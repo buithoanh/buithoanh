@@ -26,6 +26,18 @@ import { CaiDat } from "./globals/CaiDat";
 import { KeHoachSeo } from "./globals/KeHoachSeo";
 import { LichNhanDon } from "./globals/LichNhanDon";
 import { endpointCongKhai } from "./lib/api/cong-khai";
+import { endpointP1 } from "./lib/api/p1";
+import { BaoGia } from "./collections/BaoGia";
+import { GiaoDich } from "./collections/GiaoDich";
+import { KhieuNai } from "./collections/KhieuNai";
+import { MaKhuyenMai } from "./collections/MaKhuyenMai";
+import { MaXacNhan } from "./collections/MaXacNhan";
+import { PhieuBaoHanh } from "./collections/PhieuBaoHanh";
+import { SuKien } from "./collections/SuKien";
+import { Tho } from "./collections/Tho";
+import { TinNhan } from "./collections/TinNhan";
+import { TrangHangXe } from "./collections/TrangHangXe";
+import { TrangKhuVuc } from "./collections/TrangKhuVuc";
 import { tinhTrangTichHop } from "./lib/tich-hop/chung";
 import { migrations } from "./migrations";
 import { tinhNang } from "./lib/soan-thao";
@@ -46,13 +58,16 @@ export default buildConfig({
     avatar: "default",
   },
   collections: [
-    DonHang, TepDonHang, DanhGia,
+    DonHang, BaoGia, GiaoDich, PhieuBaoHanh, TepDonHang, TinNhan, Tho,
+    DanhGia, KhieuNai,
     DanhMucDichVu, HangMucGia, NhatKyGia, HangXe, DongXe,
     Quan, Phuong,
-    CamNang, DichVu, TuKhoa, Media, Users,
+    MaKhuyenMai, SuKien,
+    CamNang, DichVu, TrangKhuVuc, TrangHangXe, TuKhoa, Media,
+    Users, MaXacNhan,
   ],
   globals: [BangGiaChung, LichNhanDon, CaiDat, KeHoachSeo],
-  endpoints: endpointCongKhai,
+  endpoints: [...endpointCongKhai, ...endpointP1],
   onInit: async (payload) => {
     // Báo ngay lúc khởi động tích hợp nào đang giả lập hoặc thiếu cấu hình (xem lib/tich-hop/chung.ts).
     for (const t of tinhTrangTichHop()) {

@@ -5,6 +5,7 @@ import { draftMode } from "next/headers";
 import { getPayload } from "payload";
 import { cache } from "react";
 import siteConfig from "../site.config.mjs";
+import { noiDungHtml } from "./noi-dung";
 
 export const layPayload = () => getPayload({ config });
 
@@ -49,6 +50,20 @@ export const layDichVu = cache(async (slug) => {
   return docs[0] || null;
 });
 
+export const layDanhSachTrangKhuVuc = cache(async () => {
+  const payload = await layPayload();
+  const { docs } = await payload.find({
+    collection: "trang-khu-vuc", where: chiBaiDaDang(false), limit: 1000, depth: 1, pagination: false,
+  });
+  return docs.map((d) => ({ duongDan: `/dich-vu/${d.dichVu?.slug}/${d.quan?.slug}/`, capNhat: d.updatedAt }));
+});
+
+export const layDanhSachTrangHangXe = cache(async () => {
+  const payload = await layPayload();
+  const { docs } = await payload.find({ collection: "trang-hang-xe", where: chiBaiDaDang(false), limit: 100, depth: 0, pagination: false, select: { slug: true, updatedAt: true } });
+  return docs.map((d) => ({ duongDan: `/hang-xe/${d.slug}/`, capNhat: d.updatedAt }));
+});
+
 export const layDanhSachBai = cache(async (gioiHan = 1000) => {
   const payload = await layPayload();
   const { docs } = await payload.find({
@@ -69,6 +84,12 @@ export const layBai = cache(async (slug) => {
 
 export { cheDoNhap };
 
+/** Nội dung bài ra HTML, gồm khối giá (giá hiện hành), khối đặt lịch, video YouTube. Dùng cho mọi trang có bài. */
+export async function sangHtmlDayDu(noiDung) {
+  return noiDungHtml(await layPayload(), noiDung);
+}
+
+/** Bản đồng bộ cũ: không hiển thị khối giá, khối đặt lịch, video. Dùng sangHtmlDayDu. */
 export function sangHtml(noiDung) {
   return noiDung?.root ? convertLexicalToHTML({ data: noiDung, disableContainer: true }) : "";
 }

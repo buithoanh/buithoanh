@@ -16,6 +16,11 @@ import { dongBoDanhMucXe } from "../lib/xe";
 import { maTiepTheo } from "../lib/ma-so";
 import { congNgay, gioVN, batDauKhung } from "../lib/lich-dat.mjs";
 import { MOI_TRANG_THAI } from "../lib/don/trang-thai.mjs";
+import type { PayloadRequest } from "payload";
+import { sql } from "@payloadcms/db-postgres";
+import { capNhatViTriTho, danhDauXong, duyetBaoGia, nhanTien, taoBaoGia, xepTho } from "../lib/don/phuc-vu";
+import { guiDanhGia, guiLinkDanhGiaDenHan } from "../lib/don/danh-gia";
+import { taoTrangKhuVucTuMau } from "../lib/noi-dung";
 
 const GOC = path.resolve(process.cwd(), "du-lieu-mau");
 const payload = await getPayload({ config });
@@ -260,39 +265,163 @@ async function napDuLieuP0() {
     console.log("+ 3 đánh giá mẫu (chỉ hiện khi chạy thử)");
   }
 
-  // 12. Đơn mẫu ở mỗi trạng thái
-  if ((await payload.count({ collection: "don-hang" })).totalDocs === 0) {
-    const vios = (await payload.find({ collection: "dong-xe", where: { slug: { equals: "toyota-vios" } }, limit: 1 })).docs[0];
-    const nay = gioVN().ngay;
-    let i = 0;
-    for (const tt of MOI_TRANG_THAI.map((t) => t.value)) {
-      for (const loai of tt === "daNhan" ? (["datLich", "khanCap"] as const) : (["datLich"] as const)) {
-        i++;
-        const ngay = congNgay(nay, i % 3);
-        const don = await payload.create({
-          collection: "don-hang",
-          data: {
-            ma: await maTiepTheo(payload, "TT"),
-            loai,
-            dichVu: [idDanhMuc.get(loai === "khanCap" ? "ac-quy" : ["ac-quy", "bao-duong-dinh-ky", "lop", "phanh"][i % 4])!],
-            suCo: loai === "khanCap" ? "Hết ắc quy" : undefined,
-            xe: { hang: vios ? (vios.hang as number) : undefined, dong: vios?.id, tenXe: "Toyota Vios", doi: 2019, bienSo: `30A-${String(10000 + i * 137).slice(0, 3)}.${String(i).padStart(2, "0")}`, soKm: 40000 + i * 1000, phanKhuc: "B" },
-            viTri: { diaChi: `${i} Trần Thái Tông, Dịch Vọng Hậu, Cầu Giấy`, lat: 21.031, lng: 105.789, quan: idQuan.get("Cầu Giấy"), phuong: "Dịch Vọng Hậu", trongVung: true, etaTu: 25, etaDen: 40, choDo: "ham" },
-            khungGio: loai === "datLich" ? { ngay, ma: "08-10", nhan: `8h – 10h, ${ngay.slice(8)}/${ngay.slice(5, 7)}`, batDauLuc: batDauKhung(ngay, "08:00") } : undefined,
-            khach: { hoTen: `Khách mẫu ${i}`, sdt: `09120000${String(i).padStart(2, "0")}` },
-            dongY: { dongYXuLyDuLieu: true },
-            nguon: { kenh: ["Google", "Facebook", "QR cây xăng", "Trực tiếp"][i % 4] },
-            ghiChuNoiBo: "DỮ LIỆU MẪU để chạy thử",
-          } as never,
-        });
-        // Đi qua các bước để có lịch sử trạng thái như đơn thật
-        const buoc = MOI_TRANG_THAI.map((t) => t.value);
-        const den = buoc.indexOf(tt);
-        for (const b of tt === "huy" ? ["huy"] : buoc.slice(1, den + 1)) {
-          await payload.update({ collection: "don-hang", id: don.id, data: { trangThai: b as never }, context: { khongBaoDieuPhoi: true } });
-        }
-      }
-    }
-    console.log(`+ ${i} đơn mẫu ở các trạng thái`);
+  await napDuLieuP1(idQuan, idDanhMuc);
+
+}
+
+// ---------------------------------------------------------------- P1 (chỉ khi chạy thử)
+async function napDuLieuP1(idQuan: Map<string, number>, idDanhMuc: Map<string, number>) {
+  const khongReq = undefined as unknown as PayloadRequest;
+
+  // Cấu hình mẫu: tài khoản nhận tiền, CSKH, mục tiêu số liệu
+  const c = await payload.findGlobal({ slug: "cai-dat" });
+  if (!c.soTaiKhoan) {
+    await payload.updateGlobal({
+      slug: "cai-dat",
+      data: {
+        nganHangBin: "970436", nganHangTen: "Vietcombank – CN Hà Nội (MẪU)", soTaiKhoan: "1023456789", chuTaiKhoan: "CONG TY TNHH THOTOI MAU",
+        sdtCskh: "0900000000", tenCskh: "Chị Ngọc (CSKH, mẫu)", cskhGoiLaiGio: 2, mucTieuTyLeDatLich: 4,
+      },
+    });
+    console.log("+ tài khoản nhận tiền, CSKH mẫu");
   }
+
+  // Thợ mẫu (tên trong thiết kế)
+  const idTho: number[] = [];
+  if ((await payload.count({ collection: "tho" })).totalDocs === 0) {
+    // điểm, số đánh giá: giả như mang sang từ điều phối
+    for (const [ten, nam, xeVan, chungChi, quan, diemSao, soDanhGia] of [
+      ["Trần Minh Đức", 7, "29H-512.36", ["VCedu Bảo dưỡng", "VCedu Phanh, gầm"], "Cầu Giấy", 4.9, 214],
+      ["Trần Văn Hưng", 12, "29H-488.21", ["VCedu Chẩn đoán điện", "VCedu Xe điện 12V"], "Đống Đa", 4.8, 387],
+      ["Lê Quang Tuấn", 5, "29H-601.77", ["VCedu Lốp, ắc quy", "VCedu Cứu hộ"], "Thanh Xuân", 4.9, 96],
+    ] as const) {
+      const t = await payload.create({
+        collection: "tho",
+        data: { ten, soNamNghe: nam, bienSoXeVan: xeVan, chungChi: chungChi.map((x) => ({ ten: x })), khuVuc: [idQuan.get(quan)!], maBenDieuPhoi: `THO-${idTho.length + 1}`, diemSao, soDanhGia, gioiThieu: "DỮ LIỆU MẪU" },
+      });
+      idTho.push(t.id);
+    }
+    console.log("+ 3 thợ mẫu");
+  } else {
+    idTho.push(...(await payload.find({ collection: "tho", limit: 3 })).docs.map((t) => t.id));
+  }
+
+  // Mã khuyến mãi, mã đối tác (thiết kế QtMaKhuyenMai)
+  if ((await payload.count({ collection: "ma-khuyen-mai" })).totalDocs === 0) {
+    const nam = new Date().getFullYear() + 1;
+    for (const [ma, loai, doiTac, kieuGiam, giaTri, giamToiDa, hetHan, soLuot, hh, tamDung] of [
+      ["XANG-TDH12", "xang", "Cây xăng 12 Trần Duy Hưng", "phanTram", 10, 100000, `${nam}-12-31`, 300, 5, false],
+      ["XANG-LANG07", "xang", "Cây xăng 07 Đường Láng", "soTien", 50000, null, `${nam}-12-31`, 300, 5, false],
+      ["KOC-LINHXEHOP", "koc", "Linh Xế Hộp (TikTok)", "phanTram", 10, 150000, `${nam}-11-30`, 200, 8, false],
+      ["BQL-GOLDSEASON", "bql", "BQL toà Gold Season, Thanh Xuân", "phanTram", 15, 150000, `${nam + 1}-03-31`, 500, 5, false],
+      ["BQL-HOMECITY", "bql", "BQL chung cư Home City, Cầu Giấy", "phanTram", 15, 150000, `${nam}-12-31`, 500, 5, true],
+      ["KM-THANG10", "km", "Khuyến mãi tháng 10", "soTien", 50000, null, `${nam}-10-31`, 1000, 0, false],
+      ["KM-XEDIEN", "km", "Ưu đãi chủ xe điện", "phanTram", 20, 200000, "2026-09-30", 150, 0, false],
+    ] as const) {
+      await payload.create({
+        collection: "ma-khuyen-mai",
+        data: { ma, loai, doiTac, kieuGiam, giaTri, giamToiDa: giamToiDa ?? undefined, batDau: "2026-01-01", hetHan, soLuotToiDa: soLuot, hoaHongPhanTram: hh, tamDung, ghiChu: "DỮ LIỆU MẪU" },
+      });
+    }
+    console.log("+ 7 mã khuyến mãi mẫu");
+  }
+
+  // Sự kiện số liệu 6 tháng (ngẫu nhiên, để màn số liệu có biểu đồ)
+  if ((await payload.count({ collection: "su-kien" })).totalDocs === 0) {
+    const db = (payload.db as unknown as { drizzle: { execute: (q: unknown) => Promise<unknown> } }).drizzle;
+    await db.execute(sql.raw(`
+      INSERT INTO su_kien (loai, duong_dan, kenh, phien, updated_at, created_at)
+      SELECT (CASE WHEN r < 0.93 THEN 'xemTrang' WHEN r < 0.97 THEN 'bamGoi' ELSE 'bamZalo' END)::enum_su_kien_loai,
+             (ARRAY['/','/dich-vu/ac-quy/','/dich-vu/bao-duong-dinh-ky/','/dich-vu/lop/','/bang-gia/','/cam-nang/den-check-engine-sang/','/dich-vu/ac-quy/cau-giay/','/hang-xe/toyota/'])[1 + floor(random() * 8)::int],
+             (ARRAY['Google','Google','Google','Facebook','QR cây xăng','KOC','Zalo','Trực tiếp'])[1 + floor(random() * 8)::int],
+             'mau-' || floor(random() * 100000)::text, g, g
+      FROM (SELECT g, random() AS r FROM generate_series(now() - interval '180 days', now(), interval '7 minutes') AS g) x`));
+    console.log("+ sự kiện số liệu mẫu 6 tháng");
+  }
+
+  // Đơn mẫu ở mỗi trạng thái, đi qua đúng luồng nghiệp vụ
+  if ((await payload.count({ collection: "don-hang" })).totalDocs > 0) return;
+  const vios = (await payload.find({ collection: "dong-xe", where: { slug: { equals: "toyota-vios" } }, limit: 1 })).docs[0];
+  const km = (await payload.find({ collection: "ma-khuyen-mai", where: { ma: { equals: "XANG-TDH12" } }, limit: 1 })).docs[0];
+  const nay = gioVN().ngay;
+  const BAO_GIA = [
+    { ma: "aq", ten: "Ắc quy 12V 45Ah", lyDo: "Điện áp khởi động 8,9V, dưới mức an toàn", loai: "phuTung" as const, gia: 1650000, batBuoc: true, mucDo: "canLamNgay" },
+    { ma: "cong", ten: "Công thay ắc quy", lyDo: "Gồm lưu bộ nhớ xe", loai: "cong" as const, gia: 150000, batBuoc: true, mucDo: "canLamNgay" },
+    { ma: "coc", ten: "Vệ sinh cọc, thay đầu cos", lyDo: "Cọc âm bị rỉ trắng", loai: "cong" as const, gia: 120000, mucDo: "nenLam" },
+    { ma: "gat", ten: "Thay lưỡi gạt mưa", lyDo: "Lưỡi gạt chai, để vệt khi gạt", loai: "phuTung" as const, gia: 280000, mucDo: "coTheDeSau" },
+  ];
+  const buoc = MOI_TRANG_THAI.map((t) => t.value);
+  let i = 0;
+  // Khách chuyển khoản đúng số tiền (qua đúng đường nhận tiền của webhook ngân hàng)
+  const traDu = async (ma: string, maGiaoDich: string) => {
+    const d = (await payload.find({ collection: "don-hang", where: { ma: { equals: ma } }, limit: 1 })).docs[0];
+    await nhanTien(payload, { maGiaoDich, soTien: d.thanhToan?.soTien || 0, noiDung: `CK ${ma.replace("-", "")}`, luc: new Date().toISOString(), nguon: "du-lieu-mau" });
+  };
+  const taoMau = async (tt: string, loai: "datLich" | "khanCap", them: Record<string, unknown> = {}) => {
+    i++;
+    const ngay = congNgay(nay, i % 3);
+    const don = await payload.create({
+      collection: "don-hang",
+      context: { taoTuWeb: true },
+      data: {
+        ma: await maTiepTheo(payload, "TT"), loai,
+        dichVu: [idDanhMuc.get(loai === "khanCap" ? "ac-quy" : ["ac-quy", "bao-duong-dinh-ky", "lop", "phanh"][i % 4])!],
+        suCo: loai === "khanCap" ? "Hết ắc quy" : undefined,
+        xe: { hang: vios ? (vios.hang as number) : undefined, dong: vios?.id, tenXe: "Toyota Vios", doi: 2019, bienSo: `30A-${String(200 + i)}.${String(10 + i).slice(-2)}`, soKm: 40000 + i * 1000, phanKhuc: "B" },
+        viTri: { diaChi: `${i} Trần Thái Tông, Dịch Vọng Hậu, Cầu Giấy`, lat: 21.031, lng: 105.789, quan: idQuan.get("Cầu Giấy"), phuong: "Dịch Vọng Hậu", trongVung: true, etaTu: 25, etaDen: 40, choDo: "ham" },
+        khungGio: loai === "datLich" ? { ngay, ma: "08-10", nhan: `8h – 10h, ${ngay.slice(8)}/${ngay.slice(5, 7)}`, batDauLuc: batDauKhung(ngay, "08:00") } : undefined,
+        khach: { hoTen: `Khách mẫu ${i}`, sdt: `09120000${String(i).padStart(2, "0")}` },
+        dongY: { dongYXuLyDuLieu: true },
+        nguon: { kenh: ["Google", "Facebook", "QR cây xăng", "Trực tiếp"][i % 4], trangVao: "/dich-vu/ac-quy/" },
+        ghiChuNoiBo: "DỮ LIỆU MẪU để chạy thử",
+        ...them,
+      } as never,
+    });
+    const den = buoc.indexOf(tt);
+    const ctx = { khongBaoDieuPhoi: true };
+    if (tt === "huy") {
+      await payload.update({ collection: "don-hang", id: don.id, data: { trangThai: "huy" }, context: ctx });
+      return don;
+    }
+    if (den >= 1) await xepTho(payload, khongReq, don.ma!, { tho: idTho[i % idTho.length], duKienDenLuc: new Date(Date.now() + 30 * 60000).toISOString() });
+    if (den >= 2) await capNhatViTriTho(payload, khongReq, don.ma!, { lat: 21.028, lng: 105.795 });
+    if (den >= 3) await taoBaoGia(payload, khongReq, don.ma!, { chanDoan: "Ắc quy chỉ còn 8,9V khi đề, cần thay mới.", hangMuc: BAO_GIA });
+    if (den >= 4) await duyetBaoGia(payload, don.tokenTheoDoi!, { boHangMuc: ["gat"], dongY: true });
+    if (den >= 5) await danhDauXong(payload, khongReq, don.ma!, { soKm: 40000 + i * 1000 + 50 });
+    if (den >= 6) await traDu(don.ma!, `MAU${don.id}${Date.now()}`);
+    return don;
+  };
+  for (const tt of buoc) {
+    for (const loai of tt === "daNhan" ? (["datLich", "khanCap"] as const) : (["datLich"] as const)) await taoMau(tt, loai);
+  }
+  // Một đơn có mã khuyến mãi đã thanh toán (để có hoa hồng tháng này)
+  await taoMau("hoanThanh", "datLich", { khuyenMai: km?.id, maKhuyenMai: km?.ma, nguon: { kenh: "QR cây xăng", maQR: km?.ma } });
+
+  // Lịch sử xe 30A-123.45 cho màn tra cứu: 3 lần sửa đã xong
+  const bienSo = "30A-123.45";
+  for (const [dv, km2] of [["bao-duong-dinh-ky", 45120], ["phanh", 46300], ["ac-quy", 47950]] as const) {
+    const d = await taoMau("dangSua", "datLich", { xe: { hang: vios?.hang, dong: vios?.id, tenXe: "Toyota Vios", doi: 2019, bienSo, soKm: km2, phanKhuc: "B" }, khach: { hoTen: "Nguyễn Văn Hoàng", sdt: "0912345678" }, dichVu: [idDanhMuc.get(dv)!] });
+    await danhDauXong(payload, khongReq, d.ma!, { soKm: km2 });
+    await traDu(d.ma!, `MAU-XE-${d.id}`);
+  }
+  // Đơn xong hơn 24 giờ: gửi link đánh giá, một khách khen 5 sao, một khách chấm 2 sao (tạo phiếu khiếu nại)
+  // 3 đơn: 2 đã đánh giá, 1 còn link chưa dùng (cho ví dụ API và chạy thử màn đánh giá)
+  const xong = (await payload.find({ collection: "don-hang", where: { trangThai: { equals: "hoanThanh" } }, limit: 3, sort: "createdAt" })).docs;
+  for (const d of xong) {
+    await payload.update({ collection: "don-hang", id: d.id, context: { boQuaHook: true }, data: { ketThucLuc: new Date(Date.now() - 25 * 3600000).toISOString() } });
+  }
+  await guiLinkDanhGiaDenHan(payload);
+  const coLink = (await payload.find({ collection: "don-hang", where: { "danhGia.token": { exists: true } }, limit: 2, sort: "createdAt" })).docs;
+  if (coLink[0]?.danhGia?.token) await guiDanhGia(payload, coLink[0].danhGia.token, { soSao: 5, moTa: "Thợ tới đúng giờ, làm gọn trong hầm. Giá đúng như báo." });
+  if (coLink[1]?.danhGia?.token) await guiDanhGia(payload, coLink[1].danhGia.token, { soSao: 2, vanDe: ["tre"], moTa: "Thợ đến trễ gần 40 phút so với giờ hẹn, không báo trước." });
+  console.log(`+ ${i} đơn mẫu (đủ các bước), lịch sử xe ${bienSo}, 1 đánh giá 5 sao, 1 phiếu khiếu nại`);
+
+  // Trang khu vực mẫu tạo từ mẫu (bản nháp, chưa đủ điều kiện gửi duyệt)
+  const quanLy = (await payload.find({ collection: "users", where: { email: { equals: "quanly@thotoi.test" } }, limit: 1 })).docs[0];
+  if (quanLy && !(await payload.count({ collection: "trang-khu-vuc" })).totalDocs) {
+    await taoTrangKhuVucTuMau(payload, { user: { ...quanLy, collection: "users" }, payload, context: {} } as unknown as PayloadRequest, { dichVu: "ac-quy", quan: "thanh-xuan" }).catch((e) => console.warn("Trang khu vực mẫu:", (e as Error).message));
+    console.log("+ 1 trang khu vực nháp tạo từ mẫu");
+  }
+
+
 }

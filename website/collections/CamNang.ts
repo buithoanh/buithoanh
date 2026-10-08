@@ -4,6 +4,10 @@ import { chiNguoiDuyet, chiNguoiViet, daDangNhap, docBaiDaDang } from "../lib/qu
 import { nhanBanNhapTuNgoai } from "../lib/ai/viet-nhap";
 import { NHOM_TU_KHOA } from "./TuKhoa";
 
+export const CHU_DE = [
+  { label: "Mẹo xe", value: "meo" }, { label: "Bắt bệnh", value: "benh" }, { label: "Xe điện", value: "dien" }, { label: "Mùa vụ", value: "mua" },
+];
+
 export const CamNang: CollectionConfig = {
   slug: "cam-nang",
   labels: { singular: "Bài cẩm nang", plural: "Bài cẩm nang" },
@@ -39,7 +43,10 @@ export const CamNang: CollectionConfig = {
   ],
   fields: [
     ...truongSeo,
-    { name: "nhom", label: "Nhóm từ khoá", type: "select", required: true, options: NHOM_TU_KHOA },
+    { type: "row", fields: [
+      { name: "nhom", label: "Nhóm từ khoá", type: "select", required: true, options: NHOM_TU_KHOA },
+      { name: "chuDe", label: "Chủ đề (trang Cẩm nang)", type: "select", options: CHU_DE, admin: { description: "Mẹo xe, Bắt bệnh, Xe điện, Mùa vụ" } },
+    ] },
     { name: "noiDung", label: "Nội dung", type: "richText", required: true },
     truongFaq,
     {
@@ -87,6 +94,11 @@ export const CamNang: CollectionConfig = {
       hasMany: true,
       admin: { position: "sidebar" },
     },
+    {
+      name: "nguoiDuyetKyThuat", label: "Người duyệt kỹ thuật", type: "relationship", relationTo: "users",
+      admin: { position: "sidebar", description: "Thợ hoặc trưởng kỹ thuật kiểm tra nội dung kỹ thuật." },
+    },
+    { name: "thoiGianDocPhut", label: "Thời gian đọc (phút)", type: "number", admin: { position: "sidebar", readOnly: true } },
     ...truongDuyet,
     {
       name: "ghiChuAI",

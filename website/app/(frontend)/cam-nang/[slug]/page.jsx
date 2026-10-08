@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { demChuHtml, formatDate, isoDate, layBai, laySite, sangHtml } from "../../../../lib/cms";
+import { demChuHtml, formatDate, isoDate, layBai, laySite, sangHtmlDayDu } from "../../../../lib/cms";
 import { CallButton, ZaloButton } from "../../../../components/Contact";
 import JsonLd from "../../../../components/JsonLd";
 import Icon, { iconDichVu } from "../../../../components/Icon";
@@ -20,7 +20,7 @@ export default async function ArticlePage({ params }) {
   const { slug } = await params;
   const [e, site] = await Promise.all([layBai(slug), laySite()]);
   if (!e) notFound();
-  const html = sangHtml(e.noiDung);
+  const html = await sangHtmlDayDu(e.noiDung);
   const services = (e.dichVuLienQuan || []).filter((s) => typeof s === "object" && s?.slug);
   const faq = e.faq || [];
   const anh = services.length ? anhDichVu(services[0].slug) : null;

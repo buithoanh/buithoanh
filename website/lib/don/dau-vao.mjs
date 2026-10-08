@@ -3,6 +3,7 @@
 // làm ở lib/don/tao-don.ts.
 import { chuanHoaBienSo } from "../bien-so.mjs";
 import { chuanHoaSdt } from "../so-dien-thoai.mjs";
+import { lamSachDuongDan } from "../su-kien.mjs";
 
 export const CHO_DO = [
   { value: "nha", label: "Nhà riêng" },
@@ -98,7 +99,7 @@ export function kiemTraDauVao(loai, d = {}) {
   out.nguon = {
     utmSource: chuoi(n.utm_source ?? n.utmSource, 100), utmMedium: chuoi(n.utm_medium ?? n.utmMedium, 100),
     utmCampaign: chuoi(n.utm_campaign ?? n.utmCampaign, 100), maQR: chuoi(n.qr ?? n.maQR, 60).toUpperCase(),
-    trangVao: chuoi(n.trangVao, 300), referrer: chuoi(n.referrer, 300),
+    trangVao: n.trangVao ? lamSachDuongDan(chuoi(n.trangVao, 300)) : "", referrer: chuoi(n.referrer, 300).replace(/[?#].*$/, ""),
   };
   if (!out.maGioiThieu && n.ma) out.maGioiThieu = chuoi(n.ma, 40).toUpperCase();
 

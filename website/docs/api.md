@@ -1,7 +1,8 @@
 # Hợp đồng API backend ThợTới
 
 Tài liệu cho phiên frontend và đội VCsoft (phần mềm điều phối). Phạm vi hiện tại: **P0** (danh mục, bảng giá, vùng phục vụ,
-giờ nhận đơn, đơn đặt lịch, gọi gấp). P1, P2 bổ sung sau, xem `BAN-GIAO-BE.md`.
+giờ nhận đơn, đơn đặt lịch, gọi gấp, mục 1–5) và **P1** (phục vụ khách: thợ, báo giá, VietQR, hoá đơn, bảo hành, đánh giá,
+tra cứu xe, ZNS — mục 6; quản trị: bài viết, trang khu vực, mã khuyến mãi, số liệu — mục 7). P2 xem `BAN-GIAO-BE.md`.
 
 **Mọi ví dụ request/response dưới đây chạy ra từ server thật** bằng `node scripts/vi-du-api.mjs` (dữ liệu mẫu của
 `npm run nap-du-lieu`, tích hợp ngoài chạy giả lập). Mảng dài được rút gọn thành 2 phần tử đầu + `"… (còn N mục)"`.
@@ -309,7 +310,7 @@ GET /api/trang/bang-gia?phanKhuc=B
 Response `200`:
 ```json
 {
-  "capNhatLuc": "2026-10-08T10:26:03.461Z",
+  "capNhatLuc": "2026-10-08T11:25:37.846Z",
   "phanKhucDangChon": "B",
   "phanKhuc": [
     {
@@ -367,7 +368,7 @@ Response `200`:
           "donVi": null,
           "ghiChu": null,
           "giaTheoPhanKhuc": null,
-          "capNhatGiaLuc": "2026-10-08T10:23:50.405Z"
+          "capNhatGiaLuc": "2026-10-08T11:11:11.018Z"
         },
         {
           "id": 2,
@@ -383,7 +384,7 @@ Response `200`:
           "donVi": null,
           "ghiChu": null,
           "giaTheoPhanKhuc": null,
-          "capNhatGiaLuc": "2026-10-08T10:23:50.421Z"
+          "capNhatGiaLuc": "2026-10-08T11:11:11.039Z"
         },
         "… (còn 2 mục)"
       ]
@@ -418,7 +419,7 @@ Response `200`:
           "donVi": null,
           "ghiChu": null,
           "giaTheoPhanKhuc": null,
-          "capNhatGiaLuc": "2026-10-08T10:23:50.475Z"
+          "capNhatGiaLuc": "2026-10-08T11:11:11.095Z"
         },
         {
           "id": 6,
@@ -426,15 +427,15 @@ Response `200`:
           "loai": "cong",
           "loaiNhan": "Tiền công",
           "gia": {
-            "tu": 170000,
-            "den": 170000
+            "tu": 150000,
+            "den": 150000
           },
-          "giaHienThi": "170.000đ",
+          "giaHienThi": "150.000đ",
           "mienPhi": false,
           "donVi": null,
           "ghiChu": null,
           "giaTheoPhanKhuc": null,
-          "capNhatGiaLuc": "2026-10-08T10:26:03.461Z"
+          "capNhatGiaLuc": "2026-10-08T11:25:37.846Z"
         },
         "… (còn 2 mục)"
       ]
@@ -489,7 +490,7 @@ Response `200`:
       "donVi": null,
       "ghiChu": null,
       "giaTheoPhanKhuc": null,
-      "capNhatGiaLuc": "2026-10-08T10:23:50.475Z"
+      "capNhatGiaLuc": "2026-10-08T11:11:11.095Z"
     },
     {
       "id": 6,
@@ -497,15 +498,15 @@ Response `200`:
       "loai": "cong",
       "loaiNhan": "Tiền công",
       "gia": {
-        "tu": 170000,
-        "den": 170000
+        "tu": 150000,
+        "den": 150000
       },
-      "giaHienThi": "170.000đ",
+      "giaHienThi": "150.000đ",
       "mienPhi": false,
       "donVi": null,
       "ghiChu": null,
       "giaTheoPhanKhuc": null,
-      "capNhatGiaLuc": "2026-10-08T10:26:03.461Z"
+      "capNhatGiaLuc": "2026-10-08T11:25:37.846Z"
     },
     "… (còn 2 mục)"
   ],
@@ -530,19 +531,19 @@ Response `200`:
     "tomTat": "Kích nổ, kiểm tra và thay ắc quy đúng loại ngay tại nơi xe dừng.",
     "faq": [
       {
-        "id": "6ac76f3594f2390bc34ed56c",
+        "id": "6ac77a4d1b2df71b91e30e08",
         "q": "Xe không nổ máy có phải chắc chắn do ắc quy không?",
         "a": "Không hẳn. Ắc quy yếu là nguyên nhân phổ biến, nhưng củ đề, máy phát hay dây cáp lỏng cũng có thể gây ra. Thợ sẽ đo ắc quy và hệ thống sạc để tìm đúng nguyên nhân trước khi thay."
       },
       {
-        "id": "6ac76f3594f2390bc34ed56d",
+        "id": "6ac77a4d1b2df71b91e30e09",
         "q": "Tôi có nên tự câu bình bằng dây mồi không?",
         "a": "Chúng tôi khuyên bạn nên để thợ làm. Câu sai cực hoặc câu vào bình bị phồng, rò có thể gây chập điện, hỏng thiết bị điện tử hoặc nguy hiểm cho người."
       },
       "… (còn 2 mục)"
     ],
     "noiDung": "(nội dung Lexical JSON, rút gọn)",
-    "capNhat": "2026-10-08T10:23:49.736Z"
+    "capNhat": "2026-10-08T11:11:10.325Z"
   },
   "quan": [
     {
@@ -603,7 +604,7 @@ Response `200`:
 
 ### `GET /api/trang/khu-vuc/:dichVu/:quan`
 Ai gọi: công khai. Màn `KhuVuc`: thời gian thợ tới quận, phường đang phục vụ, giá (cùng bảng giá chung), đánh giá ở quận,
-dịch vụ khác. `noiDung` (đoạn mô tả riêng, ảnh thật) là `null` tới P1. 404 nếu quận chưa phục vụ.
+dịch vụ khác. `noiDung` (tiêu đề, mô tả, `html`, `doanRieng`, `anhThat`, `faq`) lấy từ trang khu vực đã đăng (mục 7), chưa có trang thì `null`. 404 nếu quận chưa phục vụ.
 
 <!-- vi-du:khu-vuc -->
 Request:
@@ -655,7 +656,7 @@ Response `200`:
       "donVi": null,
       "ghiChu": null,
       "giaTheoPhanKhuc": null,
-      "capNhatGiaLuc": "2026-10-08T10:23:50.475Z"
+      "capNhatGiaLuc": "2026-10-08T11:11:11.095Z"
     },
     "… (còn 3 mục)"
   ],
@@ -703,7 +704,7 @@ Response `200`:
 ### `GET /api/trang/hang-xe/:hang` và `GET /api/trang/xe-dien`
 Ai gọi: công khai. `HangXe`: danh sách hãng, các dòng của hãng (phân khúc, đời từ–đến), bảng giá đủ 4 phân khúc
 (`bangGia[].hangMuc[].giaTheoPhanKhuc`: giao diện lấy theo phân khúc của dòng đang chọn). Gợi ý nhóm đời xe (2014–2018…)
-do giao diện chia. `benhHayGap` là `null` tới P1. `XeDien`: các dòng xe điện và 4 nhóm việc (lốp, phanh, ắc quy 12V, điều hoà).
+do giao diện chia. `noiDung`, `benhHayGap` lấy từ trang hãng xe đã đăng (mục 7), chưa có thì `null`. `XeDien`: các dòng xe điện và 4 nhóm việc (lốp, phanh, ắc quy 12V, điều hoà).
 
 <!-- vi-du:hang-xe -->
 Request:
@@ -806,7 +807,7 @@ Response `200`:
           "donVi": null,
           "ghiChu": null,
           "giaTheoPhanKhuc": null,
-          "capNhatGiaLuc": "2026-10-08T10:23:50.405Z"
+          "capNhatGiaLuc": "2026-10-08T11:11:11.018Z"
         },
         {
           "id": 2,
@@ -822,7 +823,7 @@ Response `200`:
           "donVi": null,
           "ghiChu": null,
           "giaTheoPhanKhuc": null,
-          "capNhatGiaLuc": "2026-10-08T10:23:50.421Z"
+          "capNhatGiaLuc": "2026-10-08T11:11:11.039Z"
         },
         "… (còn 2 mục)"
       ]
@@ -857,7 +858,7 @@ Response `200`:
           "donVi": null,
           "ghiChu": null,
           "giaTheoPhanKhuc": null,
-          "capNhatGiaLuc": "2026-10-08T10:23:50.475Z"
+          "capNhatGiaLuc": "2026-10-08T11:11:11.095Z"
         },
         {
           "id": 6,
@@ -865,22 +866,23 @@ Response `200`:
           "loai": "cong",
           "loaiNhan": "Tiền công",
           "gia": {
-            "tu": 170000,
-            "den": 170000
+            "tu": 150000,
+            "den": 150000
           },
-          "giaHienThi": "170.000đ",
+          "giaHienThi": "150.000đ",
           "mienPhi": false,
           "donVi": null,
           "ghiChu": null,
           "giaTheoPhanKhuc": null,
-          "capNhatGiaLuc": "2026-10-08T10:26:03.461Z"
+          "capNhatGiaLuc": "2026-10-08T11:25:37.846Z"
         },
         "… (còn 2 mục)"
       ]
     },
     "… (còn 4 mục)"
   ],
-  "benhHayGap": null
+  "noiDung": null,
+  "benhHayGap": []
 }
 ```
 <!-- /vi-du -->
@@ -1089,7 +1091,7 @@ Response `200`:
           "batDau": "08:00",
           "ketThuc": "10:00",
           "nhan": "8h – 10h",
-          "conCho": 2,
+          "conCho": 1,
           "day": false,
           "daQua": true,
           "datDuoc": false
@@ -1129,10 +1131,10 @@ Response `200`:
           "batDau": "10:00",
           "ketThuc": "12:00",
           "nhan": "10h – 12h",
-          "conCho": 4,
-          "day": false,
+          "conCho": 0,
+          "day": true,
           "daQua": false,
-          "datDuoc": true
+          "datDuoc": false
         },
         "… (còn 4 mục)"
       ]
@@ -1268,7 +1270,7 @@ Response `200`:
           "batDau": "08:00",
           "ketThuc": "10:00",
           "nhan": "8h – 10h",
-          "conCho": 2,
+          "conCho": 1,
           "day": false,
           "daQua": true,
           "datDuoc": false
@@ -1308,10 +1310,10 @@ Response `200`:
           "batDau": "10:00",
           "ketThuc": "12:00",
           "nhan": "10h – 12h",
-          "conCho": 4,
-          "day": false,
+          "conCho": 0,
+          "day": true,
           "daQua": false,
-          "datDuoc": true
+          "datDuoc": false
         },
         "… (còn 4 mục)"
       ]
@@ -1481,8 +1483,8 @@ POST /api/don-hang/dat-lich
     "ghiChuChoTho": "Hầm B2, ô 112"
   },
   "khungGio": {
-    "ngay": "2026-10-09",
-    "ma": "10-12"
+    "ngay": "2026-10-10",
+    "ma": "08-10"
   },
   "khach": {
     "hoTen": "Nguyễn Văn Hoàng",
@@ -1501,15 +1503,15 @@ POST /api/don-hang/dat-lich
 Response `201`:
 ```json
 {
-  "ma": "TT-000012",
+  "ma": "TT-000037",
   "loai": "datLich",
   "trangThai": "daNhan",
-  "linkTheoDoi": "http://localhost:3000/don/Olc6WDUMEEqsNas4yGiDUvEdtm-XY7qb/",
-  "token": "Olc6WDUMEEqsNas4yGiDUvEdtm-XY7qb",
+  "linkTheoDoi": "http://localhost:3000/don/cRuddLNHCblEmzDeU_jdwAtXCt_zzlfD/",
+  "token": "cRuddLNHCblEmzDeU_jdwAtXCt_zzlfD",
   "khungGio": {
-    "ngay": "2026-10-09",
-    "ma": "10-12",
-    "nhan": "10h – 12h, 09/10"
+    "ngay": "2026-10-10",
+    "ma": "08-10",
+    "nhan": "8h – 10h, 10/10"
   },
   "viTri": {
     "quan": "Cầu Giấy",
@@ -1524,7 +1526,8 @@ Response `201`:
     "hienThi": "1,55 – 2,2 triệu",
     "ghiChu": "Đã gồm phí đi lại 50.000đ. Giá chính thức chốt sau khi thợ kiểm tra."
   },
-  "nhanLuc": "2026-10-08T10:43:57.293Z"
+  "khuyenMai": null,
+  "nhanLuc": "2026-10-08T11:27:30.104Z"
 }
 ```
 <!-- /vi-du -->
@@ -1589,8 +1592,8 @@ POST /api/don-hang/dat-lich
     "choDo": "duong"
   },
   "khungGio": {
-    "ngay": "2026-10-09",
-    "ma": "10-12"
+    "ngay": "2026-10-10",
+    "ma": "08-10"
   },
   "khach": {
     "hoTen": "Lan",
@@ -1658,11 +1661,11 @@ POST /api/don-hang/goi-gap
 Response `201`:
 ```json
 {
-  "ma": "TT-000013",
+  "ma": "TT-000038",
   "loai": "khanCap",
   "trangThai": "daNhan",
-  "linkTheoDoi": "http://localhost:3000/don/RTu7hewH21eLI8STOddVd7HANPsO8RHK/",
-  "token": "RTu7hewH21eLI8STOddVd7HANPsO8RHK",
+  "linkTheoDoi": "http://localhost:3000/don/wwCwEDjKhJrlNNBRryzPVbTTkKAGxdor/",
+  "token": "wwCwEDjKhJrlNNBRryzPVbTTkKAGxdor",
   "khungGio": null,
   "viTri": {
     "quan": "Đống Đa",
@@ -1677,26 +1680,26 @@ Response `201`:
     "hienThi": "1,4 – 3 triệu",
     "ghiChu": "Đã gồm phí đi lại 50.000đ. Giá chính thức chốt sau khi thợ kiểm tra. Chưa biết dòng xe nên khoảng giá rộng."
   },
-  "nhanLuc": "2026-10-08T10:43:57.675Z"
+  "khuyenMai": null,
+  "nhanLuc": "2026-10-08T11:27:30.334Z"
 }
 ```
 <!-- /vi-du -->
 
 ### `GET /api/don-hang/theo-doi/:token`
 Ai gọi: công khai, chỉ ai có link (token 32 ký tự ngẫu nhiên). Màn `TheoDoi`: trạng thái, 7 bước (`done`/`now`/`todo` kèm
-thời điểm), dịch vụ, xe, địa chỉ, khung giờ, số điện thoại **đã che**, giá sơ bộ. `tho` (thợ, vị trí, giờ đến) là `null`
-tới P1. Hỏi lại mỗi 30 giây. Link hết hạn 24 giờ sau khi đơn hoàn thành hoặc huỷ: 410 `LINK_HET_HAN`. Không bao giờ tra
+thời điểm), dịch vụ, xe, địa chỉ, khung giờ, số điện thoại **đã che**, giá sơ bộ, `tho` (thợ, vị trí, giờ đến; `null` khi chưa xếp), `viecCanLam`, `thanhToan` (mục 6). Hỏi lại mỗi 30 giây. Link hết hạn 24 giờ sau khi đơn hoàn thành hoặc huỷ: 410 `LINK_HET_HAN`. Không bao giờ tra
 được bằng mã đơn.
 
 <!-- vi-du:theo-doi -->
 Request:
 ```http
-GET /api/don-hang/theo-doi/Olc6WDUMEEqsNas4yGiDUvEdtm-XY7qb
+GET /api/don-hang/theo-doi/cRuddLNHCblEmzDeU_jdwAtXCt_zzlfD
 ```
 Response `200`:
 ```json
 {
-  "ma": "TT-000012",
+  "ma": "TT-000037",
   "loai": "datLich",
   "trangThai": "daNhan",
   "nhanTrangThai": "Đã nhận",
@@ -1704,7 +1707,7 @@ Response `200`:
     {
       "trangThai": "daNhan",
       "nhan": "Đã nhận",
-      "luc": "2026-10-08T10:43:57.304Z",
+      "luc": "2026-10-08T11:27:30.114Z",
       "tinhTrang": "now"
     },
     {
@@ -1733,7 +1736,7 @@ Response `200`:
     "etaTu": 25,
     "etaDen": 40
   },
-  "khungGio": "10h – 12h, 09/10",
+  "khungGio": "8h – 10h, 10/10",
   "khach": {
     "hoTen": "Nguyễn Văn Hoàng",
     "sdt": "0912 xxx 678"
@@ -1744,8 +1747,12 @@ Response `200`:
     "den": 2200000
   },
   "tho": null,
+  "viTriTho": null,
+  "thoDuKienDenLuc": null,
+  "viecCanLam": null,
+  "thanhToan": null,
   "hotline": "1900 1068",
-  "taoLuc": "2026-10-08T10:43:57.330Z",
+  "taoLuc": "2026-10-08T11:27:30.140Z",
   "hetHanLinkLuc": null
 }
 ```
@@ -1768,7 +1775,7 @@ Header `Authorization: users API-Key <khoá>` (hoặc `JWT <token>`):
 
 Request:
 ```http
-POST /api/don-hang/TT-000012/trang-thai
+POST /api/don-hang/TT-000037/trang-thai
 
 {
   "trangThai": "daXepTho",
@@ -1778,21 +1785,21 @@ POST /api/don-hang/TT-000012/trang-thai
 Response `200`:
 ```json
 {
-  "ma": "TT-000012",
+  "ma": "TT-000037",
   "trangThai": "daXepTho",
   "nhan": "Đã xếp thợ",
   "lichSu": [
     {
-      "id": "6ac773edd31690140daf0a7c",
+      "id": "6ac77e22de863a26e7261d96",
       "trangThai": "daNhan",
-      "luc": "2026-10-08T10:43:57.304Z",
+      "luc": "2026-10-08T11:27:30.114Z",
       "boi": "Khách (web)",
       "ghiChu": null
     },
     {
-      "id": "6ac773edd31690140daf0a7e",
+      "id": "6ac77e22de863a26e7261d98",
       "trangThai": "daXepTho",
-      "luc": "2026-10-08T10:43:57.980Z",
+      "luc": "2026-10-08T11:27:30.634Z",
       "boi": "Điều phối thử",
       "ghiChu": "Thợ Đức nhận đơn"
     }
@@ -1806,7 +1813,7 @@ Quay lại bước trước:
 
 Request:
 ```http
-POST /api/don-hang/TT-000012/trang-thai
+POST /api/don-hang/TT-000037/trang-thai
 
 {
   "trangThai": "daNhan"
@@ -1858,7 +1865,7 @@ POST /api/hang-muc-gia/luu-nhieu
   "thayDoi": [
     {
       "id": 6,
-      "gia": 190000
+      "gia": 170000
     }
   ],
   "lyDo": "VCparts báo tăng giá"
@@ -1874,7 +1881,7 @@ Response `200`:
       "dichVu": 2,
       "ten": "Kích nổ tại chỗ",
       "loai": "cong",
-      "gia": 190000,
+      "gia": 170000,
       "donVi": null,
       "giaPhanKhuc": {
         "A": {
@@ -1901,10 +1908,10 @@ Response `200`:
       "noiBat": true,
       "tenNgan": "Kích nổ ắc quy",
       "lyDoDoi": null,
-      "capNhatGiaLuc": "2026-10-08T10:43:58.250Z",
+      "capNhatGiaLuc": "2026-10-08T11:27:30.917Z",
       "capNhatGiaBoi": "Trần Minh Đức (thử)",
-      "updatedAt": "2026-10-08T10:43:58.251Z",
-      "createdAt": "2026-10-08T10:23:50.490Z"
+      "updatedAt": "2026-10-08T11:27:30.918Z",
+      "createdAt": "2026-10-08T11:11:11.108Z"
     }
   ]
 }
@@ -1921,32 +1928,32 @@ Response `200`:
 {
   "docs": [
     {
-      "id": 31,
-      "moTa": "Ắc quy › Kích nổ tại chỗ",
-      "hangMuc": 6,
-      "dichVu": 2,
-      "giaCu": "190.000đ",
-      "giaMoi": "170.000đ",
-      "lyDo": "Trả lại giá (script ví dụ)",
-      "nguoi": 2,
-      "tenNguoi": "Trần Minh Đức (thử)",
-      "vaiTro": "Quản lý dịch vụ",
-      "updatedAt": "2026-10-08T10:43:58.307Z",
-      "createdAt": "2026-10-08T10:43:58.307Z"
-    },
-    {
-      "id": 30,
+      "id": 43,
       "moTa": "Ắc quy › Kích nổ tại chỗ",
       "hangMuc": 6,
       "dichVu": 2,
       "giaCu": "170.000đ",
-      "giaMoi": "190.000đ",
+      "giaMoi": "150.000đ",
+      "lyDo": "Trả lại giá (script ví dụ)",
+      "nguoi": 2,
+      "tenNguoi": "Trần Minh Đức (thử)",
+      "vaiTro": "Quản lý dịch vụ",
+      "updatedAt": "2026-10-08T11:27:30.971Z",
+      "createdAt": "2026-10-08T11:27:30.971Z"
+    },
+    {
+      "id": 42,
+      "moTa": "Ắc quy › Kích nổ tại chỗ",
+      "hangMuc": 6,
+      "dichVu": 2,
+      "giaCu": "150.000đ",
+      "giaMoi": "170.000đ",
       "lyDo": "VCparts báo tăng giá",
       "nguoi": 2,
       "tenNguoi": "Trần Minh Đức (thử)",
       "vaiTro": "Quản lý dịch vụ",
-      "updatedAt": "2026-10-08T10:43:58.261Z",
-      "createdAt": "2026-10-08T10:43:58.260Z"
+      "updatedAt": "2026-10-08T11:27:30.925Z",
+      "createdAt": "2026-10-08T11:27:30.925Z"
     }
   ],
   "hasNextPage": true,
@@ -1956,13 +1963,2613 @@ Response `200`:
   "page": 1,
   "pagingCounter": 1,
   "prevPage": null,
-  "totalDocs": 30,
-  "totalPages": 15
+  "totalDocs": 43,
+  "totalPages": 22
 }
 ```
 <!-- /vi-du -->
 
-### Bảng quyền (P0)
+## 6. Phục vụ khách (P1)
+
+Luồng: điều phối **xếp thợ** → thợ gửi **vị trí** (`thoDangDen`) → thợ kiểm tra, gửi **báo giá chính thức**
+(`choDuyetBaoGia`) → khách **duyệt** từng hạng mục (`dangSua`) hoặc **từ chối** (chỉ trả phí kiểm tra) → thợ bấm **xong**
+(`choThanhToan`, tính tiền) → khách chuyển khoản **VietQR**, ngân hàng gọi **webhook** → đủ tiền thì `hoanThanh`, tự xuất
+**hoá đơn điện tử**, lập **phiếu bảo hành** `BH-`, gửi tin. 24 giờ sau gửi **link đánh giá** (việc định kỳ).
+
+Endpoint của thợ/điều phối: đăng nhập hoặc khoá API, vai trò `dieuPhoi`, `quanLyDichVu`, `quanTri`; `:ma` là `TT-000123`
+hoặc id. Endpoint của khách: theo link riêng `:token` (như màn theo dõi), giới hạn 30 lần ghi / 200 lần đọc mỗi 10 phút mỗi IP.
+
+### Thợ: `POST /api/don-hang/:ma/xep-tho`, `POST /api/don-hang/:ma/vi-tri-tho`
+- `xep-tho`: `{ "tho": "THO-1" | <id thợ>, "duKienDenLuc"?: ISO }`. `tho` là mã thợ bên điều phối (`maBenDieuPhoi`) hoặc id
+  trong collection `tho`. Đơn sang `daXepTho`, gửi tin "Đã xếp thợ" (tên, SĐT thợ) cho khách.
+- `vi-tri-tho`: `{ "lat", "lng", "duKienDenLuc"? }`, gọi mỗi 30–60 giây khi thợ đang đi. Lần đầu đưa đơn sang `thoDangDen`.
+- Danh sách thợ: `GET /api/tho` (REST Payload, `maBenDieuPhoi`, `ten`, `sdt`, `anh`, `namKinhNghiem`, `chuyenMon`, `diem`, `soDon`).
+- Màn theo dõi (`GET /api/don-hang/theo-doi/:token`) có thêm `tho`, `viTriTho`, `thoDuKienDenLuc`, `viecCanLam`
+  (báo giá chờ duyệt, thanh toán, đánh giá) và `thanhToan`.
+
+<!-- vi-du:xep-tho -->
+Đăng nhập vai trò dieuPhoi (VCsoft dùng khoá API):
+
+Request:
+```http
+POST /api/don-hang/TT-000039/xep-tho
+
+{
+  "tho": "THO-1",
+  "duKienDenLuc": "2026-10-08T11:52:31.176Z"
+}
+```
+Response `200`:
+```json
+{
+  "id": 83,
+  "ma": "TT-000039",
+  "loai": "datLich",
+  "uuTien": 0,
+  "trangThai": "daXepTho",
+  "lichSuTrangThai": [
+    {
+      "id": "6ac77e23de863a26e7261d99",
+      "trangThai": "daNhan",
+      "luc": "2026-10-08T11:27:31.132Z",
+      "boi": "Khách (web)",
+      "ghiChu": null
+    },
+    {
+      "id": "6ac77e23de863a26e7261d9a",
+      "trangThai": "daXepTho",
+      "luc": "2026-10-08T11:27:31.256Z",
+      "boi": "Điều phối thử",
+      "ghiChu": null
+    }
+  ],
+  "ghiChuNoiBo": null,
+  "dichVu": [
+    {
+      "id": 2,
+      "ma": "AQ",
+      "ten": "Ắc quy",
+      "slug": "ac-quy",
+      "moTaNgan": "Kích nổ, đo, thay mới tại chỗ",
+      "ghiChuBangGia": "Đo miễn phí trước, ắc quy còn tốt thì thợ nói thật, không ép thay.",
+      "nutKeuGoi": "Gọi thợ thay ắc quy",
+      "thoiGianLam": "20–30 phút",
+      "thuTu": 2,
+      "nhanDatLich": true,
+      "baoGiaSoBo": true,
+      "hienTrenBangGia": true,
+      "updatedAt": "2026-10-08T11:11:11.085Z",
+      "createdAt": "2026-10-08T11:11:11.085Z"
+    }
+  ],
+  "suCo": null,
+  "trieuChung": "Sáng đề không nổ, đèn táp-lô mờ",
+  "tep": [],
+  "khungGio": {
+    "ngay": "2026-10-10",
+    "ma": "10-12",
+    "nhan": "10h – 12h, 10/10",
+    "batDauLuc": "2026-10-10T03:00:00.000Z"
+  },
+  "giaSoBo": {
+    "trangThai": "coGia",
+    "tu": 1550000,
+    "den": 2200000,
+    "phanKhuc": "B",
+    "dong": [
+      {
+        "tu": 150000,
+        "den": 150000,
+        "ten": "Công thay ắc quy",
+        "loai": "cong",
+        "coThe": false,
+        "dichVu": "ac-quy",
+        "hienThi": "150.000đ"
+      },
+      {
+        "tu": 1350000,
+        "den": 2000000,
+        "ten": "Ắc quy 12V",
+        "loai": "phuTung",
+        "coThe": false,
+        "dichVu": "ac-quy",
+        "hienThi": "1.350.000 – 2.000.000đ"
+      },
+      "… (còn 1 mục)"
+    ]
+  },
+  "xe": {
+    "hang": {
+      "id": 1,
+      "ten": "Toyota",
+      "slug": "toyota",
+      "thuTu": 1,
+      "maVCparts": "TOYOTA",
+      "nguon": "vcparts",
+      "updatedAt": "2026-10-08T11:11:11.356Z",
+      "createdAt": "2026-10-08T11:11:11.356Z"
+    },
+    "dong": {
+      "id": 1,
+      "hang": 1,
+      "ten": "Vios",
+      "tenDayDu": "Toyota Vios",
+      "slug": "toyota-vios",
+      "phanKhuc": "B",
+      "goiYPhanKhuc": "B",
+      "canGan": false,
+      "doiTu": 2014,
+      "doiDen": 2026,
+      "xeDien": false,
+      "maVCparts": "TOYOTA-VIOS",
+      "nguon": "vcparts",
+      "dongBoLuc": "2026-10-08T11:11:11.351Z",
+      "updatedAt": "2026-10-08T11:11:13.396Z",
+      "createdAt": "2026-10-08T11:11:11.362Z"
+    },
+    "tenXe": "Toyota Vios",
+    "doi": 2019,
+    "bienSo": "30A-123.45",
+    "soKm": 48000,
+    "phanKhuc": "B"
+  },
+  "viTri": {
+    "diaChi": "18 Trần Thái Tông, phường Dịch Vọng Hậu, Cầu Giấy",
+    "lat": 21.0325,
+    "lng": 105.79,
+    "quan": {
+      "id": 1,
+      "ten": "Cầu Giấy",
+      "slug": "cau-giay",
+      "thanhPho": "Hà Nội",
+      "etaTu": 25,
+      "etaDen": 40,
+      "ghiChu": "Dữ liệu mẫu: đo lại thời gian tới thực tế.",
+      "ranhGioi": null,
+      "dangPhucVu": true,
+      "thuTu": 1,
+      "updatedAt": "2026-10-08T11:11:13.493Z",
+      "createdAt": "2026-10-08T11:11:13.493Z"
+    },
+    "phuong": "Dịch Vọng Hậu",
+    "trongVung": true,
+    "etaTu": 25,
+    "etaDen": 40,
+    "choDo": "ham",
+    "ghiChuChoTho": "Hầm B2, ô 112"
+  },
+  "khach": {
+    "hoTen": "Nguyễn Văn Hoàng",
+    "sdt": "0912351057"
+  },
+  "hoaDon": {
+    "can": null,
+    "mst": null,
+    "tenCongTy": null,
+    "diaChi": null,
+    "email": null
+  },
+  "maGioiThieu": null,
+  "maKhuyenMai": "XANG-TDH12",
+  "dongY": {
+    "dongYXuLyDuLieu": true,
+    "dongYLuc": "2026-10-08T11:27:31.125Z",
+    "nhacBaoDuongZalo": true
+  },
+  "tho": {
+    "id": 1,
+    "ten": "Trần Minh Đức",
+    "sdt": null,
+    "maBenDieuPhoi": "THO-1",
+    "anh": null,
+    "soNamNghe": 7,
+    "bienSoXeVan": "29H-512.36",
+    "khuVuc": [
+      1
+    ],
+    "chungChi": [
+      {
+        "id": "6ac77a521b2df71b91e30e6f",
+        "ten": "VCedu Bảo dưỡng"
+      },
+      {
+        "id": "6ac77a521b2df71b91e30e70",
+        "ten": "VCedu Phanh, gầm"
+      }
+    ],
+    "gioiThieu": "DỮ LIỆU MẪU",
+    "dangHoatDong": true,
+    "diemSao": 4.9,
+    "soDanhGia": 214,
+    "viTri": {
+      "lat": 21.0298,
+      "lng": 105.7931,
+      "luc": "2026-10-08T11:25:38.351Z"
+    },
+    "updatedAt": "2026-10-08T11:25:38.362Z",
+    "createdAt": "2026-10-08T11:11:14.430Z"
+  },
+  "thoDuKienDenLuc": "2026-10-08T11:52:31.176Z",
+  "viTriTho": {
+    "lat": null,
+    "lng": null,
+    "luc": null
+  },
+  "ketQua": "binhThuong",
+  "khuyenMai": {
+    "id": 1,
+    "ma": "XANG-TDH12",
+    "loai": "xang",
+    "doiTac": "Cây xăng 12 Trần Duy Hưng",
+    "kieuGiam": "phanTram",
+    "giaTri": 10,
+    "giamToiDa": 100000,
+    "batDau": "2026-01-01T00:00:00.000Z",
+    "hetHan": "2027-12-31T00:00:00.000Z",
+    "soLuotToiDa": 300,
+    "moiSdtMotLan": true,
+    "hoaHongPhanTram": 5,
+    "tamDung": false,
+    "ghiChu": "DỮ LIỆU MẪU",
+    "updatedAt": "2026-10-08T11:11:14.454Z",
+    "createdAt": "2026-10-08T11:11:14.454Z"
+  },
+  "xongLuc": null,
+  "soKmKhiXong": null,
+  "thanhToan": {
+    "soTien": null,
+    "giam": null,
+    "daNhan": 0,
+    "trangThai": "chuaTinh",
+    "chiTiet": null,
+    "thanhToanLuc": null,
+    "maGiaoDich": null,
+    "hinhThuc": null
+  },
+  "hoaDonDienTu": {
+    "so": null,
+    "kyHieu": null,
+    "maCQT": null,
+    "xuatLuc": null,
+    "linkXem": null,
+    "linkPdf": null,
+    "loi": null
+  },
+  "phieuBaoHanh": null,
+  "danhGia": {
+    "guiLuc": null,
+    "luc": null,
+    "soSao": null,
+    "token": null
+  },
+  "nguon": {
+    "kenh": "QR cây xăng",
+    "utmSource": "google",
+    "utmMedium": "cpc",
+    "utmCampaign": "",
+    "maQR": "",
+    "trangVao": "/dich-vu/ac-quy/",
+    "referrer": ""
+  },
+  "tichHop": {
+    "dieuPhoiId": null,
+    "guiDieuPhoiLuc": null,
+    "loiDieuPhoi": null,
+    "xacNhanKenh": null,
+    "xacNhanLuc": null,
+    "loiThongBao": null
+  },
+  "tokenTheoDoi": "6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H",
+  "ketThucLuc": null,
+  "hetHanLinkLuc": null,
+  "updatedAt": "2026-10-08T11:27:31.269Z",
+  "createdAt": "2026-10-08T11:27:31.143Z"
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:vi-tri-tho -->
+Request:
+```http
+POST /api/don-hang/TT-000039/vi-tri-tho
+
+{
+  "lat": 21.0298,
+  "lng": 105.7931
+}
+```
+Response `200`:
+```json
+{
+  "id": 83,
+  "ma": "TT-000039",
+  "loai": "datLich",
+  "uuTien": 0,
+  "trangThai": "thoDangDen",
+  "lichSuTrangThai": [
+    {
+      "id": "6ac77e23de863a26e7261d99",
+      "trangThai": "daNhan",
+      "luc": "2026-10-08T11:27:31.132Z",
+      "boi": "Khách (web)",
+      "ghiChu": null
+    },
+    {
+      "id": "6ac77e23de863a26e7261d9a",
+      "trangThai": "daXepTho",
+      "luc": "2026-10-08T11:27:31.256Z",
+      "boi": "Điều phối thử",
+      "ghiChu": null
+    },
+    "… (còn 1 mục)"
+  ],
+  "ghiChuNoiBo": null,
+  "dichVu": [
+    {
+      "id": 2,
+      "ma": "AQ",
+      "ten": "Ắc quy",
+      "slug": "ac-quy",
+      "moTaNgan": "Kích nổ, đo, thay mới tại chỗ",
+      "ghiChuBangGia": "Đo miễn phí trước, ắc quy còn tốt thì thợ nói thật, không ép thay.",
+      "nutKeuGoi": "Gọi thợ thay ắc quy",
+      "thoiGianLam": "20–30 phút",
+      "thuTu": 2,
+      "nhanDatLich": true,
+      "baoGiaSoBo": true,
+      "hienTrenBangGia": true,
+      "updatedAt": "2026-10-08T11:11:11.085Z",
+      "createdAt": "2026-10-08T11:11:11.085Z"
+    }
+  ],
+  "suCo": null,
+  "trieuChung": "Sáng đề không nổ, đèn táp-lô mờ",
+  "tep": [],
+  "khungGio": {
+    "ngay": "2026-10-10",
+    "ma": "10-12",
+    "nhan": "10h – 12h, 10/10",
+    "batDauLuc": "2026-10-10T03:00:00.000Z"
+  },
+  "giaSoBo": {
+    "trangThai": "coGia",
+    "tu": 1550000,
+    "den": 2200000,
+    "phanKhuc": "B",
+    "dong": [
+      {
+        "tu": 150000,
+        "den": 150000,
+        "ten": "Công thay ắc quy",
+        "loai": "cong",
+        "coThe": false,
+        "dichVu": "ac-quy",
+        "hienThi": "150.000đ"
+      },
+      {
+        "tu": 1350000,
+        "den": 2000000,
+        "ten": "Ắc quy 12V",
+        "loai": "phuTung",
+        "coThe": false,
+        "dichVu": "ac-quy",
+        "hienThi": "1.350.000 – 2.000.000đ"
+      },
+      "… (còn 1 mục)"
+    ]
+  },
+  "xe": {
+    "hang": {
+      "id": 1,
+      "ten": "Toyota",
+      "slug": "toyota",
+      "thuTu": 1,
+      "maVCparts": "TOYOTA",
+      "nguon": "vcparts",
+      "updatedAt": "2026-10-08T11:11:11.356Z",
+      "createdAt": "2026-10-08T11:11:11.356Z"
+    },
+    "dong": {
+      "id": 1,
+      "hang": 1,
+      "ten": "Vios",
+      "tenDayDu": "Toyota Vios",
+      "slug": "toyota-vios",
+      "phanKhuc": "B",
+      "goiYPhanKhuc": "B",
+      "canGan": false,
+      "doiTu": 2014,
+      "doiDen": 2026,
+      "xeDien": false,
+      "maVCparts": "TOYOTA-VIOS",
+      "nguon": "vcparts",
+      "dongBoLuc": "2026-10-08T11:11:11.351Z",
+      "updatedAt": "2026-10-08T11:11:13.396Z",
+      "createdAt": "2026-10-08T11:11:11.362Z"
+    },
+    "tenXe": "Toyota Vios",
+    "doi": 2019,
+    "bienSo": "30A-123.45",
+    "soKm": 48000,
+    "phanKhuc": "B"
+  },
+  "viTri": {
+    "diaChi": "18 Trần Thái Tông, phường Dịch Vọng Hậu, Cầu Giấy",
+    "lat": 21.0325,
+    "lng": 105.79,
+    "quan": {
+      "id": 1,
+      "ten": "Cầu Giấy",
+      "slug": "cau-giay",
+      "thanhPho": "Hà Nội",
+      "etaTu": 25,
+      "etaDen": 40,
+      "ghiChu": "Dữ liệu mẫu: đo lại thời gian tới thực tế.",
+      "ranhGioi": null,
+      "dangPhucVu": true,
+      "thuTu": 1,
+      "updatedAt": "2026-10-08T11:11:13.493Z",
+      "createdAt": "2026-10-08T11:11:13.493Z"
+    },
+    "phuong": "Dịch Vọng Hậu",
+    "trongVung": true,
+    "etaTu": 25,
+    "etaDen": 40,
+    "choDo": "ham",
+    "ghiChuChoTho": "Hầm B2, ô 112"
+  },
+  "khach": {
+    "hoTen": "Nguyễn Văn Hoàng",
+    "sdt": "0912351057"
+  },
+  "hoaDon": {
+    "can": null,
+    "mst": null,
+    "tenCongTy": null,
+    "diaChi": null,
+    "email": null
+  },
+  "maGioiThieu": null,
+  "maKhuyenMai": "XANG-TDH12",
+  "dongY": {
+    "dongYXuLyDuLieu": true,
+    "dongYLuc": "2026-10-08T11:27:31.125Z",
+    "nhacBaoDuongZalo": true
+  },
+  "tho": {
+    "id": 1,
+    "ten": "Trần Minh Đức",
+    "sdt": null,
+    "maBenDieuPhoi": "THO-1",
+    "anh": null,
+    "soNamNghe": 7,
+    "bienSoXeVan": "29H-512.36",
+    "khuVuc": [
+      1
+    ],
+    "chungChi": [
+      {
+        "id": "6ac77a521b2df71b91e30e6f",
+        "ten": "VCedu Bảo dưỡng"
+      },
+      {
+        "id": "6ac77a521b2df71b91e30e70",
+        "ten": "VCedu Phanh, gầm"
+      }
+    ],
+    "gioiThieu": "DỮ LIỆU MẪU",
+    "dangHoatDong": true,
+    "diemSao": 4.9,
+    "soDanhGia": 214,
+    "viTri": {
+      "lat": 21.0298,
+      "lng": 105.7931,
+      "luc": "2026-10-08T11:27:31.364Z"
+    },
+    "updatedAt": "2026-10-08T11:27:31.374Z",
+    "createdAt": "2026-10-08T11:11:14.430Z"
+  },
+  "thoDuKienDenLuc": "2026-10-08T11:52:31.176Z",
+  "viTriTho": {
+    "lat": 21.0298,
+    "lng": 105.7931,
+    "luc": "2026-10-08T11:27:31.364Z"
+  },
+  "ketQua": "binhThuong",
+  "khuyenMai": {
+    "id": 1,
+    "ma": "XANG-TDH12",
+    "loai": "xang",
+    "doiTac": "Cây xăng 12 Trần Duy Hưng",
+    "kieuGiam": "phanTram",
+    "giaTri": 10,
+    "giamToiDa": 100000,
+    "batDau": "2026-01-01T00:00:00.000Z",
+    "hetHan": "2027-12-31T00:00:00.000Z",
+    "soLuotToiDa": 300,
+    "moiSdtMotLan": true,
+    "hoaHongPhanTram": 5,
+    "tamDung": false,
+    "ghiChu": "DỮ LIỆU MẪU",
+    "updatedAt": "2026-10-08T11:11:14.454Z",
+    "createdAt": "2026-10-08T11:11:14.454Z"
+  },
+  "xongLuc": null,
+  "soKmKhiXong": null,
+  "thanhToan": {
+    "soTien": null,
+    "giam": null,
+    "daNhan": 0,
+    "trangThai": "chuaTinh",
+    "chiTiet": null,
+    "thanhToanLuc": null,
+    "maGiaoDich": null,
+    "hinhThuc": null
+  },
+  "hoaDonDienTu": {
+    "so": null,
+    "kyHieu": null,
+    "maCQT": null,
+    "xuatLuc": null,
+    "linkXem": null,
+    "linkPdf": null,
+    "loi": null
+  },
+  "phieuBaoHanh": null,
+  "danhGia": {
+    "guiLuc": null,
+    "luc": null,
+    "soSao": null,
+    "token": null
+  },
+  "nguon": {
+    "kenh": "QR cây xăng",
+    "utmSource": "google",
+    "utmMedium": "cpc",
+    "utmCampaign": "",
+    "maQR": "",
+    "trangVao": "/dich-vu/ac-quy/",
+    "referrer": ""
+  },
+  "tichHop": {
+    "dieuPhoiId": "GL-TT-000039",
+    "guiDieuPhoiLuc": "2026-10-08T11:27:31.187Z",
+    "loiDieuPhoi": null,
+    "xacNhanKenh": "zalo",
+    "xacNhanLuc": "2026-10-08T11:27:31.272Z",
+    "loiThongBao": null
+  },
+  "tokenTheoDoi": "6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H",
+  "ketThucLuc": null,
+  "hetHanLinkLuc": null,
+  "updatedAt": "2026-10-08T11:27:31.418Z",
+  "createdAt": "2026-10-08T11:27:31.143Z"
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:theo-doi-tho -->
+Request:
+```http
+GET /api/don-hang/theo-doi/6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H
+```
+Response `200`:
+```json
+{
+  "ma": "TT-000039",
+  "loai": "datLich",
+  "trangThai": "thoDangDen",
+  "nhanTrangThai": "Thợ đang đến",
+  "cacBuoc": [
+    {
+      "trangThai": "daNhan",
+      "nhan": "Đã nhận",
+      "luc": "2026-10-08T11:27:31.132Z",
+      "tinhTrang": "done"
+    },
+    {
+      "trangThai": "daXepTho",
+      "nhan": "Đã xếp thợ",
+      "luc": "2026-10-08T11:27:31.256Z",
+      "tinhTrang": "done"
+    },
+    "… (còn 5 mục)"
+  ],
+  "dichVu": [
+    {
+      "ten": "Ắc quy",
+      "slug": "ac-quy"
+    }
+  ],
+  "suCo": null,
+  "xe": {
+    "ten": "Toyota Vios",
+    "doi": 2019,
+    "bienSo": "30A-123.45"
+  },
+  "viTri": {
+    "diaChi": "18 Trần Thái Tông, phường Dịch Vọng Hậu, Cầu Giấy",
+    "quan": "Cầu Giấy",
+    "etaTu": 25,
+    "etaDen": 40
+  },
+  "khungGio": "10h – 12h, 10/10",
+  "khach": {
+    "hoTen": "Nguyễn Văn Hoàng",
+    "sdt": "0912 xxx 057"
+  },
+  "giaSoBo": {
+    "trangThai": "coGia",
+    "tu": 1550000,
+    "den": 2200000
+  },
+  "tho": {
+    "ten": "Trần Minh Đức",
+    "vietTat": "MĐ",
+    "anh": null,
+    "diemSao": 4.9,
+    "soDanhGia": 214,
+    "soNamNghe": 7,
+    "chungChi": [
+      "VCedu Bảo dưỡng",
+      "VCedu Phanh, gầm"
+    ],
+    "bienSoXeVan": "29H-512.36"
+  },
+  "viTriTho": {
+    "lat": 21.0298,
+    "lng": 105.7931,
+    "luc": "2026-10-08T11:27:31.364Z"
+  },
+  "thoDuKienDenLuc": "2026-10-08T11:52:31.176Z",
+  "viecCanLam": null,
+  "thanhToan": null,
+  "hotline": "1900 1068",
+  "taoLuc": "2026-10-08T11:27:31.143Z",
+  "hetHanLinkLuc": null
+}
+```
+<!-- /vi-du -->
+
+### Báo giá chính thức: `POST /api/don-hang/:ma/bao-gia`
+Thợ gửi: `{ "chanDoan"?, "hangMuc": [{ "ma", "ten", "lyDo", "loai": "cong"|"phuTung", "gia", "batBuoc"?, "mucDo":
+"canLamNgay"|"nenLam"|"coTheDeSau", "baoHanhThang"?, "anh"?: [<id tệp đơn>] }] }`. `ma` là khoá của hạng mục trong báo giá
+(khách bỏ chọn theo `ma`). `baoHanhThang` bỏ trống thì lấy theo bảng giá chung (công / phụ tùng).
+Gửi lại khi đơn đang `choDuyetBaoGia` thì báo giá cũ thành `thayThe`. Gửi khi đang `dangSua` = **báo giá phát sinh**: đơn
+quay về `choDuyetBaoGia`, khách duyệt riêng phần phát sinh. Tiền đi lại tính một lần, không theo từng báo giá.
+
+<!-- vi-du:tao-bao-gia -->
+Request:
+```http
+POST /api/don-hang/TT-000039/bao-gia
+
+{
+  "chanDoan": "Ắc quy chỉ còn 8,9V khi đề, cần thay mới.",
+  "hangMuc": [
+    {
+      "ma": "aq",
+      "ten": "Ắc quy 12V 45Ah",
+      "lyDo": "Điện áp khởi động 8,9V, dưới mức an toàn",
+      "loai": "phuTung",
+      "gia": 1650000,
+      "batBuoc": true,
+      "mucDo": "canLamNgay"
+    },
+    {
+      "ma": "cong",
+      "ten": "Công thay ắc quy",
+      "lyDo": "Gồm lưu bộ nhớ xe",
+      "loai": "cong",
+      "gia": 150000,
+      "batBuoc": true,
+      "mucDo": "canLamNgay"
+    },
+    {
+      "ma": "coc",
+      "ten": "Vệ sinh cọc, thay đầu cos",
+      "lyDo": "Cọc âm bị rỉ trắng",
+      "loai": "cong",
+      "gia": 120000,
+      "mucDo": "nenLam"
+    },
+    {
+      "ma": "gat",
+      "ten": "Thay lưỡi gạt mưa",
+      "lyDo": "Lưỡi gạt chai, để vệt khi gạt",
+      "loai": "phuTung",
+      "gia": 280000,
+      "mucDo": "coTheDeSau"
+    }
+  ]
+}
+```
+Response `200`:
+```json
+{
+  "id": 29,
+  "donHang": {
+    "id": 83,
+    "ma": "TT-000039",
+    "loai": "datLich",
+    "uuTien": 0,
+    "trangThai": "thoDangDen",
+    "lichSuTrangThai": [
+      {
+        "id": "6ac77e23de863a26e7261d99",
+        "trangThai": "daNhan",
+        "luc": "2026-10-08T11:27:31.132Z",
+        "boi": "Khách (web)",
+        "ghiChu": null
+      },
+      {
+        "id": "6ac77e23de863a26e7261d9a",
+        "trangThai": "daXepTho",
+        "luc": "2026-10-08T11:27:31.256Z",
+        "boi": "Điều phối thử",
+        "ghiChu": null
+      },
+      "… (còn 1 mục)"
+    ],
+    "ghiChuNoiBo": null,
+    "dichVu": [
+      {
+        "id": 2,
+        "ma": "AQ",
+        "ten": "Ắc quy",
+        "slug": "ac-quy",
+        "moTaNgan": "Kích nổ, đo, thay mới tại chỗ",
+        "ghiChuBangGia": "Đo miễn phí trước, ắc quy còn tốt thì thợ nói thật, không ép thay.",
+        "nutKeuGoi": "Gọi thợ thay ắc quy",
+        "thoiGianLam": "20–30 phút",
+        "thuTu": 2,
+        "nhanDatLich": true,
+        "baoGiaSoBo": true,
+        "hienTrenBangGia": true,
+        "updatedAt": "2026-10-08T11:11:11.085Z",
+        "createdAt": "2026-10-08T11:11:11.085Z"
+      }
+    ],
+    "suCo": null,
+    "trieuChung": "Sáng đề không nổ, đèn táp-lô mờ",
+    "tep": [],
+    "khungGio": {
+      "ngay": "2026-10-10",
+      "ma": "10-12",
+      "nhan": "10h – 12h, 10/10",
+      "batDauLuc": "2026-10-10T03:00:00.000Z"
+    },
+    "giaSoBo": {
+      "trangThai": "coGia",
+      "tu": 1550000,
+      "den": 2200000,
+      "phanKhuc": "B",
+      "dong": [
+        {
+          "tu": 150000,
+          "den": 150000,
+          "ten": "Công thay ắc quy",
+          "loai": "cong",
+          "coThe": false,
+          "dichVu": "ac-quy",
+          "hienThi": "150.000đ"
+        },
+        {
+          "tu": 1350000,
+          "den": 2000000,
+          "ten": "Ắc quy 12V",
+          "loai": "phuTung",
+          "coThe": false,
+          "dichVu": "ac-quy",
+          "hienThi": "1.350.000 – 2.000.000đ"
+        },
+        "… (còn 1 mục)"
+      ]
+    },
+    "xe": {
+      "hang": {
+        "id": 1,
+        "ten": "Toyota",
+        "slug": "toyota",
+        "thuTu": 1,
+        "maVCparts": "TOYOTA",
+        "nguon": "vcparts",
+        "updatedAt": "2026-10-08T11:11:11.356Z",
+        "createdAt": "2026-10-08T11:11:11.356Z"
+      },
+      "dong": {
+        "id": 1,
+        "hang": 1,
+        "ten": "Vios",
+        "tenDayDu": "Toyota Vios",
+        "slug": "toyota-vios",
+        "phanKhuc": "B",
+        "goiYPhanKhuc": "B",
+        "canGan": false,
+        "doiTu": 2014,
+        "doiDen": 2026,
+        "xeDien": false,
+        "maVCparts": "TOYOTA-VIOS",
+        "nguon": "vcparts",
+        "dongBoLuc": "2026-10-08T11:11:11.351Z",
+        "updatedAt": "2026-10-08T11:11:13.396Z",
+        "createdAt": "2026-10-08T11:11:11.362Z"
+      },
+      "tenXe": "Toyota Vios",
+      "doi": 2019,
+      "bienSo": "30A-123.45",
+      "soKm": 48000,
+      "phanKhuc": "B"
+    },
+    "viTri": {
+      "diaChi": "18 Trần Thái Tông, phường Dịch Vọng Hậu, Cầu Giấy",
+      "lat": 21.0325,
+      "lng": 105.79,
+      "quan": {
+        "id": 1,
+        "ten": "Cầu Giấy",
+        "slug": "cau-giay",
+        "thanhPho": "Hà Nội",
+        "etaTu": 25,
+        "etaDen": 40,
+        "ghiChu": "Dữ liệu mẫu: đo lại thời gian tới thực tế.",
+        "ranhGioi": null,
+        "dangPhucVu": true,
+        "thuTu": 1,
+        "updatedAt": "2026-10-08T11:11:13.493Z",
+        "createdAt": "2026-10-08T11:11:13.493Z"
+      },
+      "phuong": "Dịch Vọng Hậu",
+      "trongVung": true,
+      "etaTu": 25,
+      "etaDen": 40,
+      "choDo": "ham",
+      "ghiChuChoTho": "Hầm B2, ô 112"
+    },
+    "khach": {
+      "hoTen": "Nguyễn Văn Hoàng",
+      "sdt": "0912351057"
+    },
+    "hoaDon": {
+      "can": null,
+      "mst": null,
+      "tenCongTy": null,
+      "diaChi": null,
+      "email": null
+    },
+    "maGioiThieu": null,
+    "maKhuyenMai": "XANG-TDH12",
+    "dongY": {
+      "dongYXuLyDuLieu": true,
+      "dongYLuc": "2026-10-08T11:27:31.125Z",
+      "nhacBaoDuongZalo": true
+    },
+    "tho": {
+      "id": 1,
+      "ten": "Trần Minh Đức",
+      "sdt": null,
+      "maBenDieuPhoi": "THO-1",
+      "anh": null,
+      "soNamNghe": 7,
+      "bienSoXeVan": "29H-512.36",
+      "khuVuc": [
+        1
+      ],
+      "chungChi": [
+        {
+          "id": "6ac77a521b2df71b91e30e6f",
+          "ten": "VCedu Bảo dưỡng"
+        },
+        {
+          "id": "6ac77a521b2df71b91e30e70",
+          "ten": "VCedu Phanh, gầm"
+        }
+      ],
+      "gioiThieu": "DỮ LIỆU MẪU",
+      "dangHoatDong": true,
+      "diemSao": 4.9,
+      "soDanhGia": 214,
+      "viTri": {
+        "lat": 21.0298,
+        "lng": 105.7931,
+        "luc": "2026-10-08T11:27:31.364Z"
+      },
+      "updatedAt": "2026-10-08T11:27:31.374Z",
+      "createdAt": "2026-10-08T11:11:14.430Z"
+    },
+    "thoDuKienDenLuc": "2026-10-08T11:52:31.176Z",
+    "viTriTho": {
+      "lat": 21.0298,
+      "lng": 105.7931,
+      "luc": "2026-10-08T11:27:31.364Z"
+    },
+    "ketQua": "binhThuong",
+    "khuyenMai": {
+      "id": 1,
+      "ma": "XANG-TDH12",
+      "loai": "xang",
+      "doiTac": "Cây xăng 12 Trần Duy Hưng",
+      "kieuGiam": "phanTram",
+      "giaTri": 10,
+      "giamToiDa": 100000,
+      "batDau": "2026-01-01T00:00:00.000Z",
+      "hetHan": "2027-12-31T00:00:00.000Z",
+      "soLuotToiDa": 300,
+      "moiSdtMotLan": true,
+      "hoaHongPhanTram": 5,
+      "tamDung": false,
+      "ghiChu": "DỮ LIỆU MẪU",
+      "updatedAt": "2026-10-08T11:11:14.454Z",
+      "createdAt": "2026-10-08T11:11:14.454Z"
+    },
+    "xongLuc": null,
+    "soKmKhiXong": null,
+    "thanhToan": {
+      "soTien": null,
+      "giam": null,
+      "daNhan": 0,
+      "trangThai": "chuaTinh",
+      "chiTiet": null,
+      "thanhToanLuc": null,
+      "maGiaoDich": null,
+      "hinhThuc": null
+    },
+    "hoaDonDienTu": {
+      "so": null,
+      "kyHieu": null,
+      "maCQT": null,
+      "xuatLuc": null,
+      "linkXem": null,
+      "linkPdf": null,
+      "loi": null
+    },
+    "phieuBaoHanh": null,
+    "danhGia": {
+      "guiLuc": null,
+      "luc": null,
+      "soSao": null,
+      "token": null
+    },
+    "nguon": {
+      "kenh": "QR cây xăng",
+      "utmSource": "google",
+      "utmMedium": "cpc",
+      "utmCampaign": "",
+      "maQR": "",
+      "trangVao": "/dich-vu/ac-quy/",
+      "referrer": ""
+    },
+    "tichHop": {
+      "dieuPhoiId": "GL-TT-000039",
+      "guiDieuPhoiLuc": "2026-10-08T11:27:31.187Z",
+      "loiDieuPhoi": null,
+      "xacNhanKenh": "zalo",
+      "xacNhanLuc": "2026-10-08T11:27:31.272Z",
+      "loiThongBao": null
+    },
+    "tokenTheoDoi": "6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H",
+    "ketThucLuc": null,
+    "hetHanLinkLuc": null,
+    "updatedAt": "2026-10-08T11:27:31.418Z",
+    "createdAt": "2026-10-08T11:27:31.143Z"
+  },
+  "maDon": "TT-000039",
+  "phienBan": 1,
+  "tieuDe": "TT-000039 · báo giá",
+  "trangThai": "choDuyet",
+  "chanDoan": "Ắc quy chỉ còn 8,9V khi đề, cần thay mới.",
+  "hangMuc": [
+    {
+      "id": "6ac77e23de863a26e7261d9c",
+      "ma": "aq",
+      "ten": "Ắc quy 12V 45Ah",
+      "loai": "phuTung",
+      "gia": 1650000,
+      "lyDo": "Điện áp khởi động 8,9V, dưới mức an toàn",
+      "batBuoc": true,
+      "mucDo": "canLamNgay",
+      "baoHanhThang": null,
+      "anh": []
+    },
+    {
+      "id": "6ac77e23de863a26e7261d9d",
+      "ma": "cong",
+      "ten": "Công thay ắc quy",
+      "loai": "cong",
+      "gia": 150000,
+      "lyDo": "Gồm lưu bộ nhớ xe",
+      "batBuoc": true,
+      "mucDo": "canLamNgay",
+      "baoHanhThang": null,
+      "anh": []
+    },
+    "… (còn 2 mục)"
+  ],
+  "tongNeuLamHet": 2200000,
+  "taoBoi": "Điều phối thử",
+  "ketQua": {
+    "luc": null,
+    "sdt": null,
+    "boHangMuc": [],
+    "tienCong": null,
+    "phuTung": null,
+    "lyDoTuChoi": null,
+    "banChup": null
+  },
+  "updatedAt": "2026-10-08T11:27:31.532Z",
+  "createdAt": "2026-10-08T11:27:31.531Z"
+}
+```
+<!-- /vi-du -->
+
+### Khách: `GET /api/don-hang/theo-doi/:token/bao-gia`, `POST .../bao-gia/duyet`, `POST .../bao-gia/tu-choi`
+- Xem (màn `BaoGia`): hạng mục chia theo `mucDo`, ảnh lỗi qua `GET .../theo-doi/:token/anh/:id`, tổng tiền.
+- Duyệt: `{ "boHangMuc": ["<ma>", ...], "dongY": true }`. `dongY` là ô "Tôi đồng ý báo giá" (bắt buộc). Không bỏ được hạng mục
+  `batBuoc`. Lưu bản chụp giá và lúc duyệt; đơn sang `dangSua`.
+- Từ chối: `{ "lyDo"? }`. Đơn chuyển sang `choThanhToan` với số tiền = phí kiểm tra (`bang-gia-chung.phiKiemTra`).
+
+<!-- vi-du:xem-bao-gia -->
+Request:
+```http
+GET /api/don-hang/theo-doi/6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H/bao-gia
+```
+Response `200`:
+```json
+{
+  "ma": "TT-000039",
+  "xe": {
+    "ten": "Toyota Vios",
+    "bienSo": "30A-123.45"
+  },
+  "tho": {
+    "ten": "Trần Minh Đức",
+    "vietTat": "MĐ",
+    "anh": null,
+    "diemSao": 4.9,
+    "soDanhGia": 214,
+    "soNamNghe": 7,
+    "chungChi": [
+      "VCedu Bảo dưỡng",
+      "VCedu Phanh, gầm"
+    ],
+    "bienSoXeVan": "29H-512.36"
+  },
+  "baoGia": {
+    "id": 29,
+    "lan": 1,
+    "phatSinh": false,
+    "trangThai": "choDuyet",
+    "chanDoan": "Ắc quy chỉ còn 8,9V khi đề, cần thay mới.",
+    "hangMuc": [
+      {
+        "ma": "aq",
+        "ten": "Ắc quy 12V 45Ah",
+        "lyDo": "Điện áp khởi động 8,9V, dưới mức an toàn",
+        "loai": "phuTung",
+        "loaiNhan": "Phụ tùng",
+        "gia": 1650000,
+        "giaHienThi": "1.650.000đ",
+        "batBuoc": true,
+        "tuyChon": false,
+        "mucDo": "canLamNgay",
+        "mucDoNhan": "Cần làm ngay",
+        "anh": []
+      },
+      {
+        "ma": "cong",
+        "ten": "Công thay ắc quy",
+        "lyDo": "Gồm lưu bộ nhớ xe",
+        "loai": "cong",
+        "loaiNhan": "Tiền công",
+        "gia": 150000,
+        "giaHienThi": "150.000đ",
+        "batBuoc": true,
+        "tuyChon": false,
+        "mucDo": "canLamNgay",
+        "mucDoNhan": "Cần làm ngay",
+        "anh": []
+      },
+      "… (còn 2 mục)"
+    ],
+    "tongNeuLamHet": 2200000,
+    "ketQua": null,
+    "taoLuc": "2026-10-08T11:27:31.531Z"
+  },
+  "daDuyetTruoc": [],
+  "phiDiLai": 50000,
+  "phiKiemTra": 100000,
+  "khuyenMai": {
+    "ma": "XANG-TDH12",
+    "kieuGiam": "phanTram",
+    "giaTri": 10,
+    "giamToiDa": 100000
+  }
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:duyet-bao-gia-loi -->
+Bỏ hạng mục bắt buộc:
+
+Request:
+```http
+POST /api/don-hang/theo-doi/6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H/bao-gia/duyet
+
+{
+  "boHangMuc": [
+    "aq"
+  ],
+  "dongY": true
+}
+```
+Response `400`:
+```json
+{
+  "loi": "\"Ắc quy 12V 45Ah\" là hạng mục bắt buộc, không bỏ được.",
+  "ma": "BO_HANG_MUC_SAI"
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:duyet-bao-gia -->
+Request:
+```http
+POST /api/don-hang/theo-doi/6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H/bao-gia/duyet
+
+{
+  "boHangMuc": [
+    "gat"
+  ],
+  "dongY": true
+}
+```
+Response `200`:
+```json
+{
+  "baoGia": {
+    "id": 29,
+    "lan": 1,
+    "phatSinh": false,
+    "trangThai": "daDuyet",
+    "chanDoan": "Ắc quy chỉ còn 8,9V khi đề, cần thay mới.",
+    "hangMuc": [
+      {
+        "ma": "aq",
+        "ten": "Ắc quy 12V 45Ah",
+        "lyDo": "Điện áp khởi động 8,9V, dưới mức an toàn",
+        "loai": "phuTung",
+        "loaiNhan": "Phụ tùng",
+        "gia": 1650000,
+        "giaHienThi": "1.650.000đ",
+        "batBuoc": true,
+        "tuyChon": false,
+        "mucDo": "canLamNgay",
+        "mucDoNhan": "Cần làm ngay",
+        "anh": []
+      },
+      {
+        "ma": "cong",
+        "ten": "Công thay ắc quy",
+        "lyDo": "Gồm lưu bộ nhớ xe",
+        "loai": "cong",
+        "loaiNhan": "Tiền công",
+        "gia": 150000,
+        "giaHienThi": "150.000đ",
+        "batBuoc": true,
+        "tuyChon": false,
+        "mucDo": "canLamNgay",
+        "mucDoNhan": "Cần làm ngay",
+        "anh": []
+      },
+      "… (còn 2 mục)"
+    ],
+    "tongNeuLamHet": 2200000,
+    "ketQua": {
+      "luc": "2026-10-08T11:27:31.820Z",
+      "boHangMuc": [
+        "gat"
+      ],
+      "tienCong": 270000,
+      "phuTung": 1650000,
+      "lyDoTuChoi": null
+    },
+    "taoLuc": "2026-10-08T11:27:31.531Z"
+  },
+  "trangThai": "dangSua"
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:tu-choi -->
+Request:
+```http
+POST /api/don-hang/theo-doi/cet3KmIW56B2lgBSJqHig_RoHi3X5Sb1/bao-gia/tu-choi
+
+{
+  "lyDo": "Để tự mua ắc quy"
+}
+```
+Response `200`:
+```json
+{
+  "trangThai": "choThanhToan",
+  "thongBao": "Đơn kết thúc. Bạn chỉ trả phí kiểm tra 100.000đ."
+}
+```
+<!-- /vi-du -->
+
+### Xong việc: `POST /api/don-hang/:ma/xong`
+`{ "soKm"? }`. Tính tiền: hạng mục đã duyệt (mọi báo giá) + phí đi lại − giảm từ mã khuyến mãi. Đơn sang `choThanhToan`,
+gửi tin mời thanh toán. Thu tiền mặt / quẹt thẻ: `POST /api/don-hang/:ma/thu-tay` `{ "soTien" }` (ghi một giao dịch tay).
+
+<!-- vi-du:xong -->
+Request:
+```http
+POST /api/don-hang/TT-000039/xong
+
+{
+  "soKm": 48200
+}
+```
+Response `200`:
+```json
+{
+  "id": 83,
+  "ma": "TT-000039",
+  "loai": "datLich",
+  "uuTien": 0,
+  "trangThai": "choThanhToan",
+  "lichSuTrangThai": [
+    {
+      "id": "6ac77e23de863a26e7261d99",
+      "trangThai": "daNhan",
+      "luc": "2026-10-08T11:27:31.132Z",
+      "boi": "Khách (web)",
+      "ghiChu": null
+    },
+    {
+      "id": "6ac77e23de863a26e7261d9a",
+      "trangThai": "daXepTho",
+      "luc": "2026-10-08T11:27:31.256Z",
+      "boi": "Điều phối thử",
+      "ghiChu": null
+    },
+    "… (còn 4 mục)"
+  ],
+  "ghiChuNoiBo": null,
+  "dichVu": [
+    {
+      "id": 2,
+      "ma": "AQ",
+      "ten": "Ắc quy",
+      "slug": "ac-quy",
+      "moTaNgan": "Kích nổ, đo, thay mới tại chỗ",
+      "ghiChuBangGia": "Đo miễn phí trước, ắc quy còn tốt thì thợ nói thật, không ép thay.",
+      "nutKeuGoi": "Gọi thợ thay ắc quy",
+      "thoiGianLam": "20–30 phút",
+      "thuTu": 2,
+      "nhanDatLich": true,
+      "baoGiaSoBo": true,
+      "hienTrenBangGia": true,
+      "updatedAt": "2026-10-08T11:11:11.085Z",
+      "createdAt": "2026-10-08T11:11:11.085Z"
+    }
+  ],
+  "suCo": null,
+  "trieuChung": "Sáng đề không nổ, đèn táp-lô mờ",
+  "tep": [],
+  "khungGio": {
+    "ngay": "2026-10-10",
+    "ma": "10-12",
+    "nhan": "10h – 12h, 10/10",
+    "batDauLuc": "2026-10-10T03:00:00.000Z"
+  },
+  "giaSoBo": {
+    "trangThai": "coGia",
+    "tu": 1550000,
+    "den": 2200000,
+    "phanKhuc": "B",
+    "dong": [
+      {
+        "tu": 150000,
+        "den": 150000,
+        "ten": "Công thay ắc quy",
+        "loai": "cong",
+        "coThe": false,
+        "dichVu": "ac-quy",
+        "hienThi": "150.000đ"
+      },
+      {
+        "tu": 1350000,
+        "den": 2000000,
+        "ten": "Ắc quy 12V",
+        "loai": "phuTung",
+        "coThe": false,
+        "dichVu": "ac-quy",
+        "hienThi": "1.350.000 – 2.000.000đ"
+      },
+      "… (còn 1 mục)"
+    ]
+  },
+  "xe": {
+    "hang": {
+      "id": 1,
+      "ten": "Toyota",
+      "slug": "toyota",
+      "thuTu": 1,
+      "maVCparts": "TOYOTA",
+      "nguon": "vcparts",
+      "updatedAt": "2026-10-08T11:11:11.356Z",
+      "createdAt": "2026-10-08T11:11:11.356Z"
+    },
+    "dong": {
+      "id": 1,
+      "hang": 1,
+      "ten": "Vios",
+      "tenDayDu": "Toyota Vios",
+      "slug": "toyota-vios",
+      "phanKhuc": "B",
+      "goiYPhanKhuc": "B",
+      "canGan": false,
+      "doiTu": 2014,
+      "doiDen": 2026,
+      "xeDien": false,
+      "maVCparts": "TOYOTA-VIOS",
+      "nguon": "vcparts",
+      "dongBoLuc": "2026-10-08T11:11:11.351Z",
+      "updatedAt": "2026-10-08T11:11:13.396Z",
+      "createdAt": "2026-10-08T11:11:11.362Z"
+    },
+    "tenXe": "Toyota Vios",
+    "doi": 2019,
+    "bienSo": "30A-123.45",
+    "soKm": 48000,
+    "phanKhuc": "B"
+  },
+  "viTri": {
+    "diaChi": "18 Trần Thái Tông, phường Dịch Vọng Hậu, Cầu Giấy",
+    "lat": 21.0325,
+    "lng": 105.79,
+    "quan": {
+      "id": 1,
+      "ten": "Cầu Giấy",
+      "slug": "cau-giay",
+      "thanhPho": "Hà Nội",
+      "etaTu": 25,
+      "etaDen": 40,
+      "ghiChu": "Dữ liệu mẫu: đo lại thời gian tới thực tế.",
+      "ranhGioi": null,
+      "dangPhucVu": true,
+      "thuTu": 1,
+      "updatedAt": "2026-10-08T11:11:13.493Z",
+      "createdAt": "2026-10-08T11:11:13.493Z"
+    },
+    "phuong": "Dịch Vọng Hậu",
+    "trongVung": true,
+    "etaTu": 25,
+    "etaDen": 40,
+    "choDo": "ham",
+    "ghiChuChoTho": "Hầm B2, ô 112"
+  },
+  "khach": {
+    "hoTen": "Nguyễn Văn Hoàng",
+    "sdt": "0912351057"
+  },
+  "hoaDon": {
+    "can": null,
+    "mst": null,
+    "tenCongTy": null,
+    "diaChi": null,
+    "email": null
+  },
+  "maGioiThieu": null,
+  "maKhuyenMai": "XANG-TDH12",
+  "dongY": {
+    "dongYXuLyDuLieu": true,
+    "dongYLuc": "2026-10-08T11:27:31.125Z",
+    "nhacBaoDuongZalo": true
+  },
+  "tho": {
+    "id": 1,
+    "ten": "Trần Minh Đức",
+    "sdt": null,
+    "maBenDieuPhoi": "THO-1",
+    "anh": null,
+    "soNamNghe": 7,
+    "bienSoXeVan": "29H-512.36",
+    "khuVuc": [
+      1
+    ],
+    "chungChi": [
+      {
+        "id": "6ac77a521b2df71b91e30e6f",
+        "ten": "VCedu Bảo dưỡng"
+      },
+      {
+        "id": "6ac77a521b2df71b91e30e70",
+        "ten": "VCedu Phanh, gầm"
+      }
+    ],
+    "gioiThieu": "DỮ LIỆU MẪU",
+    "dangHoatDong": true,
+    "diemSao": 4.9,
+    "soDanhGia": 214,
+    "viTri": {
+      "lat": 21.0298,
+      "lng": 105.7931,
+      "luc": "2026-10-08T11:27:31.364Z"
+    },
+    "updatedAt": "2026-10-08T11:27:31.374Z",
+    "createdAt": "2026-10-08T11:11:14.430Z"
+  },
+  "thoDuKienDenLuc": "2026-10-08T11:52:31.176Z",
+  "viTriTho": {
+    "lat": 21.0298,
+    "lng": 105.7931,
+    "luc": "2026-10-08T11:27:31.364Z"
+  },
+  "ketQua": "binhThuong",
+  "khuyenMai": {
+    "id": 1,
+    "ma": "XANG-TDH12",
+    "loai": "xang",
+    "doiTac": "Cây xăng 12 Trần Duy Hưng",
+    "kieuGiam": "phanTram",
+    "giaTri": 10,
+    "giamToiDa": 100000,
+    "batDau": "2026-01-01T00:00:00.000Z",
+    "hetHan": "2027-12-31T00:00:00.000Z",
+    "soLuotToiDa": 300,
+    "moiSdtMotLan": true,
+    "hoaHongPhanTram": 5,
+    "tamDung": false,
+    "ghiChu": "DỮ LIỆU MẪU",
+    "updatedAt": "2026-10-08T11:11:14.454Z",
+    "createdAt": "2026-10-08T11:11:14.454Z"
+  },
+  "xongLuc": "2026-10-08T11:27:32.017Z",
+  "soKmKhiXong": 48200,
+  "thanhToan": {
+    "soTien": 1943000,
+    "giam": 27000,
+    "daNhan": 0,
+    "trangThai": "choTien",
+    "chiTiet": [
+      {
+        "ten": "Ắc quy 12V 45Ah",
+        "loai": "phuTung",
+        "soTien": 1650000
+      },
+      {
+        "ten": "Công thay ắc quy",
+        "loai": "cong",
+        "soTien": 150000
+      },
+      "… (còn 3 mục)"
+    ],
+    "thanhToanLuc": null,
+    "maGiaoDich": null,
+    "hinhThuc": null
+  },
+  "hoaDonDienTu": {
+    "so": null,
+    "kyHieu": null,
+    "maCQT": null,
+    "xuatLuc": null,
+    "linkXem": null,
+    "linkPdf": null,
+    "loi": null
+  },
+  "phieuBaoHanh": null,
+  "danhGia": {
+    "guiLuc": null,
+    "luc": null,
+    "soSao": null,
+    "token": null
+  },
+  "nguon": {
+    "kenh": "QR cây xăng",
+    "utmSource": "google",
+    "utmMedium": "cpc",
+    "utmCampaign": "",
+    "maQR": "",
+    "trangVao": "/dich-vu/ac-quy/",
+    "referrer": ""
+  },
+  "tichHop": {
+    "dieuPhoiId": "GL-TT-000039",
+    "guiDieuPhoiLuc": "2026-10-08T11:27:31.187Z",
+    "loiDieuPhoi": null,
+    "xacNhanKenh": "zalo",
+    "xacNhanLuc": "2026-10-08T11:27:31.272Z",
+    "loiThongBao": null
+  },
+  "tokenTheoDoi": "6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H",
+  "ketThucLuc": null,
+  "hetHanLinkLuc": null,
+  "updatedAt": "2026-10-08T11:27:32.050Z",
+  "createdAt": "2026-10-08T11:27:31.143Z"
+}
+```
+<!-- /vi-du -->
+
+### Thanh toán VietQR: `GET /api/don-hang/theo-doi/:token/thanh-toan`
+Màn `ThanhToan`: chi tiết tiền, `vietQR.chuoi` (chuỗi EMVCo, dùng để tự vẽ QR) và `vietQR.anh` (PNG data URL vẽ sẵn),
+`chuyenKhoan` (ngân hàng, số tài khoản, chủ tài khoản, số tiền còn lại, **nội dung `TT000123`**). Hỏi lại mỗi 5 giây
+đến khi `trangThai = daThanhToan`. Cấu hình tài khoản trong `cai-dat` tab "Ngân hàng (VietQR)"; thiếu thì 503 `CHUA_CAU_HINH_NGAN_HANG`.
+
+`thanhToan.trangThai`: `chuaTinh` | `choTien` | `thieu` (đã nhận một phần, QR hiện số còn lại) | `daThanhToan`.
+
+<!-- vi-du:xem-thanh-toan -->
+`vietQR.anh` là ảnh PNG dạng data URL (rút gọn ở đây):
+
+Request:
+```http
+GET /api/don-hang/theo-doi/6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H/thanh-toan
+```
+Response `200`:
+```json
+{
+  "ma": "TT-000039",
+  "xe": {
+    "ten": "Toyota Vios",
+    "doi": 2019,
+    "bienSo": "30A-123.45"
+  },
+  "tho": {
+    "ten": "Trần Minh Đức",
+    "vietTat": "MĐ",
+    "anh": null,
+    "diemSao": 4.9,
+    "soDanhGia": 214,
+    "soNamNghe": 7,
+    "chungChi": [
+      "VCedu Bảo dưỡng",
+      "VCedu Phanh, gầm"
+    ],
+    "bienSoXeVan": "29H-512.36"
+  },
+  "xongLuc": "2026-10-08T11:27:32.017Z",
+  "trangThai": "choTien",
+  "daThanhToan": false,
+  "hangMuc": [
+    {
+      "ten": "Ắc quy 12V 45Ah",
+      "loai": "phuTung",
+      "soTien": 1650000,
+      "hienThi": "1.650.000đ"
+    },
+    {
+      "ten": "Công thay ắc quy",
+      "loai": "cong",
+      "soTien": 150000,
+      "hienThi": "150.000đ"
+    },
+    "… (còn 3 mục)"
+  ],
+  "tong": 1943000,
+  "tongHienThi": "1.943.000đ",
+  "daNhan": 0,
+  "conPhaiTra": 1943000,
+  "chuyenKhoan": {
+    "nganHang": "Vietcombank – CN Hà Nội (MẪU)",
+    "soTaiKhoan": "1023456789",
+    "chuTaiKhoan": "CONG TY TNHH THOTOI MAU",
+    "soTien": 1943000,
+    "soTienHienThi": "1.943.000đ",
+    "noiDung": "TT000039"
+  },
+  "vietQR": {
+    "chuoi": "00020101021238540010A00000072701240006970436011010234567890208QRIBFTTA5303704540719430005802VN62120808TT0000396304EBE4",
+    "anh": "data:image/png;base64,iVBORw0KGgoAAAANSU…"
+  },
+  "bienNhan": null,
+  "hoaDon": null,
+  "baoHanh": null,
+  "sdtNhanHoaDon": "0912 xxx 057",
+  "hotline": "1900 1068",
+  "hetHanLinkLuc": null
+}
+```
+<!-- /vi-du -->
+
+### Webhook ngân hàng: `POST /api/thanh-toan/webhook`
+Ai gọi: SePay (header `Authorization: Apikey <NGAN_HANG_WEBHOOK_KEY>`) hoặc Casso (header `secure-token`), chọn bằng
+`NGAN_HANG_NHA_CUNG_CAP`. Sai khoá: 401. Đọc mã `TT123456` (hoặc `HV…` cho hội viên, P2) trong nội dung chuyển khoản,
+cộng vào đơn. Mỗi giao dịch ghi một dòng `giao-dich` (khoá duy nhất theo mã giao dịch ngân hàng: gửi lại không cộng hai lần),
+`ketQua`: `du` | `thieu` | `khongThayDon` | `trung`. Luôn trả 200 khi đã ghi, kể cả không khớp đơn (để đối soát tay).
+
+<!-- vi-du:webhook -->
+Định dạng SePay (Casso: `{ error: 0, data: [{ tid, amount, description, when }] }` + header `secure-token`). Ví dụ chuyển thiếu:
+
+Request:
+```http
+POST /api/thanh-toan/webhook
+
+{
+  "id": 92704,
+  "gateway": "Vietcombank",
+  "transactionDate": "2026-10-08 11:47:02",
+  "accountNumber": "1023456789",
+  "content": "NGUYEN VAN HOANG chuyen tien TT000039",
+  "transferType": "in",
+  "transferAmount": 1000000,
+  "referenceCode": "FT1791458852470"
+}
+```
+Response `200`:
+```json
+{
+  "success": true,
+  "ketQua": [
+    {
+      "ketQua": "thieu",
+      "maGiaoDich": "FT1791458852470",
+      "maDon": "TT-000039",
+      "daNhan": 1000000,
+      "canTra": 1943000
+    }
+  ]
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:gia-lap-tien-ve -->
+Chỉ có khi ngân hàng chạy giả lập (máy chạy thử, kiểm thử end-to-end):
+
+Request:
+```http
+POST /api/don-hang/theo-doi/6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H/gia-lap-tien-ve
+```
+Response `200`:
+```json
+{
+  "ketQua": "du",
+  "maGiaoDich": "GIALAP1791458852556",
+  "maDon": "TT-000039",
+  "daNhan": 1943000,
+  "canTra": 1943000
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:da-thanh-toan -->
+Request:
+```http
+GET /api/don-hang/theo-doi/6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H/thanh-toan
+```
+Response `200`:
+```json
+{
+  "ma": "TT-000039",
+  "xe": {
+    "ten": "Toyota Vios",
+    "doi": 2019,
+    "bienSo": "30A-123.45"
+  },
+  "tho": {
+    "ten": "Trần Minh Đức",
+    "vietTat": "MĐ",
+    "anh": null,
+    "diemSao": 4.9,
+    "soDanhGia": 214,
+    "soNamNghe": 7,
+    "chungChi": [
+      "VCedu Bảo dưỡng",
+      "VCedu Phanh, gầm"
+    ],
+    "bienSoXeVan": "29H-512.36"
+  },
+  "xongLuc": "2026-10-08T11:27:32.017Z",
+  "trangThai": "daThanhToan",
+  "daThanhToan": true,
+  "hangMuc": [
+    {
+      "ten": "Ắc quy 12V 45Ah",
+      "loai": "phuTung",
+      "soTien": 1650000,
+      "hienThi": "1.650.000đ"
+    },
+    {
+      "ten": "Công thay ắc quy",
+      "loai": "cong",
+      "soTien": 150000,
+      "hienThi": "150.000đ"
+    },
+    "… (còn 3 mục)"
+  ],
+  "tong": 1943000,
+  "tongHienThi": "1.943.000đ",
+  "daNhan": 1943000,
+  "conPhaiTra": 0,
+  "chuyenKhoan": {
+    "nganHang": "Vietcombank – CN Hà Nội (MẪU)",
+    "soTaiKhoan": "1023456789",
+    "chuTaiKhoan": "CONG TY TNHH THOTOI MAU",
+    "soTien": 0,
+    "soTienHienThi": "0đ",
+    "noiDung": "TT000039"
+  },
+  "vietQR": null,
+  "bienNhan": {
+    "soTien": 1943000,
+    "luc": "2026-10-08T11:27:32.556Z",
+    "hinhThuc": "Chuyển khoản VietQR",
+    "maGiaoDich": "GIALAP1791458852556"
+  },
+  "hoaDon": {
+    "so": "8852678",
+    "kyHieu": "1C26TTT",
+    "maCQT": "GIALAP-8852678",
+    "linkXem": null,
+    "linkPdf": null
+  },
+  "baoHanh": {
+    "ma": "BH-000016",
+    "bienSo": "30A-123.45",
+    "hangMuc": [
+      {
+        "ten": "Ắc quy 12V 45Ah (phụ tùng)",
+        "loai": "phuTung",
+        "tuNgay": "2026-10-08T11:27:32.556Z",
+        "denNgay": "2027-04-08T11:27:32.556Z",
+        "conNgay": 182,
+        "phanTram": 100,
+        "hetHan": false
+      },
+      {
+        "ten": "Công thay ắc quy (công)",
+        "loai": "cong",
+        "tuNgay": "2026-10-08T11:27:32.556Z",
+        "denNgay": "2027-01-08T11:27:32.556Z",
+        "conNgay": 92,
+        "phanTram": 100,
+        "hetHan": false
+      },
+      "… (còn 1 mục)"
+    ]
+  },
+  "sdtNhanHoaDon": "0912 xxx 057",
+  "hotline": "1900 1068",
+  "hetHanLinkLuc": "2026-10-09T11:27:32.632Z"
+}
+```
+<!-- /vi-du -->
+
+### Hoá đơn điện tử, phiếu bảo hành
+- Đủ tiền thì tự gọi nhà cung cấp hoá đơn (adapter `lib/tich-hop/hoa-don.ts`, `HOA_DON_URL`, `HOA_DON_KEY`). Đơn có
+  `hoaDon.can` (mã số thuế) thì xuất cho công ty, không thì xuất cho người mua lẻ. Kết quả trong `don.hoaDonDienTu`
+  (`so`, `kyHieu`, `linkPdf`, `trangThai`, `loi`). Lỗi thì đơn vẫn `hoanThanh`, quản trị bấm xuất lại trong admin.
+- Gửi lại hoá đơn: `POST /api/don-hang/theo-doi/:token/gui-hoa-don` `{ "kenh": "zalo" }` hoặc `{ "kenh": "email", "email" }`
+  (3 lần/giờ).
+- Phiếu bảo hành `BH-000123`: tạo cùng lúc, mỗi hạng mục đã duyệt một dòng `tuNgay`/`denNgay` theo `baoHanhThang`.
+  Xem trong tra cứu lịch sử xe và admin (`/api/phieu-bao-hanh`).
+
+<!-- vi-du:gui-hoa-don -->
+Request:
+```http
+POST /api/don-hang/theo-doi/6DkwYGbUNovQ6zh_k1Gb4YDDyhM-769H/gui-hoa-don
+
+{
+  "kenh": "zalo"
+}
+```
+Response `200`:
+```json
+{
+  "daGui": "zalo",
+  "toi": "0912 xxx 057"
+}
+```
+<!-- /vi-du -->
+
+### Đánh giá, khiếu nại: `GET/POST /api/don-hang/danh-gia/:token`
+Link riêng `/don/<tokenDanhGia>/danh-gia/` gửi qua Zalo 24 giờ sau khi xong (việc định kỳ), khác link theo dõi. Dùng một lần.
+- `GET`: thông tin đơn (thợ, việc, ngày), danh sách `vanDe`, đã gửi chưa.
+- `POST { "soSao": 1..5, "vanDe"?: ["tre"|"thaido"|"gia"|"chatluong"|"vesinh"|"khac"], "moTa"?, "sdtGoiLai"? }`.
+  4–5 sao: lưu đánh giá (chờ duyệt hiển thị), trả `linkGoogle` để mời viết trên Google. 1–3 sao: mở phiếu khiếu nại `KN-`,
+  báo CSKH (SMS nội bộ), trả hạn gọi lại (`cai-dat.cskhGoiLaiGio`). Gửi lần hai: 409 `DA_DANH_GIA`.
+
+<!-- vi-du:xem-danh-gia -->
+Request:
+```http
+GET /api/don-hang/danh-gia/c79mQ42wIA2x-5hdgC00W2sGO-MJSlkM
+```
+Response `200`:
+```json
+{
+  "ma": "TT-000035",
+  "daDanhGia": false,
+  "xe": {
+    "ten": "Toyota Vios",
+    "doi": null,
+    "bienSo": "30K-126.26"
+  },
+  "tho": null,
+  "dichVu": [
+    "Ắc quy"
+  ],
+  "ngay": "2026-10-08T11:27:06.854Z",
+  "noiLam": "18 Trần Thái Tông, phường Dịch Vọng Hậu, Cầu Giấy, Cầu Giấy",
+  "vanDe": [
+    {
+      "ma": "tre",
+      "nhan": "Thợ đến trễ"
+    },
+    {
+      "ma": "thaido",
+      "nhan": "Thái độ thợ"
+    },
+    "… (còn 4 mục)"
+  ],
+  "linkGoogle": "https://g.page/r/MAU/review",
+  "hotline": "1900 1068"
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:gui-danh-gia -->
+Request:
+```http
+POST /api/don-hang/danh-gia/c79mQ42wIA2x-5hdgC00W2sGO-MJSlkM
+
+{
+  "soSao": 2,
+  "vanDe": [
+    "tre"
+  ],
+  "moTa": "Thợ đến trễ gần 40 phút so với giờ hẹn, không báo trước.",
+  "sdtGoiLai": "0912345678"
+}
+```
+Response `200`:
+```json
+{
+  "soSao": 2,
+  "ketQua": "khieuNai",
+  "maPhieu": "KN-000008",
+  "maDon": "TT-000035",
+  "vanDe": [
+    "tre"
+  ],
+  "guiLuc": "2026-10-08T11:27:33.763Z",
+  "cskh": "Chị Ngọc (CSKH, mẫu)",
+  "goiLaiTrongGio": 2,
+  "hanGoiLai": "2026-10-08T13:27:33.782Z"
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:gui-danh-gia-lai -->
+Dùng lại link:
+
+Request:
+```http
+POST /api/don-hang/danh-gia/c79mQ42wIA2x-5hdgC00W2sGO-MJSlkM
+
+{
+  "soSao": 5
+}
+```
+Response `409`:
+```json
+{
+  "loi": "Link đánh giá chỉ dùng một lần, bạn đã đánh giá đơn này rồi.",
+  "ma": "DA_DANH_GIA"
+}
+```
+<!-- /vi-du -->
+
+### Tra cứu lịch sử xe: `/api/tra-cuu-xe/...`
+1. `POST /gui-ma { "bienSo" }`: gửi mã 6 số qua Zalo (không có Zalo thì SMS) tới SĐT của đơn gần nhất của biển số. Mã sống
+   5 phút, gửi lại sau 45 giây; 5 lần/giờ mỗi biển số. Biển số chưa có đơn: 404 `KHONG_CO_XE`. `maGiaLap` chỉ có khi tin
+   nhắn đang chạy giả lập (máy chạy thử).
+2. `POST /xac-nhan { "bienSo", "ma" }`: đúng thì trả `phien`; sai trả 400 `MA_SAI` + `conLanThu`; sai 5 lần: 429.
+3. `GET /lich-su` với header `Authorization: Phien <phien>`: xe, số km gần nhất, bảo hành còn lại, mốc bảo dưỡng tiếp theo,
+   lịch sử sửa (kèm hoá đơn). Phiên tự đóng sau 30 phút không dùng: 401 `HET_PHIEN`. `POST /thoat` để đóng ngay.
+
+<!-- vi-du:tra-cuu-gui-ma -->
+Request:
+```http
+POST /api/tra-cuu-xe/gui-ma
+
+{
+  "bienSo": "30a12345"
+}
+```
+Response `200`:
+```json
+{
+  "bienSo": "30A-123.45",
+  "sdtChe": "0912 xxx 101",
+  "kenh": "zalo",
+  "hetHanPhut": 5,
+  "guiLaiSauGiay": 45,
+  "maGiaLap": "750414"
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:tra-cuu-xac-nhan -->
+Request:
+```http
+POST /api/tra-cuu-xe/xac-nhan
+
+{
+  "bienSo": "30A-123.45",
+  "ma": "750414"
+}
+```
+Response `200`:
+```json
+{
+  "phien": "QN3u0-5LCirT6iigzEvRO87QnW3XZ67i",
+  "hetHanPhut": 30
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:tra-cuu-lich-su -->
+Header `Authorization: Phien <phien>`:
+
+Request:
+```http
+GET /api/tra-cuu-xe/lich-su
+```
+Response `200`:
+```json
+{
+  "xe": {
+    "ten": "Toyota Vios",
+    "doi": 2019,
+    "bienSo": "30A-123.45"
+  },
+  "kmGanNhat": 48200,
+  "soLanSua": 5,
+  "soConBaoHanh": 5,
+  "baoDuongTiepTheo": {
+    "mocKm": 50000,
+    "conKm": 1800,
+    "ngayDuKien": "2027-04-08T11:11:18.144Z",
+    "datLich": "http://localhost:3000/dat-lich/?dv=bao-duong-dinh-ky"
+  },
+  "baoHanh": [
+    {
+      "ten": "Ắc quy 12V 45Ah (phụ tùng)",
+      "maDon": "TT-000039",
+      "maPhieu": "BH-000016",
+      "tuNgay": "2026-10-08T11:27:32.556Z",
+      "denNgay": "2027-04-08T11:27:32.556Z",
+      "conNgay": 182,
+      "phanTram": 100,
+      "hetHan": false
+    },
+    {
+      "ten": "Ắc quy 12V 45Ah (phụ tùng)",
+      "maDon": "TT-000029",
+      "maPhieu": "BH-000012",
+      "tuNgay": "2026-10-08T11:25:39.403Z",
+      "denNgay": "2027-04-08T11:25:39.403Z",
+      "conNgay": 182,
+      "phanTram": 100,
+      "hetHan": false
+    },
+    "… (còn 13 mục)"
+  ],
+  "lichSu": [
+    {
+      "ngay": "2026-10-08T11:27:32.632Z",
+      "ma": "TT-000039",
+      "viec": "Ắc quy",
+      "tho": "Trần Minh Đức",
+      "km": 48200,
+      "soTien": 1943000,
+      "soTienHienThi": "1.943.000đ",
+      "hoaDon": {
+        "so": "8852678",
+        "linkPdf": null
+      }
+    },
+    {
+      "ngay": "2026-10-08T11:25:39.497Z",
+      "ma": "TT-000029",
+      "viec": "Ắc quy",
+      "tho": "Trần Minh Đức",
+      "km": 48200,
+      "soTien": 1943000,
+      "soTienHienThi": "1.943.000đ",
+      "hoaDon": {
+        "so": "8739540",
+        "linkPdf": null
+      }
+    },
+    "… (còn 3 mục)"
+  ],
+  "phienHetHanPhut": 30
+}
+```
+<!-- /vi-du -->
+
+### Tin Zalo ZNS
+Adapter `lib/tich-hop/thong-bao.ts`. Mỗi bước một mẫu ZNS (biến môi trường `ZALO_ZNS_MAU_*`): `xacNhan`, `daXepTho`,
+`baoGia`, `thanhToan`, `hoanThanh`, `danhGia`, `maXacNhan`, `hoaDon`. Không gửi được ZNS (số chưa có Zalo, mẫu chưa duyệt)
+thì gửi SMS cùng nội dung. Mọi tin ghi vào `tin-nhan` (đọc: vai trò xử lý đơn), số điện thoại đã che.
+
+## 7. Quản trị (P1)
+
+### Vai trò
+`quanTri`, `quanLyDichVu` (giá, dịch vụ, duyệt bài), `bienTap` (VCmedia: viết nháp, gửi duyệt), `marketing` (mã khuyến mãi,
+số liệu, viết nháp). `dieuPhoi` là tài khoản máy của VCsoft. Bảng quyền ở cuối tài liệu.
+
+### Bài viết, trang khu vực, trang hãng xe
+Bốn loại có cùng quy trình: `cam-nang`, `dich-vu`, `trang-khu-vuc`, `trang-hang-xe` (REST Payload, bản nháp `?draft=true`).
+`trangThaiDuyet`: `nhap` → `choDuyet` → (`daHenGio` + `henGioDang`) → đăng. Người viết chỉ đưa tới `choDuyet`; người duyệt
+(`quanTri`, `quanLyDichVu`) hẹn giờ hoặc đăng. Gửi duyệt / đăng bị chặn (400 kèm danh sách lỗi) khi không qua kiểm tra
+(`lib/kiem-tra.mjs`). Trang khu vực thêm điều kiện chống trang trùng: đoạn riêng ≥ 150 chữ, ≥ 2 ảnh thật, ≥ 1 đánh giá
+thật trong quận, trùng nội dung với trang khu vực khác ≤ 70%.
+
+- Danh sách (màn `QtBaiViet`): `GET /api/quan-tri/bai-viet?loai=cam-nang|dich-vu|khu-vuc|hang-xe&trangThai=nhap|choDuyet|daHenGio|daDang&q=`.
+- Tạo trang khu vực từ mẫu: `POST /api/trang-khu-vuc/tao-tu-mau { "dichVu": "<slug>", "quan": "<slug>" }`: điền sẵn
+  tiêu đề, từ khoá, FAQ, đánh giá thật trong quận; đoạn riêng và ảnh thật để người viết bổ sung.
+- Trình soạn thảo có khối `khoiGia` (bảng giá dịch vụ), `khoiDatLich` (nút đặt lịch), `videoYoutube`.
+- Bài hẹn giờ được đăng bởi việc định kỳ (dưới).
+
+<!-- vi-du:bai-viet -->
+Đăng nhập biên tập:
+
+Request:
+```http
+GET /api/quan-tri/bai-viet?loai=khu-vuc
+```
+Response `200`:
+```json
+{
+  "bai": [
+    {
+      "id": 10,
+      "collection": "trang-khu-vuc",
+      "loai": "khu-vuc",
+      "loaiNhan": "Trang khu vực",
+      "tieuDe": "Thay má phanh ô tô tận nơi Ba Đình, thợ tới nhanh",
+      "title": "Thay má phanh ô tô tận nơi Ba Đình, thợ tới nhanh",
+      "description": "Thợ ThợTới tới tận nơi ở Đống Đa: má phanh, dầu phanh. Có mặt dự kiến 30–45 phút, báo giá trước khi làm, bảo hành 6 tháng phụ tùng.",
+      "duongDan": "/dich-vu/phanh/ba-dinh/",
+      "trangThai": "nhap",
+      "trangThaiDuyet": "nhap",
+      "daDang": false,
+      "tacGia": null,
+      "nguoiDuyet": null,
+      "henGioDang": null,
+      "capNhat": "2026-10-08T11:27:08.592Z",
+      "ngay": "2026-10-08T11:27:08.592Z",
+      "chuDe": null,
+      "ketQuaKiemTra": "520 chữ\n✗ Trùng 100% nội dung với \"Phanh ô tô tận nơi Đống Đa, thợ tới 30–45 phút\": viết lại cho riêng quận này",
+      "ghiChuDuyet": "",
+      "sua": "/admin/collections/trang-khu-vuc/10"
+    },
+    {
+      "id": 9,
+      "collection": "trang-khu-vuc",
+      "loai": "khu-vuc",
+      "loaiNhan": "Trang khu vực",
+      "tieuDe": "Phanh ô tô tận nơi Đống Đa, thợ tới 30–45 phút",
+      "title": "Phanh ô tô tận nơi Đống Đa, thợ tới 30–45 phút",
+      "description": "Thợ ThợTới tới tận nơi ở Đống Đa: má phanh, dầu phanh. Có mặt dự kiến 30–45 phút, báo giá trước khi làm, bảo hành 6 tháng phụ tùng.",
+      "duongDan": "/dich-vu/phanh/dong-da/",
+      "trangThai": "cho-duyet",
+      "trangThaiDuyet": "choDuyet",
+      "daDang": false,
+      "tacGia": null,
+      "nguoiDuyet": null,
+      "henGioDang": null,
+      "capNhat": "2026-10-08T11:27:08.518Z",
+      "ngay": "2026-10-08T11:27:08.403Z",
+      "chuDe": null,
+      "ketQuaKiemTra": "520 chữ\nĐạt, có thể đăng.",
+      "ghiChuDuyet": "",
+      "sua": "/admin/collections/trang-khu-vuc/9"
+    },
+    "… (còn 3 mục)"
+  ],
+  "dem": {
+    "tatCa": 5,
+    "nhap": 4,
+    "choDuyet": 1,
+    "henGio": 0,
+    "daDang": 0
+  }
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:tao-tu-mau -->
+Request:
+```http
+POST /api/trang-khu-vuc/tao-tu-mau
+
+{
+  "dichVu": "doc-loi-chan-doan",
+  "quan": "ba-dinh"
+}
+```
+Response `201`:
+```json
+{
+  "id": 11,
+  "slug": "doc-loi-chan-doan-ba-dinh",
+  "title": "Đọc lỗi, chẩn đoán ô tô tận nơi Ba Đình, thợ tới 35–50 phút",
+  "sua": "/admin/collections/trang-khu-vuc/11",
+  "ketQuaKiemTra": "169 chữ\n✗ Bài có 169 chữ, cần tối thiểu 250\n✗ Đoạn mô tả riêng có 0 chữ, cần tối thiểu 150 (khu chung cư, tuyến đường, lỗi khách hay gặp ở quận này)\n✗ Có 0 ảnh thật, cần ít nhất 2\n✗ Chưa gắn đánh giá thật nào của khách ở quận này"
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:gui-duyet-loi -->
+Gửi duyệt khi chưa đủ điều kiện:
+
+Request:
+```http
+PATCH /api/trang-khu-vuc/11?draft=true
+
+{
+  "trangThaiDuyet": "choDuyet"
+}
+```
+Response `400`:
+```json
+{
+  "errors": [
+    {
+      "message": "Chưa gửi duyệt được, còn 4 lỗi:\n• Bài có 169 chữ, cần tối thiểu 250\n• Đoạn mô tả riêng có 0 chữ, cần tối thiểu 150 (khu chung cư, tuyến đường, lỗi khách hay gặp ở quận này)\n• Có 0 ảnh thật, cần ít nhất 2\n• Chưa gắn đánh giá thật nào của khách ở quận này"
+    }
+  ]
+}
+```
+<!-- /vi-du -->
+
+### Mã khuyến mãi, hoa hồng: `/api/ma-khuyen-mai/...`
+Loại mã: `km` (khuyến mãi, `KM-`), `koc` (`KOC-`), `xang` (QR cây xăng, `XANG-`), `bql` (ban quản lý chung cư, `BQL-`).
+Giảm theo % tiền công (có trần) hoặc số tiền cố định; hoa hồng cho đối tác theo % số tiền khách đã trả hoặc cố định mỗi đơn.
+Link `?ma=XANG-TDH12` điền sẵn mã vào form đặt; mã lưu vào đơn khi đặt và trừ khi tính tiền.
+- `POST /kiem-tra { "ma", "sdt"? }` (công khai): `hopLe`, `moTa` ("Giảm 10% tiền công, tối đa 200.000đ"), hoặc lý do không dùng được.
+- `GET /danh-sach` (màn `QtMaKhuyenMai`), `GET /thong-ke`: lượt dùng, doanh thu, hoa hồng theo mã.
+- `GET /hoa-hong?thang=2026-10&dinhDang=json|csv|xlsx`: bảng hoa hồng theo đối tác (đơn đã thanh toán trong tháng).
+- `GET /:id/qr.png`: QR in cho cây xăng / BQL trỏ tới `/dat-lich/?ma=<mã>`.
+- Thêm, sửa: REST `POST/PATCH /api/ma-khuyen-mai` (vai trò `quanTri`, `marketing`).
+
+<!-- vi-du:km-kiem-tra -->
+Request:
+```http
+POST /api/ma-khuyen-mai/kiem-tra
+
+{
+  "ma": "xang-tdh12",
+  "sdt": "0987000111"
+}
+```
+Response `200`:
+```json
+{
+  "hopLe": true,
+  "id": 1,
+  "ma": "XANG-TDH12",
+  "moTa": "Giảm 10% tiền công (tối đa 100.000đ)",
+  "loai": "xang",
+  "doiTac": "Cây xăng 12 Trần Duy Hưng"
+}
+```
+
+Mã hết hạn:
+
+Request:
+```http
+POST /api/ma-khuyen-mai/kiem-tra
+
+{
+  "ma": "KM-XEDIEN"
+}
+```
+Response `200`:
+```json
+{
+  "hopLe": false,
+  "ma": "HETHAN",
+  "lyDo": "Mã này đã hết hạn."
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:km-danh-sach -->
+Đăng nhập marketing:
+
+Request:
+```http
+GET /api/ma-khuyen-mai/danh-sach
+```
+Response `200`:
+```json
+{
+  "ma": [
+    {
+      "id": 15,
+      "ma": "KM-MK7015",
+      "loai": "km",
+      "doiTac": null,
+      "kieuGiam": "soTien",
+      "giaTri": 1,
+      "giamToiDa": null,
+      "batDau": null,
+      "hetHan": null,
+      "soLuotToiDa": null,
+      "moiSdtMotLan": true,
+      "hoaHongPhanTram": 0,
+      "tamDung": false,
+      "ghiChu": null,
+      "updatedAt": "2026-10-08T11:27:07.017Z",
+      "createdAt": "2026-10-08T11:27:07.017Z",
+      "trangThai": "dangChay",
+      "trangThaiNhan": "Đang chạy",
+      "daDung": 0,
+      "phanTramDaDung": null,
+      "moTaGiam": "Giảm 1đ",
+      "loaiNhan": "Khuyến mãi",
+      "nguonNhan": "Khuyến mãi",
+      "linkDatLich": "http://localhost:3000/dat-lich/?ma=KM-MK7015",
+      "anhQR": "/api/ma-khuyen-mai/15/qr.png"
+    },
+    {
+      "id": 14,
+      "ma": "KM-KT26231-CU",
+      "loai": "km",
+      "doiTac": null,
+      "kieuGiam": "soTien",
+      "giaTri": 50000,
+      "giamToiDa": null,
+      "batDau": null,
+      "hetHan": "2020-01-01T00:00:00.000Z",
+      "soLuotToiDa": null,
+      "moiSdtMotLan": true,
+      "hoaHongPhanTram": 0,
+      "tamDung": false,
+      "ghiChu": null,
+      "updatedAt": "2026-10-08T11:27:06.998Z",
+      "createdAt": "2026-10-08T11:27:06.998Z",
+      "trangThai": "hetHan",
+      "trangThaiNhan": "Hết hạn",
+      "daDung": 0,
+      "phanTramDaDung": null,
+      "moTaGiam": "Giảm 50.000đ",
+      "loaiNhan": "Khuyến mãi",
+      "nguonNhan": "Khuyến mãi",
+      "linkDatLich": "http://localhost:3000/dat-lich/?ma=KM-KT26231-CU",
+      "anhQR": "/api/ma-khuyen-mai/14/qr.png"
+    },
+    "… (còn 13 mục)"
+  ],
+  "loai": {
+    "km": {
+      "nhan": "Khuyến mãi",
+      "tienTo": "KM-",
+      "nguon": "Khuyến mãi"
+    },
+    "koc": {
+      "nhan": "KOC",
+      "tienTo": "KOC-",
+      "nguon": "KOC"
+    },
+    "xang": {
+      "nhan": "Cây xăng",
+      "tienTo": "XANG-",
+      "nguon": "QR cây xăng"
+    },
+    "bql": {
+      "nhan": "BQL chung cư",
+      "tienTo": "BQL-",
+      "nguon": "Ban quản lý chung cư"
+    }
+  }
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:km-thong-ke -->
+Request:
+```http
+GET /api/ma-khuyen-mai/thong-ke
+```
+Response `200`:
+```json
+{
+  "maDangChay": 11,
+  "tongMa": 15,
+  "luotDungThangNay": 7,
+  "phanTramDonThangNay": 18,
+  "tongLuotDung": 7,
+  "hoaHongThangNay": 793930,
+  "hoaHongThangNayHienThi": "793.930đ",
+  "soDoiTacThangNay": 4,
+  "thang": "2026-10",
+  "ngayCuoiThang": "2026-10-31"
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:km-hoa-hong -->
+Request:
+```http
+GET /api/ma-khuyen-mai/hoa-hong
+```
+Response `200`:
+```json
+{
+  "thang": "2026-10",
+  "dong": [
+    {
+      "ma": "XANG-TDH12",
+      "loai": "Cây xăng",
+      "doiTac": "Cây xăng 12 Trần Duy Hưng",
+      "soDon": 3,
+      "doanhThu": 5829000,
+      "tyLe": 5,
+      "hoaHong": 291450,
+      "maDon": "TT-000039 TT-000029 TT-000010",
+      "doanhThuHienThi": "5.829.000đ",
+      "hoaHongHienThi": "291.450đ"
+    },
+    {
+      "ma": "KM-KT26231",
+      "loai": "KOC",
+      "doiTac": "KT",
+      "soDon": 1,
+      "doanhThu": 2223000,
+      "tyLe": 8,
+      "hoaHong": 177840,
+      "maDon": "TT-000035",
+      "doanhThuHienThi": "2.223.000đ",
+      "hoaHongHienThi": "177.840đ"
+    },
+    "… (còn 2 mục)"
+  ],
+  "tong": {
+    "soDon": 6,
+    "doanhThu": 12110000,
+    "hoaHong": 793930,
+    "doanhThuHienThi": "12.110.000đ",
+    "hoaHongHienThi": "793.930đ"
+  },
+  "soDoiTac": 4
+}
+```
+
+`GET /api/ma-khuyen-mai/hoa-hong?dinhDang=csv` → `200` `text/csv; charset=utf-8`:
+```csv
+Mã,Loại,Đối tác,Số đơn đã thanh toán,Doanh thu (đ),Tỷ lệ hoa hồng (%),Hoa hồng (đ),Danh sách mã đơn
+XANG-TDH12,Cây xăng,Cây xăng 12 Trần Duy Hưng,3,5829000,5,291450,TT-000039 TT-000029 TT-000010
+KM-KT26231,KOC,KT,1,2223000,8,177840,TT-000035
+KM-KT9426,KOC,KT,1,2223000,8,177840,TT-000023
+KOC-LINHXEHOP,KOC,Linh Xế Hộp (TikTok),1,1835000,8,146800,TT-000014
+TỔNG,,,6,12110000,,793930,
+```
+<!-- /vi-du -->
+
+### Số liệu: `POST /api/su-kien/ghi`, `GET /api/su-kien/bao-cao`
+- Ghi (công khai, tối đa 20 sự kiện/lần): `{ "suKien": [{ "loai": "xemTrang"|"bamGoi"|"bamZalo"|"guiForm", "duongDan",
+  "nguon": { utm_* }, "phien" }] }`. Đường dẫn bỏ query, link riêng `/don/<token>/` được che. Không lưu IP.
+- Báo cáo (màn `QtSoLieu`, vai trò `quanTri`, `quanLyDichVu`, `marketing`): `?ky=ngay|tuan|thang&soKy=6&dinhDang=json|xlsx`.
+  KPI (lượt xem, bấm gọi, bấm Zalo, đơn, tỷ lệ đặt lịch so với mục tiêu `cai-dat.mucTieuTyLeDatLich`, doanh thu), đơn theo
+  nguồn, trang vào nhiều nhất, đơn mới nhất, đối soát giao dịch chưa khớp. Giờ tính theo giờ Việt Nam.
+
+<!-- vi-du:su-kien -->
+Request:
+```http
+POST /api/su-kien/ghi
+
+{
+  "suKien": [
+    {
+      "loai": "xemTrang",
+      "duongDan": "/dich-vu/ac-quy/?utm_source=google",
+      "nguon": {
+        "utm_source": "google",
+        "utm_medium": "cpc"
+      },
+      "phien": "p-3f9a2c71"
+    },
+    {
+      "loai": "bamGoi",
+      "duongDan": "/dich-vu/ac-quy/",
+      "nguon": {
+        "utm_source": "google"
+      },
+      "phien": "p-3f9a2c71"
+    }
+  ]
+}
+```
+Response `202`:
+```json
+{
+  "soGhi": 2
+}
+```
+<!-- /vi-du -->
+
+<!-- vi-du:so-lieu -->
+Request:
+```http
+GET /api/su-kien/bao-cao?ky=thang&soKy=6
+```
+Response `200`:
+```json
+{
+  "ky": "thang",
+  "donVi": "tháng",
+  "nhan": [
+    "T5/26",
+    "T6/26",
+    "… (còn 4 mục)"
+  ],
+  "luotVao": [
+    5946,
+    5731,
+    "… (còn 4 mục)"
+  ],
+  "soDon": [
+    0,
+    0,
+    "… (còn 4 mục)"
+  ],
+  "cuocGoi": [
+    243,
+    255,
+    "… (còn 4 mục)"
+  ],
+  "zalo": [
+    188,
+    185,
+    "… (còn 4 mục)"
+  ],
+  "tyLe": [
+    7.25,
+    7.68,
+    "… (còn 4 mục)"
+  ],
+  "mucTieuTyLe": 4,
+  "kpi": {
+    "luotVao": {
+      "giaTri": 1491,
+      "thayDoi": -74,
+      "donVi": "%"
+    },
+    "soDon": {
+      "giaTri": 38,
+      "thayDoi": 100,
+      "donVi": "%"
+    },
+    "tyLe": {
+      "giaTri": 10.06,
+      "thayDoi": 3.3,
+      "donVi": "điểm",
+      "datMucTieu": true
+    },
+    "cuocGoi": {
+      "giaTri": 58,
+      "thayDoi": -75,
+      "donVi": "%"
+    },
+    "zalo": {
+      "giaTri": 54,
+      "thayDoi": -66,
+      "donVi": "%"
+    }
+  },
+  "donTheoNguon": {
+    "Google": [
+      0,
+      0,
+      "… (còn 4 mục)"
+    ],
+    "Facebook": [
+      0,
+      0,
+      "… (còn 4 mục)"
+    ],
+    "QR cây xăng": [
+      0,
+      0,
+      "… (còn 4 mục)"
+    ],
+    "KOC": [
+      0,
+      0,
+      "… (còn 4 mục)"
+    ],
+    "Trực tiếp": [
+      0,
+      0,
+      "… (còn 4 mục)"
+    ]
+  },
+  "nguonKyNay": [
+    {
+      "kenh": "Trực tiếp",
+      "soDon": 21,
+      "cuocGoi": 10,
+      "zalo": 10,
+      "tyTrong": 55.3
+    },
+    {
+      "kenh": "Google",
+      "soDon": 8,
+      "cuocGoi": 22,
+      "zalo": 14,
+      "tyTrong": 21.1
+    },
+    "… (còn 3 mục)"
+  ],
+  "topTrang": [
+    {
+      "duongDan": "/dich-vu/ac-quy/cau-giay/",
+      "luotVao": 207,
+      "soDon": 0,
+      "tyLe": 0
+    },
+    {
+      "duongDan": "/dich-vu/ac-quy/",
+      "luotVao": 199,
+      "soDon": 18,
+      "tyLe": 9
+    },
+    "… (còn 7 mục)"
+  ],
+  "donMoiNhat": [
+    {
+      "ma": "TT-000040",
+      "luc": "2026-10-08T11:27:33.189Z",
+      "kenh": "Google",
+      "hanhDong": "Gửi form đặt lịch",
+      "chiTiet": "Từ trang /dich-vu/ac-quy/"
+    },
+    {
+      "ma": "TT-000039",
+      "luc": "2026-10-08T11:27:31.143Z",
+      "kenh": "QR cây xăng",
+      "hanhDong": "Gửi form đặt lịch",
+      "chiTiet": "Mã XANG-TDH12"
+    },
+    "… (còn 6 mục)"
+  ],
+  "doiSoat": {
+    "kyNay": "T10/26",
+    "web": 38,
+    "dieuPhoi": null,
+    "khop": null
+  }
+}
+```
+<!-- /vi-du -->
+
+### Việc định kỳ: `POST /api/viec-dinh-ky`
+Gọi mỗi 5 phút (dịch vụ `hen-gio` trong `docker-compose.yml`), header `Authorization: Bearer <VIEC_DINH_KY_KEY>`: gửi link
+đánh giá đến hạn, đăng bài đến giờ hẹn, xoá mã xác nhận cũ. Chạy lại nhiều lần không sao.
+
+<!-- vi-du:viec-dinh-ky -->
+Header `Authorization: Bearer <VIEC_DINH_KY_KEY>` (máy chạy thử không đặt khoá thì bỏ qua):
+
+Request:
+```http
+POST /api/viec-dinh-ky
+```
+Response `200`:
+```json
+{
+  "guiLinkDanhGia": 0,
+  "dangBaiHenGio": 0,
+  "luc": "2026-10-08T11:27:34.921Z"
+}
+```
+<!-- /vi-du -->
+
+## Bảng quyền
 
 | Dữ liệu | Khách | quanTri | quanLyDichVu | bienTap | marketing | dieuPhoi |
 |---|---|---|---|---|---|---|
@@ -1975,3 +4582,11 @@ Response `200`:
 | Bài viết: viết nháp | | ✓ | ✓ | ✓ | ✓ | |
 | Bài viết: đăng, xoá | | ✓ | ✓ | | | |
 | Người dùng, vai trò | | ✓ | (sửa mình) | (sửa mình) | (sửa mình) | (sửa mình) |
+| Bài viết: hẹn giờ | | ✓ | ✓ | | | |
+| Thợ: đọc, sửa (thêm: quanTri, quanLyDichVu) | | ✓ | ✓ | | | ✓ |
+| Báo giá, phiếu bảo hành, giao dịch, tin nhắn: đọc | | ✓ | ✓ | | | ✓ |
+| Khiếu nại: đọc, xử lý | | ✓ | ✓ | | | ✓ |
+| Mã khuyến mãi: đọc, thống kê, hoa hồng | | ✓ | ✓ | | ✓ | |
+| Mã khuyến mãi: thêm, sửa | | ✓ | | | ✓ | |
+| Số liệu | | ✓ | ✓ | | ✓ | |
+| Xem báo giá, duyệt, thanh toán, đánh giá (link riêng) | ✓ | | | | | |

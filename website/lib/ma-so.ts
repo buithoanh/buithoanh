@@ -7,6 +7,8 @@ import type { Payload } from "payload";
 
 const LOAI = {
   TT: { seq: "ma_so_tt", bang: "don_hang", cot: "ma" },
+  BH: { seq: "ma_so_bh", bang: "phieu_bao_hanh", cot: "ma" },
+  KN: { seq: "ma_so_kn", bang: "khieu_nai", cot: "ma" },
 } as const;
 export type LoaiMa = keyof typeof LOAI;
 

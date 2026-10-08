@@ -48,6 +48,31 @@ export const CaiDat: GlobalConfig = {
           ],
         },
         {
+          label: "Ngân hàng (VietQR)",
+          description: "Tài khoản nhận tiền khách chuyển khoản. Mã BIN: Vietcombank 970436, Techcombank 970407, MB 970422, VietinBank 970415, BIDV 970418, ACB 970416.",
+          fields: [
+            { type: "row", fields: [
+              { name: "nganHangBin", label: "Mã BIN ngân hàng (6 số)", type: "text", validate: (v: unknown) => !v || /^\d{6}$/.test(String(v)) || "Mã BIN gồm 6 số" },
+              { name: "nganHangTen", label: "Tên ngân hàng hiển thị", type: "text", admin: { placeholder: "Vietcombank – CN Hà Nội" } },
+            ] },
+            { type: "row", fields: [
+              { name: "soTaiKhoan", label: "Số tài khoản", type: "text" },
+              { name: "chuTaiKhoan", label: "Chủ tài khoản (in hoa, không dấu)", type: "text" },
+            ] },
+          ],
+        },
+        {
+          label: "CSKH, số liệu",
+          fields: [
+            { type: "row", fields: [
+              { name: "sdtCskh", label: "Số điện thoại CSKH (nhận báo khiếu nại)", type: "text" },
+              { name: "tenCskh", label: "Tên người phụ trách CSKH (hiện cho khách)", type: "text" },
+              { name: "cskhGoiLaiGio", label: "CSKH gọi lại trong (giờ)", type: "number", defaultValue: 2 },
+            ] },
+            { name: "mucTieuTyLeDatLich", label: "Mục tiêu tỷ lệ đặt lịch, gọi, Zalo trên lượt vào (%)", type: "number", defaultValue: 4, min: 0, max: 100 },
+          ],
+        },
+        {
           label: "Gọi gấp",
           fields: [{
             name: "suCoKhanCap", label: "Sự cố trên màn gọi gấp", type: "array",

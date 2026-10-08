@@ -1,15 +1,17 @@
-// Phần dùng chung cho hai loại bài: trang dịch vụ và bài cẩm nang.
+// Phần dùng chung cho các loại bài: trang dịch vụ, bài cẩm nang, trang khu vực, trang hãng xe.
 import { APIError, type CollectionBeforeChangeHook, type Field, type Payload } from "payload";
-import { kiemTraBai, taoSlug, tomTatKiemTra } from "./kiem-tra.mjs";
-import { coTheDang, truongChiNguoiDuyet } from "./quyen";
+import { demChu, kiemTraBai, taoSlug, tomTatKiemTra } from "./kiem-tra.mjs";
+import { coTheDang, laNguoiDuyet, truongChiNguoiDuyet } from "./quyen";
+import { soLieuKhuVuc } from "./noi-dung";
 import { noiDungSangMarkdown } from "./soan-thao";
 import { readTuLieu, tuLieuSlugs } from "./tu-lieu.mjs";
 
-export type LoaiBai = "dich-vu" | "cam-nang";
+export type LoaiBai = "dich-vu" | "cam-nang" | "khu-vuc" | "hang-xe";
+export const COLLECTION_BAI = { "dich-vu": "dich-vu", "cam-nang": "cam-nang", "khu-vuc": "trang-khu-vuc", "hang-xe": "trang-hang-xe" } as const;
 
 /** Slug của mọi bài (kể cả nháp) và của bài đã đăng. */
 export async function slugsDangCo(payload: Payload) {
-  const lay = async (collection: LoaiBai) => {
+  const lay = async (collection: "dich-vu" | "cam-nang") => {
     const { docs } = await payload.find({
       collection, limit: 1000, depth: 0, pagination: false, select: { slug: true, _status: true },
     });
@@ -34,15 +36,18 @@ export function docTuLieu(slugs: unknown): { slug: string; body: string | null }
 
 /**
  * Chạy mỗi lần lưu bài:
- *  - Chặn người không có quyền "Duyệt bài" bấm đăng.
+ *  - Chặn người không phải người duyệt bấm đăng hoặc hẹn giờ đăng.
  *  - Chạy luật kiểm tra, ghi kết quả vào ô "Kiểm tra bài" để người viết thấy ngay.
- *  - Đang đăng mà còn lỗi thì từ chối, bài không lên web.
+ *  - Còn lỗi thì không gửi duyệt được, không hẹn giờ được, không đăng được (kể cả Quản trị).
  */
 export const hookKiemTraVaDuyet =
   (loai: LoaiBai): CollectionBeforeChangeHook =>
-  async ({ data, originalDoc, req }) => {
+  async ({ data, originalDoc, req, operation }) => {
     const bai = { ...(originalDoc || {}), ...data };
     const dangDang = data._status === "published";
+    const truocDo = originalDoc?.trangThaiDuyet;
+    const guiDuyet = data.trangThaiDuyet === "choDuyet" && truocDo !== "choDuyet";
+    const henGio = data.trangThaiDuyet === "daHenGio" && truocDo !== "daHenGio";
 
     if (dangDang && !coTheDang(req)) {
       throw new APIError(
@@ -52,13 +57,33 @@ export const hookKiemTraVaDuyet =
         true,
       );
     }
+    if (henGio) {
+      if (!laNguoiDuyet(req)) throw new APIError("Chỉ người duyệt mới hẹn giờ đăng được.", 403, undefined, true);
+      if (!bai.henGioDang || new Date(bai.henGioDang).getTime() <= Date.now()) {
+        throw new APIError('Chọn "Hẹn giờ đăng" là một thời điểm trong tương lai.', 400, undefined, true);
+      }
+    }
+    if (operation === "create" && req.user && !bai.nguoiViet) data.nguoiViet = req.user.id;
 
-    const markdown = await noiDungSangMarkdown(req.payload, bai.noiDung);
+    // Đường dẫn tự tạo cho trang khu vực, trang hãng xe
+    if (loai === "khu-vuc" && bai.dichVu && bai.quan) {
+      const [dv, q] = await Promise.all([
+        req.payload.findByID({ collection: "danh-muc-dich-vu", id: idCua(bai.dichVu), depth: 0, req }),
+        req.payload.findByID({ collection: "quan", id: idCua(bai.quan), depth: 0, req }),
+      ]);
+      data.slug = `${dv.slug}-${q.slug}`;
+    }
+    if (loai === "hang-xe" && bai.hang) {
+      data.slug = (await req.payload.findByID({ collection: "hang-xe", id: idCua(bai.hang), depth: 0, req })).slug;
+    }
+
+    const than = await noiDungSangMarkdown(req.payload, bai.noiDung);
+    const markdown = loai === "khu-vuc" ? `${bai.doanRieng || ""}\n\n${than}` : than;
     const { slugs, slugsDaDang } = await slugsDangCo(req.payload);
-    if (bai.slug) slugs[loai].add(String(bai.slug)); // bài đang sửa có thể chưa lưu lần nào
+    if (bai.slug && (loai === "dich-vu" || loai === "cam-nang")) slugs[loai].add(String(bai.slug)); // bài đang sửa có thể chưa lưu lần nào
     const cungTieuDe = bai.title
       ? await req.payload.count({
-          collection: loai,
+          collection: COLLECTION_BAI[loai],
           where: { and: [{ title: { equals: bai.title } }, ...(originalDoc?.id ? [{ id: { not_equals: originalDoc.id } }] : [])] },
           req,
         })
@@ -66,15 +91,23 @@ export const hookKiemTraVaDuyet =
 
     const ketQua = kiemTraBai({
       loai, data: bai, markdown, slugs, slugsDaDang, trungTieuDe: cungTieuDe.totalDocs > 0, tuLieu: docTuLieu(bai.tuLieu),
+      khuVuc: loai === "khu-vuc" ? await soLieuKhuVuc(req.payload, bai, originalDoc?.id, `${bai.doanRieng || ""}\n\n${than}`) : undefined,
     });
     data.ketQuaKiemTra = tomTatKiemTra(ketQua);
+    if (loai === "cam-nang") data.thoiGianDocPhut = Math.max(1, Math.round(demChu(markdown) / 220));
 
-    if (dangDang && ketQua.loi.length) {
-      throw new APIError(`Chưa đăng được, còn ${ketQua.loi.length} lỗi:\n• ${ketQua.loi.join("\n• ")}`, 400, undefined, true);
+    const danhSachLoi = `${ketQua.loi.length} lỗi:\n• ${ketQua.loi.join("\n• ")}`;
+    if (dangDang && ketQua.loi.length) throw new APIError(`Chưa đăng được, còn ${danhSachLoi}`, 400, undefined, true);
+    if (henGio && ketQua.loi.length) throw new APIError(`Chưa hẹn giờ được, còn ${danhSachLoi}`, 400, undefined, true);
+    if (guiDuyet && ketQua.loi.length) throw new APIError(`Chưa gửi duyệt được, còn ${danhSachLoi}`, 400, undefined, true);
+    if (dangDang) {
+      data.trangThaiDuyet = "daDuyet";
+      if (req.user && laNguoiDuyet(req)) data.nguoiDuyet = req.user.id;
     }
-    if (dangDang) data.trangThaiDuyet = "daDuyet";
     return data;
   };
+
+const idCua = (v: unknown) => (typeof v === "object" && v ? (v as { id: number }).id : (v as number));
 
 export const truongSlug: Field = {
   name: "slug",
@@ -140,9 +173,23 @@ export const truongDuyet: Field[] = [
       { label: "Đang viết", value: "nhap" },
       { label: "Chờ duyệt", value: "choDuyet" },
       { label: "Cần sửa", value: "canSua" },
+      { label: "Đã hẹn giờ đăng", value: "daHenGio" },
       { label: "Đã duyệt", value: "daDuyet" },
     ],
   },
+  {
+    name: "henGioDang",
+    label: "Hẹn giờ đăng",
+    type: "date",
+    access: { create: truongChiNguoiDuyet, update: truongChiNguoiDuyet },
+    admin: {
+      position: "sidebar",
+      date: { pickerAppearance: "dayAndTime" },
+      description: 'Người duyệt chọn giờ, đổi trạng thái sang "Đã hẹn giờ đăng" rồi Lưu nháp. Nên đăng 7:00 sáng.',
+    },
+  },
+  { name: "nguoiViet", label: "Người viết", type: "relationship", relationTo: "users", admin: { position: "sidebar" } },
+  { name: "nguoiDuyet", label: "Người duyệt", type: "relationship", relationTo: "users", admin: { position: "sidebar", readOnly: true } },
   {
     name: "ghiChuDuyet",
     label: "Ghi chú của người duyệt",

@@ -11,13 +11,15 @@ Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tớ
 
 | Mục | Dùng để |
 |---|---|
-| Đơn hàng → Đơn hàng | Đơn đặt lịch và gọi gấp (khẩn cấp luôn ở đầu). Đổi trạng thái theo thứ tự, xem lịch sử, nguồn khách, giá sơ bộ lúc đặt. |
+| Đơn hàng → Đơn hàng | Đơn đặt lịch và gọi gấp (khẩn cấp luôn ở đầu). Đổi trạng thái theo thứ tự, xem lịch sử, nguồn khách, giá sơ bộ lúc đặt, thợ, tiền đã nhận, hoá đơn, bảo hành, đánh giá. |
+| Đơn hàng → Thợ, Báo giá, Giao dịch, Phiếu bảo hành, Khiếu nại, Tin nhắn | Hồ sơ thợ; báo giá chính thức khách đã duyệt; tiền về từ ngân hàng (đối soát); bảo hành; phiếu khiếu nại từ đánh giá thấp; nhật ký tin Zalo/SMS. |
+| Marketing → Mã khuyến mãi, Số liệu | Mã KM, KOC, cây xăng, BQL (giảm, hạn, hoa hồng, QR); sự kiện xem trang, bấm gọi, bấm Zalo. |
 | Bảng giá & danh mục | Danh mục dịch vụ (bật/tắt nhận đặt, báo giá sơ bộ), hạng mục giá (công cố định, phụ tùng theo phân khúc A–D), **nhật ký đổi giá** (tự ghi), phí chung – bảo hành – phân khúc, hãng và dòng xe (nút đồng bộ VCparts). |
 | Vùng phục vụ & lịch | Quận (thời gian thợ tới), phường (bật/tắt), giờ nhận đơn gấp, khung giờ đặt lịch (giới hạn đơn mỗi khung), ngày nghỉ. |
 | Khách hàng → Đánh giá hiển thị | Đánh giá thật của khách để hiện trên web. |
-| Nội dung → Bài cẩm nang / Trang dịch vụ | Viết, sửa, xem trước, đăng bài. Mỗi bài lưu lịch sử phiên bản. |
+| Nội dung → Bài cẩm nang / Trang dịch vụ / Trang khu vực / Trang hãng xe | Viết, sửa, xem trước, gửi duyệt, hẹn giờ, đăng. Mỗi bài lưu lịch sử phiên bản. |
 | SEO → Từ khoá SEO, Kế hoạch SEO | Bộ từ khoá (nút **"AI viết bản nháp"**), lịch đăng, quy tắc. |
-| Hệ thống → Cấu hình chung | Hotline, Zalo OA, pháp nhân, MST, địa chỉ, điểm Google, sự cố trên màn gọi gấp. Sửa là web đổi ngay. |
+| Hệ thống → Cấu hình chung | Hotline, Zalo OA, pháp nhân, MST, địa chỉ, điểm Google, sự cố trên màn gọi gấp, tài khoản nhận tiền (VietQR), CSKH, mục tiêu số liệu. Sửa là web đổi ngay. |
 | Hệ thống → Người dùng | Tài khoản, vai trò, khoá API (agent SEO Editor, phần mềm điều phối). |
 
 Trang `/quan-tri/` là bảng điều khiển nội dung & SEO (xem bên dưới). API cho giao diện và cho VCsoft: `docs/api.md`.
@@ -28,10 +30,10 @@ Việc backend đã làm, chưa làm, tích hợp đang giả lập: `docs/BAN-G
 | Vai trò | Được làm |
 |---|---|
 | Quản trị | Mọi việc, thêm người dùng, sửa tay trạng thái đơn đã xong |
-| Quản lý dịch vụ | Sửa giá, danh mục, vùng, giờ, ngày nghỉ; duyệt và đăng bài; xử lý đơn |
+| Quản lý dịch vụ | Sửa giá, danh mục, vùng, giờ, ngày nghỉ; duyệt, hẹn giờ và đăng bài; xử lý đơn, khiếu nại; xem số liệu |
 | Biên tập nội dung (VCmedia) | Viết, sửa bản nháp, tải ảnh, gửi duyệt. **Không đăng, không sửa giá, không xem đơn.** |
-| Marketing | Viết nháp, quản lý đánh giá hiển thị (mã khuyến mãi, số liệu: P1) |
-| Điều phối | Xem, nhập đơn, đổi trạng thái đơn (người hoặc tài khoản máy của phần mềm điều phối có khoá API) |
+| Marketing | Viết nháp, quản lý đánh giá hiển thị, mã khuyến mãi và hoa hồng, số liệu |
+| Điều phối | Xem, nhập đơn, đổi trạng thái, xếp thợ, gửi báo giá, thu tay, xử lý khiếu nại (người hoặc tài khoản máy của phần mềm điều phối có khoá API) |
 
 Người đầu tiên tạo tài khoản ở `/admin` tự thành Quản trị. Vai trò "Duyệt bài" cũ được migration đổi thành "Quản lý dịch vụ".
 
@@ -68,9 +70,10 @@ Khi nối phải giữ hai luật: chỉ lấy trang được đánh dấu công
 | `collections/` | Bảng dữ liệu: đơn hàng, danh mục và giá, xe, quận/phường, đánh giá, bài cẩm nang, trang dịch vụ, từ khoá, ảnh, người dùng |
 | `globals/` | Cấu hình chung, phí chung, giờ nhận đơn, kế hoạch SEO |
 | `lib/cong-khai.ts` | Dữ liệu công khai cho từng màn (bảng giá, báo giá sơ bộ, vùng, khung giờ); trang server và `/api/trang/...` dùng chung |
-| `lib/don/` | Tạo đơn, kiểm tra đầu vào, luồng trạng thái, link theo dõi |
-| `lib/tich-hop/` | Adapter tích hợp ngoài: bản đồ, điều phối, Zalo ZNS, SMS, VCparts (bản thật + giả lập) |
-| `lib/*.mjs` | Phần thuần, có kiểm thử: tính giá, biển số, số điện thoại, vùng, khung giờ |
+| `lib/don/` | Tạo đơn, kiểm tra đầu vào, luồng trạng thái, link theo dõi, phục vụ (thợ, báo giá, thanh toán, hoá đơn, bảo hành), đánh giá, tin nhắn |
+| `lib/tich-hop/` | Adapter tích hợp ngoài: bản đồ, điều phối, Zalo ZNS, SMS, VCparts, ngân hàng, hoá đơn điện tử (bản thật + giả lập) |
+| `lib/*.mjs` | Phần thuần, có kiểm thử: tính giá, biển số, số điện thoại, vùng, khung giờ, VietQR, khuyến mãi, báo giá, bảo hành, sự kiện |
+| `lib/tra-cuu-xe.ts`, `lib/ma-khuyen-mai.ts`, `lib/so-lieu.ts`, `lib/noi-dung.ts` | Tra cứu lịch sử xe, mã khuyến mãi và hoa hồng, báo cáo số liệu, trang khu vực và bài hẹn giờ |
 | `tests/` | Kiểm thử đơn vị (`don-vi/`) và tích hợp (`tich-hop/`) |
 | `lib/kiem-tra.mjs` | Luật kiểm tra bài (dùng khi lưu/đăng và trong `npm run kiem-tra`) |
 | `lib/bai.ts`, `lib/quyen.ts` | Trường dùng chung, hook duyệt bài, phân quyền 5 vai trò |
@@ -130,7 +133,7 @@ Web giờ cần server chạy liên tục (không còn là trang tĩnh trên Clo
 ```bash
 git clone … && cd buithoanh/website
 cp .env.example .env          # điền PAYLOAD_SECRET, POSTGRES_PASSWORD, SITE_URL, ANTHROPIC_API_KEY và khoá tích hợp
-docker compose up -d --build  # web + PostgreSQL; migration tự chạy khi khởi động
+docker compose up -d --build  # web + PostgreSQL + hen-gio (gọi /api/viec-dinh-ky mỗi 5 phút, đặt VIEC_DINH_KY_KEY); migration tự chạy khi khởi động
 docker compose run --rm cong-cu npm run nap-du-lieu   # lần đầu
 ```
 

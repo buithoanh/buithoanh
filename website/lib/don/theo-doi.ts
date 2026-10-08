@@ -3,6 +3,8 @@ import type { Payload } from "payload";
 import { LoiNguoiDung } from "../cong-khai";
 import { cheSdt } from "../so-dien-thoai.mjs";
 import { cacBuoc, nhanTrangThai } from "./trang-thai.mjs";
+import type { Tho } from "../../payload-types";
+import { thoChoKhach } from "./phuc-vu";
 
 export async function donTheoToken(payload: Payload, token: string) {
   if (!/^[A-Za-z0-9_-]{20,64}$/.test(token)) throw new LoiNguoiDung("Link không đúng.", 404, "LINK_SAI");
@@ -31,8 +33,13 @@ export async function donTheoToken(payload: Payload, token: string) {
     khungGio: don.khungGio?.nhan || null,
     khach: { hoTen: don.khach?.hoTen || null, sdt: cheSdt(don.khach?.sdt || "") },
     giaSoBo: don.giaSoBo?.trangThai ? { trangThai: don.giaSoBo.trangThai, tu: don.giaSoBo.tu ?? null, den: don.giaSoBo.den ?? null } : null,
-    // Thợ, vị trí thợ, giờ dự kiến đến, báo giá, thanh toán: P1.
-    tho: null,
+    tho: thoChoKhach(don.tho as Tho),
+    // Vị trí thợ chỉ hiện khi thợ đang tới
+    viTriTho: don.trangThai === "thoDangDen" && don.viTriTho?.lat != null ? { lat: don.viTriTho.lat, lng: don.viTriTho.lng, luc: don.viTriTho.luc } : null,
+    thoDuKienDenLuc: don.thoDuKienDenLuc || null,
+    // Trang tiếp theo khách cần mở (giao diện hiện nút)
+    viecCanLam: don.trangThai === "choDuyetBaoGia" ? "duyetBaoGia" : don.trangThai === "choThanhToan" ? "thanhToan" : null,
+    thanhToan: don.thanhToan?.soTien ? { soTien: don.thanhToan.soTien, trangThai: don.thanhToan.trangThai } : null,
     hotline: c.hotline || "",
     taoLuc: don.createdAt,
     hetHanLinkLuc: don.hetHanLinkLuc || null,

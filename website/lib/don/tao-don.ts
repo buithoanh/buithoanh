@@ -10,6 +10,9 @@ import { kiemTraDauVao } from "./dau-vao.mjs";
 import { kenhNguon } from "./nguon.mjs";
 import { dieuPhoi } from "../tich-hop/dieu-phoi";
 import { thongBao } from "../tich-hop/thong-bao";
+import { guiTinDon } from "./tin-nhan";
+import { ghiTruong } from "../ghi-truong";
+import { kiemTraMaChoKhach, timMa } from "../ma-khuyen-mai";
 import { CHO_DO } from "./dau-vao.mjs";
 
 export type TepTaiLen = { ten: string; loai: string; kichThuoc: number; duLieu: Buffer; thoiLuongGiay?: number | null };
@@ -85,6 +88,19 @@ export async function taoDon(payload: Payload, loai: "datLich" | "khanCap", tho:
     khung = { ngay: ngay.ngay, ma: k.ma, batDau: k.batDau, ketThuc: k.ketThuc, nhan: `${k.nhan}, ${ngay.ngayThang}` };
   }
 
+  // Mã khuyến mãi: khách gõ (báo lỗi rõ nếu không dùng được) hoặc từ link ?ma= (mã đối tác in trên QR)
+  let khuyenMai: { id: number; ma: string; moTa: string } | null = null;
+  if (d.maKhuyenMai) {
+    const kq = await kiemTraMaChoKhach(payload, d.maKhuyenMai, d.khach.sdt);
+    if (!kq.hopLe) throw new LoiNguoiDung(kq.lyDo, 409, "MA_KHUYEN_MAI_KHONG_DUNG_DUOC", { truong: { maKhuyenMai: kq.lyDo } });
+    khuyenMai = { id: kq.id, ma: kq.ma, moTa: kq.moTa };
+  } else if (d.maGioiThieu && (await timMa(payload, d.maGioiThieu))) {
+    const kq = await kiemTraMaChoKhach(payload, d.maGioiThieu, d.khach.sdt);
+    d.maKhuyenMai = d.maGioiThieu;
+    d.maGioiThieu = "";
+    if (kq.hopLe) khuyenMai = { id: kq.id, ma: kq.ma, moTa: kq.moTa };
+  }
+
   const token = taoToken();
   const ma = await maTiepTheo(payload, "TT");
   const bayGio = new Date().toISOString();
@@ -117,6 +133,7 @@ export async function taoDon(payload: Payload, loai: "datLich" | "khanCap", tho:
       hoaDon: d.hoaDon || undefined,
       maGioiThieu: d.maGioiThieu || undefined,
       maKhuyenMai: d.maKhuyenMai || undefined,
+      khuyenMai: khuyenMai?.id,
       dongY: { dongYXuLyDuLieu: true, dongYLuc: bayGio, nhacBaoDuongZalo: Boolean(d.nhacBaoDuong) },
       nguon: { ...d.nguon, kenh: kenhNguon({ ...d.nguon, maKhuyenMai: d.maKhuyenMai, maGioiThieu: d.maGioiThieu }) },
       giaSoBo: gia ? { trangThai: gia.trangThai as "coGia", tu: gia.tu, den: gia.den, phanKhuc: gia.phanKhuc, dong: gia.dong } : undefined,
@@ -151,6 +168,7 @@ export async function taoDon(payload: Payload, loai: "datLich" | "khanCap", tho:
     khungGio: khung ? { ngay: khung.ngay, ma: khung.ma, nhan: khung.nhan } : null,
     viTri: { quan: vung.quan?.ten || null, phuong: vung.phuong?.ten || null, etaTu: vung.eta?.tu ?? null, etaDen: vung.eta?.den ?? null },
     giaSoBo: gia ? { trangThai: gia.trangThai as "coGia", tu: gia.tu, den: gia.den, hienThi: gia.hienThi, ghiChu: gia.ghiChu } : null,
+    khuyenMai: khuyenMai ? { ma: khuyenMai.ma, moTa: khuyenMai.moTa } : null,
     nhanLuc: bayGio,
   };
 }
@@ -194,21 +212,13 @@ export async function guiSauKhiTao(payload: Payload, id: number) {
     payload.logger.error({ err: e, msg: `Không gửi được đơn ${don.ma} sang điều phối` });
   }
   if (don.loai === "khanCap") {
-    await thongBao.baoTrucDieuPhoi(`DON KHAN CAP ${don.ma}: ${don.suCo || tenDv} tai ${don.viTri?.diaChi || ""}. SDT ${don.khach?.sdt}`)
+    await thongBao.nhanNoiBo(process.env.SDT_TRUC_DIEU_PHOI, `DON KHAN CAP ${don.ma}: ${don.suCo || tenDv} tai ${don.viTri?.diaChi || ""}. SDT ${don.khach?.sdt}`)
       .catch((e) => payload.logger.error({ err: e, msg: "Không nhắn được số trực điều phối" }));
   }
-  try {
-    const kenh = await thongBao.guiXacNhanDon({
-      sdt: don.khach?.sdt || "", hoTen: don.khach?.hoTen || undefined, ma: don.ma || "", dichVu: tenDv,
-      gioHen: don.khungGio?.nhan || "Khẩn cấp, thợ gần nhất tới ngay", xe: [don.xe?.tenXe, don.xe?.bienSo].filter(Boolean).join(" · "),
-      diaChi: don.viTri?.diaChi || "", link: linkTheoDoi(don.tokenTheoDoi || ""), khanCap: don.loai === "khanCap",
-    });
-    Object.assign(ghi, { "tichHop.xacNhanKenh": kenh, "tichHop.xacNhanLuc": new Date().toISOString(), "tichHop.loiThongBao": null });
-  } catch (e) {
-    ghi["tichHop.loiThongBao"] = (e as Error).message;
-    payload.logger.error({ err: e, msg: `Không nhắn được xác nhận đơn ${don.ma}` });
-  }
-  const tichHop: Record<string, unknown> = { ...(don.tichHop || {}) };
+  const kenh = await guiTinDon(payload, id, "xacNhan");
+  if (kenh) Object.assign(ghi, { "tichHop.xacNhanKenh": kenh, "tichHop.xacNhanLuc": new Date().toISOString(), "tichHop.loiThongBao": null });
+  else ghi["tichHop.loiThongBao"] = "Không gửi được tin xác nhận (xem Tin Zalo/SMS đã gửi)";
+  const tichHop: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(ghi)) tichHop[k.replace("tichHop.", "")] = v;
-  await payload.update({ collection: "don-hang", id, overrideAccess: true, context: { boQuaHook: true }, data: { tichHop } }).catch(() => {});
+  await ghiTruong(payload, "don-hang", id, { tichHop }).catch((e) => payload.logger.error({ err: e, msg: "Không ghi được kết quả tích hợp" }));
 }

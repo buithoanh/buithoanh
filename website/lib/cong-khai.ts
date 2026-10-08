@@ -376,13 +376,19 @@ export async function layTrangDichVu(payload: Payload, slug: string, opts: { dra
   };
 }
 
-export async function layTrangKhuVuc(payload: Payload, dichVuSlug: string, quanSlug: string) {
+export async function layTrangKhuVuc(payload: Payload, dichVuSlug: string, quanSlug: string, opts: { draft?: boolean } = {}) {
   const [dvs, vung, chung, danhGia] = await Promise.all([
     layDichVuKemGia(payload, { bangGia: true }), layVung(payload), layCauHinhChung(payload), layDanhGia(payload, { quan: quanSlug, gioiHan: 6 }),
   ]);
   const dv = dvs.find((d) => d.slug === dichVuSlug);
   const quan = vung.quan.find((q) => q.slug === quanSlug && q.dangPhucVu);
   if (!dv || !quan) return null;
+  const trang = (await payload.find({
+    collection: "trang-khu-vuc", where: { and: [{ slug: { equals: `${dv.slug}-${quan.slug}` } }, ...(opts.draft ? [] : [{ _status: { equals: "published" } }])] },
+    draft: opts.draft, limit: 1, depth: 2,
+  })).docs[0];
+  const { noiDungHtml } = await import("./noi-dung");
+  const danhGiaTrang = trang ? (trang.danhGia || []).filter((d): d is Exclude<typeof d, number> => typeof d === "object" && Boolean(d?.hienThi)) : [];
   return {
     dichVu: { ten: dv.ten, slug: dv.slug, ma: dv.ma, moTaNgan: dv.moTaNgan },
     quan: { ten: quan.ten, slug: quan.slug, etaTu: quan.etaTu, etaDen: quan.etaDen, ghiChu: quan.ghiChu },
@@ -391,18 +397,32 @@ export async function layTrangKhuVuc(payload: Payload, dichVuSlug: string, quanS
       { ten: "Phí đi lại", loai: "phi", giaHienThi: chung.phi.hienThi.phiDiLai, gia: { tu: chung.phi.phiDiLai, den: chung.phi.phiDiLai } },
       ...dv.hangMucGoc.map((h) => hangMucHienThi(h)),
     ],
-    danhGia,
+    // Đánh giá gắn vào trang trước, rồi các đánh giá khác ở quận
+    danhGia: [
+      ...danhGiaTrang.map((d) => ({ noiDung: d.noiDung, tenHienThi: d.tenHienThi, soSao: d.soSao, ngay: d.ngay, quan: { ten: quan.ten, slug: quan.slug }, phuong: d.phuong || null, dichVu: null, nguon: d.nguon })),
+      ...danhGia.filter((d) => !danhGiaTrang.some((x) => x.noiDung === d.noiDung)),
+    ].slice(0, 6),
     dichVuKhac: dvs.filter((d) => d.slug !== dv.slug).map((d) => ({ ten: d.ten, slug: d.slug })),
-    // Đoạn mô tả riêng, ảnh việc thật tại quận: thuộc "trang khu vực" (P1), chưa có.
-    noiDung: null,
+    // Trang khu vực đã đăng (null nếu chưa viết): tiêu đề, mô tả SEO, đoạn riêng, nội dung HTML (có khối giá), ảnh thật, FAQ
+    noiDung: trang ? {
+      title: trang.title, description: trang.description, doanRieng: trang.doanRieng,
+      html: await noiDungHtml(payload, trang.noiDung), faq: trang.faq || [],
+      anhThat: (trang.anhThat || []).map((a) => (typeof a === "object" && a ? { url: a.url, alt: a.alt, width: a.width, height: a.height } : null)).filter(Boolean),
+      capNhat: trang.updatedAt,
+    } : null,
     lienHe: chung.lienHe,
   };
 }
 
-export async function layTrangHangXe(payload: Payload, hangSlug: string) {
+export async function layTrangHangXe(payload: Payload, hangSlug: string, opts: { draft?: boolean } = {}) {
   const [tatCa, bangGia] = await Promise.all([layDanhMucXe(payload), layBangGia(payload)]);
   const hang = tatCa.find((h) => h.slug === hangSlug);
   if (!hang) return null;
+  const trang = (await payload.find({
+    collection: "trang-hang-xe", where: { and: [{ slug: { equals: hangSlug } }, ...(opts.draft ? [] : [{ _status: { equals: "published" } }])] },
+    draft: opts.draft, limit: 1, depth: 1,
+  })).docs[0];
+  const { noiDungHtml } = await import("./noi-dung");
   return {
     hangXe: tatCa.map((h) => ({ ten: h.ten, slug: h.slug, soDong: h.dong.length })),
     hang,
@@ -410,8 +430,12 @@ export async function layTrangHangXe(payload: Payload, hangSlug: string) {
     phi: bangGia.phi,
     // Bảng giá đủ 4 phân khúc: giao diện chọn theo phân khúc của dòng xe đang chọn (giaTheoPhanKhuc).
     bangGia: bangGia.dichVu,
-    // Bệnh hay gặp theo dòng xe, phụ tùng VCparts theo mã: nội dung trang hãng xe (P1), chưa có.
-    benhHayGap: null,
+    // Trang hãng xe đã đăng (null nếu chưa viết). Bệnh hay gặp: dong = slug dòng xe, null = mọi dòng của hãng.
+    noiDung: trang ? { title: trang.title, description: trang.description, html: await noiDungHtml(payload, trang.noiDung), faq: trang.faq || [] } : null,
+    benhHayGap: trang ? (trang.benhHayGap || []).map((b) => ({
+      dong: typeof b.dong === "object" && b.dong ? b.dong.slug : null, tieuDe: b.tieuDe, moTa: b.moTa,
+      dichVu: typeof b.dichVu === "object" && b.dichVu ? b.dichVu.slug : null,
+    })) : [],
   };
 }
 

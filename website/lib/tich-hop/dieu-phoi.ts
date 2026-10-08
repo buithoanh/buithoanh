@@ -34,6 +34,14 @@ export const dieuPhoi = {
     if (!j?.id) throw new Error("Phần mềm điều phối không trả mã đơn.");
     return { id: String(j.id) };
   },
+  /** Số đơn bên điều phối nhận trong khoảng thời gian (đối soát số liệu). Giả lập: trả null (không có số để so). */
+  async demDon(tu: string, den: string): Promise<number | null> {
+    if (cheDo(MO_TA) === "giaLap") return null;
+    const j = (await goiHttp("Phần mềm điều phối", `${process.env.DIEU_PHOI_URL}/thong-ke/so-don?tu=${encodeURIComponent(tu)}&den=${encodeURIComponent(den)}`, {
+      headers: { Authorization: `Bearer ${process.env.DIEU_PHOI_KEY}` },
+    })) as { soDon?: number } | null;
+    return typeof j?.soDon === "number" ? j.soDon : null;
+  },
   /** Báo điều phối khi người trong công ty đổi trạng thái đơn trên web (vd huỷ theo yêu cầu khách). */
   async baoDoiTrangThai(ma: string, trangThai: string, ghiChu?: string) {
     if (cheDo(MO_TA) === "giaLap") {

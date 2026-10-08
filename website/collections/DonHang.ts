@@ -10,6 +10,8 @@ import { donTheoToken } from "../lib/don/theo-doi";
 import { docBody, gioiHan, ipCua, json, traLoi } from "../lib/api/chung";
 import { LoiNguoiDung } from "../lib/cong-khai";
 import { dieuPhoi } from "../lib/tich-hop/dieu-phoi";
+import { guiTinDon } from "../lib/don/tin-nhan";
+import { endpointPhucVu } from "../lib/don/endpoint";
 
 const HAN_LINK_MS = 24 * 60 * 60 * 1000;
 const nguoiLam = (u: unknown) => {
@@ -60,7 +62,9 @@ export const DonHang: CollectionConfig = {
           data.xe.bienSo = b;
         }
         if (operation === "update" && data.trangThai && originalDoc && data.trangThai !== originalDoc.trangThai) {
-          const kq = chuyenDuoc(originalDoc.trangThai, data.trangThai, { choPhepLui: laQuanTri(req) });
+          // Phát sinh khi đang sửa: báo giá bổ sung đưa đơn về "chờ duyệt báo giá"
+          const phatSinh = context.phatSinh === true && originalDoc.trangThai === "dangSua" && data.trangThai === "choDuyetBaoGia";
+          const kq = chuyenDuoc(originalDoc.trangThai, data.trangThai, { choPhepLui: laQuanTri(req) || phatSinh });
           if (!kq.ok) throw new APIError(kq.loi!, 409, undefined, true);
           data.lichSuTrangThai = [
             ...(originalDoc.lichSuTrangThai || []),
@@ -80,6 +84,10 @@ export const DonHang: CollectionConfig = {
         const doi = req.context.doiTrangThai as { tu: string; den: string } | undefined;
         if (!doi) return;
         delete req.context.doiTrangThai;
+        // Đã xếp thợ: nhắn khách tên thợ, xe van, giờ dự kiến đến
+        if (doi.den === "daXepTho" && doc.tho && !req.context.khongNhanTin) {
+          void guiTinDon(req.payload, doc.id, "daXepTho");
+        }
         // Phần mềm điều phối tự đổi thì không báo ngược lại; script nạp mẫu cũng không báo
         if (la(req, "dieuPhoi") || req.context.khongBaoDieuPhoi) return;
         dieuPhoi.baoDoiTrangThai(doc.ma, doi.den, req.context.ghiChuTrangThai as string | undefined)
@@ -88,6 +96,7 @@ export const DonHang: CollectionConfig = {
     ],
   },
   endpoints: [
+    ...endpointPhucVu,
     {
       path: "/dat-lich",
       method: "post",
@@ -297,6 +306,79 @@ export const DonHang: CollectionConfig = {
                 { name: "dongYLuc", label: "Đồng ý lúc", type: "date", admin: { readOnly: true, date: { pickerAppearance: "dayAndTime" } } },
                 { name: "nhacBaoDuongZalo", label: "Nhắc bảo dưỡng qua Zalo", type: "checkbox" },
               ] }],
+            },
+          ],
+        },
+        {
+          label: "Thợ, thanh toán",
+          fields: [
+            { type: "row", fields: [
+              { name: "tho", label: "Thợ", type: "relationship", relationTo: "tho", index: true },
+              { name: "thoDuKienDenLuc", label: "Thợ dự kiến đến lúc", type: "date", admin: { date: { pickerAppearance: "dayAndTime" } } },
+            ] },
+            {
+              name: "viTriTho", label: "Vị trí thợ (đang tới)", type: "group", admin: { readOnly: true },
+              fields: [{ type: "row", fields: [
+                { name: "lat", label: "Vĩ độ", type: "number" }, { name: "lng", label: "Kinh độ", type: "number" },
+                { name: "luc", label: "Cập nhật lúc", type: "date", admin: { date: { pickerAppearance: "dayAndTime" } } },
+              ] }],
+            },
+            { type: "row", fields: [
+              {
+                name: "ketQua", label: "Kết quả", type: "select", defaultValue: "binhThuong",
+                options: [{ label: "Bình thường", value: "binhThuong" }, { label: "Khách từ chối báo giá (chỉ thu phí kiểm tra)", value: "tuChoiBaoGia" }],
+              },
+              { name: "khuyenMai", label: "Mã khuyến mãi áp dụng", type: "relationship", relationTo: "ma-khuyen-mai", index: true },
+              { name: "xongLuc", label: "Sửa xong lúc", type: "date", admin: { readOnly: true } },
+              { name: "soKmKhiXong", label: "Số km khi xong", type: "number" },
+            ] },
+            {
+              name: "thanhToan", label: "Thanh toán", type: "group",
+              fields: [
+                { type: "row", fields: [
+                  { name: "soTien", label: "Số tiền phải trả (đ)", type: "number", admin: { readOnly: true } },
+                  { name: "giam", label: "Giảm giá (đ)", type: "number", admin: { readOnly: true } },
+                  { name: "daNhan", label: "Đã nhận (đ)", type: "number", defaultValue: 0, admin: { readOnly: true } },
+                  {
+                    name: "trangThai", label: "Trạng thái", type: "select", defaultValue: "chuaTinh", admin: { readOnly: true },
+                    options: [{ label: "Chưa tính", value: "chuaTinh" }, { label: "Chờ tiền về", value: "choTien" }, { label: "Thiếu tiền", value: "thieu" }, { label: "Đã thanh toán", value: "daThanhToan" }],
+                  },
+                ] },
+                { name: "chiTiet", label: "Chi tiết", type: "json", admin: { readOnly: true } },
+                { type: "row", fields: [
+                  { name: "thanhToanLuc", label: "Thanh toán lúc", type: "date", admin: { readOnly: true, date: { pickerAppearance: "dayAndTime" } } },
+                  { name: "maGiaoDich", label: "Mã giao dịch", type: "text", admin: { readOnly: true } },
+                  { name: "hinhThuc", label: "Hình thức", type: "text", admin: { readOnly: true } },
+                ] },
+              ],
+            },
+            {
+              name: "hoaDonDienTu", label: "Hoá đơn điện tử", type: "group", admin: { readOnly: true },
+              fields: [
+                { type: "row", fields: [
+                  { name: "so", label: "Số", type: "text" }, { name: "kyHieu", label: "Ký hiệu", type: "text" },
+                  { name: "maCQT", label: "Mã cơ quan thuế", type: "text" }, { name: "xuatLuc", label: "Xuất lúc", type: "date" },
+                ] },
+                { type: "row", fields: [
+                  { name: "linkXem", label: "Link xem", type: "text" }, { name: "linkPdf", label: "Link PDF", type: "text" },
+                  { name: "loi", label: "Lỗi xuất hoá đơn", type: "text" },
+                ] },
+              ],
+            },
+            { name: "phieuBaoHanh", label: "Phiếu bảo hành", type: "relationship", relationTo: "phieu-bao-hanh", admin: { readOnly: true } },
+            {
+              name: "danhGia", label: "Đánh giá của khách", type: "group", admin: { readOnly: true },
+              fields: [
+                { type: "row", fields: [
+                  { name: "guiLuc", label: "Gửi link lúc", type: "date" },
+                  { name: "luc", label: "Khách đánh giá lúc", type: "date" },
+                  { name: "soSao", label: "Số sao", type: "number" },
+                ] },
+                {
+                  name: "token", label: "Mã link đánh giá", type: "text", unique: true, index: true,
+                  access: { read: truongChiNguoiXuLyDon, update: () => false },
+                },
+              ],
             },
           ],
         },

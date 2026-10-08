@@ -6,11 +6,16 @@ import { doanTrung } from "./tu-lieu.mjs";
 export const LUAT = {
   "dich-vu": { batBuoc: ["title", "description", "keyword", "ten", "tomTat"], soChuToiThieu: 350 },
   "cam-nang": { batBuoc: ["title", "description", "keyword", "nhom", "ngay"], soChuToiThieu: 600 },
+  "khu-vuc": { batBuoc: ["title", "description", "keyword", "dichVu", "quan"], soChuToiThieu: 250 },
+  "hang-xe": { batBuoc: ["title", "description", "keyword", "hang"], soChuToiThieu: 350 },
 };
+
+/** Trang khu vực (dịch vụ × quận): luật riêng trước khi gửi duyệt. */
+export const LUAT_KHU_VUC = { soChuDoanRieng: 150, soAnhThat: 2, soDanhGiaThat: 1, tyLeTrungToiDa: 0.7 };
 
 const TEN_TRUONG = {
   title: "Tiêu đề SEO", description: "Mô tả SEO", keyword: "Từ khoá chính", ten: "Tên dịch vụ",
-  tomTat: "Tóm tắt", nhom: "Nhóm từ khoá", ngay: "Ngày đăng",
+  tomTat: "Tóm tắt", nhom: "Nhóm từ khoá", ngay: "Ngày đăng", dichVu: "Dịch vụ", quan: "Quận", hang: "Hãng xe",
 };
 
 export const norm = (s) => String(s || "").toLowerCase().normalize("NFC");
@@ -27,9 +32,11 @@ export const coNeuGia = (md) => /\d[\d.,]*\s*(đ|đồng|vnđ|vnd|k|nghìn|ngàn
  * @param {{ "dich-vu": Set<string>, "cam-nang": Set<string> }} [p.slugsDaDang]  slug đã đăng; link tới trang chưa đăng thì cảnh báo
  * @param {boolean} [p.trungTieuDe]      đã có bài khác cùng tiêu đề
  * @param {{ slug: string, body: string | null }[]} [p.tuLieu]  tư liệu transcript bài dẫn (body null = không có trong repo)
+ * @param {{ soChuDoanRieng: number, soAnh: number, soAnhThieuMoTa: number, soDanhGiaThat: number, tyLeTrung: number, trangTrung?: string }} [p.khuVuc]
+ *   số liệu của trang khu vực (đếm từ database ở lib/bai.ts)
  * @returns {{ label: string, ok: boolean, detail: string, level: "error" | "warn" }[]}
  */
-export function cacMucKiemTra({ loai, data, markdown, slugs, slugsDaDang = slugs, trungTieuDe = false, tuLieu = [] }) {
+export function cacMucKiemTra({ loai, data, markdown, slugs, slugsDaDang = slugs, trungTieuDe = false, tuLieu = [], khuVuc }) {
   const md = String(markdown || "");
   const { batBuoc, soChuToiThieu } = LUAT[loai];
   const soChu = demChu(md);
@@ -75,6 +82,20 @@ export function cacMucKiemTra({ loai, data, markdown, slugs, slugsDaDang = slugs
   ];
   if (loai === "cam-nang") {
     muc.push(c("Có liên kết tới trang dịch vụ", /\]\(\/dich-vu\//.test(md), "Nên có ít nhất 1 liên kết tới trang dịch vụ", "warn"));
+  }
+  if (loai === "khu-vuc" && khuVuc) {
+    const L = LUAT_KHU_VUC;
+    const pt = Math.round(khuVuc.tyLeTrung * 100);
+    muc.push(
+      c(`Đoạn mô tả riêng của quận từ ${L.soChuDoanRieng} chữ`, khuVuc.soChuDoanRieng >= L.soChuDoanRieng,
+        `Đoạn mô tả riêng có ${khuVuc.soChuDoanRieng} chữ, cần tối thiểu ${L.soChuDoanRieng} (khu chung cư, tuyến đường, lỗi khách hay gặp ở quận này)`),
+      c(`Có ít nhất ${L.soAnhThat} ảnh việc thật tại quận`, khuVuc.soAnh >= L.soAnhThat, `Có ${khuVuc.soAnh} ảnh thật, cần ít nhất ${L.soAnhThat}`),
+      c("Ảnh có mô tả", !khuVuc.soAnhThieuMoTa, `Còn ${khuVuc.soAnhThieuMoTa} ảnh chưa có mô tả`),
+      c(`Có ít nhất ${L.soDanhGiaThat} đánh giá thật của khách ở quận`, khuVuc.soDanhGiaThat >= L.soDanhGiaThat,
+        "Chưa gắn đánh giá thật nào của khách ở quận này"),
+      c(`Trùng nội dung không quá ${Math.round(L.tyLeTrungToiDa * 100)}% với trang khác`, khuVuc.tyLeTrung <= L.tyLeTrungToiDa,
+        `Trùng ${pt}% nội dung với ${khuVuc.trangTrung || "trang khác"}: viết lại cho riêng quận này`),
+    );
   }
   if (tuLieu.length) {
     muc.push(c("Tư liệu dẫn nguồn có trong repo", !tlThieu.length,

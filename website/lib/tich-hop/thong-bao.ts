@@ -1,25 +1,46 @@
-// Gửi tin cho khách: Zalo ZNS trước, khách không dùng Zalo (hoặc ZNS lỗi) thì SMS cùng nội dung, link rút gọn.
+// Gửi tin cho khách: Zalo ZNS trước; khách không dùng Zalo (hoặc ZNS lỗi) thì SMS cùng nội dung, link rút gọn.
 // Bản thật:
-//   Zalo ZNS: POST https://business.openapi.zalo.me/message/template, header access_token = ZALO_ZNS_ACCESS_TOKEN,
-//             template xác nhận đơn = ZALO_ZNS_MAU_XAC_NHAN (mẫu INT-02 trong thiết kế TinZalo).
+//   Zalo ZNS: POST https://business.openapi.zalo.me/message/template, header access_token = ZALO_ZNS_ACCESS_TOKEN.
+//             Mỗi loại tin một mẫu đăng ký với Zalo: ZALO_ZNS_MAU_<LOẠI> (vd ZALO_ZNS_MAU_XAC_NHAN). Thiếu mẫu → gửi SMS.
+//             Tên tham số trong mẫu phải khớp `duLieu` bên dưới (MAU_TIN).
 //   SMS:      POST {SMS_URL}, header Authorization: Bearer {SMS_KEY}, body { to, text } (giả định, chờ chọn nhà mạng).
-// Phiên này (P0) chỉ gửi tin xác nhận đơn và báo điều phối trực khi có đơn khẩn cấp; tin theo từng bước đơn là P1.
 import { cheDo, dangKy, goiHttp, logGiaLap } from "./chung";
 
 const ZNS = dangKy({ ten: "zalo-zns", moTa: "Zalo ZNS (tin đơn hàng)", bien: ["ZALO_ZNS_ACCESS_TOKEN", "ZALO_ZNS_MAU_XAC_NHAN"] });
 const SMS = dangKy({ ten: "sms", moTa: "SMS dự phòng", bien: ["SMS_URL", "SMS_KEY"] });
 
-export type TinXacNhan = {
-  sdt: string; hoTen?: string; ma: string; dichVu: string; gioHen: string; xe: string; diaChi: string; link: string; khanCap: boolean;
+/** Các loại tin (thiết kế TinZalo, mẫu INT-02…). bien = biến môi trường chứa mã mẫu ZNS. */
+export const MAU_TIN = {
+  xacNhan: { bien: "ZALO_ZNS_MAU_XAC_NHAN", ten: "Xác nhận đơn" },
+  daXepTho: { bien: "ZALO_ZNS_MAU_XEP_THO", ten: "Đã xếp thợ" },
+  baoGia: { bien: "ZALO_ZNS_MAU_BAO_GIA", ten: "Báo giá chính thức" },
+  thanhToan: { bien: "ZALO_ZNS_MAU_THANH_TOAN", ten: "Mời thanh toán" },
+  hoanThanh: { bien: "ZALO_ZNS_MAU_HOAN_THANH", ten: "Đã thanh toán, hoá đơn và bảo hành" },
+  danhGia: { bien: "ZALO_ZNS_MAU_DANH_GIA", ten: "Mời đánh giá" },
+  maXacNhan: { bien: "ZALO_ZNS_MAU_MA_XAC_NHAN", ten: "Mã xác nhận tra cứu xe" },
+  hoaDon: { bien: "ZALO_ZNS_MAU_HOA_DON", ten: "Gửi lại hoá đơn" },
+} as const;
+export type LoaiTin = keyof typeof MAU_TIN;
+
+export type Tin = {
+  loai: LoaiTin;
+  sdt: string;
+  /** Tham số mẫu ZNS (chuỗi). */
+  duLieu: Record<string, string>;
+  /** Nội dung SMS (không dấu, ngắn) khi không gửi được Zalo. */
+  sms: string;
+  /** "sms" = khách chọn nhận SMS (vd mã tra cứu xe). */
+  kenh?: "zalo" | "sms";
+  maTheoDoi?: string;
 };
 
 const sdtQuocTe = (sdt: string) => "84" + sdt.replace(/^0/, "");
 
-async function guiZns(mau: string, sdt: string, duLieu: Record<string, string>, maTheoDoi: string) {
+async function guiZns(mau: string, t: Tin) {
   const j = (await goiHttp("Zalo ZNS", "https://business.openapi.zalo.me/message/template", {
     method: "POST",
     headers: { "Content-Type": "application/json", access_token: process.env.ZALO_ZNS_ACCESS_TOKEN! },
-    body: JSON.stringify({ phone: sdtQuocTe(sdt), template_id: mau, template_data: duLieu, tracking_id: maTheoDoi }),
+    body: JSON.stringify({ phone: sdtQuocTe(t.sdt), template_id: mau, template_data: t.duLieu, tracking_id: t.maTheoDoi || t.loai }),
   })) as { error?: number; message?: string } | null;
   if (j?.error) throw new Error(`Zalo ZNS lỗi ${j.error}: ${j.message || ""}`);
 }
@@ -38,31 +59,40 @@ async function guiSms(sdt: string, noiDung: string) {
 
 export const thongBao = {
   moTa: [ZNS, SMS],
-  /** Trả về kênh đã gửi được. Ném lỗi nếu cả Zalo và SMS đều không gửi được. */
-  async guiXacNhanDon(t: TinXacNhan): Promise<"zalo" | "sms"> {
-    const chao = t.hoTen ? `Chào ${t.hoTen}, ` : "";
+  /** Cả Zalo và SMS đều giả lập (máy chạy thử): khách không nhận được tin thật. */
+  dangGiaLap(): boolean {
     try {
-      if (cheDo(ZNS) === "giaLap") {
-        logGiaLap("zalo-zns", `xác nhận đơn ${t.ma} tới ${t.sdt}`, { link: t.link });
-        return "zalo";
-      }
-      await guiZns(process.env.ZALO_ZNS_MAU_XAC_NHAN!, t.sdt, {
-        ten_khach: t.hoTen || "Quý khách", ma_don: t.ma, gio_hen: t.gioHen, dich_vu: t.dichVu, xe: t.xe, dia_chi: t.diaChi, link: t.link,
-      }, t.ma);
-      return "zalo";
-    } catch (loiZalo) {
-      const noiDung = `${chao}ThoToi da nhan don ${t.ma}${t.khanCap ? " (KHAN CAP)" : ""}. ${t.gioHen}. Theo doi: ${t.link}`;
-      try {
-        await guiSms(t.sdt, noiDung);
-        return "sms";
-      } catch (loiSms) {
-        throw new Error(`Zalo: ${(loiZalo as Error).message}. SMS: ${(loiSms as Error).message}`);
-      }
+      return cheDo(ZNS) === "giaLap" && cheDo(SMS) === "giaLap";
+    } catch {
+      return false;
     }
   },
-  /** Nhắn số trực điều phối (SDT_TRUC_DIEU_PHOI) khi có đơn khẩn cấp. Không đặt số thì bỏ qua. */
-  async baoTrucDieuPhoi(noiDung: string) {
-    const sdt = process.env.SDT_TRUC_DIEU_PHOI;
+  /** Gửi một tin. Trả về kênh đã gửi. Ném lỗi nếu cả Zalo và SMS đều không gửi được. */
+  async gui(t: Tin): Promise<"zalo" | "sms"> {
+    let loiZalo: unknown = null;
+    if (t.kenh !== "sms") {
+      try {
+        if (cheDo(ZNS) === "giaLap") {
+          logGiaLap("zalo-zns", `${MAU_TIN[t.loai].ten} tới ${t.sdt}`, t.duLieu);
+          return "zalo";
+        }
+        const mau = process.env[MAU_TIN[t.loai].bien];
+        if (!mau) throw new Error(`Chưa có mẫu ZNS ${MAU_TIN[t.loai].bien}`);
+        await guiZns(mau, t);
+        return "zalo";
+      } catch (e) {
+        loiZalo = e;
+      }
+    }
+    try {
+      await guiSms(t.sdt, t.sms);
+      return "sms";
+    } catch (loiSms) {
+      throw new Error(`${loiZalo ? `Zalo: ${(loiZalo as Error).message}. ` : ""}SMS: ${(loiSms as Error).message}`);
+    }
+  },
+  /** Nhắn SMS nội bộ (trực điều phối, CSKH). Không có số thì bỏ qua. */
+  async nhanNoiBo(sdt: string | undefined | null, noiDung: string) {
     if (!sdt) return false;
     await guiSms(sdt, noiDung);
     return true;

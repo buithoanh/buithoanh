@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { layDanhSachBai, layDanhSachDichVu, layDichVu, laySite, sangHtml } from "../../../../lib/cms";
+import { layDanhSachBai, layDanhSachDichVu, layDichVu, laySite, sangHtmlDayDu } from "../../../../lib/cms";
 import { CallButton, ZaloButton } from "../../../../components/Contact";
 import JsonLd from "../../../../components/JsonLd";
 import Icon, { iconDichVu } from "../../../../components/Icon";
@@ -59,7 +59,7 @@ export default async function ServicePage({ params }) {
 
       <div className="wrap page-body">
         <article className="prose">
-          <div dangerouslySetInnerHTML={{ __html: sangHtml(e.noiDung) }} />
+          <div dangerouslySetInnerHTML={{ __html: await sangHtmlDayDu(e.noiDung) }} />
           {faq.length > 0 && (
             <section className="faq">
               <h2>Câu hỏi thường gặp</h2>
