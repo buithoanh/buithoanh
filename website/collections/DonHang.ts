@@ -50,7 +50,9 @@ export const DonHang: CollectionConfig = {
           }
           data.dongY.dongYLuc = data.dongY.dongYLuc || bayGio;
         }
-        data.uuTien = (data.loai ?? originalDoc?.loai) === "khanCap" ? 1 : 0;
+        // Khẩn cấp lên đầu; hội viên có quyền ưu tiên gọi gấp (gói An tâm) lên trước nữa
+        const uuTienHV = (data.quyenLoi?.uuTienHoiVien ?? originalDoc?.quyenLoi?.uuTienHoiVien) === true;
+        data.uuTien = (data.loai ?? originalDoc?.loai) === "khanCap" ? (uuTienHV ? 2 : 1) : 0;
         if (data.khach?.sdt) {
           const s = chuanHoaSdt(data.khach.sdt);
           if (!s) throw new APIError("Số điện thoại khách chưa đúng.", 400, undefined, true);
@@ -297,7 +299,12 @@ export const DonHang: CollectionConfig = {
             },
             { type: "row", fields: [
               { name: "maGioiThieu", label: "Mã giới thiệu", type: "text", index: true },
-              { name: "maKhuyenMai", label: "Mã khuyến mãi / đối tác", type: "text", index: true, admin: { description: "Kiểm tra và tính giảm giá: P1." } },
+              { name: "maKhuyenMai", label: "Mã khuyến mãi / đối tác", type: "text", index: true },
+            ] },
+            { type: "row", fields: [
+              { name: "gioiThieu", label: "Người giới thiệu", type: "relationship", relationTo: "ma-gioi-thieu", index: true },
+              { name: "gioiThieuApDung", label: "Đơn đầu của bạn được giới thiệu (miễn phí đi lại)", type: "checkbox" },
+              { name: "hoiVien", label: "Hội viên (theo biển số)", type: "relationship", relationTo: "hoi-vien", index: true },
             ] },
             {
               name: "dongY", label: "Đồng ý dữ liệu (Nghị định 13/2023)", type: "group",
@@ -332,6 +339,24 @@ export const DonHang: CollectionConfig = {
               { name: "xongLuc", label: "Sửa xong lúc", type: "date", admin: { readOnly: true } },
               { name: "soKmKhiXong", label: "Số km khi xong", type: "number" },
             ] },
+            {
+              name: "quyenLoi", label: "Quyền lợi đã áp (hội viên, giới thiệu)", type: "group", admin: { readOnly: true },
+              fields: [
+                { type: "row", fields: [
+                  {
+                    name: "mienDiLai", label: "Miễn phí đi lại do", type: "select", index: true,
+                    options: [{ label: "Gói hội viên", value: "hoiVien" }, { label: "Bạn mới được giới thiệu", value: "banMoi" }, { label: "Lượt thưởng giới thiệu", value: "luotGioiThieu" }],
+                  },
+                  { name: "kichNo", label: "Lượt miễn kích nổ", type: "number" },
+                  { name: "vaLop", label: "Lượt miễn vá lốp", type: "number" },
+                ] },
+                { type: "row", fields: [
+                  { name: "giamHoiVien", label: "Giảm tiền công hội viên (đ)", type: "number" },
+                  { name: "giamMa", label: "Giảm theo mã (đ)", type: "number" },
+                  { name: "uuTienHoiVien", label: "Ưu tiên gọi gấp (hội viên)", type: "checkbox" },
+                ] },
+              ],
+            },
             {
               name: "thanhToan", label: "Thanh toán", type: "group",
               fields: [

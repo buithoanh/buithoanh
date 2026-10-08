@@ -19,6 +19,11 @@ export const MAU_TIN = {
   danhGia: { bien: "ZALO_ZNS_MAU_DANH_GIA", ten: "Mời đánh giá" },
   maXacNhan: { bien: "ZALO_ZNS_MAU_MA_XAC_NHAN", ten: "Mã xác nhận tra cứu xe" },
   hoaDon: { bien: "ZALO_ZNS_MAU_HOA_DON", ten: "Gửi lại hoá đơn" },
+  hoiVienThanhToan: { bien: "ZALO_ZNS_MAU_HOI_VIEN_THANH_TOAN", ten: "Link thanh toán gói hội viên" },
+  hoiVienKichHoat: { bien: "ZALO_ZNS_MAU_HOI_VIEN_KICH_HOAT", ten: "Gói hội viên đã có hiệu lực" },
+  hoiVienSapHet: { bien: "ZALO_ZNS_MAU_HOI_VIEN_SAP_HET", ten: "Nhắc gia hạn gói hội viên" },
+  maGioiThieu: { bien: "ZALO_ZNS_MAU_MA_GIOI_THIEU", ten: "Mã giới thiệu của bạn" },
+  gioiThieuThuong: { bien: "ZALO_ZNS_MAU_GIOI_THIEU_THUONG", ten: "Nhận lượt thưởng giới thiệu" },
 } as const;
 export type LoaiTin = keyof typeof MAU_TIN;
 

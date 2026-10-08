@@ -59,22 +59,28 @@ export function noiDungTin(don: DonHang, loai: LoaiTin, them: Record<string, str
   }
 }
 
-/** Gửi tin theo bước và ghi nhật ký. Không ném lỗi (đơn không được hỏng vì tin nhắn). */
+/** Gửi một tin (Zalo, SMS dự phòng) và ghi nhật ký. Không ném lỗi: trả null nếu không gửi được. */
+export async function guiTin(payload: Payload, t: { loai: LoaiTin; sdt: string; duLieu: Record<string, string>; sms: string; donHang?: number; lienQuan?: string }) {
+  let kenh: "zalo" | "sms" | undefined;
+  let loi: string | undefined;
+  const maTheoDoi = `${t.lienQuan || t.donHang || ""}-${t.loai}`;
+  try {
+    kenh = await thongBao.gui({ loai: t.loai, sdt: t.sdt, duLieu: t.duLieu, sms: t.sms, maTheoDoi });
+  } catch (e) {
+    loi = (e as Error).message;
+    payload.logger.error({ err: e, msg: `Không gửi được tin ${t.loai} ${maTheoDoi}` });
+  }
+  await payload.create({
+    collection: "tin-nhan", overrideAccess: true,
+    data: { loai: t.loai, donHang: t.donHang, lienQuan: t.lienQuan, sdtChe: cheSdt(t.sdt), kenh, trangThai: loi ? "loi" : "daGui", loi, noiDung: t.sms },
+  }).catch(() => {});
+  return kenh ?? null;
+}
+
+/** Gửi tin theo bước của đơn và ghi nhật ký. Không ném lỗi (đơn không được hỏng vì tin nhắn). */
 export async function guiTinDon(payload: Payload, donId: number, loai: LoaiTin, them: Record<string, string> = {}) {
   const don = await payload.findByID({ collection: "don-hang", id: donId, depth: 1, overrideAccess: true });
   const nd = noiDungTin(don, loai, them);
   if (!nd || !don.khach?.sdt) return null;
-  let kenh: "zalo" | "sms" | undefined;
-  let loi: string | undefined;
-  try {
-    kenh = await thongBao.gui({ loai, sdt: don.khach.sdt, duLieu: nd.duLieu, sms: nd.sms, maTheoDoi: `${don.ma}-${loai}` });
-  } catch (e) {
-    loi = (e as Error).message;
-    payload.logger.error({ err: e, msg: `Không gửi được tin ${loai} đơn ${don.ma}` });
-  }
-  await payload.create({
-    collection: "tin-nhan", overrideAccess: true,
-    data: { loai, donHang: don.id, sdtChe: cheSdt(don.khach.sdt), kenh, trangThai: loi ? "loi" : "daGui", loi, noiDung: nd.sms },
-  }).catch(() => {});
-  return kenh ?? null;
+  return guiTin(payload, { loai, sdt: don.khach.sdt, duLieu: nd.duLieu, sms: nd.sms, donHang: don.id, lienQuan: don.ma || undefined });
 }

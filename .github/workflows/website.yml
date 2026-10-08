@@ -41,12 +41,12 @@ jobs:
           cache-dependency-path: website/package-lock.json
       - run: npm ci
       - run: npm run typecheck
-      - name: Kiểm thử đơn vị (tính giá, biển số, vùng, khung giờ, trạng thái đơn)
+      - name: Kiểm thử đơn vị (tính giá, mã giảm giá, quyền lợi hội viên, hoa hồng, biển số, vùng, khung giờ, trạng thái đơn)
         run: npm test
       # Migration phải tạo được database từ đầu, dữ liệu mẫu phải qua được luật kiểm tra bài.
       - run: npx payload migrate
       - run: npm run nap-du-lieu
       - run: npm run kiem-tra
-      - name: Kiểm thử tích hợp (phân quyền, đơn hàng, báo giá trên database)
+      - name: Kiểm thử tích hợp (phân quyền, đơn hàng, báo giá, thanh toán, hội viên, giới thiệu trên database)
         run: npm run test:tich-hop
       - run: npm run build

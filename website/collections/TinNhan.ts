@@ -13,6 +13,7 @@ export const TinNhan: CollectionConfig = {
       { name: "loai", label: "Loại tin", type: "text", required: true, index: true },
       { name: "donHang", label: "Đơn hàng", type: "relationship", relationTo: "don-hang", index: true },
       { name: "sdtChe", label: "Gửi tới", type: "text" },
+      { name: "lienQuan", label: "Liên quan (HV-, mã giới thiệu…)", type: "text", index: true },
     ] },
     { type: "row", fields: [
       { name: "kenh", label: "Kênh", type: "select", options: [{ label: "Zalo", value: "zalo" }, { label: "SMS", value: "sms" }] },

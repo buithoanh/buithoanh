@@ -9,6 +9,7 @@ import { LoiNguoiDung } from "./cong-khai";
 import { cheSdt } from "./so-dien-thoai.mjs";
 import { dinhDangTien } from "./tinh-gia.mjs";
 import { thongBao } from "./tich-hop/thong-bao";
+import { hoiVienCuaXe, tomTatHoiVien } from "./hoi-vien";
 
 export const TRA_CUU = { hanMaPhut: 5, guiLaiSauGiay: 45, soLanThuToiDa: 5, phienPhut: 30 };
 const bam = (s: string) => crypto.createHash("sha256").update(`${process.env.PAYLOAD_SECRET || ""}:${s}`).digest("hex");
@@ -94,6 +95,7 @@ export async function lichSuXe(payload: Payload, phien: string) {
     kmGanNhat, lanBaoDuongCuoi: lanBaoDuong ? { ngay: lanBaoDuong.ketThucLuc || lanBaoDuong.createdAt, km: lanBaoDuong.soKmKhiXong ?? lanBaoDuong.xe?.soKm } : null,
     chuKyKm: phi.chuKyBaoDuongKm ?? 5000, chuKyThang: phi.chuKyBaoDuongThang ?? 6,
   });
+  const hv = await hoiVienCuaXe(payload, ban.bienSo);
   return {
     xe: { ten: xe?.tenXe || null, doi: xe?.doi ?? null, bienSo: ban.bienSo },
     kmGanNhat,
@@ -111,6 +113,7 @@ export async function lichSuXe(payload: Payload, phien: string) {
         hoaDon: d.hoaDonDienTu?.so ? { so: d.hoaDonDienTu.so, linkPdf: d.hoaDonDienTu.linkPdf || null } : null,
       };
     }),
+    hoiVien: hv ? await tomTatHoiVien(payload, hv) : null,
     phienHetHanPhut: TRA_CUU.phienPhut,
   };
 }

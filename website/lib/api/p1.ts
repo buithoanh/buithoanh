@@ -9,6 +9,7 @@ import { guiMaTraCuu, lichSuXe, thoatTraCuu, xacNhanMa } from "../tra-cuu-xe";
 import { dangBaiHenGio, danhSachBai } from "../noi-dung";
 import { laNguoiViet } from "../quyen";
 import { docBody, gioiHan, ipCua, json, traLoi } from "./chung";
+import { capNhatHanHoiVien } from "../hoi-vien";
 
 const phienCua = (req: PayloadRequest) =>
   (req.headers.get("authorization") || "").replace(/^Phien\s+/i, "") || req.searchParams.get("phien") || "";
@@ -17,10 +18,10 @@ const bangNhau = (a: string, b: string) => a.length === b.length && crypto.timin
 
 /** Chạy các việc định kỳ một lần. Server gọi mỗi 5 phút (service "hen-gio" trong docker-compose). */
 export async function chayViecDinhKy(payload: PayloadRequest["payload"]) {
-  const [danhGia, baiDang] = [await guiLinkDanhGiaDenHan(payload), await dangBaiHenGio(payload)];
+  const [danhGia, baiDang, hoiVien] = [await guiLinkDanhGiaDenHan(payload), await dangBaiHenGio(payload), await capNhatHanHoiVien(payload)];
   const cu = new Date(Date.now() - 2 * 86400000).toISOString();
   await payload.delete({ collection: "ma-xac-nhan", overrideAccess: true, where: { guiLuc: { less_than: cu } } });
-  return { guiLinkDanhGia: danhGia, dangBaiHenGio: baiDang, luc: new Date().toISOString() };
+  return { guiLinkDanhGia: danhGia, dangBaiHenGio: baiDang, hoiVien, luc: new Date().toISOString() };
 }
 
 export const endpointP1: Endpoint[] = [

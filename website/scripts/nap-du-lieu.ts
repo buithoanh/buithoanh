@@ -21,6 +21,11 @@ import { sql } from "@payloadcms/db-postgres";
 import { capNhatViTriTho, danhDauXong, duyetBaoGia, nhanTien, taoBaoGia, xepTho } from "../lib/don/phuc-vu";
 import { guiDanhGia, guiLinkDanhGiaDenHan } from "../lib/don/danh-gia";
 import { taoTrangKhuVucTuMau } from "../lib/noi-dung";
+import { taoDon } from "../lib/don/tao-don";
+import { dangKyHoiVien } from "../lib/hoi-vien";
+import { maCuaSdt } from "../lib/gioi-thieu";
+import { guiHoSoTho, guiYeuCauDoanhNghiep } from "../lib/p2";
+import { layKhungGio } from "../lib/cong-khai";
 
 const GOC = path.resolve(process.cwd(), "du-lieu-mau");
 const payload = await getPayload({ config });
@@ -230,6 +235,8 @@ async function napDuLieuP0() {
     console.log(`+ cấu hình chung (${Object.keys(capNhat).join(", ")})`);
   }
 
+  await napGoiHoiVien();
+
   if (!CHAY_THU) {
     console.log("Production: bỏ qua đánh giá mẫu, đơn mẫu, tài khoản thử.");
     return;
@@ -266,7 +273,7 @@ async function napDuLieuP0() {
   }
 
   await napDuLieuP1(idQuan, idDanhMuc);
-
+  await napDuLieuP2();
 }
 
 // ---------------------------------------------------------------- P1 (chỉ khi chạy thử)
@@ -424,4 +431,94 @@ async function napDuLieuP1(idQuan: Map<string, number>, idDanhMuc: Map<string, n
   }
 
 
+}
+
+// ---------------------------------------------------------------- P2
+/** Gói hội viên theo thiết kế HoiVien (luôn nạp; giá, quyền lợi là MẪU cần duyệt) và gắn quyền lợi vào hạng mục giá. */
+async function napGoiHoiVien() {
+  if (!(await payload.count({ collection: "goi-hoi-vien" })).totalDocs) {
+    const ghiChu = "Nhập ban đầu từ thiết kế HoiVien, cần duyệt giá và quyền lợi";
+    await payload.create({
+      collection: "goi-hoi-vien",
+      data: {
+        ten: "Gói Cơ bản", slug: "co-ban", giaNam: 490000, nhan: "Đi lại ít", thuTu: 1, dangBan: true, giamCongPhanTram: 10, uuTienGoiGap: false,
+        mienDiLai: { kieu: "soLan", soLan: 4 }, mienKichNo: { kieu: "soLan", soLan: 2 }, mienVaLop: { kieu: "khong" },
+        loiIch: "Hợp với xe đi trong phố, vài lần gọi thợ mỗi năm.", ghiChu,
+      },
+    });
+    await payload.create({
+      collection: "goi-hoi-vien",
+      data: {
+        ten: "Gói An tâm", slug: "an-tam", giaNam: 1290000, nhan: "Nhiều người chọn", thuTu: 2, dangBan: true, giamCongPhanTram: 15, uuTienGoiGap: true,
+        mienDiLai: { kieu: "khongGioiHan" }, mienKichNo: { kieu: "khongGioiHan" }, mienVaLop: { kieu: "khongGioiHan" },
+        loiIch: "Gọi thợ bao nhiêu lần cũng không mất phí đi lại, được ưu tiên khi gọi gấp.", ghiChu,
+      },
+    });
+    console.log("+ 2 gói hội viên (Cơ bản, An tâm)");
+  }
+  for (const [ten, quyenLoi] of [["Kích nổ tại chỗ", "kichNo"], ["Vá lốp không săm", "vaLop"]] as const) {
+    const r = await payload.update({
+      collection: "hang-muc-gia", where: { and: [{ ten: { equals: ten } }, { quyenLoiHoiVien: { exists: false } }] },
+      data: { quyenLoiHoiVien: quyenLoi },
+    });
+    if (r.docs.length) console.log(`+ gắn quyền lợi hội viên "${quyenLoi}" cho "${ten}"`);
+  }
+}
+
+/** Dữ liệu mẫu P2 (chỉ chạy thử): sales, nhân sự, mã giới thiệu, bạn bè đặt qua mã, hội viên, yêu cầu DN, hồ sơ thợ. */
+async function napDuLieuP2() {
+  const khongReq = undefined as unknown as PayloadRequest;
+  const c = await payload.findGlobal({ slug: "cai-dat" });
+  if (!c.salesB2B?.ten) {
+    await payload.updateGlobal({
+      slug: "cai-dat",
+      data: {
+        salesB2B: { ten: "Phạm Lan (mẫu)", sdt: "0900000001", email: "sales@thotoi.test" },
+        nhanSu: { ten: "Phòng nhân sự (mẫu)", sdt: "0900000002", zalo: "https://zalo.me/0900000002" },
+        hoSoNangLucUrl: "https://thotoi.test/ho-so-nang-luc-mau.pdf",
+      },
+    });
+    console.log("+ sales doanh nghiệp, nhân sự mẫu");
+  }
+  if ((await payload.count({ collection: "hoi-vien" })).totalDocs) return;
+
+  // Mã giới thiệu của khách mẫu Nguyễn Văn Hoàng (đã có lịch sử sửa xe 30A-123.45)
+  const ma = await maCuaSdt(payload, "0912345678", "Nguyễn Văn Hoàng");
+  await payload.update({ collection: "ma-gioi-thieu", id: ma.id, data: { soLuotMo: 5 } });
+
+  // Bạn của anh Hoàng đặt đơn đầu qua mã → xong, trả tiền → anh Hoàng có 1 lượt miễn phí đi lại
+  const lich = await layKhungGio(payload, { soNgay: 10 });
+  const ngay = lich.ngay.find((n) => n.khung.some((k) => k.datDuoc))!;
+  const khung = ngay.khung.find((k) => k.datDuoc)!;
+  const datMau = (khach: { hoTen: string; sdt: string }, bienSo: string, them: Record<string, unknown> = {}) => taoDon(payload, "datLich", {
+    dichVu: ["ac-quy"], xe: { hang: "toyota", dong: "toyota-vios", doi: 2020, bienSo, soKm: 30000 },
+    viTri: { diaChi: "18 Trần Thái Tông, phường Dịch Vọng Hậu, Cầu Giấy", choDo: "ham" },
+    khungGio: { ngay: ngay.ngay, ma: khung.ma }, khach, dongY: true, ...them,
+  });
+  const lamXong = async (maDon: string, token: string, hangMuc: Parameters<typeof taoBaoGia>[3]["hangMuc"]) => {
+    await taoBaoGia(payload, khongReq, maDon, { hangMuc });
+    await duyetBaoGia(payload, token, { dongY: true });
+    const d = await danhDauXong(payload, khongReq, maDon, {});
+    await nhanTien(payload, { maGiaoDich: `MAU-P2-${maDon}`, soTien: d.thanhToan?.soTien || 0, noiDung: `CK ${maDon.replace("-", "")}`, luc: new Date().toISOString(), nguon: "du-lieu-mau" });
+  };
+  const ban = await datMau({ hoTen: "Lê Thu Trang", sdt: "0912000111" }, "30E-111.22", { maGioiThieu: ma.ma });
+  await lamXong(ban.ma, ban.token, [{ ma: "cong", ten: "Công thay ắc quy", loai: "cong", gia: 150000, batBuoc: true }, { ma: "aq", ten: "Ắc quy 12V 45Ah", loai: "phuTung", gia: 1650000, batBuoc: true }]);
+
+  // Hội viên An tâm (đã thanh toán) có một đơn được miễn đi lại, kích nổ, giảm 15% công; một đăng ký Cơ bản chờ thanh toán
+  const hv = await dangKyHoiVien(payload, { goi: "an-tam", hoTen: "Trần Minh Tuấn", sdt: "0912000678", bienSo: "30G-678.90", dongY: true });
+  await nhanTien(payload, { maGiaoDich: `MAU-HV-${hv.ma}`, soTien: hv.goi.soTien, noiDung: `CK ${hv.ma!.replace("-", "")}`, luc: new Date().toISOString(), nguon: "du-lieu-mau" });
+  const donHv = await datMau({ hoTen: "Trần Minh Tuấn", sdt: "0912000678" }, "30G-678.90");
+  await lamXong(donHv.ma, donHv.token, [
+    { ma: "kich", ten: "Kích nổ tại chỗ", loai: "cong", gia: 150000, batBuoc: true },
+    { ma: "coc", ten: "Vệ sinh cọc, thay đầu cos", loai: "cong", gia: 120000 },
+  ]);
+  await dangKyHoiVien(payload, { goi: "co-ban", hoTen: "Phạm Quốc Bảo", sdt: "0912000222", bienSo: "29A-555.66", dongY: true });
+  console.log(`+ mã giới thiệu ${ma.ma} (1 bạn đã đặt qua mã), hội viên An tâm 30G-678.90 (1 đơn hưởng quyền lợi), 1 đăng ký chờ thanh toán`);
+
+  await guiYeuCauDoanhNghiep(payload, {
+    tenCongTy: "Công ty TNHH Cho thuê xe tự lái Mẫu", mst: "0101234567", soXe: 42, loaiXe: "4-5-cho", loaiDoiXe: "thue", khuVuc: ["dong-da"],
+    nguoiLienHe: "Anh N. L. (mẫu)", sdt: "0912000333", email: "doixe@mau.test", ghiChu: "DỮ LIỆU MẪU", dongY: true,
+  });
+  await guiHoSoTho(payload, { hoTen: "Lê Văn Bình (mẫu)", sdt: "0977000444", namKinhNghiem: "4-5", khuVuc: ["cau-giay", "dong-da"], dungCu: ["obd", "kich", "bom"], ghiChu: "DỮ LIỆU MẪU", dongY: true }, []);
+  console.log("+ 1 yêu cầu doanh nghiệp, 1 hồ sơ thợ mẫu");
 }

@@ -1,4 +1,4 @@
-// Mã chứng từ tuần tự: TT-000123 (đơn), sau này BH- (bảo hành), KN- (khiếu nại), DN- (doanh nghiệp), TH- (hồ sơ thợ).
+// Mã chứng từ tuần tự: TT-000123 (đơn), BH- (bảo hành), KN- (khiếu nại), HV- (hội viên), DN- (doanh nghiệp), TH- (hồ sơ thợ).
 // Dùng sequence của PostgreSQL nên hai đơn gửi cùng lúc không bao giờ trùng mã.
 // Sequence bị mất hoặc chạy lùi (vd chế độ dev tự đồng bộ bảng xoá sequence, khôi phục bản sao lưu cũ) thì tự nắn
 // lại theo mã lớn nhất đang có trong bảng.
@@ -9,6 +9,9 @@ const LOAI = {
   TT: { seq: "ma_so_tt", bang: "don_hang", cot: "ma" },
   BH: { seq: "ma_so_bh", bang: "phieu_bao_hanh", cot: "ma" },
   KN: { seq: "ma_so_kn", bang: "khieu_nai", cot: "ma" },
+  HV: { seq: "ma_so_hv", bang: "hoi_vien", cot: "ma" },
+  DN: { seq: "ma_so_dn", bang: "yeu_cau_doanh_nghiep", cot: "ma" },
+  TH: { seq: "ma_so_th", bang: "ho_so_tho", cot: "ma" },
 } as const;
 export type LoaiMa = keyof typeof LOAI;
 

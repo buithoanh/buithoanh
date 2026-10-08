@@ -51,6 +51,13 @@ export const BaoGia: CollectionConfig = {
           { name: "mucDo", label: "Mức độ", type: "select", defaultValue: "canLamNgay", options: MUC_DO },
           { name: "baoHanhThang", label: "Bảo hành (tháng, để trống = theo mặc định)", type: "number", min: 0 },
         ] },
+        { type: "row", fields: [
+          { name: "hangMucGia", label: "Theo hạng mục bảng giá", type: "relationship", relationTo: "hang-muc-gia" },
+          {
+            name: "quyenLoi", label: "Quyền lợi hội viên", type: "select", admin: { readOnly: true, description: "Tự lấy từ hạng mục bảng giá" },
+            options: [{ label: "Kích nổ", value: "kichNo" }, { label: "Vá lốp", value: "vaLop" }],
+          },
+        ] },
         { name: "anh", label: "Ảnh lỗi", type: "relationship", relationTo: "tep-don-hang", hasMany: true },
       ],
     },

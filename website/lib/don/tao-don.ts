@@ -11,6 +11,8 @@ import { kenhNguon } from "./nguon.mjs";
 import { dieuPhoi } from "../tich-hop/dieu-phoi";
 import { thongBao } from "../tich-hop/thong-bao";
 import { guiTinDon } from "./tin-nhan";
+import { hoiVienCuaXe } from "../hoi-vien";
+import { kiemTraMaGioiThieu, timMaGioiThieu } from "../gioi-thieu";
 import { ghiTruong } from "../ghi-truong";
 import { kiemTraMaChoKhach, timMa } from "../ma-khuyen-mai";
 import { CHO_DO } from "./dau-vao.mjs";
@@ -94,12 +96,26 @@ export async function taoDon(payload: Payload, loai: "datLich" | "khanCap", tho:
     const kq = await kiemTraMaChoKhach(payload, d.maKhuyenMai, d.khach.sdt);
     if (!kq.hopLe) throw new LoiNguoiDung(kq.lyDo, 409, "MA_KHUYEN_MAI_KHONG_DUNG_DUOC", { truong: { maKhuyenMai: kq.lyDo } });
     khuyenMai = { id: kq.id, ma: kq.ma, moTa: kq.moTa };
-  } else if (d.maGioiThieu && (await timMa(payload, d.maGioiThieu))) {
-    const kq = await kiemTraMaChoKhach(payload, d.maGioiThieu, d.khach.sdt);
-    d.maKhuyenMai = d.maGioiThieu;
-    d.maGioiThieu = "";
-    if (kq.hopLe) khuyenMai = { id: kq.id, ma: kq.ma, moTa: kq.moTa };
   }
+  // Mã giới thiệu bạn bè (ô "Mã giới thiệu" hoặc link ?ma=). Link ?ma= cũng có thể là mã đối tác: khi đó coi như mã khuyến mãi.
+  // Mã có thật nhưng không áp (đơn không phải đơn đầu, mã của chính mình): vẫn nhận đơn, báo lý do trong kết quả.
+  let gioiThieu: { id?: number; ma: string; apDung: boolean; moTa?: string; lyDo?: string } | null = null;
+  if (d.maGioiThieu) {
+    const gt = await timMaGioiThieu(payload, d.maGioiThieu);
+    if (gt) {
+      const kq = await kiemTraMaGioiThieu(payload, gt.ma, d.khach.sdt);
+      gioiThieu = kq.hopLe ? { id: gt.id, ma: gt.ma, apDung: true, moTa: kq.moTa } : { id: gt.id, ma: gt.ma, apDung: false, lyDo: kq.lyDo };
+    } else if (!d.maKhuyenMai && (await timMa(payload, d.maGioiThieu))) {
+      const kq = await kiemTraMaChoKhach(payload, d.maGioiThieu, d.khach.sdt);
+      d.maKhuyenMai = d.maGioiThieu;
+      d.maGioiThieu = "";
+      if (kq.hopLe) khuyenMai = { id: kq.id, ma: kq.ma, moTa: kq.moTa };
+    } else {
+      gioiThieu = { ma: d.maGioiThieu, apDung: false, lyDo: "Không có mã giới thiệu này." };
+    }
+  }
+  // Hội viên: biển số có gói còn hạn (quyền lợi tính khi thợ bấm xong; gói An tâm được ưu tiên khi gọi gấp)
+  const hv = await hoiVienCuaXe(payload, d.xe.bienSo);
 
   const token = taoToken();
   const ma = await maTiepTheo(payload, "TT");
@@ -134,6 +150,9 @@ export async function taoDon(payload: Payload, loai: "datLich" | "khanCap", tho:
       maGioiThieu: d.maGioiThieu || undefined,
       maKhuyenMai: d.maKhuyenMai || undefined,
       khuyenMai: khuyenMai?.id,
+      gioiThieu: gioiThieu?.id, gioiThieuApDung: Boolean(gioiThieu?.apDung),
+      hoiVien: hv?.id,
+      quyenLoi: { uuTienHoiVien: loai === "khanCap" && Boolean(hv?.quyenLoi?.uuTienGoiGap) },
       dongY: { dongYXuLyDuLieu: true, dongYLuc: bayGio, nhacBaoDuongZalo: Boolean(d.nhacBaoDuong) },
       nguon: { ...d.nguon, kenh: kenhNguon({ ...d.nguon, maKhuyenMai: d.maKhuyenMai, maGioiThieu: d.maGioiThieu }) },
       giaSoBo: gia ? { trangThai: gia.trangThai as "coGia", tu: gia.tu, den: gia.den, phanKhuc: gia.phanKhuc, dong: gia.dong } : undefined,
@@ -169,6 +188,8 @@ export async function taoDon(payload: Payload, loai: "datLich" | "khanCap", tho:
     viTri: { quan: vung.quan?.ten || null, phuong: vung.phuong?.ten || null, etaTu: vung.eta?.tu ?? null, etaDen: vung.eta?.den ?? null },
     giaSoBo: gia ? { trangThai: gia.trangThai as "coGia", tu: gia.tu, den: gia.den, hienThi: gia.hienThi, ghiChu: gia.ghiChu } : null,
     khuyenMai: khuyenMai ? { ma: khuyenMai.ma, moTa: khuyenMai.moTa } : null,
+    gioiThieu: gioiThieu ? { ma: gioiThieu.ma, apDung: gioiThieu.apDung, moTa: gioiThieu.moTa ?? null, lyDo: gioiThieu.lyDo ?? null } : null,
+    hoiVien: hv ? { ma: hv.ma, goi: hv.tenGoi, hetHan: hv.hetHanLuc } : null,
     nhanLuc: bayGio,
   };
 }

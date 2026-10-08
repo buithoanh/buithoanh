@@ -73,6 +73,35 @@ export const CaiDat: GlobalConfig = {
           ],
         },
         {
+          label: "Doanh nghiệp, tuyển thợ",
+          fields: [
+            {
+              name: "salesB2B", label: "Sales doanh nghiệp (nhận yêu cầu DN-, hiện cho khách sau khi gửi)", type: "group",
+              fields: [
+                { type: "row", fields: [
+                  { name: "ten", label: "Tên", type: "text" },
+                  { name: "sdt", label: "Số điện thoại", type: "text" },
+                  { name: "email", label: "Email nhận yêu cầu", type: "email" },
+                ] },
+                { name: "camKet", label: "Câu hẹn liên hệ", type: "text", defaultValue: "Sales doanh nghiệp sẽ liên hệ trong 1 giờ làm việc (8h–17h30, thứ 2 đến thứ 7)." },
+              ],
+            },
+            { name: "hoSoNangLucUrl", label: "Link hồ sơ năng lực (PDF)", type: "text", admin: { placeholder: "https://…/ho-so-nang-luc.pdf" } },
+            {
+              name: "nhanSu", label: "Nhân sự (nhận hồ sơ thợ TH-)", type: "group",
+              fields: [
+                { type: "row", fields: [
+                  { name: "ten", label: "Tên", type: "text" },
+                  { name: "sdt", label: "Số điện thoại", type: "text" },
+                  { name: "zalo", label: "Link Zalo nhân sự", type: "text" },
+                  { name: "email", label: "Email nhận hồ sơ", type: "email" },
+                ] },
+                { name: "camKet", label: "Câu hẹn liên hệ", type: "text", defaultValue: "Bộ phận nhân sự sẽ gọi cho bạn trong 2 ngày làm việc để hẹn lịch kiểm tra tay nghề." },
+              ],
+            },
+          ],
+        },
+        {
           label: "Gọi gấp",
           fields: [{
             name: "suCoKhanCap", label: "Sự cố trên màn gọi gấp", type: "array",

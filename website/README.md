@@ -13,7 +13,9 @@ Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tớ
 |---|---|
 | Đơn hàng → Đơn hàng | Đơn đặt lịch và gọi gấp (khẩn cấp luôn ở đầu). Đổi trạng thái theo thứ tự, xem lịch sử, nguồn khách, giá sơ bộ lúc đặt, thợ, tiền đã nhận, hoá đơn, bảo hành, đánh giá. |
 | Đơn hàng → Thợ, Báo giá, Giao dịch, Phiếu bảo hành, Khiếu nại, Tin nhắn | Hồ sơ thợ; báo giá chính thức khách đã duyệt; tiền về từ ngân hàng (đối soát); bảo hành; phiếu khiếu nại từ đánh giá thấp; nhật ký tin Zalo/SMS. |
-| Marketing → Mã khuyến mãi, Số liệu | Mã KM, KOC, cây xăng, BQL (giảm, hạn, hoa hồng, QR); sự kiện xem trang, bấm gọi, bấm Zalo. |
+| Marketing → Mã khuyến mãi, Mã giới thiệu, Số liệu | Mã KM, KOC, cây xăng, BQL (giảm, hạn, hoa hồng, QR); mã giới thiệu bạn bè (tạm dừng, cộng lượt tay); sự kiện xem trang, bấm gọi, bấm Zalo. |
+| Khách hàng → Gói hội viên, Hội viên, Yêu cầu doanh nghiệp | Giá và quyền lợi 2 gói; đăng ký gói theo biển số (hạn dùng, đã trả tiền); yêu cầu báo giá hợp đồng của doanh nghiệp (giao sales). |
+| Đơn hàng → Hồ sơ thợ cộng tác | Hồ sơ thợ đăng ký trên web, ảnh chứng chỉ (chỉ quản trị, quản lý dịch vụ xem). |
 | Bảng giá & danh mục | Danh mục dịch vụ (bật/tắt nhận đặt, báo giá sơ bộ), hạng mục giá (công cố định, phụ tùng theo phân khúc A–D), **nhật ký đổi giá** (tự ghi), phí chung – bảo hành – phân khúc, hãng và dòng xe (nút đồng bộ VCparts). |
 | Vùng phục vụ & lịch | Quận (thời gian thợ tới), phường (bật/tắt), giờ nhận đơn gấp, khung giờ đặt lịch (giới hạn đơn mỗi khung), ngày nghỉ. |
 | Khách hàng → Đánh giá hiển thị | Đánh giá thật của khách để hiện trên web. |
@@ -30,9 +32,9 @@ Việc backend đã làm, chưa làm, tích hợp đang giả lập: `docs/BAN-G
 | Vai trò | Được làm |
 |---|---|
 | Quản trị | Mọi việc, thêm người dùng, sửa tay trạng thái đơn đã xong |
-| Quản lý dịch vụ | Sửa giá, danh mục, vùng, giờ, ngày nghỉ; duyệt, hẹn giờ và đăng bài; xử lý đơn, khiếu nại; xem số liệu |
+| Quản lý dịch vụ | Sửa giá, danh mục, vùng, giờ, ngày nghỉ, gói hội viên; duyệt, hẹn giờ và đăng bài; xử lý đơn, khiếu nại, hội viên, hồ sơ thợ; xem số liệu |
 | Biên tập nội dung (VCmedia) | Viết, sửa bản nháp, tải ảnh, gửi duyệt. **Không đăng, không sửa giá, không xem đơn.** |
-| Marketing | Viết nháp, quản lý đánh giá hiển thị, mã khuyến mãi và hoa hồng, số liệu |
+| Marketing | Viết nháp, quản lý đánh giá hiển thị, mã khuyến mãi và hoa hồng, mã giới thiệu, yêu cầu doanh nghiệp, số liệu |
 | Điều phối | Xem, nhập đơn, đổi trạng thái, xếp thợ, gửi báo giá, thu tay, xử lý khiếu nại (người hoặc tài khoản máy của phần mềm điều phối có khoá API) |
 
 Người đầu tiên tạo tài khoản ở `/admin` tự thành Quản trị. Vai trò "Duyệt bài" cũ được migration đổi thành "Quản lý dịch vụ".
@@ -71,9 +73,10 @@ Khi nối phải giữ hai luật: chỉ lấy trang được đánh dấu công
 | `globals/` | Cấu hình chung, phí chung, giờ nhận đơn, kế hoạch SEO |
 | `lib/cong-khai.ts` | Dữ liệu công khai cho từng màn (bảng giá, báo giá sơ bộ, vùng, khung giờ); trang server và `/api/trang/...` dùng chung |
 | `lib/don/` | Tạo đơn, kiểm tra đầu vào, luồng trạng thái, link theo dõi, phục vụ (thợ, báo giá, thanh toán, hoá đơn, bảo hành), đánh giá, tin nhắn |
-| `lib/tich-hop/` | Adapter tích hợp ngoài: bản đồ, điều phối, Zalo ZNS, SMS, VCparts, ngân hàng, hoá đơn điện tử (bản thật + giả lập) |
-| `lib/*.mjs` | Phần thuần, có kiểm thử: tính giá, biển số, số điện thoại, vùng, khung giờ, VietQR, khuyến mãi, báo giá, bảo hành, sự kiện |
+| `lib/tich-hop/` | Adapter tích hợp ngoài: bản đồ, điều phối, Zalo ZNS, SMS, VCparts, ngân hàng, hoá đơn điện tử, tra MST (bản thật + giả lập) |
+| `lib/*.mjs` | Phần thuần, có kiểm thử: tính giá, biển số, số điện thoại, vùng, khung giờ, VietQR, khuyến mãi, báo giá và quyền lợi hội viên, bảo hành, sự kiện, form P2 |
 | `lib/tra-cuu-xe.ts`, `lib/ma-khuyen-mai.ts`, `lib/so-lieu.ts`, `lib/noi-dung.ts` | Tra cứu lịch sử xe, mã khuyến mãi và hoa hồng, báo cáo số liệu, trang khu vực và bài hẹn giờ |
+| `lib/hoi-vien.ts`, `lib/gioi-thieu.ts`, `lib/p2.ts` | Gói hội viên, giới thiệu bạn bè, yêu cầu doanh nghiệp, hồ sơ thợ cộng tác |
 | `tests/` | Kiểm thử đơn vị (`don-vi/`) và tích hợp (`tich-hop/`) |
 | `lib/kiem-tra.mjs` | Luật kiểm tra bài (dùng khi lưu/đăng và trong `npm run kiem-tra`) |
 | `lib/bai.ts`, `lib/quyen.ts` | Trường dùng chung, hook duyệt bài, phân quyền 5 vai trò |

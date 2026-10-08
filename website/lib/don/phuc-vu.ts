@@ -2,7 +2,7 @@
 // thanh toán VietQR, hoá đơn điện tử, phiếu bảo hành. Thợ/điều phối gọi qua API có khoá; khách qua link riêng (token).
 import QRCode from "qrcode";
 import type { Payload, PayloadRequest } from "payload";
-import type { BaoGia, DonHang, MaKhuyenMai, Tho } from "../../payload-types";
+import type { BaoGia, DonHang, HoiVien, MaKhuyenMai, Tho } from "../../payload-types";
 import { LoiNguoiDung, layPhiChung } from "../cong-khai";
 import { chonHangMuc, tinhThanhToan } from "../bao-gia.mjs";
 import { hangMucBaoHanh, conLai } from "../bao-hanh.mjs";
@@ -15,6 +15,8 @@ import { hoaDon } from "../tich-hop/hoa-don";
 import type { GiaoDichVao } from "../tich-hop/ngan-hang";
 import { guiTinDon } from "./tin-nhan";
 import { ghiTruong } from "../ghi-truong";
+import { hoiVienCuaXe, nhanTienHoiVien, quyenLoiChoDon } from "../hoi-vien";
+import { baoThuongGioiThieu, luotConLaiCuaSdt } from "../gioi-thieu";
 
 const id = (v: unknown) => (typeof v === "object" && v ? (v as { id: number }).id : (v as number));
 const nguoiLam = (req?: PayloadRequest) => {
@@ -93,7 +95,21 @@ export async function capNhatViTriTho(payload: Payload, req: PayloadRequest, ma:
 
 // ------------------------------------------------------------------ báo giá
 
-type HangMucVao = { ma?: string; ten: string; lyDo?: string; loai: "cong" | "phuTung"; gia: number; batBuoc?: boolean; mucDo?: string; baoHanhThang?: number; anh?: number[] };
+type HangMucVao = { ma?: string; ten: string; lyDo?: string; loai: "cong" | "phuTung"; gia: number; batBuoc?: boolean; mucDo?: string; baoHanhThang?: number; anh?: number[]; hangMucGia?: number };
+
+/**
+ * Quyền lợi hội viên của từng hạng mục: theo hạng mục bảng giá thợ chọn (hangMucGia), không có thì so tên với các hạng mục
+ * bảng giá đang gắn quyền lợi (không phân biệt hoa thường).
+ */
+async function ganQuyenLoi(payload: Payload, hangMuc: { ten: string; loai: string; hangMucGia?: number }[]) {
+  const coQuyenLoi = (await payload.find({ collection: "hang-muc-gia", where: { quyenLoiHoiVien: { exists: true } }, limit: 50, depth: 0, overrideAccess: true })).docs;
+  const chuan = (t: string) => t.trim().toLowerCase();
+  return hangMuc.map((h) => {
+    if (h.loai !== "cong") return null;
+    const hm = h.hangMucGia ? coQuyenLoi.find((x) => x.id === h.hangMucGia) : coQuyenLoi.find((x) => chuan(x.ten) === chuan(h.ten) || (x.tenNgan && chuan(x.tenNgan) === chuan(h.ten)));
+    return hm?.quyenLoiHoiVien || null;
+  });
+}
 
 export async function taoBaoGia(payload: Payload, req: PayloadRequest, ma: string, p: { chanDoan?: string; hangMuc: HangMucVao[] }) {
   const don = await donTheoMa(payload, ma);
@@ -103,8 +119,12 @@ export async function taoBaoGia(payload: Payload, req: PayloadRequest, ma: strin
     if (!h.ten || !["cong", "phuTung"].includes(h.loai) || !Number.isInteger(h.gia) || h.gia < 0) {
       throw new LoiNguoiDung(`Hạng mục ${i + 1}: cần tên, loại (cong|phuTung), giá là số nguyên đồng.`, 400, "DU_LIEU_SAI");
     }
-    return { ma: h.ma || `hm${i + 1}`, ten: h.ten, lyDo: h.lyDo, loai: h.loai, gia: h.gia, batBuoc: Boolean(h.batBuoc), mucDo: (h.mucDo as "nenLam") || "canLamNgay", baoHanhThang: h.baoHanhThang, anh: h.anh };
+    const hangMucGia = h.hangMucGia == null ? undefined : Number(h.hangMucGia);
+    if (hangMucGia !== undefined && !Number.isInteger(hangMucGia)) throw new LoiNguoiDung(`Hạng mục ${i + 1}: hangMucGia là id hạng mục bảng giá.`, 400, "DU_LIEU_SAI");
+    return { ma: h.ma || `hm${i + 1}`, ten: h.ten, lyDo: h.lyDo, loai: h.loai, gia: h.gia, batBuoc: Boolean(h.batBuoc), mucDo: (h.mucDo as "nenLam") || "canLamNgay", baoHanhThang: h.baoHanhThang, anh: h.anh, hangMucGia };
   });
+  const quyenLoi = await ganQuyenLoi(payload, hangMuc);
+  hangMuc.forEach((h, i) => Object.assign(h, { quyenLoi: quyenLoi[i] }));
   if (new Set(hangMuc.map((h) => h.ma)).size !== hangMuc.length) throw new LoiNguoiDung("Mã hạng mục bị trùng.", 400, "DU_LIEU_SAI");
   const cu = (await payload.find({ collection: "bao-gia", where: { donHang: { equals: don.id } }, sort: "-phienBan", limit: 100, overrideAccess: true })).docs;
   // Báo giá chưa duyệt cũ thì thay bằng báo giá mới
@@ -222,15 +242,24 @@ export async function danhDauXong(payload: Payload, req: PayloadRequest | undefi
   if (!tuChoi && !bgs.length) throw new LoiNguoiDung("Chưa có báo giá nào được duyệt.", 409, "CHUA_DUYET_BAO_GIA");
   const daDuyet = bgs.map((b) => chonHangMuc((b.hangMuc || []) as never, b.ketQua?.boHangMuc || []) as { chon: { ten: string; loai: string; gia: number }[]; tienCong: number });
   const km = typeof don.khuyenMai === "object" && don.khuyenMai ? (don.khuyenMai as MaKhuyenMai) : null;
-  const tienCong = daDuyet.reduce((a, x) => a + x.tienCong, 0);
-  const tamTinh = tinhThanhToan({ baoGiaDaDuyet: daDuyet, phiDiLai: phi.phiDiLai });
-  const giam = tuChoi ? 0 : tinhGiam(km, { tienCong, tongTien: tamTinh.tong });
-  const tt = tinhThanhToan({ baoGiaDaDuyet: daDuyet, phiDiLai: phi.phiDiLai, phiKiemTra: phi.phiKiemTra, tuChoi, giam });
+  // Quyền lợi: gói hội viên còn hạn của biển số (gắn lúc đặt, hoặc mua sau khi đặt), giới thiệu bạn bè
+  const hv = (typeof don.hoiVien === "object" && don.hoiVien ? (don.hoiVien as HoiVien) : null) || (await hoiVienCuaXe(payload, don.xe?.bienSo));
+  const tt = tinhThanhToan({
+    baoGiaDaDuyet: daDuyet, phiDiLai: phi.phiDiLai, phiKiemTra: phi.phiKiemTra, tuChoi,
+    tinhGiamMa: km ? (tienCong, tongTien) => tinhGiam(km, { tienCong, tongTien }) : undefined, tenMa: km?.ma || "",
+    hoiVien: hv ? await quyenLoiChoDon(payload, hv, don.id) : null,
+    gioiThieu: { banMoi: Boolean(don.gioiThieu && don.gioiThieuApDung), luotConLai: await luotConLaiCuaSdt(payload, don.khach?.sdt, don) },
+  });
   const daNhan = don.thanhToan?.daNhan || 0;
   const moi = await capNhatDon(payload, don, {
     trangThai: "choThanhToan",
     xongLuc: new Date().toISOString(),
     ...(Number.isInteger(p.soKm) ? { soKmKhiXong: p.soKm } : {}),
+    hoiVien: hv?.id ?? null,
+    quyenLoi: {
+      ...(don.quyenLoi || {}), mienDiLai: tt.suDung.mienDiLai, kichNo: tt.suDung.kichNo, vaLop: tt.suDung.vaLop,
+      giamHoiVien: tt.suDung.giamHoiVien, giamMa: tt.suDung.giamMa,
+    },
     thanhToan: { ...(don.thanhToan || {}), soTien: tt.tong, giam: tt.giam, chiTiet: tt.dong, daNhan, trangThai: daNhan >= tt.tong ? "daThanhToan" : "choTien" },
   }, req);
   if (daNhan >= tt.tong) return hoanTatThanhToan(payload, moi.id, { maGiaoDich: moi.thanhToan?.maGiaoDich || "", hinhThuc: moi.thanhToan?.hinhThuc || "chuyenKhoan" });
@@ -243,18 +272,33 @@ async function taiKhoanNhan(payload: Payload) {
   return { bin: c.nganHangBin || "", tenNganHang: c.nganHangTen || "", soTaiKhoan: c.soTaiKhoan || "", chuTaiKhoan: c.chuTaiKhoan || "", hotline: c.hotline || "" };
 }
 
+/**
+ * Chuyển khoản cho một mã (TT-… đơn, HV-… gói hội viên): nội dung TT000123, VietQR (chuỗi + ảnh PNG).
+ * Chưa nhập tài khoản nhận tiền thì chuyenKhoan, vietQR là null (giao diện mời gọi hotline).
+ */
+export async function thongTinChuyenKhoan(payload: Payload, ma: string, conPhaiTra: number) {
+  const tk = await taiKhoanNhan(payload);
+  const noiDung = noiDungChuyenKhoan(ma);
+  let vietQR: { chuoi: string; anh: string } | null = null;
+  if (tk.bin && tk.soTaiKhoan && conPhaiTra > 0) {
+    const chuoi = taoChuoiVietQR({ maBin: tk.bin, soTaiKhoan: tk.soTaiKhoan, soTien: conPhaiTra, noiDung });
+    vietQR = { chuoi, anh: await QRCode.toDataURL(chuoi, { margin: 1, width: 480, errorCorrectionLevel: "M" }) };
+  }
+  return {
+    chuyenKhoan: tk.soTaiKhoan
+      ? { nganHang: tk.tenNganHang, soTaiKhoan: tk.soTaiKhoan, chuTaiKhoan: tk.chuTaiKhoan, soTien: conPhaiTra, soTienHienThi: dinhDangTien(conPhaiTra), noiDung }
+      : null,
+    vietQR,
+    hotline: tk.hotline,
+  };
+}
+
 /** Màn ThanhToan: hạng mục đã duyệt, tổng, VietQR, chuyển khoản tay; sau khi tiền về: biên nhận, hoá đơn, bảo hành. */
 export async function xemThanhToan(payload: Payload, token: string) {
   const don = await donTheoLink(payload, token);
   if (!don.thanhToan?.soTien) throw new LoiNguoiDung("Thợ chưa báo sửa xong, chưa có số tiền thanh toán.", 409, "CHUA_TINH_TIEN");
-  const tk = await taiKhoanNhan(payload);
-  const noiDung = noiDungChuyenKhoan(don.ma!);
   const conPhaiTra = Math.max(0, don.thanhToan.soTien - (don.thanhToan.daNhan || 0));
-  let qr: { chuoi: string; anh: string } | null = null;
-  if (tk.bin && tk.soTaiKhoan && conPhaiTra > 0) {
-    const chuoi = taoChuoiVietQR({ maBin: tk.bin, soTaiKhoan: tk.soTaiKhoan, soTien: conPhaiTra, noiDung });
-    qr = { chuoi, anh: await QRCode.toDataURL(chuoi, { margin: 1, width: 480, errorCorrectionLevel: "M" }) };
-  }
+  const ck = await thongTinChuyenKhoan(payload, don.ma!, conPhaiTra);
   const daTra = don.thanhToan.trangThai === "daThanhToan";
   const bh = typeof don.phieuBaoHanh === "object" && don.phieuBaoHanh ? don.phieuBaoHanh : null;
   return {
@@ -269,10 +313,8 @@ export async function xemThanhToan(payload: Payload, token: string) {
     tongHienThi: dinhDangTien(don.thanhToan.soTien),
     daNhan: don.thanhToan.daNhan || 0,
     conPhaiTra,
-    chuyenKhoan: tk.soTaiKhoan
-      ? { nganHang: tk.tenNganHang, soTaiKhoan: tk.soTaiKhoan, chuTaiKhoan: tk.chuTaiKhoan, soTien: conPhaiTra, soTienHienThi: dinhDangTien(conPhaiTra), noiDung }
-      : null,
-    vietQR: qr,
+    chuyenKhoan: ck.chuyenKhoan,
+    vietQR: ck.vietQR,
     bienNhan: daTra ? { soTien: don.thanhToan.daNhan, luc: don.thanhToan.thanhToanLuc, hinhThuc: don.thanhToan.hinhThuc === "tienMat" ? "Tiền mặt" : "Chuyển khoản VietQR", maGiaoDich: don.thanhToan.maGiaoDich } : null,
     hoaDon: don.hoaDonDienTu?.so ? { so: don.hoaDonDienTu.so, kyHieu: don.hoaDonDienTu.kyHieu, maCQT: don.hoaDonDienTu.maCQT, linkXem: don.hoaDonDienTu.linkXem || null, linkPdf: don.hoaDonDienTu.linkPdf || null } : null,
     baoHanh: bh ? {
@@ -280,7 +322,7 @@ export async function xemThanhToan(payload: Payload, token: string) {
       hangMuc: (bh.hangMuc || []).map((h) => ({ ten: h.ten, loai: h.loai, tuNgay: h.tuNgay, denNgay: h.denNgay, ...conLai({ tuNgay: h.tuNgay!, denNgay: h.denNgay! }) })),
     } : null,
     sdtNhanHoaDon: cheSdt(don.khach?.sdt || ""),
-    hotline: tk.hotline,
+    hotline: ck.hotline,
     hetHanLinkLuc: don.hetHanLinkLuc || null,
   };
 }
@@ -295,9 +337,18 @@ export async function nhanTien(payload: Payload, g: GiaoDichVao & { hinhThuc?: "
     collection: "giao-dich", overrideAccess: true,
     data: { maGiaoDich: g.maGiaoDich, soTien: g.soTien, noiDung: g.noiDung, luc: g.luc, nguon: g.nguon, hinhThuc: g.hinhThuc || "chuyenKhoan", donHang, ketQua: ketQua as "du" },
   });
+  if (maDon?.startsWith("HV-")) {
+    // Tiền gói hội viên
+    const kq = await nhanTienHoiVien(payload, maDon, g);
+    await payload.create({
+      collection: "giao-dich", overrideAccess: true,
+      data: { maGiaoDich: g.maGiaoDich, soTien: g.soTien, noiDung: g.noiDung, luc: g.luc, nguon: g.nguon, hinhThuc: g.hinhThuc || "chuyenKhoan", hoiVien: kq.hv?.id, ketQua: kq.ketQua },
+    });
+    return { ketQua: kq.ketQua, maGiaoDich: g.maGiaoDich, maDon, ...(kq.hv ? { trangThai: kq.hv.trangThai, hetHan: kq.hv.hetHanLuc ?? null } : {}) };
+  }
   if (!maDon || !maDon.startsWith("TT-")) {
-    // Tiền gói hội viên (HV-…) xử lý ở P2; không nhận ra mã thì ghi lại để kế toán đối soát tay
-    await ghi(maDon?.startsWith("HV-") ? "hoiVien" : "khongThayDon");
+    // Không nhận ra mã: ghi lại để kế toán đối soát tay
+    await ghi("khongThayDon");
     return { ketQua: "khongThayDon" as const, maGiaoDich: g.maGiaoDich, maDon };
   }
   const don = (await payload.find({ collection: "don-hang", where: { ma: { equals: maDon } }, limit: 1, overrideAccess: true })).docs[0];
@@ -363,6 +414,10 @@ export async function hoanTatThanhToan(payload: Payload, donId: number, p: { maG
     }
   }
   void guiTinDon(payload, donId, "hoanThanh", { maBaoHanh });
+  // Đơn đầu của bạn được giới thiệu đã xong: người giới thiệu được thêm 1 lượt
+  if (don.gioiThieu && don.gioiThieuApDung) {
+    void baoThuongGioiThieu(payload, typeof don.gioiThieu === "object" ? don.gioiThieu.id : don.gioiThieu, (don.khach?.hoTen || "bạn bè").split(/\s+/).pop()!);
+  }
   return payload.findByID({ collection: "don-hang", id: donId, depth: 1, overrideAccess: true });
 }
 

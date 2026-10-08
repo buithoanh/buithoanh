@@ -38,6 +38,12 @@ import { Tho } from "./collections/Tho";
 import { TinNhan } from "./collections/TinNhan";
 import { TrangHangXe } from "./collections/TrangHangXe";
 import { TrangKhuVuc } from "./collections/TrangKhuVuc";
+import { GoiHoiVien } from "./collections/GoiHoiVien";
+import { HoiVien } from "./collections/HoiVien";
+import { MaGioiThieu } from "./collections/MaGioiThieu";
+import { YeuCauDoanhNghiep } from "./collections/YeuCauDoanhNghiep";
+import { HoSoTho, TepHoSo } from "./collections/HoSoTho";
+import { endpointP2 } from "./lib/api/p2";
 import { tinhTrangTichHop } from "./lib/tich-hop/chung";
 import { migrations } from "./migrations";
 import { tinhNang } from "./lib/soan-thao";
@@ -59,15 +65,16 @@ export default buildConfig({
   },
   collections: [
     DonHang, BaoGia, GiaoDich, PhieuBaoHanh, TepDonHang, TinNhan, Tho,
-    DanhGia, KhieuNai,
+    DanhGia, KhieuNai, GoiHoiVien, HoiVien, YeuCauDoanhNghiep,
     DanhMucDichVu, HangMucGia, NhatKyGia, HangXe, DongXe,
     Quan, Phuong,
-    MaKhuyenMai, SuKien,
+    MaKhuyenMai, MaGioiThieu, SuKien,
     CamNang, DichVu, TrangKhuVuc, TrangHangXe, TuKhoa, Media,
+    HoSoTho, TepHoSo,
     Users, MaXacNhan,
   ],
   globals: [BangGiaChung, LichNhanDon, CaiDat, KeHoachSeo],
-  endpoints: [...endpointCongKhai, ...endpointP1],
+  endpoints: [...endpointCongKhai, ...endpointP1, ...endpointP2],
   onInit: async (payload) => {
     // Báo ngay lúc khởi động tích hợp nào đang giả lập hoặc thiếu cấu hình (xem lib/tich-hop/chung.ts).
     for (const t of tinhTrangTichHop()) {

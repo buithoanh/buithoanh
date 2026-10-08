@@ -19,13 +19,14 @@ export const GiaoDich: CollectionConfig = {
       { name: "luc", label: "Thời điểm", type: "date", admin: { date: { pickerAppearance: "dayAndTime" } } },
       { name: "nguon", label: "Nguồn", type: "text" },
       { name: "donHang", label: "Đơn hàng", type: "relationship", relationTo: "don-hang" },
+      { name: "hoiVien", label: "Gói hội viên", type: "relationship", relationTo: "hoi-vien" },
     ] },
     {
       name: "ketQua", label: "Kết quả", type: "select",
       options: [
         { label: "Đủ tiền, đơn hoàn tất", value: "du" }, { label: "Thiếu tiền", value: "thieu" },
         { label: "Không tìm thấy đơn", value: "khongThayDon" }, { label: "Đơn đã thanh toán trước đó", value: "trung" },
-        { label: "Gói hội viên", value: "hoiVien" },
+        { label: "Gói hội viên: đủ tiền, đã kích hoạt", value: "hoiVien" }, { label: "Gói hội viên: thiếu tiền", value: "hoiVienThieu" },
       ],
     },
   ],

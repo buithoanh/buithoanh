@@ -126,6 +126,10 @@ export const HangMucGia: CollectionConfig = {
       name: "noiBat", label: "Hiện ở bảng giá nhanh (trang chủ)", type: "checkbox", defaultValue: false,
       admin: { position: "sidebar" },
     },
+    {
+      name: "quyenLoiHoiVien", label: "Quyền lợi hội viên", type: "select", admin: { position: "sidebar", description: "Hạng mục được miễn phí theo gói hội viên" },
+      options: [{ label: "Kích nổ ắc quy", value: "kichNo" }, { label: "Vá lốp", value: "vaLop" }],
+    },
     { name: "tenNgan", label: "Tên ngắn trên bảng giá nhanh", type: "text", admin: { position: "sidebar", condition: (d) => Boolean(d?.noiBat) } },
     {
       name: "lyDoDoi", label: "Lý do đổi giá (ghi vào nhật ký)", type: "text",

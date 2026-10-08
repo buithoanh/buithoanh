@@ -13,7 +13,7 @@ Hợp đồng API (ví dụ chạy thật): `docs/api.md`. Kiểu dữ liệu: `
 | P0 – Đơn đặt lịch và gọi gấp, trạng thái, link riêng, chống spam | **Xong** (phiên 1) |
 | P1 – Phục vụ khách sau khi đặt (thợ, báo giá chính thức, VietQR, hoá đơn, bảo hành, đánh giá – khiếu nại, tra cứu xe, tin Zalo) | **Xong** (phiên 2) |
 | P1 – Quản trị (vai trò, bài viết, trang khu vực, trang hãng xe, mã khuyến mãi, hoa hồng, số liệu) | **Xong** (phiên 2) |
-| P2 – Hội viên, giới thiệu bạn bè, doanh nghiệp, tuyển thợ | Chưa làm (phiên 3) |
+| P2 – Hội viên, giới thiệu bạn bè, doanh nghiệp, tuyển thợ | **Xong** (phiên 3) |
 
 ## Phiên 1 đã làm gì
 
@@ -83,6 +83,27 @@ chặn gửi duyệt trang khu vực, quyền hẹn giờ, ghi đè trạng thá
 Migration: `20261008_111844_p1_phuc_vu_quan_tri` (bảng P1, sequence `BH-`, `KN-`). Đã thử trên bản sao database P0 có dữ
 liệu, database trống, `down` rồi `up`.
 
+## Phiên 3 đã làm gì (P2)
+
+| Thiết kế | Backend |
+|---|---|
+| Gói hội viên (`HoiVien`) | `goi-hoi-vien` (giá năm, quyền lợi: miễn đi lại / kích nổ / vá lốp theo "không có – N lần/năm – không giới hạn", giảm % công, ưu tiên gọi gấp), `hoi-vien` `HV-000123` (1 biển số, quyền lợi chép lúc đăng ký, 12 tháng từ lúc thanh toán, nối tiếp khi gia hạn sớm). Đăng ký → link VietQR qua Zalo → webhook `HV000123` → kích hoạt. Quyền lợi tự áp khi thợ bấm xong (`lib/bao-gia.mjs` `tinhThanhToan`), lượt đã dùng tính từ đơn. Việc định kỳ: hết hạn, nhắc gia hạn trước 14 ngày |
+| Giới thiệu bạn bè | `ma-gioi-thieu` (mỗi SĐT một mã `TUAN2481`), "nhận mã qua Zalo" bằng SĐT, link xem lượt thưởng, đếm lượt mở link, bạn mới miễn đi lại đơn đầu, người giới thiệu +1 lượt khi đơn bạn đã thanh toán (hoặc bạn mua gói), tự trừ vào đơn sau |
+| Yêu cầu báo giá doanh nghiệp (`DoanhNghiep`) | `yeu-cau-doanh-nghiep` `DN-000045`, tra MST tự điền (adapter `mst.ts`), báo sales (SMS + email), trả người phụ trách |
+| Hồ sơ thợ cộng tác (`TuyenTho`) | `ho-so-tho` `TH-000087` + `tep-ho-so` (≤3 ảnh, không công khai), báo nhân sự |
+
+Cấu hình chung thêm tab "Doanh nghiệp, tuyển thợ" (sales B2B, nhân sự, link hồ sơ năng lực). Hạng mục giá thêm "Quyền lợi hội
+viên" (kích nổ, vá lốp); báo giá thợ gửi thêm `hangMucGia`. Đơn hàng thêm người giới thiệu, hội viên, quyền lợi đã áp.
+
+Kiểm thử: `npm test` 41 ca (thêm quyền lợi hội viên, không cộng dồn với mã giảm giá, giới thiệu, thời hạn gói, bảng so sánh,
+mã giới thiệu, form DN/thợ); `npm run test:tich-hop` thêm 8 ca P2 (đăng ký → thiếu → đủ → 12 tháng, gia hạn nối tiếp, hết hạn;
+gói Cơ bản qua 5 đơn: hết 4 lượt đi lại, 2 lượt kích nổ; An tâm ưu tiên gọi gấp; giới thiệu từ đầu đến cuối kể cả bấm xong lại
+không tiêu thêm lượt; MST, DN-, khu vực sai; ảnh hồ sơ thợ; phân quyền).
+
+Migration: `20261008_114750_p2_hoi_vien_gioi_thieu_doanh_nghiep_tho` (bảng P2, sequence `HV-`, `DN-`, `TH-`, gắn quyền lợi
+cho "Kích nổ tại chỗ", "Vá lốp không săm"). Đã thử: bản sao database P1 có dữ liệu, database trống, `down` rồi `up`.
+**Sau khi deploy chạy lại `npm run nap-du-lieu`** để có 2 gói hội viên (không nạp gì mẫu khi production).
+
 ## Tích hợp ngoài: đang giả lập
 
 Mỗi tích hợp một module trong `lib/tich-hop/`, khung chung ở `chung.ts`. Đủ biến môi trường → bản thật. Thiếu khi chạy thử →
@@ -100,12 +121,15 @@ Tình trạng: `GET /api/tich-hop/trang-thai` (quản trị).
 | Ngân hàng (tiền về) | `ngan-hang.ts` | `NGAN_HANG_NHA_CUNG_CAP` (`sepay`/`casso`), `NGAN_HANG_WEBHOOK_KEY` | Webhook SePay (`Authorization: Apikey`) / Casso (`secure-token`) | Giả lập: nút "tiền về" `POST .../gia-lap-tien-ve`. Tài khoản nhận tiền nhập trong `cai-dat` |
 | Hoá đơn điện tử | `hoa-don.ts` | `HOA_DON_URL`, `HOA_DON_KEY` | **Giả định** `POST /hoa-don` | Chưa chọn nhà cung cấp (VNPT, Viettel, MISA…) |
 
-Chưa có module (thuộc P2): tra MST. Điểm Google nhập tay trong `cai-dat` (chưa gọi Google Business Profile API).
+| Tra mã số thuế | `mst.ts` | `MST_URL`, (`MST_KEY`) | `GET {MST_URL}/{mst}` dạng API công khai VietQR (`https://api.vietqr.io/v2/business`) | Giả lập: công ty mẫu, MST kết thúc `000` = không tìm thấy |
+
+Điểm Google nhập tay trong `cai-dat` (chưa gọi Google Business Profile API).
 
 ## Biến môi trường mới
 Xem `.env.example`: `TICH_HOP_GIA_LAP`, `GOOGLE_MAPS_API_KEY`, `DIEU_PHOI_URL`, `DIEU_PHOI_KEY`, `SDT_TRUC_DIEU_PHOI`,
 `ZALO_ZNS_ACCESS_TOKEN`, `ZALO_ZNS_MAU_*`, `SMS_URL`, `SMS_KEY`, `VCPARTS_URL`, `VCPARTS_KEY`, `MAT_KHAU_TAI_KHOAN_THU`,
-`TU_LIEU_DIR`; P1: `NGAN_HANG_NHA_CUNG_CAP`, `NGAN_HANG_WEBHOOK_KEY`, `HOA_DON_URL`, `HOA_DON_KEY`, `VIEC_DINH_KY_KEY`. Tên database mặc định đổi `vcmobilecare` → `thotoi` (docker-compose, CI). Agent SEO Editor vẫn dùng
+`TU_LIEU_DIR`; P1: `NGAN_HANG_NHA_CUNG_CAP`, `NGAN_HANG_WEBHOOK_KEY`, `HOA_DON_URL`, `HOA_DON_KEY`, `VIEC_DINH_KY_KEY`;
+P2: `MST_URL`, `MST_KEY`, 5 mẫu ZNS `ZALO_ZNS_MAU_HOI_VIEN_*`, `ZALO_ZNS_MAU_MA_GIOI_THIEU`, `ZALO_ZNS_MAU_GIOI_THIEU_THUONG`. Tên database mặc định đổi `vcmobilecare` → `thotoi` (docker-compose, CI). Agent SEO Editor vẫn dùng
 `VCMC_URL`, `VCMC_API_KEY` (giữ tên để không phá máy đã cài).
 
 ## Cách chạy
@@ -155,7 +179,7 @@ Mật khẩu chung `ThoToi-ThuNghiem-2026` (đổi bằng `MAT_KHAU_TAI_KHOAN_TH
 9. **Giới hạn tần suất** nằm trong bộ nhớ một máy chủ. Chạy nhiều máy chủ thì chuyển sang Redis/Postgres.
 10. **Mã khuyến mãi** (P1): kiểm tra lúc đặt (sai/hết hạn thì báo lỗi ô mã, không tạo đơn), trừ lúc tính tiền. Giảm % chỉ
     tính trên tiền công; giảm cố định không quá tổng. Hoa hồng tính trên số tiền khách **đã trả**, chỉ đơn đã thanh toán.
-    Mã giới thiệu bạn bè là P2.
+    Mã giới thiệu bạn bè: mục 19–21.
 11. **Bảng "Lịch hẹn" cũ** (form đặt lịch đơn giản) bị thay bằng Đơn hàng; migration xoá bảng cũ (web chưa chạy thật nên
     không có dữ liệu thật). Form `/dat-lich/` hiện là bản tối thiểu nối API mới, chờ frontend dựng lại 4 bước.
 12. **Dữ liệu mẫu**: bảng giá, xe (phân khúc), quận, thời gian tới, khung giờ đều là số mẫu của thiết kế, có ghi chú trong
@@ -175,7 +199,23 @@ Mật khẩu chung `ThoToi-ThuNghiem-2026` (đổi bằng `MAT_KHAU_TAI_KHOAN_TH
 18. **Số liệu** tự ghi (bảng `su-kien`), không phụ thuộc Google Analytics; frontend gọi `POST /api/su-kien/ghi` (gộp tối đa
     20 sự kiện, dùng `navigator.sendBeacon`). Ngày/tuần/tháng tính theo giờ Việt Nam.
 
+19. **Mã gói hội viên `HV-000123`**, không dùng `TT-` như mẫu màn `HoiVien` ("Mã đơn TT-000418"): tách khỏi đơn sửa xe để
+    không lẫn vào số đơn, doanh thu sửa chữa, hoa hồng. Nội dung chuyển khoản `HV000123`, cùng webhook ngân hàng.
+20. **Chính sách tiền cần người dùng xác nhận** (đã chọn cách có lợi cho khách, đổi được trong code `tinhThanhToan`):
+    giảm % tiền công của gói và mã khuyến mãi **không cộng dồn**, lấy mức lớn hơn; hạng mục miễn phí (kích nổ, vá lốp) và miễn
+    đi lại vẫn áp cùng mã khuyến mãi. Gói hội viên miễn đi lại thì không tiêu lượt giới thiệu. Khách mới mua gói hội viên qua
+    mã giới thiệu cũng tính 1 lượt thưởng cho người giới thiệu. Huỷ gói, hoàn tiền: làm tay trong admin (theo chính sách hội
+    viên, thiết kế ghi "gọi 1900 1068").
+21. **Giới thiệu**: "nhận mã qua Zalo" trả lời giống nhau cho mọi số (không dò được ai là khách); mã và lượt thưởng xem qua link
+    riêng trong tin Zalo `/gioi-thieu/<token>/` (thiết kế hiện ngay trên trang sau khi nhập số, nhưng như vậy ai biết số
+    người khác cũng xem được). Mã sai / không áp ở form đặt lịch không chặn đơn, chỉ báo `gioiThieu.lyDo`.
+22. **Link riêng mới**: `/hoi-vien/thanh-toan/<token>/`, `/gioi-thieu/<token>/` (robots chặn, header noindex). Frontend dựng
+    hai màn này; link `?ma=` ở mọi trang: lưu mã, gọi `POST /api/gioi-thieu/mo`, điền vào ô mã khi đặt lịch.
+23. **Bảng giá doanh nghiệp theo xe, mức giảm theo số xe** trong thiết kế `DoanhNghiep` là giá mẫu tiếp thị, chưa thành dữ liệu
+    (chốt trong hợp đồng). Cần thì thêm global sau.
+
 ## Chưa làm, và vì sao
-- P2 (phiên 3).
+- Màn `/hoi-vien/thanh-toan/<token>/`, `/gioi-thieu/<token>/`, `/hoi-vien/`, `/doanh-nghiep/`, `/tuyen-tho/` (phiên frontend);
+  backend đã có API.
 - Màn `/quan-tri/...`, màn báo giá, thanh toán, đánh giá, tra cứu xe theo thiết kế (phiên frontend); backend đã có API.
 - Tích hợp thật: chờ thông tin kết nối (bảng trên).

@@ -27,6 +27,10 @@ const nextConfig = {
       { source: "/admin/:path*", headers: [noindex] },
       { source: "/api/:path*", headers: [noindex] },
       { source: "/quan-tri/:path*", headers: [noindex] },
+      // Link riêng của khách (theo dõi đơn, thanh toán gói hội viên, mã giới thiệu)
+      { source: "/don/:path*", headers: [noindex] },
+      { source: "/hoi-vien/thanh-toan/:path*", headers: [noindex] },
+      { source: "/gioi-thieu/:path*", headers: [noindex] },
     ];
   },
 };

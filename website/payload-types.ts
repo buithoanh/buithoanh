@@ -76,6 +76,9 @@ export interface Config {
     tho: Tho;
     'danh-gia': DanhGia;
     'khieu-nai': KhieuNai;
+    'goi-hoi-vien': GoiHoiVien;
+    'hoi-vien': HoiVien;
+    'yeu-cau-doanh-nghiep': YeuCauDoanhNghiep;
     'danh-muc-dich-vu': DanhMucDichVu;
     'hang-muc-gia': HangMucGia;
     'nhat-ky-gia': NhatKyGia;
@@ -84,6 +87,7 @@ export interface Config {
     quan: Quan;
     phuong: Phuong;
     'ma-khuyen-mai': MaKhuyenMai;
+    'ma-gioi-thieu': MaGioiThieu;
     'su-kien': SuKien;
     'cam-nang': CamNang;
     'dich-vu': DichVu;
@@ -91,6 +95,8 @@ export interface Config {
     'trang-hang-xe': TrangHangXe;
     'tu-khoa': TuKhoa;
     media: Media;
+    'ho-so-tho': HoSoTho;
+    'tep-ho-so': TepHoSo;
     users: User;
     'ma-xac-nhan': MaXacNhan;
     'payload-kv': PayloadKv;
@@ -109,6 +115,9 @@ export interface Config {
     tho: ThoSelect<false> | ThoSelect<true>;
     'danh-gia': DanhGiaSelect<false> | DanhGiaSelect<true>;
     'khieu-nai': KhieuNaiSelect<false> | KhieuNaiSelect<true>;
+    'goi-hoi-vien': GoiHoiVienSelect<false> | GoiHoiVienSelect<true>;
+    'hoi-vien': HoiVienSelect<false> | HoiVienSelect<true>;
+    'yeu-cau-doanh-nghiep': YeuCauDoanhNghiepSelect<false> | YeuCauDoanhNghiepSelect<true>;
     'danh-muc-dich-vu': DanhMucDichVuSelect<false> | DanhMucDichVuSelect<true>;
     'hang-muc-gia': HangMucGiaSelect<false> | HangMucGiaSelect<true>;
     'nhat-ky-gia': NhatKyGiaSelect<false> | NhatKyGiaSelect<true>;
@@ -117,6 +126,7 @@ export interface Config {
     quan: QuanSelect<false> | QuanSelect<true>;
     phuong: PhuongSelect<false> | PhuongSelect<true>;
     'ma-khuyen-mai': MaKhuyenMaiSelect<false> | MaKhuyenMaiSelect<true>;
+    'ma-gioi-thieu': MaGioiThieuSelect<false> | MaGioiThieuSelect<true>;
     'su-kien': SuKienSelect<false> | SuKienSelect<true>;
     'cam-nang': CamNangSelect<false> | CamNangSelect<true>;
     'dich-vu': DichVuSelect<false> | DichVuSelect<true>;
@@ -124,6 +134,8 @@ export interface Config {
     'trang-hang-xe': TrangHangXeSelect<false> | TrangHangXeSelect<true>;
     'tu-khoa': TuKhoaSelect<false> | TuKhoaSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'ho-so-tho': HoSoThoSelect<false> | HoSoThoSelect<true>;
+    'tep-ho-so': TepHoSoSelect<false> | TepHoSoSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'ma-xac-nhan': MaXacNhanSelect<false> | MaXacNhanSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -263,10 +275,10 @@ export interface DonHang {
     email?: string | null;
   };
   maGioiThieu?: string | null;
-  /**
-   * Kiểm tra và tính giảm giá: P1.
-   */
   maKhuyenMai?: string | null;
+  gioiThieu?: (number | null) | MaGioiThieu;
+  gioiThieuApDung?: boolean | null;
+  hoiVien?: (number | null) | HoiVien;
   dongY: {
     dongYXuLyDuLieu: boolean;
     dongYLuc?: string | null;
@@ -283,6 +295,14 @@ export interface DonHang {
   khuyenMai?: (number | null) | MaKhuyenMai;
   xongLuc?: string | null;
   soKmKhiXong?: number | null;
+  quyenLoi?: {
+    mienDiLai?: ('hoiVien' | 'banMoi' | 'luotGioiThieu') | null;
+    kichNo?: number | null;
+    vaLop?: number | null;
+    giamHoiVien?: number | null;
+    giamMa?: number | null;
+    uuTienHoiVien?: boolean | null;
+  };
   thanhToan?: {
     soTien?: number | null;
     giam?: number | null;
@@ -476,6 +496,103 @@ export interface Quan {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ma-gioi-thieu".
+ */
+export interface MaGioiThieu {
+  id: number;
+  ma: string;
+  sdt: string;
+  hoTen?: string | null;
+  soLuotMo?: number | null;
+  /**
+   * CSKH bù cho khách (có thể âm để trừ).
+   */
+  luotThuongThem?: number | null;
+  tamDung?: boolean | null;
+  token?: string | null;
+  ghiChu?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hoi-vien".
+ */
+export interface HoiVien {
+  id: number;
+  ma?: string | null;
+  bienSo: string;
+  goi: number | GoiHoiVien;
+  tenGoi?: string | null;
+  hoTen?: string | null;
+  sdt: string;
+  maGioiThieu?: string | null;
+  gioiThieu?: (number | null) | MaGioiThieu;
+  trangThai: 'choThanhToan' | 'hieuLuc' | 'hetHan' | 'huy';
+  batDauLuc?: string | null;
+  hetHanLuc?: string | null;
+  quyenLoi?: {
+    soTien?: number | null;
+    giamCongPhanTram?: number | null;
+    uuTienGoiGap?: boolean | null;
+    /**
+     * Để trống = không giới hạn, 0 = không có
+     */
+    mienDiLaiSoLan?: number | null;
+    /**
+     * Để trống = không giới hạn, 0 = không có
+     */
+    mienKichNoSoLan?: number | null;
+    /**
+     * Để trống = không giới hạn, 0 = không có
+     */
+    mienVaLopSoLan?: number | null;
+  };
+  thanhToan?: {
+    daNhan?: number | null;
+    maGiaoDich?: string | null;
+    thanhToanLuc?: string | null;
+  };
+  dongYLuc?: string | null;
+  nhacGiaHanLuc?: string | null;
+  token?: string | null;
+  ghiChu?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "goi-hoi-vien".
+ */
+export interface GoiHoiVien {
+  id: number;
+  ten: string;
+  slug: string;
+  giaNam: number;
+  nhan?: string | null;
+  thuTu?: number | null;
+  dangBan?: boolean | null;
+  mienDiLai: {
+    kieu: 'khong' | 'soLan' | 'khongGioiHan';
+    soLan?: number | null;
+  };
+  mienKichNo: {
+    kieu: 'khong' | 'soLan' | 'khongGioiHan';
+    soLan?: number | null;
+  };
+  mienVaLop: {
+    kieu: 'khong' | 'soLan' | 'khongGioiHan';
+    soLan?: number | null;
+  };
+  giamCongPhanTram?: number | null;
+  uuTienGoiGap?: boolean | null;
+  loiIch?: string | null;
+  ghiChu?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tho".
  */
 export interface Tho {
@@ -600,6 +717,11 @@ export interface BaoGia {
     batBuoc?: boolean | null;
     mucDo?: ('canLamNgay' | 'nenLam' | 'coTheDeSau') | null;
     baoHanhThang?: number | null;
+    hangMucGia?: (number | null) | HangMucGia;
+    /**
+     * Tự lấy từ hạng mục bảng giá
+     */
+    quyenLoi?: ('kichNo' | 'vaLop') | null;
     anh?: (number | TepDonHang)[] | null;
     id?: string | null;
   }[];
@@ -630,6 +752,57 @@ export interface BaoGia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hang-muc-gia".
+ */
+export interface HangMucGia {
+  id: number;
+  dichVu: number | DanhMucDichVu;
+  ten: string;
+  loai: 'cong' | 'phuTung';
+  /**
+   * 0 = Miễn phí
+   */
+  gia?: number | null;
+  donVi?: string | null;
+  giaPhanKhuc?: {
+    A?: {
+      tu?: number | null;
+      den?: number | null;
+    };
+    B?: {
+      tu?: number | null;
+      den?: number | null;
+    };
+    C?: {
+      tu?: number | null;
+      den?: number | null;
+    };
+    D?: {
+      tu?: number | null;
+      den?: number | null;
+    };
+  };
+  ghiChu?: string | null;
+  baoGiaSoBo?: ('khong' | 'luonCo' | 'coThe') | null;
+  nguonGia?: ('tay' | 'vcparts') | null;
+  thuTu?: number | null;
+  noiBat?: boolean | null;
+  /**
+   * Hạng mục được miễn phí theo gói hội viên
+   */
+  quyenLoiHoiVien?: ('kichNo' | 'vaLop') | null;
+  tenNgan?: string | null;
+  /**
+   * Điền khi sửa giá. Sau khi lưu, ô này tự xoá.
+   */
+  lyDoDoi?: string | null;
+  capNhatGiaLuc?: string | null;
+  capNhatGiaBoi?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "giao-dich".
  */
 export interface GiaoDich {
@@ -641,7 +814,8 @@ export interface GiaoDich {
   luc?: string | null;
   nguon?: string | null;
   donHang?: (number | null) | DonHang;
-  ketQua?: ('du' | 'thieu' | 'khongThayDon' | 'trung' | 'hoiVien') | null;
+  hoiVien?: (number | null) | HoiVien;
+  ketQua?: ('du' | 'thieu' | 'khongThayDon' | 'trung' | 'hoiVien' | 'hoiVienThieu') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -654,6 +828,7 @@ export interface TinNhan {
   loai: string;
   donHang?: (number | null) | DonHang;
   sdtChe?: string | null;
+  lienQuan?: string | null;
   kenh?: ('zalo' | 'sms') | null;
   trangThai?: ('daGui' | 'loi') | null;
   loi?: string | null;
@@ -736,48 +911,46 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hang-muc-gia".
+ * via the `definition` "yeu-cau-doanh-nghiep".
  */
-export interface HangMucGia {
+export interface YeuCauDoanhNghiep {
   id: number;
-  dichVu: number | DanhMucDichVu;
-  ten: string;
-  loai: 'cong' | 'phuTung';
+  ma?: string | null;
+  tenCongTy: string;
+  mst?: string | null;
+  diaChi?: string | null;
+  soXe: number;
+  loaiXe?: ('4-5-cho' | '7-cho' | 'dien' | 'ban-tai-van' | 'nhieu-loai') | null;
+  loaiDoiXe?: ('taxi' | 'thue' | 'cty') | null;
   /**
-   * 0 = Miễn phí
+   * Slug quận, "khac" = quận khác
    */
-  gia?: number | null;
-  donVi?: string | null;
-  giaPhanKhuc?: {
-    A?: {
-      tu?: number | null;
-      den?: number | null;
-    };
-    B?: {
-      tu?: number | null;
-      den?: number | null;
-    };
-    C?: {
-      tu?: number | null;
-      den?: number | null;
-    };
-    D?: {
-      tu?: number | null;
-      den?: number | null;
-    };
-  };
+  khuVuc?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  nguoiLienHe: string;
+  sdt: string;
+  email?: string | null;
   ghiChu?: string | null;
-  baoGiaSoBo?: ('khong' | 'luonCo' | 'coThe') | null;
-  nguonGia?: ('tay' | 'vcparts') | null;
-  thuTu?: number | null;
-  noiBat?: boolean | null;
-  tenNgan?: string | null;
-  /**
-   * Điền khi sửa giá. Sau khi lưu, ô này tự xoá.
-   */
-  lyDoDoi?: string | null;
-  capNhatGiaLuc?: string | null;
-  capNhatGiaBoi?: string | null;
+  trangThai?: ('moi' | 'dangTuVan' | 'daBaoGia' | 'daKy' | 'khongThanh') | null;
+  phuTrach?: (number | null) | User;
+  dongYLuc?: string | null;
+  ghiChuNoiBo?: string | null;
+  nguon?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1164,6 +1337,53 @@ export interface TuKhoa {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ho-so-tho".
+ */
+export interface HoSoTho {
+  id: number;
+  ma?: string | null;
+  hoTen: string;
+  sdt: string;
+  namKinhNghiem?: ('2-3' | '4-5' | '6-10' | 'tren-10') | null;
+  khuVuc?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  dungCu?: ('obd' | 'kich' | 'acquy' | 'sung' | 'bom' | 'va' | 'cole' | 'xe')[] | null;
+  anhChungChi?: (number | TepHoSo)[] | null;
+  ghiChu?: string | null;
+  trangThai?: ('moi' | 'daGoi' | 'henKiemTra' | 'daNhan' | 'khongDat') | null;
+  dongYLuc?: string | null;
+  ghiChuNoiBo?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tep-ho-so".
+ */
+export interface TepHoSo {
+  id: number;
+  hoSo?: (number | null) | HoSoTho;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ma-xac-nhan".
  */
 export interface MaXacNhan {
@@ -1242,6 +1462,18 @@ export interface PayloadLockedDocument {
         value: number | KhieuNai;
       } | null)
     | ({
+        relationTo: 'goi-hoi-vien';
+        value: number | GoiHoiVien;
+      } | null)
+    | ({
+        relationTo: 'hoi-vien';
+        value: number | HoiVien;
+      } | null)
+    | ({
+        relationTo: 'yeu-cau-doanh-nghiep';
+        value: number | YeuCauDoanhNghiep;
+      } | null)
+    | ({
         relationTo: 'danh-muc-dich-vu';
         value: number | DanhMucDichVu;
       } | null)
@@ -1274,6 +1506,10 @@ export interface PayloadLockedDocument {
         value: number | MaKhuyenMai;
       } | null)
     | ({
+        relationTo: 'ma-gioi-thieu';
+        value: number | MaGioiThieu;
+      } | null)
+    | ({
         relationTo: 'su-kien';
         value: number | SuKien;
       } | null)
@@ -1300,6 +1536,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'ho-so-tho';
+        value: number | HoSoTho;
+      } | null)
+    | ({
+        relationTo: 'tep-ho-so';
+        value: number | TepHoSo;
       } | null)
     | ({
         relationTo: 'users';
@@ -1433,6 +1677,9 @@ export interface DonHangSelect<T extends boolean = true> {
       };
   maGioiThieu?: T;
   maKhuyenMai?: T;
+  gioiThieu?: T;
+  gioiThieuApDung?: T;
+  hoiVien?: T;
   dongY?:
     | T
     | {
@@ -1453,6 +1700,16 @@ export interface DonHangSelect<T extends boolean = true> {
   khuyenMai?: T;
   xongLuc?: T;
   soKmKhiXong?: T;
+  quyenLoi?:
+    | T
+    | {
+        mienDiLai?: T;
+        kichNo?: T;
+        vaLop?: T;
+        giamHoiVien?: T;
+        giamMa?: T;
+        uuTienHoiVien?: T;
+      };
   thanhToan?:
     | T
     | {
@@ -1534,6 +1791,8 @@ export interface BaoGiaSelect<T extends boolean = true> {
         batBuoc?: T;
         mucDo?: T;
         baoHanhThang?: T;
+        hangMucGia?: T;
+        quyenLoi?: T;
         anh?: T;
         id?: T;
       };
@@ -1565,6 +1824,7 @@ export interface GiaoDichSelect<T extends boolean = true> {
   luc?: T;
   nguon?: T;
   donHang?: T;
+  hoiVien?: T;
   ketQua?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1617,6 +1877,7 @@ export interface TinNhanSelect<T extends boolean = true> {
   loai?: T;
   donHang?: T;
   sdtChe?: T;
+  lienQuan?: T;
   kenh?: T;
   trangThai?: T;
   loi?: T;
@@ -1695,6 +1956,107 @@ export interface KhieuNaiSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "goi-hoi-vien_select".
+ */
+export interface GoiHoiVienSelect<T extends boolean = true> {
+  ten?: T;
+  slug?: T;
+  giaNam?: T;
+  nhan?: T;
+  thuTu?: T;
+  dangBan?: T;
+  mienDiLai?:
+    | T
+    | {
+        kieu?: T;
+        soLan?: T;
+      };
+  mienKichNo?:
+    | T
+    | {
+        kieu?: T;
+        soLan?: T;
+      };
+  mienVaLop?:
+    | T
+    | {
+        kieu?: T;
+        soLan?: T;
+      };
+  giamCongPhanTram?: T;
+  uuTienGoiGap?: T;
+  loiIch?: T;
+  ghiChu?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hoi-vien_select".
+ */
+export interface HoiVienSelect<T extends boolean = true> {
+  ma?: T;
+  bienSo?: T;
+  goi?: T;
+  tenGoi?: T;
+  hoTen?: T;
+  sdt?: T;
+  maGioiThieu?: T;
+  gioiThieu?: T;
+  trangThai?: T;
+  batDauLuc?: T;
+  hetHanLuc?: T;
+  quyenLoi?:
+    | T
+    | {
+        soTien?: T;
+        giamCongPhanTram?: T;
+        uuTienGoiGap?: T;
+        mienDiLaiSoLan?: T;
+        mienKichNoSoLan?: T;
+        mienVaLopSoLan?: T;
+      };
+  thanhToan?:
+    | T
+    | {
+        daNhan?: T;
+        maGiaoDich?: T;
+        thanhToanLuc?: T;
+      };
+  dongYLuc?: T;
+  nhacGiaHanLuc?: T;
+  token?: T;
+  ghiChu?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "yeu-cau-doanh-nghiep_select".
+ */
+export interface YeuCauDoanhNghiepSelect<T extends boolean = true> {
+  ma?: T;
+  tenCongTy?: T;
+  mst?: T;
+  diaChi?: T;
+  soXe?: T;
+  loaiXe?: T;
+  loaiDoiXe?: T;
+  khuVuc?: T;
+  nguoiLienHe?: T;
+  sdt?: T;
+  email?: T;
+  ghiChu?: T;
+  trangThai?: T;
+  phuTrach?: T;
+  dongYLuc?: T;
+  ghiChuNoiBo?: T;
+  nguon?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "danh-muc-dich-vu_select".
  */
 export interface DanhMucDichVuSelect<T extends boolean = true> {
@@ -1755,6 +2117,7 @@ export interface HangMucGiaSelect<T extends boolean = true> {
   nguonGia?: T;
   thuTu?: T;
   noiBat?: T;
+  quyenLoiHoiVien?: T;
   tenNgan?: T;
   lyDoDoi?: T;
   capNhatGiaLuc?: T;
@@ -1859,6 +2222,22 @@ export interface MaKhuyenMaiSelect<T extends boolean = true> {
   moiSdtMotLan?: T;
   hoaHongPhanTram?: T;
   tamDung?: T;
+  ghiChu?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ma-gioi-thieu_select".
+ */
+export interface MaGioiThieuSelect<T extends boolean = true> {
+  ma?: T;
+  sdt?: T;
+  hoTen?: T;
+  soLuotMo?: T;
+  luotThuongThem?: T;
+  tamDung?: T;
+  token?: T;
   ghiChu?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -2071,6 +2450,43 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ho-so-tho_select".
+ */
+export interface HoSoThoSelect<T extends boolean = true> {
+  ma?: T;
+  hoTen?: T;
+  sdt?: T;
+  namKinhNghiem?: T;
+  khuVuc?: T;
+  dungCu?: T;
+  anhChungChi?: T;
+  ghiChu?: T;
+  trangThai?: T;
+  dongYLuc?: T;
+  ghiChuNoiBo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tep-ho-so_select".
+ */
+export interface TepHoSoSelect<T extends boolean = true> {
+  hoSo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
@@ -2256,6 +2672,20 @@ export interface CaiDat {
   tenCskh?: string | null;
   cskhGoiLaiGio?: number | null;
   mucTieuTyLeDatLich?: number | null;
+  salesB2B?: {
+    ten?: string | null;
+    sdt?: string | null;
+    email?: string | null;
+    camKet?: string | null;
+  };
+  hoSoNangLucUrl?: string | null;
+  nhanSu?: {
+    ten?: string | null;
+    sdt?: string | null;
+    zalo?: string | null;
+    email?: string | null;
+    camKet?: string | null;
+  };
   suCoKhanCap?:
     | {
         ma: string;
@@ -2379,6 +2809,24 @@ export interface CaiDatSelect<T extends boolean = true> {
   tenCskh?: T;
   cskhGoiLaiGio?: T;
   mucTieuTyLeDatLich?: T;
+  salesB2B?:
+    | T
+    | {
+        ten?: T;
+        sdt?: T;
+        email?: T;
+        camKet?: T;
+      };
+  hoSoNangLucUrl?: T;
+  nhanSu?:
+    | T
+    | {
+        ten?: T;
+        sdt?: T;
+        zalo?: T;
+        email?: T;
+        camKet?: T;
+      };
   suCoKhanCap?:
     | T
     | {

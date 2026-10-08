@@ -3,6 +3,7 @@ import * as migration_20261008_092859_khoa_api from './20261008_092859_khoa_api'
 import * as migration_20261008_100259_tu_lieu from './20261008_100259_tu_lieu';
 import * as migration_20261008_102632_p0_danh_muc_gia_vung_don_hang from './20261008_102632_p0_danh_muc_gia_vung_don_hang';
 import * as migration_20261008_111844_p1_phuc_vu_quan_tri from './20261008_111844_p1_phuc_vu_quan_tri';
+import * as migration_20261008_114750_p2_hoi_vien_gioi_thieu_doanh_nghiep_tho from './20261008_114750_p2_hoi_vien_gioi_thieu_doanh_nghiep_tho';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20261008_111844_p1_phuc_vu_quan_tri.up,
     down: migration_20261008_111844_p1_phuc_vu_quan_tri.down,
-    name: '20261008_111844_p1_phuc_vu_quan_tri'
+    name: '20261008_111844_p1_phuc_vu_quan_tri',
+  },
+  {
+    up: migration_20261008_114750_p2_hoi_vien_gioi_thieu_doanh_nghiep_tho.up,
+    down: migration_20261008_114750_p2_hoi_vien_gioi_thieu_doanh_nghiep_tho.down,
+    name: '20261008_114750_p2_hoi_vien_gioi_thieu_doanh_nghiep_tho'
   },
 ];

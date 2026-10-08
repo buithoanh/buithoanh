@@ -7,6 +7,7 @@ import { sangCsv, sangXlsx, traFile } from "../lib/xuat-file";
 import { docBody, gioiHan, ipCua, json, traLoi } from "../lib/api/chung";
 import { LoiNguoiDung } from "../lib/cong-khai";
 import { chuanHoaSdt } from "../lib/so-dien-thoai.mjs";
+import { kiemTraMaGioiThieu } from "../lib/gioi-thieu";
 
 const xemMa = ({ req }: { req: Parameters<typeof la>[0] }) => la(req, "quanTri", "quanLyDichVu", "marketing");
 const suaMa = ({ req }: { req: Parameters<typeof la>[0] }) => la(req, "quanTri", "marketing");
@@ -39,7 +40,13 @@ export const MaKhuyenMai: CollectionConfig = {
         try {
           gioiHan(`ma-km:ip:${ipCua(req)}`, 20, 10);
           const { duLieu } = await docBody(req);
-          return json(await kiemTraMaChoKhach(req.payload, String(duLieu.ma || ""), chuanHoaSdt(duLieu.sdt)));
+          const kq = await kiemTraMaChoKhach(req.payload, String(duLieu.ma || ""), chuanHoaSdt(duLieu.sdt));
+          // Không phải mã khuyến mãi: có thể là mã giới thiệu bạn bè (link ?ma= dùng chung cho cả hai)
+          if (!kq.hopLe && kq.ma === "KHONG_CO") {
+            const gt = await kiemTraMaGioiThieu(req.payload, String(duLieu.ma || ""), chuanHoaSdt(duLieu.sdt));
+            if (gt.hopLe || gt.ma !== "KHONG_CO") return json(gt);
+          }
+          return json(kq);
         } catch (e) {
           return traLoi(req, e);
         }

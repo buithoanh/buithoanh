@@ -169,6 +169,57 @@ await ghi("gui-duyet-loi", "PATCH", `/api/trang-khu-vuc/${tm.json.id}?draft=true
 await ghi("viec-dinh-ky", "POST", "/api/viec-dinh-ky", null, process.env.VIEC_DINH_KY_KEY ? { Authorization: `Bearer ${process.env.VIEC_DINH_KY_KEY}` } : {},
   "Header `Authorization: Bearer <VIEC_DINH_KY_KEY>` (máy chạy thử không đặt khoá thì bỏ qua):");
 
+// ---------------------------------------------------------------- P2
+await ghi("trang-hoi-vien", "GET", "/api/trang/hoi-vien");
+const bienHV = `30H-${String(Date.now() % 1000).padStart(3, "0")}.${String(Date.now() % 90 + 10)}`;
+const sdtHV = `09124${String(Date.now()).slice(-5)}`;
+const dk = await ghi("hv-dang-ky", "POST", "/api/hoi-vien/dang-ky", { goi: "an-tam", hoTen: "Trần Minh Tuấn", sdt: sdtHV, bienSo: bienHV.replace(/\W/g, "").toLowerCase(), maGioiThieu: "", dongY: true, website: "" });
+viDu["hv-dang-ky"] += "\n\n" + khoi("POST", "/api/hoi-vien/dang-ky", { goi: "an-tam", sdt: "0912", dongY: false }, await goi("POST", "/api/hoi-vien/dang-ky", { goi: "an-tam", sdt: "0912", dongY: false }), "Thiếu thông tin:");
+await ghi("hv-thanh-toan", "GET", `/api/hoi-vien/thanh-toan/${dk.json.token}`, null, null, "`vietQR.anh` là ảnh PNG dạng data URL (rút gọn ở đây):");
+await ghi("hv-tien-ve", "POST", `/api/hoi-vien/thanh-toan/${dk.json.token}/gia-lap-tien-ve`, null, null, "Chỉ khi ngân hàng chạy giả lập. Tiền thật về qua `POST /api/thanh-toan/webhook` với nội dung `HV000123`:");
+await ghi("hv-da-tra", "GET", `/api/hoi-vien/thanh-toan/${dk.json.token}`);
+// Đơn của xe hội viên: kích nổ miễn phí, miễn đi lại, giảm 15% công
+const dHV = (await datThu({ xe: { ...donDatLich.xe, bienSo: bienHV } })).json;
+const kichNo = (await goi("GET", "/api/hang-muc-gia?limit=1&depth=0&where[quyenLoiHoiVien][equals]=kichNo")).json.docs[0];
+await goi("POST", `/api/don-hang/${dHV.ma}/bao-gia`, { hangMuc: [
+  { ma: "kich", ten: "Kích nổ tại chỗ", loai: "cong", gia: 150000, batBuoc: true, hangMucGia: kichNo?.id },
+  { ma: "coc", ten: "Vệ sinh cọc, thay đầu cos", loai: "cong", gia: 120000 },
+] }, dieuPhoi);
+await goi("POST", `/api/don-hang/theo-doi/${dHV.token}/bao-gia/duyet`, { dongY: true });
+await goi("POST", `/api/don-hang/${dHV.ma}/xong`, {}, dieuPhoi);
+{
+  const r = await goi("GET", `/api/don-hang/theo-doi/${dHV.token}/thanh-toan`);
+  const { ma, hangMuc, tong, tongHienThi, conPhaiTra } = r.json;
+  viDu["hv-don"] = `Đơn của xe hội viên An tâm sau khi thợ bấm xong (báo giá gửi \`hangMucGia\` của hạng mục kích nổ). Chỉ trích các trường liên quan, đủ mọi dòng:\n\nRequest:\n\`\`\`http\nGET /api/don-hang/theo-doi/${dHV.token}/thanh-toan\n\`\`\`\nResponse \`${r.status}\` (trích):\n\`\`\`json\n${JSON.stringify({ ma, hangMuc, tong, tongHienThi, conPhaiTra }, null, 2)}\n\`\`\``;
+}
+// Giới thiệu bạn bè
+const gm = await ghi("gt-gui-ma", "POST", "/api/gioi-thieu/gui-ma", { sdt: "0912 345 678" }, null, "Máy chạy thử (tin nhắn giả lập) trả thêm `giaLap`; chạy thật không bao giờ có:");
+const maGT = gm.json.giaLap?.ma;
+await ghi("gt-xem", "GET", `/api/gioi-thieu/xem/${gm.json.giaLap?.token}`);
+await ghi("gt-mo", "POST", "/api/gioi-thieu/mo", { ma: maGT });
+await ghi("gt-kiem-tra", "POST", "/api/ma-khuyen-mai/kiem-tra", { ma: maGT, sdt: `09125${String(Date.now()).slice(-5)}` }, null, "Cùng endpoint với mã khuyến mãi:");
+viDu["gt-kiem-tra"] += "\n\n" + khoi("POST", "/api/ma-khuyen-mai/kiem-tra", { ma: maGT, sdt: "0912345678" }, await goi("POST", "/api/ma-khuyen-mai/kiem-tra", { ma: maGT, sdt: "0912345678" }), "Chủ mã tự dùng:");
+const dGT = await datThu({ maGioiThieu: maGT, khach: { hoTen: "Lê Thu Trang", sdt: `09126${String(Date.now()).slice(-5)}` } });
+viDu["gt-dat-lich"] = khoi("POST", "/api/don-hang/dat-lich", { "...": "như đặt lịch ở trên", maGioiThieu: maGT }, { status: 201, json: { ...dGT.json, token: "<token>", linkTheoDoi: "<link>" } }, "Đặt lịch qua link `?ma=` (form gửi `maGioiThieu`):");
+// Doanh nghiệp, tuyển thợ
+await ghi("trang-doanh-nghiep", "GET", "/api/trang/doanh-nghiep");
+await ghi("tra-mst", "GET", "/api/doanh-nghiep/tra-mst?mst=0101234567", null, null, "Tra MST chạy giả lập:");
+viDu["tra-mst"] += "\n\n" + khoi("GET", "/api/doanh-nghiep/tra-mst?mst=0101234000", null, await goi("GET", "/api/doanh-nghiep/tra-mst?mst=0101234000"), "Không tìm thấy:");
+const ycDN = { tenCongTy: "Công ty TNHH Cho thuê xe tự lái Minh Long", mst: "0101234567", soXe: 42, loaiXe: "4-5-cho", loaiDoiXe: "thue", khuVuc: ["dong-da", "cau-giay"], nguoiLienHe: "Nguyễn Lâm", sdt: "0988 216 401", email: "doixe@minhlong.vn", ghiChu: "Bảo dưỡng buổi tối tại bãi", dongY: true, website: "", nguon: { utm_source: "google", trangVao: "/doanh-nghiep/" } };
+await ghi("dn-yeu-cau", "POST", "/api/doanh-nghiep/yeu-cau", ycDN);
+viDu["dn-yeu-cau"] += "\n\n" + khoi("POST", "/api/doanh-nghiep/yeu-cau", { tenCongTy: "", soXe: 0, dongY: false }, await goi("POST", "/api/doanh-nghiep/yeu-cau", { tenCongTy: "", soXe: 0, dongY: false }), "Thiếu thông tin:");
+await ghi("trang-tuyen-tho", "GET", "/api/trang/tuyen-tho");
+{
+  const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "base64");
+  const duLieu = { hoTen: "Lê Văn Bình", sdt: `09778${String(Date.now()).slice(-5)}`, namKinhNghiem: "6-10", khuVuc: ["cau-giay", "dong-da"], dungCu: ["obd", "kich", "bom"], dongY: true, website: "" };
+  const fd = new FormData();
+  fd.append("duLieu", JSON.stringify(duLieu));
+  fd.append("tep", new Blob([png], { type: "image/png" }), "chung-chi-nghe.png");
+  fd.append("tep", new Blob([png], { type: "image/png" }), "bang-lai-b2.png");
+  const r = await fetch(BASE + "/api/tuyen-tho/ho-so", { method: "POST", body: fd, headers: { "X-Forwarded-For": `10.9.0.${++ip}` } });
+  viDu["th-ho-so"] = `Request (\`multipart/form-data\`):\n\`\`\`http\nPOST /api/tuyen-tho/ho-so\n\nduLieu = ${JSON.stringify(duLieu)}\ntep    = chung-chi-nghe.png (image/png)\ntep    = bang-lai-b2.png (image/png)\n\`\`\`\nResponse \`${r.status}\`:\n\`\`\`json\n${JSON.stringify(await r.json(), null, 2)}\n\`\`\``;
+}
+
 let md = fs.readFileSync(FILE, "utf8");
 let soKhoi = 0;
 md = md.replace(/<!-- vi-du:([\w-]+) -->[\s\S]*?<!-- \/vi-du -->/g, (m, ten) => {
