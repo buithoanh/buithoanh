@@ -184,6 +184,10 @@ export interface CamNang {
    * Tự tạo từ tiêu đề nếu để trống. Đổi sau khi đã đăng sẽ làm mất thứ hạng Google.
    */
   slug: string;
+  /**
+   * Slug tư liệu transcript trong tu-lieu/transcript (không hiện trên web). Bài chép nguyên văn từ 12 chữ liên tiếp sẽ không đăng được.
+   */
+  tuLieu?: string[] | null;
   ngay: string;
   capNhat?: string | null;
   dichVuLienQuan?: (number | DichVu)[] | null;
@@ -248,6 +252,10 @@ export interface DichVu {
    * Tự tạo từ tiêu đề nếu để trống. Đổi sau khi đã đăng sẽ làm mất thứ hạng Google.
    */
   slug: string;
+  /**
+   * Slug tư liệu transcript trong tu-lieu/transcript (không hiện trên web). Bài chép nguyên văn từ 12 chữ liên tiếp sẽ không đăng được.
+   */
+  tuLieu?: string[] | null;
   thuTu?: number | null;
   trangThaiDuyet?: ('nhap' | 'choDuyet' | 'canSua' | 'daDuyet') | null;
   ghiChuDuyet?: string | null;
@@ -473,6 +481,7 @@ export interface CamNangSelect<T extends boolean = true> {
         id?: T;
       };
   slug?: T;
+  tuLieu?: T;
   ngay?: T;
   capNhat?: T;
   dichVuLienQuan?: T;
@@ -504,6 +513,7 @@ export interface DichVuSelect<T extends boolean = true> {
         id?: T;
       };
   slug?: T;
+  tuLieu?: T;
   thuTu?: T;
   trangThaiDuyet?: T;
   ghiChuDuyet?: T;

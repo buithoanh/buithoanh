@@ -1,5 +1,5 @@
 import { addDataAndFileToRequest, type CollectionConfig } from "payload";
-import { hookKiemTraVaDuyet, truongDuyet, truongFaq, truongSeo, truongSlug, xemTruoc } from "../lib/bai";
+import { hookKiemTraVaDuyet, truongDuyet, truongFaq, truongSeo, truongSlug, truongTuLieu, xemTruoc } from "../lib/bai";
 import { chiNguoiDuyet, daDangNhap, docBaiDaDang } from "../lib/quyen";
 import { nhanBanNhapTuNgoai } from "../lib/ai/viet-nhap";
 import { NHOM_TU_KHOA } from "./TuKhoa";
@@ -64,6 +64,7 @@ export const CamNang: CollectionConfig = {
       ],
     },
     truongSlug,
+    truongTuLieu,
     {
       name: "ngay",
       label: "Ngày đăng",

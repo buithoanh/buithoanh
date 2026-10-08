@@ -50,7 +50,7 @@ export const layDanhSachBai = cache(async (gioiHan = 1000) => {
   const payload = await layPayload();
   const { docs } = await payload.find({
     collection: "cam-nang", where: chiBaiDaDang(false), sort: "-ngay", limit: gioiHan, depth: 0, pagination: false,
-    select: { slug: true, title: true, description: true, ngay: true, capNhat: true, dichVuLienQuan: true, updatedAt: true },
+    select: { slug: true, title: true, description: true, nhom: true, ngay: true, capNhat: true, dichVuLienQuan: true, updatedAt: true },
   });
   return docs;
 });

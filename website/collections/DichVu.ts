@@ -1,5 +1,5 @@
 import type { CollectionConfig } from "payload";
-import { hookKiemTraVaDuyet, truongDuyet, truongFaq, truongSeo, truongSlug, xemTruoc } from "../lib/bai";
+import { hookKiemTraVaDuyet, truongDuyet, truongFaq, truongSeo, truongSlug, truongTuLieu, xemTruoc } from "../lib/bai";
 import { chiNguoiDuyet, daDangNhap, docBaiDaDang } from "../lib/quyen";
 
 export const DichVu: CollectionConfig = {
@@ -22,6 +22,7 @@ export const DichVu: CollectionConfig = {
     { name: "noiDung", label: "Nội dung", type: "richText", required: true },
     truongFaq,
     truongSlug,
+    truongTuLieu,
     { name: "thuTu", label: "Thứ tự hiển thị", type: "number", defaultValue: 99, admin: { position: "sidebar" } },
     ...truongDuyet,
   ],

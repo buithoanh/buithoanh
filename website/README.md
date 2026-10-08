@@ -70,6 +70,19 @@ Khi nối phải giữ hai luật: chỉ lấy trang được đánh dấu công
 | `migrations/` | Thay đổi cấu trúc database cho production |
 | `du-lieu-mau/` | Dữ liệu ban đầu (6 trang dịch vụ, 2 bài, bộ từ khoá) để nạp lần đầu. Sửa ở đây **không** làm đổi web. |
 | `site.config.mjs` | Tên thương hiệu, slogan, thành phố, địa chỉ web |
+| `app/quan-tri/`, `lib/quan-tri/` | Trang quản trị nội dung & SEO `/quan-tri/` (đọc từ CMS, cần đăng nhập) |
+| `lib/tu-lieu.mjs`, `scripts/so-trung.mjs` | Đọc tư liệu transcript, so bài với transcript để bắt đoạn chép nguyên văn |
+| `../tu-lieu/transcript/` | Tư liệu transcript từ TIKTIKTOTEXT (xem `tu-lieu/README.md`) |
+
+## Trang quản trị nội dung `/quan-tri/`
+
+Đăng nhập bằng tài khoản CMS (chưa đăng nhập thì chuyển sang `/admin/login`). Trang đọc thẳng từ CMS, luôn có `noindex`:
+
+- **Tổng quan**: số trang, trang có lỗi, tỉ lệ từ khoá đã có trang, tiến độ bài trong tháng, tư liệu chưa dùng, việc cần xử lý.
+- **Trang & bài**: mọi trang (cả bản nháp), lọc theo loại và trạng thái. Mở một trang để xem bản xem trước trên Google, thử tiêu đề và mô tả khác, điểm kiểm tra (cùng luật CMS dùng khi đăng), số liệu, dàn ý, liên kết vào/ra, tư liệu cùng chủ đề và câu khách hỏi chưa có trong FAQ. Nút **Sửa** mở bài trong `/admin`.
+- **Từ khoá**, **Lịch đăng**: đối chiếu với SEO → Từ khoá và Kế hoạch SEO trong CMS.
+- **Tư liệu transcript**: video nào đã dùng ở bài nào, câu khách hỏi.
+- **Viết bài mới**: điền từ khoá, tiêu đề, chọn tư liệu, rồi chép lệnh cho SEO Editor hoặc tạo bản nháp trong `/admin`.
 
 ## Chạy thử trên máy
 

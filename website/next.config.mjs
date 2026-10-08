@@ -16,6 +16,8 @@ const nextConfig = {
   output: "standalone",
   // Thêm dấu / ở cuối do proxy.js lo (chỉ cho trang công khai).
   skipTrailingSlashRedirect: true,
+  // Trang /quan-tri/ đọc file giao diện lúc chạy: đưa kèm vào bản standalone.
+  outputFileTracingIncludes: { "/quan-tri": ["./lib/quan-tri/giao-dien.*"] },
   images: { localPatterns: [{ pathname: "/api/media/file/**" }] },
   turbopack: { root: path.resolve(dirname) },
   async headers() {
@@ -24,6 +26,7 @@ const nextConfig = {
       { source: "/:path*", headers: allowIndex ? security : [...security, noindex] },
       { source: "/admin/:path*", headers: [noindex] },
       { source: "/api/:path*", headers: [noindex] },
+      { source: "/quan-tri/:path*", headers: [noindex] },
     ];
   },
 };

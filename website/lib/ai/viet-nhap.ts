@@ -97,7 +97,8 @@ export async function nhanBanNhapTuNgoai(payload: Payload, d: Record<string, unk
   const tk = (await payload.find({ collection: "tu-khoa", where: { tuKhoa: { equals: tuKhoa } }, limit: 1, depth: 0 })).docs[0];
   const nhom = s(d.nhom) || tk?.nhom || "Thông tin";
   const dichVu = (await payload.find({ collection: "dich-vu", limit: 100, depth: 0, pagination: false, select: { slug: true } })).docs;
-  const moi = await luuBanNhap(payload, bai, tuKhoa, nhom, dichVu);
+  const tuLieu = ds<string>(d.tuLieu).map(String).filter((x) => /^[a-z0-9-]+$/.test(x));
+  const moi = await luuBanNhap(payload, bai, tuKhoa, nhom, dichVu, tuLieu);
   if (tk) await payload.update({ collection: "tu-khoa", id: tk.id, data: { trangThai: "dangViet", baiViet: moi.id } });
   return moi;
 }
@@ -108,6 +109,7 @@ export async function luuBanNhap(
   tuKhoa: string,
   nhom: string,
   dichVu: { id: number | string; slug?: string | null }[],
+  tuLieu: string[] = [],
 ) {
   const noiDung = await markdownSangNoiDung(payload, bai.noiDungMarkdown);
 
@@ -137,6 +139,7 @@ export async function luuBanNhap(
       noiDung: noiDung as never,
       faq: bai.faq,
       nguonThamKhao: bai.nguon,
+      tuLieu,
       dichVuLienQuan: dichVu.filter((d) => bai.dichVuLienQuan.includes(String(d.slug))).map((d) => d.id) as never,
       ngay: new Date().toISOString(),
       trangThaiDuyet: "nhap",

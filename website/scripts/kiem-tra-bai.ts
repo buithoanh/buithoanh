@@ -2,7 +2,7 @@
 //   npm run kiem-tra
 import { getPayload } from "payload";
 import config from "../payload.config";
-import { slugsDangCo } from "../lib/bai";
+import { docTuLieu, slugsDangCo } from "../lib/bai";
 import { noiDungSangMarkdown } from "../lib/soan-thao";
 import { kiemTraBai } from "../lib/kiem-tra.mjs";
 
@@ -15,7 +15,7 @@ for (const loai of ["dich-vu", "cam-nang"] as const) {
   });
   for (const doc of docs) {
     const markdown = await noiDungSangMarkdown(payload, doc.noiDung);
-    const kq = kiemTraBai({ loai, data: doc, markdown, slugs, slugsDaDang });
+    const kq = kiemTraBai({ loai, data: doc, markdown, slugs, slugsDaDang, tuLieu: docTuLieu(doc.tuLieu) });
     for (const c of kq.canhBao) console.warn(`Cảnh báo  ${loai}/${doc.slug}: ${c}`);
     for (const l of kq.loi) console.error(`Lỗi      ${loai}/${doc.slug}: ${l}`);
     soLoi += kq.loi.length;

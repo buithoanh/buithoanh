@@ -3,6 +3,7 @@ import { APIError, type CollectionBeforeChangeHook, type Field, type Payload } f
 import { kiemTraBai, taoSlug, tomTatKiemTra } from "./kiem-tra.mjs";
 import { coTheDang, truongChiNguoiDuyet } from "./quyen";
 import { noiDungSangMarkdown } from "./soan-thao";
+import { readTuLieu, tuLieuSlugs } from "./tu-lieu.mjs";
 
 export type LoaiBai = "dich-vu" | "cam-nang";
 
@@ -22,6 +23,13 @@ export async function slugsDangCo(payload: Payload) {
     slugs: { "dich-vu": dv.tatCa, "cam-nang": cn.tatCa },
     slugsDaDang: { "dich-vu": dv.daDang, "cam-nang": cn.daDang },
   };
+}
+
+/** Nội dung tư liệu transcript bài dẫn nguồn; tư liệu không có trong thư mục thì body = null. */
+export function docTuLieu(slugs: unknown): { slug: string; body: string | null }[] {
+  const co = new Set(tuLieuSlugs());
+  return (Array.isArray(slugs) ? slugs : []).map(String).filter(Boolean)
+    .map((slug) => ({ slug, body: co.has(slug) ? readTuLieu(slug).body : null }));
 }
 
 /**
@@ -56,7 +64,9 @@ export const hookKiemTraVaDuyet =
         })
       : { totalDocs: 0 };
 
-    const ketQua = kiemTraBai({ loai, data: bai, markdown, slugs, slugsDaDang, trungTieuDe: cungTieuDe.totalDocs > 0 });
+    const ketQua = kiemTraBai({
+      loai, data: bai, markdown, slugs, slugsDaDang, trungTieuDe: cungTieuDe.totalDocs > 0, tuLieu: docTuLieu(bai.tuLieu),
+    });
     data.ketQuaKiemTra = tomTatKiemTra(ketQua);
 
     if (dangDang && ketQua.loi.length) {
@@ -106,6 +116,17 @@ export const truongFaq: Field = {
     { name: "q", label: "Câu hỏi", type: "text", required: true },
     { name: "a", label: "Trả lời", type: "textarea", required: true },
   ],
+};
+
+export const truongTuLieu: Field = {
+  name: "tuLieu",
+  label: "Tư liệu đã dùng",
+  type: "text",
+  hasMany: true,
+  admin: {
+    position: "sidebar",
+    description: "Slug tư liệu transcript trong tu-lieu/transcript (không hiện trên web). Bài chép nguyên văn từ 12 chữ liên tiếp sẽ không đăng được.",
+  },
 };
 
 export const truongDuyet: Field[] = [
