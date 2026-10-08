@@ -1,0 +1,64 @@
+.khoi { margin: 12px 16px 0; }
+.khoi:first-child { margin-top: 16px; }
+.the { margin: 12px 16px 0; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.h2 { font-size: 16px; color: var(--toi); }
+
+.trangThai { display: flex; gap: 12px; align-items: center; border-radius: var(--bo); padding: 12px 14px; }
+.trangThai div { display: flex; flex-direction: column; line-height: 1.35; }
+.trangThai b { font-size: 15px; }
+.trangThai span:not(.cham) { font-size: 13px; }
+.cham { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+.ttCho { background: var(--nhan-nhat); border: 1px solid var(--vien-cam); color: var(--nhan-chu-dam); }
+.ttCho .cham { background: var(--nhan); box-shadow: 0 0 0 5px rgba(194, 65, 12, .18); animation: nhip 1.6s ease-in-out infinite; }
+.ttXong { background: var(--xanh-nhat); border: 1px solid #c6e6cf; color: var(--xanh); }
+.ttXong .cham { background: var(--xanh); }
+.ttXam { background: var(--vien-nhat); border: 1px solid var(--vien); color: var(--chu-2); }
+.ttXam .cham { background: var(--chu-phu); }
+@keyframes nhip { 50% { box-shadow: 0 0 0 9px rgba(194, 65, 12, .08); } }
+@media (prefers-reduced-motion: reduce) { .ttCho .cham { animation: none; } }
+
+.dongTien { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+.dongTien b { flex: none; color: var(--toi); font-weight: 600; text-align: right; }
+.ke { height: 1px; background: var(--vien); margin: 2px 0; }
+.tong { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; color: var(--toi); }
+.soTong { font-size: 24px; color: var(--nhan); }
+
+.qr { align-items: center; padding: 16px; gap: 10px; }
+.phuGiua { font-size: 13px; color: var(--chu-phu); text-align: center; }
+.khungQr { width: 232px; height: 232px; padding: 12px; border: 2px solid var(--toi); border-radius: var(--bo); background: #fff; }
+.khungQr img { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+.napas { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--chu-phu); }
+.napas b { color: var(--nhan); font-weight: 800; }
+.luuQr { font-size: 14px; border-width: 1.5px; border-color: var(--vien-o); }
+
+.tay { padding: 6px 14px; gap: 0; }
+.tay .h2 { padding: 8px 0 4px; }
+.dongCk { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--vien-nhat); }
+.dongChu { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+.dongChu span { font-size: 12.5px; color: var(--chu-phu); }
+.dongChu b { font-size: 15px; color: var(--toi); overflow-wrap: anywhere; }
+.dongChu .to { font-size: 17px; letter-spacing: .5px; }
+.dongChu .tien { font-size: 17px; color: var(--nhan); }
+.nhacNd { background: var(--nhan-nhat); border-radius: 10px; padding: 10px 12px; margin: 6px 0 10px; font-size: 13px; color: var(--nhan-chu-dam); line-height: 1.4; }
+
+.cho { flex-direction: row; align-items: center; gap: 12px; }
+.cho div { display: flex; flex-direction: column; line-height: 1.35; }
+.cho b { color: var(--toi); }
+.cho span { font-size: 13px; color: var(--chu-phu); }
+.cho .loi { color: var(--do); font-weight: 600; }
+.quay {
+  flex: none; width: 28px; height: 28px; border-radius: 50%; border: 3px solid var(--vien); border-top-color: var(--nhan);
+  animation: quay 1s linear infinite;
+}
+@keyframes quay { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .quay { animation-duration: 3s; } }
+.goi { min-height: 48px; border-width: 1.5px; border-color: var(--vien-o); }
+
+.hieuLuc { background: var(--xanh-nhat); border: 1px solid #c6e6cf; border-radius: var(--bo); }
+.hlDau { display: flex; gap: 12px; align-items: center; }
+.hlDau h2 { font-size: 16px; color: var(--xanh); }
+.hlDau span { font-size: 13px; color: var(--chu-2); }
+.oIcon { width: 44px; height: 44px; border-radius: 10px; background: #fff; color: var(--xanh); display: grid; place-items: center; flex: none; }
+.dongHl { display: flex; justify-content: space-between; gap: 10px; background: #fff; border-radius: var(--bo-nho); padding: 8px 10px; font-size: 13.5px; }
+.dongHl b { color: var(--xanh); }
+.hlGhiChu { font-size: 12.5px; color: var(--chu-2); }

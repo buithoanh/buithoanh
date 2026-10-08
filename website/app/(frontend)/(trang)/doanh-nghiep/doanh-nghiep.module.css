@@ -1,0 +1,56 @@
+.hero { background: var(--toi); color: #fff; padding: 8px 0 26px; }
+.heroTrong { display: flex; flex-direction: column; gap: 14px; }
+.nhanHero {
+  align-self: flex-start; background: rgba(255, 255, 255, .1); color: var(--nhan-tren-toi-3); font-size: 13px; font-weight: 600;
+  padding: 4px 10px; border-radius: 999px;
+}
+.hero h1 { color: #fff; font-size: 29px; line-height: 1.18; font-weight: 800; letter-spacing: -0.02em; }
+.dan { color: var(--chu-tren-toi); font-size: 15px; max-width: 640px; }
+.nutHero { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.nutHero :global(.nut-vien-trang) { min-height: 50px; font-size: 16px; border-radius: 12px; }
+.diem { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 6px; max-width: 560px; }
+.diem div { background: rgba(255, 255, 255, .07); border-radius: 10px; padding: 10px 8px; text-align: center; display: flex; flex-direction: column; }
+.diem b { font-size: 17px; color: var(--nhan-tren-toi); }
+.diem span { font-size: 12px; color: var(--chu-tren-toi-2); }
+
+.luoi { display: flex; flex-direction: column; }
+.cotTrai { display: flex; flex-direction: column; }
+.khoi { padding-top: 24px; display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 16px; }
+.khoi h2 { font-size: 22px; }
+
+.bangGia { overflow: hidden; }
+.dauBang { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 10px 14px; background: var(--toi); color: #fff; font-size: 13px; font-weight: 600; }
+.dongGia { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 12px 14px; border-bottom: 1px solid var(--vien-nhat); align-items: center; }
+.lienHe { color: var(--nhan); font-weight: 700; white-space: nowrap; font-size: 14.5px; min-height: 44px; display: inline-flex; align-items: center; }
+.daGom { padding: 12px 14px; background: var(--nen-nhat); display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; }
+.daGom b { color: var(--toi); }
+.daGom span { color: var(--chu-phu); }
+.giam { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; color: var(--chu-2); }
+.giam svg { flex: none; color: var(--xanh); margin-top: 2px; }
+
+.giayTo { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.giayTo li { padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start; }
+.giayTo b { display: block; color: var(--toi); }
+.giayTo li span:not(.oIcon) { font-size: 14px; color: var(--chu-phu); }
+.oIcon { flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--xanh-duong-nhat); color: var(--toi-2); display: grid; place-items: center; }
+.hoSo {
+  display: flex; align-items: center; gap: 12px; background: var(--toi); color: #fff; text-decoration: none; border-radius: var(--bo);
+  padding: 12px 14px; min-height: 60px;
+}
+.hoSo:hover { background: var(--toi-2); color: #fff; }
+.hoSo > span:nth-child(2) { flex: 1; display: flex; flex-direction: column; }
+.hoSo > span:nth-child(2) span { font-size: 13px; color: var(--chu-tren-toi-2); }
+.oIconToi { flex: none; width: 40px; height: 40px; border-radius: 10px; background: rgba(255, 255, 255, .12); display: grid; place-items: center; }
+.cotForm { padding-top: 28px; }
+
+@media (min-width: 900px) {
+  .hero { padding: 16px 0 40px; }
+  .hero h1 { font-size: 44px; }
+  .dan { font-size: 17px; }
+  .nutHero { flex-direction: row; }
+  .nutHero :global(.nut) { padding: 0 28px; }
+  .luoi { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px; align-items: start; }
+  .khoi { padding-top: 40px; }
+  .khoi h2 { font-size: 26px; }
+  .cotForm { position: sticky; top: 16px; padding-top: 40px; }
+}

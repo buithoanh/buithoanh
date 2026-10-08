@@ -1,0 +1,13 @@
+.footer { background: var(--toi); color: var(--chu-tren-toi-2); padding: 24px 0 28px; margin-top: 28px; font-size: 13px; }
+.cot { display: flex; flex-direction: column; gap: 18px; }
+.thuongHieu, .nhom { display: flex; flex-direction: column; gap: 6px; }
+.ten { color: #fff; font-size: 18px; font-weight: 800; }
+.nhom b { color: #fff; font-size: 15px; }
+.nhom a { color: #fff; min-height: 32px; display: inline-flex; align-items: center; }
+.nhom a:hover { color: var(--nhan-tren-toi); }
+.bct { align-self: flex-start; border: 1px dashed #5a7a9c; border-radius: 6px; padding: 6px 10px; }
+@media (min-width: 900px) {
+  .footer { padding: 40px 0; margin-top: 48px; font-size: 14px; }
+  .cot { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 32px; }
+  .nhom a { min-height: 28px; }
+}

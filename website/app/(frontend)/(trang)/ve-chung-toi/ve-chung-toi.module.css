@@ -1,0 +1,56 @@
+.anhHero { min-height: 190px; }
+.hai { display: flex; flex-direction: column; }
+.hai p { margin: 0; }
+.trich { margin: 0; background: var(--nhan-nhat); border-radius: var(--bo); padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.trich b { color: var(--toi); font-size: 16px; }
+.trich span { font-size: 13.5px; color: var(--chu-phu); }
+.soLieu { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.soLieu > div { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); padding: 14px 12px; display: flex; flex-direction: column-reverse; gap: 2px; }
+.soLieu dd { margin: 0; font-size: 24px; line-height: 1.2; color: var(--nhan); font-weight: 800; }
+.soLieu dt { font-size: 13.5px; color: var(--chu-phu); }
+.tho { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.theTho { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); overflow: hidden; height: 100%; }
+.anhTho { border-radius: 0; border: 0; }
+.thoChu { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px; }
+.thoDau { display: flex; align-items: center; gap: 12px; }
+.thoDau h3 { font-size: 16px; }
+.thoDau span { font-size: 13.5px; color: var(--chu-phu); }
+.chuDau {
+  flex: none; width: 48px; height: 48px; border-radius: 50%; background: var(--toi-2); color: var(--nen-trang); display: grid; place-items: center;
+  font-weight: 700; font-size: 15px; margin-top: -36px; border: 3px solid var(--nen-trang); position: relative;
+}
+.chungChi { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chungChi li { display: inline-flex; align-items: center; gap: 5px; background: var(--xanh-nen); color: var(--xanh-dam); border-radius: 999px; padding: 4px 10px; font-size: 12.5px; font-weight: 600; }
+.thoGt { font-size: 13.5px; }
+.anhXuong { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 90px 90px; gap: 8px; }
+.anhXuong > * { height: 100%; min-height: 0; }
+.anhLon { grid-row: span 2; }
+.dsXuong { list-style: none; margin: 0; padding: 0; background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); }
+.dsXuong li { display: flex; gap: 10px; padding: 12px 14px; font-size: 14.5px; }
+.dsXuong li + li { border-top: 1px solid var(--vien-nhat); }
+.dsXuong svg { flex: none; color: var(--xanh-vua); margin-top: 2px; }
+.hst { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.hst li { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); padding: 14px; display: flex; gap: 12px; align-items: flex-start; }
+.hst li > div { display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+.hst h3 { font-size: 16px; }
+.maHst {
+  flex: none; width: 48px; height: 48px; border-radius: var(--bo); background: var(--toi); color: var(--nhan-tren-toi);
+  display: grid; place-items: center; font-weight: 800; font-size: 11px; letter-spacing: .02em;
+}
+.choBan { font-size: 13px; color: var(--nhan); font-weight: 600; }
+.camKet { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.camKet > div { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); padding: 14px 12px; display: flex; flex-direction: column; gap: 4px; }
+.camKet dt { font-size: 17px; color: var(--toi); line-height: 1.25; font-weight: 700; }
+.camKet dd { margin: 0; font-size: 13px; color: var(--chu-phu); }
+.nut { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+.tuyenTho { font-weight: 700; color: var(--toi-2); min-height: 44px; display: flex; align-items: center; justify-content: center; }
+
+@media (min-width: 900px) {
+  .hai { display: grid; grid-template-columns: 3fr 2fr; gap: 40px; align-items: start; }
+  .tho { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .anhXuong { grid-template-rows: 140px 140px; max-width: 760px; }
+  .dsXuong { max-width: 760px; }
+  .hst { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .camKet { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .nut { flex-direction: row; align-items: center; gap: 24px; }
+}

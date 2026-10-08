@@ -1,18 +1,28 @@
 import site from "../site.config.mjs";
-import { slugsOf, readEntry, isoDate } from "../lib/content.mjs";
+import { isoDate, layDanhSachBai, layDanhSachDichVu, layDanhSachTrangHangXe, layDanhSachTrangKhuVuc } from "../lib/cms";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
-export default function sitemap() {
+export default async function sitemap() {
   const u = (p) => `${site.url}${p}`;
+  const [dichVu, baiViet, khuVuc, hangXe] = await Promise.all([layDanhSachDichVu(), layDanhSachBai(), layDanhSachTrangKhuVuc(), layDanhSachTrangHangXe()]);
   return [
     { url: u("/"), changeFrequency: "weekly", priority: 1 },
     { url: u("/dat-lich/"), priority: 0.8 },
+    { url: u("/goi-gap/"), priority: 0.8 },
     { url: u("/cam-nang/"), changeFrequency: "weekly", priority: 0.7 },
-    ...slugsOf("dich-vu").map((s) => ({ url: u(`/dich-vu/${s}/`), priority: 0.9 })),
-    ...slugsOf("cam-nang").map((s) => {
-      const d = readEntry("cam-nang", s).data;
-      return { url: u(`/cam-nang/${s}/`), lastModified: isoDate(d.capNhat || d.ngay), priority: 0.6 };
-    }),
+    { url: u("/bang-gia/"), changeFrequency: "weekly", priority: 0.8 },
+    { url: u("/xe-dien/"), priority: 0.7 },
+    { url: u("/ve-chung-toi/"), priority: 0.5 },
+    { url: u("/chinh-sach-bao-hanh/"), priority: 0.3 },
+    { url: u("/chinh-sach-du-lieu/"), priority: 0.3 },
+    { url: u("/hoi-vien/"), priority: 0.6 },
+    { url: u("/doanh-nghiep/"), priority: 0.6 },
+    { url: u("/tuyen-tho/"), priority: 0.5 },
+    { url: u("/tra-cuu-xe/"), priority: 0.4 },
+    ...dichVu.map((s) => ({ url: u(`/dich-vu/${s.slug}/`), priority: 0.9 })),
+    ...baiViet.map((a) => ({ url: u(`/cam-nang/${a.slug}/`), lastModified: isoDate(a.capNhat || a.ngay), priority: 0.6 })),
+    ...khuVuc.map((t) => ({ url: u(t.duongDan), lastModified: isoDate(t.capNhat), priority: 0.7 })),
+    ...hangXe.map((t) => ({ url: u(t.duongDan), lastModified: isoDate(t.capNhat), priority: 0.6 })),
   ];
 }

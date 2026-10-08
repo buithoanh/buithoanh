@@ -1,0 +1,16 @@
+.khung { display: flex; flex-direction: column; gap: 12px; color: var(--chu); }
+.the { background: var(--nen-trang); border-radius: var(--bo-lon); padding: 22px; box-shadow: 0 12px 32px rgba(0, 0, 0, .25); }
+.hop { background: var(--nhan-nhat); border-radius: var(--bo); padding: 14px; gap: 10px; }
+.tieuDe { font-size: 19px; color: var(--toi); }
+.hop .tieuDe { font-size: 15px; }
+.cho { min-height: 136px; border-radius: 10px; background: var(--nen); }
+.gia {
+  background: var(--nhan-nhat); border-radius: 10px; padding: 12px 14px; display: flex; justify-content: space-between;
+  align-items: baseline; gap: 10px; flex-wrap: wrap;
+}
+.hop .gia { background: var(--nen-trang); padding: 10px 12px; }
+.gia span { font-size: 14px; }
+.gia b { font-size: 22px; color: var(--nhan); white-space: nowrap; }
+.hop .gia b { font-size: 18px; }
+.ghiChu { font-size: 12.5px; color: var(--chu-phu); margin-top: -4px; }
+.nut { min-height: 50px; font-weight: 800; }

@@ -1,0 +1,24 @@
+.nd :global(h2) { font-size: 20px; }
+.nd :global(.khoi-gia) { margin: 18px 0 0; background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); overflow: hidden; }
+.nd :global(.khoi-gia figcaption) { padding: 10px 14px; font-size: 14px; font-weight: 700; color: var(--nen-trang); background: var(--toi); }
+.nd :global(.khoi-gia table) { display: table; width: 100%; font-size: 14px; }
+.nd :global(.khoi-gia td) { padding: 10px 14px; border: 0; border-top: 1px solid var(--vien-nhat); vertical-align: top; }
+.nd :global(.khoi-gia td:last-child) { text-align: right; font-weight: 700; color: var(--toi); }
+.nd :global(.khoi-gia small) { display: block; font-size: 12px; color: var(--chu-phu); }
+.nd :global(.khoi-gia-ghi-chu) { padding: 10px 14px; font-size: 13px; color: var(--chu-phu); background: var(--nen-nhat); margin: 0; }
+.nd :global(.khoi-dat-lich) {
+  margin: 22px 0 8px; background: var(--nhan-nhat); border-radius: var(--bo); padding: 16px;
+  display: flex; flex-direction: column; gap: 10px; font-size: 15px;
+}
+.nd :global(.khoi-dat-lich > *) { margin: 0; }
+.nd :global(.khoi-dat-lich-tieu-de) { font-size: 17px; font-weight: 700; color: var(--toi); }
+.nd :global(.khoi-dat-lich a) { align-self: flex-start; min-height: 48px; padding: 0 22px; }
+.nd :global(.video-youtube) { margin: 18px 0 0; position: relative; display: flex; flex-direction: column; gap: 8px; }
+.nd :global(.video-youtube img), .nd :global(.video-youtube iframe) {
+  width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; border-radius: var(--bo); background: var(--nen-ban-do); border: 0; display: block;
+}
+.nd :global(.video-youtube-phat) {
+  position: absolute; left: 0; right: 0; top: 0; aspect-ratio: 16 / 9; width: 100%; border: 0; border-radius: var(--bo);
+  background: rgba(19, 40, 63, .25); color: var(--nen-trang); font-size: 40px; cursor: pointer;
+}
+.nd :global(.video-youtube figcaption) { font-size: 13px; color: var(--chu-phu); }

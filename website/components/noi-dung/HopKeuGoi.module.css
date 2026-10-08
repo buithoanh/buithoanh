@@ -1,0 +1,13 @@
+.hop {
+  background: var(--nhan-nhat); border-radius: var(--bo); padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.chu { display: flex; flex-direction: column; gap: 10px; }
+.hop :global(.nut) { min-height: 50px; font-weight: 800; }
+.tieuDe { color: var(--toi); font-size: 17px; font-weight: 700; }
+.moTa { font-size: 14px; color: var(--chu-2); }
+@media (min-width: 720px) {
+  .hop { flex-direction: row; align-items: center; justify-content: space-between; padding: 20px 24px; gap: 24px; }
+  .chu { gap: 4px; }
+  .hop :global(.nut) { width: auto; flex: none; padding: 0 28px; }
+}

@@ -1,0 +1,12 @@
+.dau {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--toi); color: #fff; padding: 6px 8px 12px; display: flex; flex-direction: column; gap: 8px;
+}
+.hang { display: flex; align-items: center; gap: 4px; }
+.nutIcon {
+  width: 44px; height: 44px; border: 0; background: transparent; color: #fff; display: grid; place-items: center;
+  cursor: pointer; border-radius: 10px; flex: none;
+}
+.nutIcon:hover { background: rgba(255, 255, 255, .08); color: #fff; }
+.tieuDe { font-size: 17px; flex: 1; min-width: 0; }
+.buoc { font-size: 13px; color: var(--chu-tren-toi-2); padding-right: 8px; white-space: nowrap; }

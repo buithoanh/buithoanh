@@ -1,0 +1,190 @@
+/* Nền chung của web công khai ThợTới: biến màu, chữ, khoảng cách và vài lớp tiện dụng.
+   Style riêng của từng khối nằm trong CSS Module cạnh component (components/**, app/(frontend)/**). */
+
+:root {
+  /* Màu theo thiết kế (docs/thiet-ke). Không viết mã màu trực tiếp trong component: dùng biến dưới đây. */
+  --toi: #13283f;          /* nền tối, chữ tiêu đề */
+  --toi-2: #1d3a5a;        /* link */
+  --nhan: #c2410c;         /* nhấn cam: nút chính */
+  --nhan-dam: #9a330a;     /* hover nút chính */
+  --nhan-nhat: #fff1e6;    /* nền cam nhạt */
+  --nhan-tren-toi: #ffb27a;/* chữ cam trên nền tối */
+  --nhan-tren-toi-2: #ffc9a3;
+  --nhan-tren-toi-3: #ffd8bd;
+  --nen: #f6f7f9;
+  --nen-trang: #ffffff;
+  --nen-nhat: #fafbfc;     /* chân bảng, ghi chú */
+  --chu: #18212c;
+  --chu-phu: #5a6575;
+  --chu-tren-toi: #d6e0eb;
+  --chu-tren-toi-2: #c3cfdc;
+  --vien: #e1e5ea;
+  --vien-nhat: #eef1f4;    /* kẻ dòng trong bảng */
+  --vien-o: #c9d0d8;       /* viền ô nhập */
+  --zalo: #0068ff;
+  --xanh: #15803d;         /* thành công */
+  --xanh-nhat: #ecfdf3;
+  --do: #b42318;           /* lỗi */
+  --do-nhat: #fef3f2;
+  --vang-nhat: #fffbeb;
+  --vang: #92400e;
+
+  --font: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bo-nho: 8px;
+  --bo: 12px;
+  --bo-lon: 16px;
+  --rong-toi-da: 1200px;
+  --le: 16px;              /* lề hai bên trên điện thoại */
+  --cao-nut: 44px;         /* nút, ô bấm tối thiểu */
+  --bong: 0 1px 2px rgba(19, 40, 63, 0.06), 0 4px 16px rgba(19, 40, 63, 0.06);
+  /* Luồng đơn (DatLich, GoiGap) */
+  --nhan-sang: #ff8a4c;    /* đoạn thanh bước đã qua (trên nền tối) */
+  --nhan-chu-dam: #8a2c06; /* chữ cam đậm trên nền cam nhạt */
+  --xam-tat: #9aa5b1;      /* nút chưa bấm được */
+  --chu-khoa: #6b7684;     /* chữ ô bị khoá (khung đầy) */
+  --vien-net-dut: #a9b6c4; /* nút thêm ảnh viền nét đứt */
+  --xanh-duong-nhat: #eef3f9;
+  --do-vien: #f3b8b1;
+  --do-khan: #b42318;      /* nhãn KHẨN CẤP */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--nen);
+  color: var(--chu);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 { color: var(--toi); line-height: 1.2; margin: 0; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: var(--toi-2); }
+a:hover { color: var(--toi); }
+img, svg, video { max-width: 100%; }
+img { height: auto; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--nhan); outline-offset: 2px; }
+main:focus { outline: none; }
+
+/* ---------- bố cục ---------- */
+.wrap { width: 100%; max-width: var(--rong-toi-da); margin: 0 auto; padding: 0 var(--le); }
+.wrap-hep { width: 100%; max-width: 720px; margin: 0 auto; padding: 0 var(--le); }
+.khoi { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 14px; }
+.khoi-tieu-de { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.khoi h2 { font-size: 22px; }
+.phu { color: var(--chu-phu); font-size: 14px; }
+.nho { font-size: 13px; }
+@media (min-width: 900px) {
+  :root { --le: 24px; }
+  .khoi { padding-top: 48px; }
+  .khoi h2 { font-size: 28px; }
+}
+
+/* ---------- nút ---------- */
+.nut {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: var(--cao-nut); padding: 0 18px; border-radius: 10px; border: 0;
+  font-weight: 700; font-size: 15px; text-decoration: none; cursor: pointer; text-align: center;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.nut:disabled, .nut[aria-disabled="true"] { opacity: .55; cursor: not-allowed; pointer-events: none; }
+.nut-chinh { background: var(--nhan); color: #fff; }
+.nut-chinh:hover { background: var(--nhan-dam); color: #fff; }
+.nut-toi { background: var(--toi); color: #fff; }
+.nut-toi:hover { background: var(--toi-2); color: #fff; }
+.nut-zalo { background: var(--zalo); color: #fff; }
+.nut-zalo:hover { background: #0052cc; color: #fff; }
+.nut-trang { background: #fff; color: var(--toi); border: 1px solid var(--vien); }
+.nut-trang:hover { border-color: var(--toi); color: var(--toi); }
+.nut-vien-trang { background: transparent; color: #fff; border: 2px solid rgba(255, 255, 255, .7); }
+.nut-vien-trang:hover { background: rgba(255, 255, 255, .08); color: #fff; }
+.nut-lon { min-height: 54px; font-size: 17px; border-radius: 12px; font-weight: 800; }
+.nut-day { width: 100%; }
+.link-nhan { color: var(--nhan); font-weight: 700; text-decoration: none; }
+.link-nhan:hover { color: var(--nhan-dam); text-decoration: underline; }
+
+/* ---------- thẻ, nhãn ---------- */
+.the { background: #fff; border: 1px solid var(--vien); border-radius: var(--bo); }
+.nhan { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 4px 10px; font-size: 13px; font-weight: 600; }
+.nhan-cam { background: var(--nhan-nhat); color: var(--nhan); }
+.nhan-xanh { background: var(--xanh-nhat); color: var(--xanh); }
+.chip { display: inline-flex; align-items: center; background: #fff; border: 1px solid var(--vien); border-radius: 999px; padding: 6px 12px; font-size: 14px; }
+
+/* ---------- thông báo ---------- */
+.bao { border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+.bao-loi { background: var(--do-nhat); color: var(--do); border: 1px solid #fecdca; }
+.bao-ok { background: var(--xanh-nhat); color: var(--xanh); border: 1px solid #abefc6; }
+.bao-vang { background: var(--vang-nhat); color: var(--vang); border: 1px solid #fde68a; }
+.bao-cam { background: var(--nhan-nhat); color: var(--toi); }
+
+/* ---------- nội dung bài (HTML từ trình soạn thảo) ---------- */
+.noi-dung-bai { font-size: 16px; line-height: 1.7; }
+.noi-dung-bai > * + * { margin-top: 14px; }
+.noi-dung-bai h2 { font-size: 22px; margin-top: 28px; scroll-margin-top: 80px; }
+.noi-dung-bai h3 { font-size: 18px; margin-top: 22px; scroll-margin-top: 80px; }
+.noi-dung-bai ul, .noi-dung-bai ol { padding-left: 22px; }
+.noi-dung-bai li + li { margin-top: 6px; }
+.noi-dung-bai table { width: 100%; border-collapse: collapse; font-size: 14px; display: block; overflow-x: auto; }
+.noi-dung-bai th, .noi-dung-bai td { border: 1px solid var(--vien); padding: 8px 10px; text-align: left; }
+.noi-dung-bai blockquote { margin: 0; border-left: 4px solid var(--nhan); padding: 4px 0 4px 14px; color: var(--chu-phu); }
+
+/* ---------- tiện ích ---------- */
+.an-di, .sr-only {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.bo-qua {
+  position: absolute; left: 8px; top: -60px; z-index: 100; background: #fff; color: var(--toi);
+  padding: 10px 14px; border-radius: 8px; font-weight: 700;
+}
+.bo-qua:focus { top: 8px; }
+.thanh-thu {
+  background: #fde68a; color: #422006; font-size: 13px; text-align: center; padding: 6px 12px;
+}
+.thanh-thu a { color: inherit; font-weight: 700; }
+
+/* Thêm cho nhóm nội dung + P2 (cẩm nang, hội viên, doanh nghiệp, tuyển thợ). */
+:root {
+  --nen-khung-anh: #e6ecf2; /* khung giữ chỗ ảnh nhỏ */
+  --chu-2: #3d4754;         /* chữ thân hơi nhạt (đoạn dẫn) */
+  --vien-cam: #f3cfb2;      /* viền trên nền cam nhạt */
+}
+
+/* ---------- thêm cho trang công khai (nhóm A: trang chủ, dịch vụ, bảng giá…) ---------- */
+:root {
+  --nen-ban-do: #e6ecf2;   /* khung bản đồ, khung ảnh giữ chỗ */
+  --vien-ban-do: #d5dde6;
+  --xanh-nen: #e9f6ec;     /* ô bảo hành, "việc chúng tôi làm" */
+  --xanh-dam: #1e6b2f;
+  --xanh-vua: #2b8a3e;     /* chữ "Miễn phí", dấu tích */
+  --do-nen: #fdecea;       /* "việc KHÔNG làm" */
+  --do-vien: #f3c2bd;
+  --chu-tren-do: #4a3330;
+  --chu-404: #3d4754;
+  --net-404: #a9b6c4;
+  --chu-tren-cam: #ffe2cf; /* chữ phụ trên nút cam */
+  --chu-menu-toi: #dfe7f1;
+}
+
+/* Màu thêm cho các màn phục vụ khách (link riêng /don/..., tra cứu xe) — components/phuc-vu/ */
+:root {
+  --nhan-chu: #8a2c06;       /* chữ cam đậm trên nền cam nhạt */
+  --nhan-vien: #f6d3b8;      /* viền khối cam nhạt */
+  --xanh-dam: #1f6b30;       /* chữ xanh đậm trên nền xanh nhạt */
+  --xanh-vien: #c6e6cf;
+  --muc-gap-nen: #fde8e0;    /* nhãn "Cần làm ngay" */
+  --muc-nen-nen: #fff4d6;    /* nhãn "Nên làm" */
+  --muc-nen-chu: #6b4e00;
+  --chu-xam: #4a5768;        /* nhãn "Có thể để sau", chú thích */
+  --chu-phu-2: #3d4856;
+  --nen-xanh-nhat: #eef3f9;  /* nền ô thông tin xanh nhạt */
+  --zalo-nhat: #eaf2ff;
+  --nen-ban-do: #e6ecf2;
+  --vien-dam: #d5dde6;
+  --sao: #e8890c;
+  --sao-tat: #d3d9e0;
+}

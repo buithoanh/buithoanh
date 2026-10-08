@@ -1,0 +1,18 @@
+.khoi { gap: 10px; }
+.khoi h2.nho { font-size: 18px; }
+.ds { display: flex; flex-direction: column; gap: 8px; }
+.cau { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); padding: 0 14px; }
+.cau summary {
+  font-weight: 700; color: var(--toi); cursor: pointer; min-height: 48px; padding: 12px 24px 12px 0; position: relative;
+  list-style: none; display: flex; align-items: center;
+}
+.cau summary::-webkit-details-marker { display: none; }
+.cau summary::after {
+  content: ""; position: absolute; right: 2px; top: 50%; width: 8px; height: 8px; margin-top: -6px;
+  border-right: 2px solid var(--chu-phu); border-bottom: 2px solid var(--chu-phu); transform: rotate(45deg); transition: transform .15s;
+}
+.cau[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+.cau p { margin: 0 0 12px; color: var(--chu-phu); font-size: 14px; }
+@media (min-width: 900px) {
+  .cau p { font-size: 15px; }
+}

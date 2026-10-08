@@ -1,0 +1,66 @@
+.banDo { height: 300px; flex: none; background: var(--nen-ban-do); position: relative; overflow: hidden; }
+.hinh { position: absolute; inset: 0; width: 100%; height: 100%; }
+.chipBanDo {
+  position: absolute; left: 12px; top: 12px; background: var(--nen-trang); border-radius: var(--bo-nho);
+  padding: 4px 10px; font-size: 12px; color: var(--chu-phu); box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
+}
+.moBanDo {
+  position: absolute; right: 12px; bottom: 32px; display: inline-flex; align-items: center; gap: 6px;
+  min-height: 44px; padding: 0 14px; border-radius: 999px; background: var(--nen-trang); color: var(--toi);
+  font-size: 13.5px; font-weight: 700; text-decoration: none; box-shadow: 0 1px 4px rgba(0, 0, 0, .16);
+}
+.tam {
+  flex: 1; background: var(--nen-trang); padding: 16px 16px 12px; display: flex; flex-direction: column; gap: 14px;
+}
+.tamNoi { margin-top: -20px; border-radius: 18px 18px 0 0; box-shadow: 0 -4px 16px rgba(19, 40, 63, .12); position: relative; }
+.tayCam { align-self: center; width: 40px; height: 4px; border-radius: 2px; background: var(--vien-dam); margin-top: -6px; }
+
+.dau { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+.dauTrai { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.dauTrai span { font-size: 13px; color: var(--chu-phu); }
+.lon { font-size: 30px; color: var(--toi); letter-spacing: -0.02em; font-weight: 800; }
+.lonVua { font-size: 22px; letter-spacing: -0.01em; line-height: 1.25; margin-top: 2px; }
+.chip {
+  background: var(--nhan-nhat); color: var(--nhan-chu); font-weight: 700; border-radius: 999px;
+  padding: 6px 12px; font-size: 14px; white-space: nowrap; flex: none;
+}
+.chipXanh { background: var(--xanh-nhat); color: var(--xanh-dam); }
+.loiNhac { font-size: 14px; color: var(--chu-phu-2); margin-top: -6px; }
+.cta { display: flex; flex-direction: column; gap: 8px; }
+.cta :global(.nut) { min-height: 50px; border-radius: var(--bo); }
+
+.haiNut { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.goi, .nhanTin {
+  display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; border-radius: var(--bo);
+  text-decoration: none; font-weight: 800; text-align: center; padding: 0 8px;
+}
+.goi { background: var(--nhan); color: #fff; }
+.goi:hover { background: var(--nhan-dam); color: #fff; }
+.nhanTin { background: var(--nen-trang); color: var(--toi); border: 1.5px solid var(--vien-o); font-weight: 700; }
+.nhanTin:hover { border-color: var(--toi); color: var(--toi); }
+
+.buoc { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.buoc li { display: flex; gap: 12px; align-items: stretch; min-height: 34px; }
+.cot { display: flex; flex-direction: column; align-items: center; width: 18px; flex: none; }
+.cham { width: 14px; height: 14px; border-radius: 50%; margin-top: 4px; flex: none; background: var(--nen-trang); border: 2px solid var(--vien-o); }
+.chamXong { background: var(--xanh); border-color: var(--xanh); }
+.chamNay { background: var(--nhan); border-color: var(--nhan); box-shadow: 0 0 0 4px rgba(194, 65, 12, .2); }
+.duong { flex: 1; width: 2px; background: var(--vien); }
+.duongXong { background: var(--xanh); }
+.buoc li:last-child .duong { display: none; }
+.dong { display: flex; justify-content: space-between; flex: 1; gap: 8px; padding-bottom: 8px; }
+.chuNay { font-weight: 700; color: var(--nhan); }
+.chuChua { color: var(--chu-phu); }
+.luc { font-size: 12.5px; color: var(--chu-phu); white-space: nowrap; }
+
+.thongTin { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 14px; border-top: 1px solid var(--vien-nhat); padding-top: 12px; }
+.thongTin dt { color: var(--chu-phu); }
+.thongTin dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+.ghiChu { margin: 0; font-size: 12px; color: var(--chu-phu); }
+.duongPho { stroke: var(--nen-trang); stroke-width: 10; fill: none; }
+.duongDi { stroke: var(--toi-2); stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.quang { fill: var(--nhan); fill-opacity: .18; }
+.ghim { fill: var(--nhan); }
+.tamGhim { fill: var(--nen-trang); }
+.xeTho { fill: var(--toi); }
+.denXe { stroke: var(--nhan-tren-toi); stroke-width: 3; stroke-linecap: round; }

@@ -1,0 +1,76 @@
+.dam { color: var(--toi); font-weight: 700; }
+.chonKy { display: flex; background: #fff; border: 1px solid var(--vien-o); border-radius: 12px; padding: 3px; gap: 3px; }
+.chonKy a {
+  display: inline-flex; align-items: center; justify-content: center; font-size: 14.5px; font-weight: 700; border-radius: 9px;
+  min-height: 42px; min-width: 76px; padding: 0 14px; color: var(--toi); text-decoration: none;
+}
+.chonKy a:hover { background: var(--nen); }
+.chonKy a[aria-current="page"] { background: var(--toi); color: #fff; }
+
+.kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 12px; }
+.oKpi { background: #fff; border: 1px solid var(--vien); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; }
+.oKpiNhan { border-color: #f3c9a8; box-shadow: inset 0 3px 0 var(--nhan); }
+.nhanKpi { font-size: 13.5px; color: var(--chu-phu); font-weight: 600; }
+.oKpi > b { font-size: 28px; line-height: 1.15; color: var(--toi); font-variant-numeric: tabular-nums; }
+.tang, .giam, .ngang { font-size: 13px; font-weight: 600; }
+.tang { color: var(--qt-xanh-bat); }
+.giam { color: var(--do); }
+.ngang { color: var(--chu-phu); }
+.mucTieuKpi { margin-top: 6px; }
+.thuoc { position: relative; height: 8px; background: var(--vien-nhat); border-radius: 4px; }
+.thuoc i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; }
+.dat { background: var(--qt-xanh-bat); }
+.chuaDat { background: var(--nhan); }
+.vach { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--toi); }
+.ghiChuKpi { font-size: 12.5px; color: var(--chu-phu); }
+
+.khoi { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 14px; }
+.khoi h2, .dauBang h2 { font-size: 19px; line-height: 1.35; margin-top: 2px; }
+.truocTieuDe { font-size: 13px; color: var(--chu-phu); font-weight: 600; }
+.chuGiai { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; }
+.chuGiai li { display: flex; align-items: center; gap: 8px; }
+.chuGiai b { color: var(--toi); font-variant-numeric: tabular-nums; }
+.nhat { color: var(--chu-phu); }
+.mau { flex: none; width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+.svg { width: 100%; height: auto; display: block; overflow: visible; }
+.luoi { stroke: var(--vien-nhat); stroke-width: 1; }
+.day { stroke: var(--chu-phu); stroke-width: 1.5; }
+.chuTruc { font-size: 12px; fill: var(--chu-phu); font-family: var(--font); }
+.chuTong { font-size: 12.5px; font-weight: 700; fill: var(--toi); font-family: var(--font); }
+.mucTieu { stroke: var(--nhan); stroke-width: 2; stroke-dasharray: 6 5; }
+.duong { fill: none; stroke: var(--toi); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.cham { fill: #fff; stroke: var(--toi); stroke-width: 2.5; }
+
+.hai { display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch; }
+.cotTyLe { flex: 1 1 420px; min-width: 0; }
+.cotNguon { flex: 1 1 460px; min-width: 0; overflow: hidden; display: flex; flex-direction: column; }
+.cotTop { flex: 3 1 560px; min-width: 0; overflow: hidden; }
+.cotDon { flex: 2 1 340px; min-width: 0; overflow: hidden; display: flex; flex-direction: column; }
+.chuGiaiDuong { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--chu-phu); }
+.chuGiaiDuong > span { display: flex; align-items: center; gap: 8px; }
+.netLien { width: 22px; height: 3px; background: var(--toi); border-radius: 2px; }
+.netDut { width: 22px; border-top: 2px dashed var(--nhan); }
+.dauBang { padding: 18px 20px 10px; }
+.bangNguon { min-width: 440px; font-variant-numeric: tabular-nums; }
+.bangTop { min-width: 560px; }
+.tenNguon { display: flex; align-items: center; gap: 8px; }
+.dongTong td { border-top: 2px solid var(--toi); font-weight: 800; background: var(--nen-nhat); }
+.duongDan { color: var(--toi); font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+.duongDan:hover { text-decoration: underline; }
+.oVao { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.oVao span { min-width: 52px; text-align: right; font-variant-numeric: tabular-nums; }
+.thanh { flex: 1; height: 8px; background: var(--vien-nhat); border-radius: 4px; max-width: 120px; min-width: 60px; }
+.thanh i { display: block; height: 8px; border-radius: 4px; background: var(--toi-2); }
+.donMoi { list-style: none; margin: 0; padding: 0; flex: 1; }
+.donMoi li { border-top: 1px solid var(--vien-nhat); padding: 10px 20px; display: flex; gap: 12px; align-items: flex-start; }
+.donMoi li .mau { margin-top: 5px; }
+.donMoi li > div { flex: 1; min-width: 0; display: flex; flex-direction: column; font-size: 14px; }
+.dongDon { display: flex; justify-content: space-between; gap: 8px; }
+.dongDon b { color: var(--toi); }
+.dongDon span { font-size: 13px; color: var(--chu-phu); }
+.xemTatCa {
+  display: flex; align-items: center; min-height: 46px; padding: 0 20px; border-top: 1px solid var(--vien-nhat); font-weight: 700;
+  color: var(--nhan); text-decoration: none; background: var(--nen-nhat);
+}
+.xemTatCa:hover { color: var(--nhan-dam); text-decoration: underline; }

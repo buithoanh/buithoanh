@@ -1,0 +1,28 @@
+.than { padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+.hop { background: var(--nhan-nhat); border-radius: var(--bo); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.chuMa { display: flex; align-items: center; gap: 10px; }
+.chuMa > span:last-child { display: flex; flex-direction: column; line-height: 1.3; }
+.chuMa b { color: var(--toi); }
+.avatar {
+  flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--toi-2); color: #fff;
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.hangMa { display: flex; gap: 8px; align-items: stretch; }
+.ma {
+  flex: 1; min-width: 0; background: #fff; border: 2px dashed var(--nhan); border-radius: 10px; display: grid; place-items: center;
+  font-size: 24px; font-weight: 800; letter-spacing: .12em; color: var(--toi); min-height: 54px; overflow-wrap: anywhere;
+}
+.oLink { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 13.5px; }
+.input {
+  flex: 1; min-width: 0; font-weight: 400; font-size: 14px; padding: 10px 12px; border: 1px solid var(--vien-cam);
+  border-radius: 10px; background: #fff; color: var(--chu); min-height: 46px;
+}
+.so { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.khoi { display: flex; flex-direction: column; gap: 10px; }
+.khoi h2 { font-size: 20px; }
+.nutVien { border-width: 1.5px; border-color: var(--vien-o); }
+.chan {
+  padding: 12px; border-radius: var(--bo); background: var(--vien-nhat); display: flex; gap: 10px;
+  align-items: flex-start; font-size: 12.5px; color: var(--chu-2); line-height: 1.4;
+}
+.chan svg { flex: none; margin-top: 1px; }

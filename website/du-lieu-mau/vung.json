@@ -1,0 +1,31 @@
+{
+  "_ghiChu": "DỮ LIỆU MẪU: 4 quận đợt 1 theo thiết kế (QtBangGia, KhuVuc). Thời gian tới dự kiến cần đo thực tế. Lưu ý: từ 01/07/2025 Hà Nội bỏ cấp quận, sắp xếp lại phường; cần chốt lại danh sách theo địa giới mới.",
+  "quan": [
+    { "ten": "Cầu Giấy", "eta": [25, 40], "phuong": ["Dịch Vọng", "Dịch Vọng Hậu", "Mai Dịch", "Nghĩa Đô", "Nghĩa Tân", "Quan Hoa", "Trung Hòa", "Yên Hòa"] },
+    { "ten": "Đống Đa", "eta": [30, 45], "phuong": ["Cát Linh", "Hàng Bột", "Khâm Thiên", "Khương Thượng", "Kim Liên", "Láng Hạ", "Láng Thượng", "Nam Đồng", "Ngã Tư Sở", "Ô Chợ Dừa", "Phương Liên – Trung Tự", "Phương Mai", "Quang Trung", "Quốc Tử Giám", "Thịnh Quang", "Thổ Quan", "Trung Liệt", "Văn Chương", "Văn Miếu"] },
+    { "ten": "Thanh Xuân", "eta": [30, 45], "phuong": ["Hạ Đình", "Khương Đình", "Khương Mai", "Khương Trung", "Kim Giang", "Nhân Chính", "Phương Liệt", "Thanh Xuân Bắc", "Thanh Xuân Nam", "Thanh Xuân Trung", "Thượng Đình"] },
+    { "ten": "Ba Đình", "eta": [35, 50], "phuong": ["Cống Vị", "Điện Biên", "Đội Cấn", "Giảng Võ", "Kim Mã", "Liễu Giai", "Ngọc Hà", "Ngọc Khánh", "Nguyễn Trung Trực", "Phúc Xá", "Quán Thánh", "Thành Công", "Trúc Bạch", "Vĩnh Phúc"],
+      "phuongTat": { "Phúc Xá": "Khu ngoài đê, xe van khó vào." } }
+  ],
+  "quanChuaPhucVu": ["Hai Bà Trưng", "Hoàn Kiếm", "Tây Hồ", "Nam Từ Liêm"],
+  "suCoKhanCap": [
+    { "ma": "aq", "ten": "Hết ắc quy", "moTa": "Đề không quay, đèn mờ", "dichVu": "ac-quy" },
+    { "ma": "lop", "ten": "Thủng, xẹp lốp", "moTa": "Vá hoặc thay tại chỗ", "dichVu": "lop" },
+    { "ma": "may", "ten": "Không nổ máy", "moTa": "Đề quay nhưng không nổ", "dichVu": "doc-loi-chan-doan" },
+    { "ma": "khac", "ten": "Vấn đề khác", "moTa": "Đèn báo lỗi, kẹt khóa…", "dichVu": "doc-loi-chan-doan" }
+  ],
+  "khungGio": [
+    { "ma": "08-10", "batDau": "08:00", "ketThuc": "10:00" },
+    { "ma": "10-12", "batDau": "10:00", "ketThuc": "12:00" },
+    { "ma": "12-14", "batDau": "12:00", "ketThuc": "14:00" },
+    { "ma": "14-16", "batDau": "14:00", "ketThuc": "16:00", "nghiCN": true },
+    { "ma": "16-18", "batDau": "16:00", "ketThuc": "18:00", "nghiCN": true },
+    { "ma": "18-20", "batDau": "18:00", "ketThuc": "20:00", "nghiCN": true }
+  ],
+  "ngayNghi": [
+    { "ngay": "2027-02-05", "ten": "Tết Nguyên đán" }, { "ngay": "2027-02-06", "ten": "Tết Nguyên đán" }, { "ngay": "2027-02-07", "ten": "Tết Nguyên đán" },
+    { "ngay": "2027-02-08", "ten": "Tết Nguyên đán" }, { "ngay": "2027-02-09", "ten": "Tết Nguyên đán" },
+    { "ngay": "2027-04-30", "ten": "Giải phóng miền Nam" }, { "ngay": "2027-05-01", "ten": "Quốc tế lao động" },
+    { "ngay": "2027-09-02", "ten": "Quốc khánh" }
+  ]
+}

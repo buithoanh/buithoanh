@@ -1,0 +1,39 @@
+.header { background: var(--toi); color: #fff; position: relative; z-index: 50; }
+.hang { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; padding-top: 10px; padding-bottom: 10px; }
+.ten { color: #fff; text-decoration: none; display: flex; flex-direction: column; line-height: 1.15; }
+.ten:hover { color: #fff; }
+.ten b { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+.ten span { font-size: 11px; color: var(--nhan-tren-toi-2); }
+.phai { display: flex; align-items: center; gap: 4px; }
+.goi {
+  display: inline-flex; align-items: center; gap: 6px; color: #fff; text-decoration: none; font-weight: 700; font-size: 14px;
+  padding: 10px 8px; min-height: 44px;
+}
+.goi:hover { color: var(--nhan-tren-toi); }
+.iconGoi { color: var(--nhan-tren-toi); }
+.menuNgang { display: none; }
+.datLich { display: none; }
+
+.menuDoc { position: static; }
+.menuDoc summary {
+  list-style: none; width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; border-radius: 8px;
+}
+.menuDoc summary::-webkit-details-marker { display: none; }
+.menuDoc[open] summary { background: rgba(255, 255, 255, .1); }
+.ngan {
+  position: absolute; left: 0; right: 0; top: 100%; background: var(--toi); border-top: 1px solid rgba(255, 255, 255, .12);
+  display: flex; flex-direction: column; padding: 8px var(--le) 16px; box-shadow: 0 12px 24px rgba(0, 0, 0, .2);
+}
+.ngan a { color: #fff; text-decoration: none; font-weight: 600; padding: 12px 0; min-height: 44px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+.ngan a:hover { color: var(--nhan-tren-toi); }
+
+@media (min-width: 900px) {
+  .hang { min-height: 72px; gap: 24px; }
+  .ten b { font-size: 20px; }
+  .menuNgang { display: flex; gap: 22px; flex: 1; justify-content: center; }
+  .menuNgang a { color: var(--chu-tren-toi); text-decoration: none; font-weight: 600; font-size: 15px; padding: 10px 0; }
+  .menuNgang a:hover { color: #fff; }
+  .phai { gap: 12px; }
+  .datLich { display: inline-flex; }
+  .menuDoc { display: none; }
+}

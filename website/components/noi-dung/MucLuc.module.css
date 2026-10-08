@@ -1,0 +1,18 @@
+.mucLuc { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); overflow: hidden; }
+.mucLuc summary {
+  list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 0 14px; min-height: 50px; font-weight: 700; color: var(--toi); cursor: pointer;
+}
+.mucLuc summary::-webkit-details-marker { display: none; }
+.phai { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--chu-phu); }
+.khiMo { display: none; }
+details[open] .khiMo { display: inline; }
+details[open] .khiDong { display: none; }
+details[open] .mui { transform: rotate(180deg); }
+.mucLuc ol { margin: 0; padding: 0 14px 10px; list-style: none; }
+.mucLuc > details > ol { border-top: 1px solid var(--vien-nhat); }
+.mucLuc a { display: flex; gap: 10px; align-items: center; min-height: 44px; font-size: 14.5px; text-decoration: none; color: var(--toi-2); }
+.so { flex: none; width: 22px; color: var(--nhan); font-weight: 700; }
+.chu { text-decoration: underline; text-underline-offset: 3px; }
+.mucLuc ol.con { padding: 0 0 0 32px; }
+.con a { min-height: 40px; font-size: 14px; }

@@ -1,84 +1,133 @@
-// Quy tắc kiểm tra bài, dùng chung cho script build (scripts/kiem-tra-bai.mjs) và trang quản trị (scripts/quan-tri.mjs).
-// Mỗi bài trả về danh sách mục kiểm tra { label, ok, level: "error" | "warn", detail }.
+// Luật kiểm tra bài, dùng chung cho CMS (khi lưu/đăng), trang /quan-tri/ và script kiểm tra hàng loạt.
+// Đầu vào là dữ liệu bài + thân bài ở dạng Markdown. Không đọc database ở đây.
 import site from "../site.config.mjs";
-import { slugsOf, readEntry } from "./content.mjs";
-import { tuLieuSlugs, readTuLieu, doanTrung } from "./tu-lieu.mjs";
+import { doanTrung } from "./tu-lieu.mjs";
 
-export const RULES = {
-  "dich-vu": { required: ["title", "description", "keyword", "ten", "tomTat"], minWords: 350 },
-  "cam-nang": { required: ["title", "description", "keyword", "nhom", "ngay"], minWords: 600 },
+export const LUAT = {
+  "dich-vu": { batBuoc: ["title", "description", "keyword", "ten", "tomTat"], soChuToiThieu: 350 },
+  "cam-nang": { batBuoc: ["title", "description", "keyword", "nhom", "ngay"], soChuToiThieu: 600 },
+  "khu-vuc": { batBuoc: ["title", "description", "keyword", "dichVu", "quan"], soChuToiThieu: 250 },
+  "hang-xe": { batBuoc: ["title", "description", "keyword", "hang"], soChuToiThieu: 350 },
+};
+
+/** Trang khu vực (dịch vụ × quận): luật riêng trước khi gửi duyệt. */
+export const LUAT_KHU_VUC = { soChuDoanRieng: 150, soAnhThat: 2, soDanhGiaThat: 1, tyLeTrungToiDa: 0.7 };
+
+const TEN_TRUONG = {
+  title: "Tiêu đề SEO", description: "Mô tả SEO", keyword: "Từ khoá chính", ten: "Tên dịch vụ",
+  tomTat: "Tóm tắt", nhom: "Nhóm từ khoá", ngay: "Ngày đăng", dichVu: "Dịch vụ", quan: "Quận", hang: "Hãng xe",
 };
 
 export const norm = (s) => String(s || "").toLowerCase().normalize("NFC");
-const PRICE = /\d[\d.,]*\s*(đ|đồng|vnđ|vnd|k|nghìn|ngàn|triệu)(?!\p{L})/iu;
+export const demChu = (md) => String(md || "").split(/\s+/).filter(Boolean).length;
+export const coNeuGia = (md) => /\d[\d.,]*\s*(đ|đồng|vnđ|vnd|k|nghìn|ngàn|triệu)(?!\p{L})/iu.test(String(md || ""));
 
-export function checkEntry(e) {
-  const services = slugsOf("dich-vu");
-  const tuLieuCo = tuLieuSlugs();
-  const { required, minWords } = RULES[e.section];
-  const t = String(e.data.title || "");
-  const d = String(e.data.description || "");
-  const kw = norm(e.data.keyword);
-  const head = norm(t + " " + e.body.split(/\s+/).slice(0, 120).join(" "));
-  const missing = required.filter((k) => !e.data[k]);
-  const badLinks = [...e.body.matchAll(/\]\((\/[^)\s]*)\)/g)]
-    .map(([, href]) => href)
-    .filter((href) => {
-      const m = href.match(/^\/(dich-vu|cam-nang)\/([^/]+)\/?$/);
-      return m && !slugsOf(m[1]).includes(m[2]);
-    });
-  const badServices = (e.data.dichVuLienQuan || []).filter((s) => !services.includes(s));
-  const tuLieu = e.data.tuLieu || [];
-  const tuLieuThieu = tuLieu.filter((s) => !tuLieuCo.includes(s));
-  const trung = tuLieu.filter((s) => tuLieuCo.includes(s))
-    .map((s) => ({ s, doan: doanTrung(e.body, readTuLieu(s).body) }))
+/**
+ * Danh sách mục kiểm tra của một bài, kể cả mục đã đạt (trang quản trị tính điểm theo tỷ lệ đạt).
+ * @param {object} p
+ * @param {"dich-vu"|"cam-nang"} p.loai
+ * @param {Record<string, any>} p.data   các trường của bài
+ * @param {string} p.markdown            thân bài
+ * @param {{ "dich-vu": Set<string>, "cam-nang": Set<string> }} p.slugs  slug đang có (cả nháp), để bắt liên kết hỏng
+ * @param {{ "dich-vu": Set<string>, "cam-nang": Set<string> }} [p.slugsDaDang]  slug đã đăng; link tới trang chưa đăng thì cảnh báo
+ * @param {boolean} [p.trungTieuDe]      đã có bài khác cùng tiêu đề
+ * @param {{ slug: string, body: string | null }[]} [p.tuLieu]  tư liệu transcript bài dẫn (body null = không có trong repo)
+ * @param {{ soChuDoanRieng: number, soAnh: number, soAnhThieuMoTa: number, soDanhGiaThat: number, tyLeTrung: number, trangTrung?: string }} [p.khuVuc]
+ *   số liệu của trang khu vực (đếm từ database ở lib/bai.ts)
+ * @returns {{ label: string, ok: boolean, detail: string, level: "error" | "warn" }[]}
+ */
+export function cacMucKiemTra({ loai, data, markdown, slugs, slugsDaDang = slugs, trungTieuDe = false, tuLieu = [], khuVuc }) {
+  const md = String(markdown || "");
+  const { batBuoc, soChuToiThieu } = LUAT[loai];
+  const soChu = demChu(md);
+  const t = String(data.title || "");
+  const d = String(data.description || "");
+  const kw = norm(data.keyword);
+  const dau = norm(t + " " + md.split(/\s+/).slice(0, 120).join(" "));
+  const thieu = batBuoc.filter((k) => !data[k]);
+  const hong = [];
+  const chuaDang = [];
+  for (const [, href] of md.matchAll(/\]\((\/[^)\s]*)\)/g)) {
+    const m = href.match(/^\/(dich-vu|cam-nang)\/([^/]+)\/?$/);
+    if (m && !slugs[m[1]].has(m[2])) hong.push(href);
+    else if (m && !slugsDaDang[m[1]].has(m[2])) chuaDang.push(href);
+  }
+  const tlThieu = tuLieu.filter((x) => x.body == null).map((x) => x.slug);
+  const trung = tuLieu.filter((x) => x.body != null)
+    .map((x) => ({ slug: x.slug, doan: doanTrung(md, x.body) }))
     .filter((x) => x.doan);
 
-  const c = (label, ok, detail, level = "error") => ({ label, ok, detail: ok ? "" : detail, level });
-  const checks = [
-    c("Tên file chữ thường không dấu", /^[a-z0-9]+(-[a-z0-9]+)*$/.test(e.slug),
-      "tên file phải là chữ thường không dấu, nối bằng gạch ngang (ví dụ thay-ac-quy-o-to.md)"),
-    c("Đủ trường ở phần đầu bài", !missing.length, missing.map((k) => `thiếu trường "${k}" ở phần đầu bài`).join("; ")),
-    c("Tiêu đề 25–70 ký tự", !t || (t.length >= 25 && t.length <= 70), `tiêu đề dài ${t.length} ký tự, cần 25–70`),
-    c("Mô tả 100–170 ký tự", !d || (d.length >= 100 && d.length <= 170), `mô tả dài ${d.length} ký tự, cần 100–170`),
-    c(`Tối thiểu ${minWords} chữ`, e.words >= minWords, `bài có ${e.words} chữ, cần tối thiểu ${minWords}`),
-    c("Từ khoá ở tiêu đề hoặc mở bài", !kw || head.includes(kw),
-      `từ khoá chính "${e.data.keyword}" phải có trong tiêu đề hoặc đoạn mở đầu`),
-    c("Không có tiêu đề cấp 1 trong thân bài", !/^#\s/m.test(e.body),
-      "không dùng tiêu đề cấp 1 (# ) trong thân bài; tiêu đề trang lấy từ trường title"),
-    c("Không còn TODO / lorem ipsum", !/\b(TODO|lorem ipsum)\b/i.test(e.body), "còn chữ TODO hoặc lorem ipsum"),
-    c("Dịch vụ liên quan tồn tại", !badServices.length,
-      badServices.map((s) => `dichVuLienQuan "${s}" không có trong content/dich-vu`).join("; ")),
-    c("Liên kết nội bộ không hỏng", !badLinks.length, badLinks.map((h) => `liên kết nội bộ hỏng: ${h}`).join("; ")),
-    c("Giá tiền đã được duyệt", !PRICE.test(e.body) || !!e.data.giaDaDuyet,
-      "bài có nêu giá tiền: cần người phụ trách xác nhận rồi thêm giaDaDuyet: true ở phần đầu bài"),
+  const c = (label, ok, detail, level = "error") => ({ label, ok: Boolean(ok), detail: ok ? "" : detail, level });
+  const muc = [
+    c("Đường dẫn chữ thường không dấu", !data.slug || /^[a-z0-9]+(-[a-z0-9]+)*$/.test(data.slug),
+      "Đường dẫn (slug) chỉ dùng chữ thường không dấu, nối bằng gạch ngang"),
+    c("Đủ các trường bắt buộc", !thieu.length, thieu.map((k) => `Chưa điền "${TEN_TRUONG[k] || k}"`).join("; ")),
+    c("Tiêu đề SEO 25–70 ký tự", !t || (t.length >= 25 && t.length <= 70), `Tiêu đề SEO dài ${t.length} ký tự, cần 25–70`),
+    c("Mô tả SEO 100–170 ký tự", !d || (d.length >= 100 && d.length <= 170), `Mô tả SEO dài ${d.length} ký tự, cần 100–170`),
+    c(`Tối thiểu ${soChuToiThieu} chữ`, soChu >= soChuToiThieu, `Bài có ${soChu} chữ, cần tối thiểu ${soChuToiThieu}`),
+    c("Từ khoá ở tiêu đề hoặc mở bài", !kw || dau.includes(kw),
+      `Từ khoá chính "${data.keyword}" phải có trong tiêu đề hoặc đoạn mở đầu`),
+    c("Không có tiêu đề cấp 1 trong thân bài", !/^#\s/m.test(md),
+      "Không dùng tiêu đề cấp 1 trong thân bài; tiêu đề trang lấy từ trường Tiêu đề"),
+    c("Không còn TODO / lorem ipsum", !/\b(TODO|lorem ipsum)\b/i.test(md), "Còn chữ TODO hoặc lorem ipsum"),
+    c("Không trùng tiêu đề bài khác", !trungTieuDe, "Đã có bài khác cùng tiêu đề"),
+    c("Liên kết nội bộ không hỏng", !hong.length, hong.map((h) => `Liên kết nội bộ hỏng: ${h}`).join("; ")),
+    c("Liên kết tới trang đã đăng", !chuaDang.length, chuaDang.map((h) => `Liên kết tới trang chưa đăng: ${h}`).join("; "), "warn"),
+    c("Giá tiền đã được duyệt", !coNeuGia(md) || Boolean(data.giaDaDuyet),
+      'Bài có nêu giá tiền: người duyệt cần kiểm tra giá rồi tick "Giá đã duyệt"'),
     c("Không chép nguyên văn tư liệu", !trung.length,
-      trung.map((x) => `chép nguyên văn từ tư liệu "${x.s}": "${x.doan}…", cần viết lại bằng lời của mình`).join("; ")),
+      trung.map((x) => `Chép nguyên văn từ tư liệu "${x.slug}": "${x.doan}…", cần viết lại bằng lời của mình`).join("; ")),
+    c("Tiêu đề không tự ghi tên thương hiệu", !site.name || !norm(t).includes(norm(site.name)),
+      `Tiêu đề SEO đã có "${site.name}", website tự thêm " | ${site.name}" nên tên sẽ hiện hai lần trên Google`, "warn"),
   ];
-  checks.push(c("Tiêu đề không tự ghi tên thương hiệu", !norm(t).includes(norm(site.name)),
-    `tiêu đề đã có "${site.name}", website tự thêm " | ${site.name}" nên tên sẽ hiện hai lần trên Google`, "warn"));
-  if (e.section === "cam-nang") {
-    checks.push(c("Có liên kết tới trang dịch vụ", /\]\(\/dich-vu\//.test(e.body), "nên có ít nhất 1 liên kết tới trang dịch vụ", "warn"));
+  if (loai === "cam-nang") {
+    muc.push(c("Có liên kết tới trang dịch vụ", /\]\(\/dich-vu\//.test(md), "Nên có ít nhất 1 liên kết tới trang dịch vụ", "warn"));
+  }
+  if (loai === "khu-vuc" && khuVuc) {
+    const L = LUAT_KHU_VUC;
+    const pt = Math.round(khuVuc.tyLeTrung * 100);
+    muc.push(
+      c(`Đoạn mô tả riêng của quận từ ${L.soChuDoanRieng} chữ`, khuVuc.soChuDoanRieng >= L.soChuDoanRieng,
+        `Đoạn mô tả riêng có ${khuVuc.soChuDoanRieng} chữ, cần tối thiểu ${L.soChuDoanRieng} (khu chung cư, tuyến đường, lỗi khách hay gặp ở quận này)`),
+      c(`Có ít nhất ${L.soAnhThat} ảnh việc thật tại quận`, khuVuc.soAnh >= L.soAnhThat, `Có ${khuVuc.soAnh} ảnh thật, cần ít nhất ${L.soAnhThat}`),
+      c("Ảnh có mô tả", !khuVuc.soAnhThieuMoTa, `Còn ${khuVuc.soAnhThieuMoTa} ảnh chưa có mô tả`),
+      c(`Có ít nhất ${L.soDanhGiaThat} đánh giá thật của khách ở quận`, khuVuc.soDanhGiaThat >= L.soDanhGiaThat,
+        "Chưa gắn đánh giá thật nào của khách ở quận này"),
+      c(`Trùng nội dung không quá ${Math.round(L.tyLeTrungToiDa * 100)}% với trang khác`, khuVuc.tyLeTrung <= L.tyLeTrungToiDa,
+        `Trùng ${pt}% nội dung với ${khuVuc.trangTrung || "trang khác"}: viết lại cho riêng quận này`),
+    );
   }
   if (tuLieu.length) {
-    checks.push(c("Tư liệu dẫn nguồn có trong repo", !tuLieuThieu.length,
-      tuLieuThieu.map((s) => `tuLieu "${s}" không có trong tu-lieu/transcript (bản xuất riêng tư thì bỏ qua)`).join("; "), "warn"));
+    muc.push(c("Tư liệu dẫn nguồn có trong repo", !tlThieu.length,
+      tlThieu.map((s) => `Tư liệu "${s}" không có trong tu-lieu/transcript (bản xuất riêng tư thì bỏ qua)`).join("; "), "warn"));
   }
-  return checks;
+  return muc;
 }
 
-/** Kiểm tra toàn bộ content/. Trả về { entries: [{ entry, checks }], duplicates: [[file, ...]] }. */
-export function checkAll() {
-  const entries = [];
-  const seen = new Map();
-  for (const section of Object.keys(RULES)) {
-    for (const slug of slugsOf(section)) {
-      const entry = readEntry(section, slug);
-      const key = norm(entry.data.title);
-      if (key) seen.set(key, [...(seen.get(key) || []), `content/${section}/${slug}.md`]);
-      entries.push({ entry, checks: checkEntry(entry) });
-    }
-  }
-  const duplicates = [...seen.values()].filter((f) => f.length > 1);
-  return { entries, duplicates };
+/** Gọn cho CMS: lỗi chặn đăng, cảnh báo chỉ để biết. */
+export function kiemTraBai(p) {
+  const muc = cacMucKiemTra(p);
+  const tach = (level) => muc.filter((m) => !m.ok && m.level === level).flatMap((m) => m.detail.split("; "));
+  return { loi: tach("error"), canhBao: tach("warn"), soChu: demChu(p.markdown) };
+}
+
+export function tomTatKiemTra({ loi, canhBao, soChu }) {
+  const dong = [`${soChu} chữ`];
+  if (!loi.length && !canhBao.length) dong.push("Đạt, có thể đăng.");
+  for (const l of loi) dong.push(`✗ ${l}`);
+  for (const c of canhBao) dong.push(`! ${c}`);
+  return dong.join("\n");
+}
+
+/** Bỏ dấu tiếng Việt, ra slug dạng thay-ac-quy-o-to */
+export function taoSlug(s) {
+  return String(s || "")
+    .toLowerCase()
+    .replace(/đ/g, "d")
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80)
+    .replace(/-+$/g, "");
 }

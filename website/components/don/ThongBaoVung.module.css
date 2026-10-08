@@ -1,0 +1,10 @@
+.trong { display: flex; gap: 10px; background: var(--xanh-nhat); border-radius: 10px; padding: 12px; color: var(--xanh); font-size: 14px; }
+.icon { flex: none; margin-top: 1px; }
+.ngoai, .ngoaiKhan { display: flex; flex-direction: column; gap: 8px; border-radius: 10px; padding: 12px; font-size: 14px; }
+.ngoai { background: var(--nhan-nhat); }
+.ngoaiKhan { background: var(--do-nhat); border: 1px solid var(--do-vien); }
+.tieuDe { color: var(--nhan-chu-dam); }
+.tieuDeKhan { color: var(--do); }
+.haiNut { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.haiNut :global(.nut) { min-height: 46px; font-size: 14px; padding: 0 8px; }
+.haiNut :global(.nut-trang) { border: 1.5px solid var(--vien-o); }

@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Doanh nghiệp – đội xe</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 3180px; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.55; display: flex; flex-direction: column; position: relative">
+
+  <header style="background: #13283f; color: #ffffff; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+    <a href="Main.dc.html" style="color: #ffffff; text-decoration: none; display: flex; flex-direction: column; line-height: 1.15">
+      <b style="font-size: 18px; font-weight: 800; letter-spacing: -0.01em">ThợTới</b>
+      <span style="font-size: 11px; color: #ffc9a3">by VC Phồn Vinh</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 4px">
+      <a href="#" aria-label="Gọi hotline" style="display: inline-flex; align-items: center; gap: 6px; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 10px 8px; min-height: 44px; box-sizing: border-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb27a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        1900 1068
+      </a>
+      <button type="button" aria-label="Mở menu" style="width: 44px; height: 44px; border: 0; background: transparent; color: #ffffff; display: grid; place-items: center; cursor: pointer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <section style="background: #13283f; color: #ffffff; padding: 20px 16px 26px; display: flex; flex-direction: column; gap: 14px">
+    <span style="align-self: flex-start; background: rgba(255,255,255,0.1); color: #ffd8bd; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px">Dành cho doanh nghiệp có đội xe</span>
+    <h1 style="margin: 0; font-size: 29px; line-height: 1.18; font-weight: 800; letter-spacing: -0.02em">Xe nằm bãi,<br>thợ tới bảo dưỡng</h1>
+    <p style="margin: 0; color: #d6e0eb; font-size: 15px">Không phải điều tài xế ra gara, xe không nghỉ chạy nửa ngày. Một hợp đồng, giá theo xe mỗi tháng, hoá đơn VAT đầy đủ.</p>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px">
+      <a href="#bao-gia" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 17px; border-radius: 12px; min-height: 54px">Xin báo giá hợp đồng</a>
+      <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 16px; border-radius: 12px; min-height: 50px; border: 2px solid rgba(255,255,255,0.7)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Tải hồ sơ năng lực (PDF)
+      </a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 6px">
+      <div style="background: rgba(255,255,255,0.07); border-radius: 10px; padding: 10px 8px; text-align: center"><b style="display: block; font-size: 17px; color: #ffb27a">Tại bãi</b><span style="font-size: 12px; color: #c3cfdc">làm ngoài giờ chạy</span></div>
+      <div style="background: rgba(255,255,255,0.07); border-radius: 10px; padding: 10px 8px; text-align: center"><b style="display: block; font-size: 17px; color: #ffb27a">60 phút</b><span style="font-size: 12px; color: #c3cfdc">cứu hộ ưu tiên</span></div>
+      <div style="background: rgba(255,255,255,0.07); border-radius: 10px; padding: 10px 8px; text-align: center"><b style="display: block; font-size: 17px; color: #ffb27a">VAT</b><span style="font-size: 12px; color: #c3cfdc">hoá đơn điện tử</span></div>
+    </div>
+  </section>
+
+  <section style="padding: 28px 16px 8px; display: flex; flex-direction: column; gap: 14px">
+    <div>
+      <h2 style="margin: 0; font-size: 22px; color: #13283f">Gói hợp đồng theo loại đội xe</h2>
+      <p style="margin: 2px 0 0; color: #5a6575; font-size: 14px">Chọn loại xe của bạn để xem gói phù hợp.</p>
+    </div>
+    <div role="tablist" aria-label="Loại đội xe" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; background: #e9edf2; padding: 4px; border-radius: 12px">
+      <sc-for list="{{fleets}}" as="f" hint-placeholder-count="3">
+        <button type="button" role="tab" aria-selected="{{f.on}}" onClick="{{f.pick}}" style="{{f.style}}">{{f.tab}}</button>
+      </sc-for>
+    </div>
+    <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="flex: none; width: 44px; height: 44px; border-radius: 12px; background: #fff1e6; color: #c2410c; display: grid; place-items: center">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h11l3 5h2v5h-2"></path><circle cx="7.5" cy="17.5" r="2"></circle><circle cx="16.5" cy="17.5" r="2"></circle><line x1="9.5" y1="17" x2="14.5" y2="17"></line></svg>
+        </span>
+        <div>
+          <b style="display: block; font-size: 17px; color: #13283f">{{fleet.title}}</b>
+          <span style="font-size: 13.5px; color: #5a6575">{{fleet.sub}}</span>
+        </div>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{fleet.points}}" as="pt" hint-placeholder-count="4">
+          <li style="display: flex; gap: 10px; font-size: 14.5px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b8a3e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 3px"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>{{pt.t}}</span>
+          </li>
+        </sc-for>
+      </ul>
+      <div style="background: #fff1e6; border-radius: 10px; padding: 10px 12px; font-size: 14px; color: #13283f">{{fleet.note}}</div>
+    </div>
+  </section>
+
+  <section style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <div>
+      <h2 style="margin: 0; font-size: 22px; color: #13283f">Giá theo xe mỗi tháng</h2>
+      <p style="margin: 2px 0 0; color: #5a6575; font-size: 14px">Giá mẫu để bạn hình dung. Giá chính thức chốt trong hợp đồng.</p>
+    </div>
+    <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+      <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 10px 14px; background: #13283f; color: #ffffff; font-size: 13px; font-weight: 600">
+        <span>Loại xe</span><span>Đồng/xe/tháng</span>
+      </div>
+      <sc-for list="{{rates}}" as="r" hint-placeholder-count="4">
+        <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #eef1f4; align-items: center">
+          <div><span style="display: block">{{r.car}}</span><span style="font-size: 12.5px; color: #5a6575">{{r.eg}}</span></div>
+          <b style="color: #c2410c; white-space: nowrap; font-size: 16px">{{r.price}}</b>
+        </div>
+      </sc-for>
+      <div style="padding: 12px 14px; background: #fafbfc; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px">
+        <b style="color: #13283f">Giá đã gồm</b>
+        <span style="color: #5a6575">Tiền công bảo dưỡng định kỳ, kiểm tra 30 hạng mục mỗi tháng, miễn phí đi lại, ưu tiên cứu hộ trong 60 phút. Phụ tùng tính theo bảng giá công khai.</span>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{tiers}}" as="t" hint-placeholder-count="3">
+        <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 10px 8px; text-align: center">
+          <b style="display: block; font-size: 16px; color: #13283f">{{t.off}}</b>
+          <span style="font-size: 12px; color: #5a6575">{{t.when}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 22px; color: #13283f">Khách hàng tiêu biểu</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+      <div style="height: 64px; border-radius: 10px; background: #e6ebf0"></div>
+      <div style="height: 64px; border-radius: 10px; background: #e6ebf0"></div>
+      <div style="height: 64px; border-radius: 10px; background: #e6ebf0"></div>
+      <div style="height: 64px; border-radius: 10px; background: #e6ebf0"></div>
+      <div style="height: 64px; border-radius: 10px; background: #e6ebf0"></div>
+      <div style="height: 64px; border-radius: 10px; background: #e6ebf0"></div>
+    </div>
+    <figure style="margin: 0; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px">
+      <blockquote style="margin: 0; font-size: 14px">“42 xe tự lái của bên mình được bảo dưỡng ngay tại bãi vào buổi tối. Hết cảnh tài xế xếp hàng ở gara, cuối tháng có một hoá đơn gọn gàng.”</blockquote>
+      <figcaption style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #5a6575">
+        <span style="flex: none; width: 36px; height: 36px; border-radius: 50%; background: #1d3a5a; color: #ffffff; display: grid; place-items: center; font-weight: 700; font-size: 13px">NL</span>
+        <span><b style="color: #13283f">Anh N. L.</b> · Quản lý đội xe, công ty cho thuê xe tự lái · Đống Đa · 03/2027</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 22px; color: #13283f">Hoá đơn, giấy tờ rõ ràng</h2>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{papers}}" as="pp" hint-placeholder-count="3">
+        <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start">
+          <span style="flex: none; width: 36px; height: 36px; border-radius: 10px; background: #eef3f9; color: #1d3a5a; display: grid; place-items: center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg>
+          </span>
+          <div><b style="display: block; color: #13283f">{{pp.t}}</b><span style="font-size: 14px; color: #5a6575">{{pp.d}}</span></div>
+        </div>
+      </sc-for>
+    </div>
+    <a href="#" style="display: flex; align-items: center; gap: 12px; background: #13283f; color: #ffffff; text-decoration: none; border-radius: 12px; padding: 12px 14px; min-height: 60px; box-sizing: border-box">
+      <span style="flex: none; width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.12); display: grid; place-items: center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffb27a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      </span>
+      <span style="flex: 1"><b style="display: block">Tải hồ sơ năng lực</b><span style="font-size: 13px; color: #c3cfdc">PDF · 12 trang · 4,2 MB · cập nhật 01/2027</span></span>
+    </a>
+  </section>
+
+  <section id="bao-gia" style="padding: 28px 16px 8px; display: flex; flex-direction: column; gap: 14px">
+    <sc-if value="{{showForm}}" hint-placeholder-val="{{ true }}">
+      <form style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 14px">
+        <div>
+          <h2 style="margin: 0; font-size: 22px; color: #13283f">Xin báo giá hợp đồng</h2>
+          <p style="margin: 2px 0 0; color: #5a6575; font-size: 14px">Điền 2 phút. Sales doanh nghiệp gửi báo giá chi tiết cho bạn.</p>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Tên công ty
+          <input type="text" placeholder="Công ty TNHH Vận tải Hồng Hà" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Mã số thuế
+          <input type="text" inputmode="numeric" placeholder="0101234567" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+          <span style="font-weight: 400; font-size: 12.5px; color: #5a6575">Nhập xong, tên và địa chỉ công ty tự điền.</span>
+        </label>
+        <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Số xe
+            <input type="number" min="1" placeholder="25" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Loại xe chính
+            <select style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; width: 100%"><option>Xe 4–5 chỗ</option><option>Xe 7 chỗ, MPV</option><option>Xe điện VinFast</option><option>Bán tải, van</option><option>Nhiều loại</option></select>
+          </label>
+        </div>
+        <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+          <legend style="font-weight: 600; font-size: 14px; padding: 0; margin-bottom: 8px">Đội xe thuộc loại</legend>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+            <sc-for list="{{kinds}}" as="k" hint-placeholder-count="3">
+              <button type="button" aria-pressed="{{k.on}}" onClick="{{k.pick}}" style="{{k.style}}">{{k.name}}</button>
+            </sc-for>
+          </div>
+        </fieldset>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Khu vực bãi xe
+          <select style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; width: 100%"><option>Cầu Giấy</option><option>Đống Đa</option><option>Thanh Xuân</option><option>Ba Đình</option><option>Quận khác (sales gọi tư vấn)</option></select>
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Người liên hệ
+          <input type="text" placeholder="Trần Thu Hà – Trưởng phòng hành chính" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+        </label>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Số điện thoại
+            <input type="tel" placeholder="0912 345 678" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Email
+            <input type="email" placeholder="ha.tt@honghaauto.vn" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+          </label>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Ghi chú (không bắt buộc)
+          <textarea rows="2" placeholder="VD: bãi ở Trung Kính, xe về bãi sau 21h" style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; resize: none"></textarea>
+        </label>
+        <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px">
+          <input type="checkbox" checked="{{agree}}" onChange="{{toggleAgree}}" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #13283f">
+          <span>Tôi đồng ý cho ThợTới xử lý thông tin trên để gửi báo giá (<a href="#">chính sách dữ liệu</a>). <b style="color: #8a2c06">Bắt buộc</b></span>
+        </label>
+        <sc-if value="{{agreeErr}}" hint-placeholder-val="{{ false }}">
+          <span style="color: #a8320a; font-size: 13.5px; font-weight: 600">Bạn cần tích ô đồng ý để gửi yêu cầu.</span>
+        </sc-if>
+        <button type="button" onClick="{{send}}" style="border: 0; border-radius: 12px; min-height: 52px; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; color: #ffffff; background: #c2410c">Gửi yêu cầu báo giá</button>
+      </form>
+    </sc-if>
+    <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+      <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 22px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px">
+        <span style="width: 64px; height: 64px; border-radius: 50%; background: #e9f6ec; color: #2b8a3e; display: grid; place-items: center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </span>
+        <h2 style="margin: 0; font-size: 22px; color: #13283f">Đã gửi yêu cầu báo giá</h2>
+        <p style="margin: 0; color: #5a6575">Sales B2B sẽ liên hệ trong 1 giờ làm việc (8h–17h30, thứ 2 đến thứ 7).</p>
+        <div style="background: #f6f7f9; border-radius: 10px; padding: 12px 16px; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 13px; color: #5a6575">Mã yêu cầu</span>
+          <b style="font-size: 20px; letter-spacing: 0.05em; color: #13283f">DN-000045</b>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; font-size: 14px">
+          <span style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #1d3a5a; color: #ffffff; display: grid; place-items: center; font-weight: 700; font-size: 13px">PL</span>
+          <span>Phụ trách: <b style="color: #13283f">Phạm Lan</b>, sales doanh nghiệp · 0988 216 400</span>
+        </div>
+        <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: #13283f; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 12px; min-height: 50px">Tải hồ sơ năng lực trong lúc chờ</a>
+        <button type="button" onClick="{{reset}}" style="border: 0; background: transparent; font: inherit; color: #1d3a5a; text-decoration: underline; cursor: pointer; min-height: 44px">Xem lại form (bản mẫu)</button>
+      </div>
+    </sc-if>
+  </section>
+
+  <footer style="background: #13283f; color: #c3cfdc; padding: 24px 16px 96px; margin-top: 28px; font-size: 13px; display: flex; flex-direction: column; gap: 10px">
+    <b style="color: #ffffff; font-size: 15px">Công ty TNHH ThợTới · MST 0109876543</b>
+    <span>18 Trần Thái Tông, Cầu Giấy, Hà Nội · Phục vụ: Cầu Giấy, Đống Đa, Thanh Xuân, Ba Đình</span>
+    <span style="display: flex; flex-wrap: wrap; gap: 6px 14px"><a href="#" style="color: #ffffff">Chính sách bảo hành</a><a href="#" style="color: #ffffff">Bảo vệ dữ liệu cá nhân</a><a href="TuyenTho.dc.html" style="color: #ffffff">Tuyển thợ cộng tác</a><a href="VeChungToi.dc.html" style="color: #ffffff">Về chúng tôi</a></span>
+    <span style="align-self: flex-start; border: 1px dashed #5a7a9c; border-radius: 6px; padding: 6px 10px">Đã thông báo Bộ Công Thương</span>
+  </footer>
+
+  <div style="flex: 1"></div>
+  <nav aria-label="Liên hệ nhanh" style="position: sticky; bottom: 0; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 8px; padding: 8px 12px 12px; background: rgba(19,40,63,0.97); margin-top: -76px">
+    <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 10px; min-height: 50px; font-size: 15px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      Gọi thợ
+    </a>
+    <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #0068ff; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 10px; min-height: 50px; font-size: 15px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      Zalo
+    </a>
+    <a href="DatLich.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #ffffff; color: #13283f; text-decoration: none; font-weight: 700; border-radius: 10px; min-height: 50px; font-size: 15px">Đặt lịch</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3180}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { fleet: 'taxi', kinds: ['taxi'], agree: false, agreeErr: false, sent: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const tabStyle = (on) => 'font: inherit; font-size: 14px; font-weight: 700; border: 0; border-radius: 9px; min-height: 44px; cursor: pointer; padding: 4px 6px; line-height: 1.2; ' +
+      (on ? 'background: #ffffff; color: #13283f; box-shadow: 0 1px 3px rgba(19,40,63,0.18);' : 'background: transparent; color: #4a5565;');
+    const pill = (on) => 'font: inherit; font-size: 13.5px; font-weight: 600; border-radius: 10px; min-height: 46px; cursor: pointer; padding: 6px; line-height: 1.2; ' +
+      (on ? 'background: #13283f; color: #ffffff; border: 1.5px solid #13283f;' : 'background: #ffffff; color: #13283f; border: 1.5px solid #c9d0d8;');
+    const data = {
+      taxi: {
+        tab: 'Taxi', title: 'Gói Taxi – chạy liên tục', sub: 'Taxi xăng và taxi điện, chạy 2 ca mỗi ngày',
+        points: [
+          { t: 'Bảo dưỡng theo km, thợ tới bãi lúc đổi ca, xe không mất ca chạy' },
+          { t: 'Ưu tiên cứu hộ trong 60 phút: ắc quy, lốp, không nổ máy' },
+          { t: 'Làm được taxi điện: lốp, phanh, ắc quy 12V, điều hoà' },
+          { t: 'Báo cáo tình trạng từng xe theo biển số mỗi tháng' }
+        ],
+        note: 'Phù hợp đội từ 10 xe trở lên, bãi trong 4 quận phục vụ.'
+      },
+      thue: {
+        tab: 'Cho thuê tự lái', title: 'Gói Cho thuê tự lái', sub: 'Xe quay vòng nhanh giữa các khách thuê',
+        points: [
+          { t: 'Kiểm tra nhanh 30 hạng mục giữa 2 lượt thuê, có ảnh gửi qua Zalo' },
+          { t: 'Thay dầu, lọc, má phanh ngay tại bãi giao xe' },
+          { t: 'Cứu hộ cho khách thuê khi xe gặp sự cố trong vùng phục vụ' },
+          { t: 'Ghi chép hồ sơ từng xe để đối chiếu khi khách trả xe' }
+        ],
+        note: 'Phù hợp đội từ 5 xe, nhiều hãng và đời xe khác nhau.'
+      },
+      cty: {
+        tab: 'Xe công ty', title: 'Gói Xe công ty', sub: 'Xe đưa đón, xe lãnh đạo, xe kinh doanh',
+        points: [
+          { t: 'Lên lịch bảo dưỡng cả năm, nhắc trước 1 tuần qua Zalo' },
+          { t: 'Thợ làm tại hầm toà nhà hoặc bãi công ty, ngoài giờ hành chính' },
+          { t: 'Một hoá đơn VAT gộp mỗi tháng, chia chi phí theo từng xe' },
+          { t: 'Một đầu mối phụ trách, gọi là có người nghe' }
+        ],
+        note: 'Phù hợp đội từ 3 xe, cần thủ tục và chứng từ rõ ràng.'
+      }
+    };
+    const fleets = ['taxi', 'thue', 'cty'].map((id) => ({
+      id, tab: data[id].tab, on: st.fleet === id, style: tabStyle(st.fleet === id), pick: () => this.setState({ fleet: id })
+    }));
+    const kinds = [{ id: 'taxi', name: 'Taxi' }, { id: 'thue', name: 'Cho thuê' }, { id: 'cty', name: 'Xe công ty' }].map((k) => {
+      const on = st.kinds.includes(k.id);
+      return { ...k, on, style: pill(on), pick: () => this.setState({ kinds: on ? st.kinds.filter((x) => x !== k.id) : st.kinds.concat(k.id) }) };
+    });
+    return {
+      fleets, fleet: data[st.fleet], kinds,
+      rates: [
+        { car: 'Xe 4–5 chỗ', eg: 'Vios, Accent, City, Mazda3', price: '390.000đ' },
+        { car: 'Xe 7 chỗ, MPV', eg: 'Innova, Xpander, Carnival', price: '450.000đ' },
+        { car: 'Xe điện', eg: 'VinFast VF5, VF e34 (không làm pin cao áp)', price: '350.000đ' },
+        { car: 'Bán tải, van', eg: 'Ranger, Triton, Transit', price: '490.000đ' }
+      ],
+      tiers: [
+        { off: 'Giảm 5%', when: 'từ 20 xe' },
+        { off: 'Giảm 10%', when: 'từ 50 xe' },
+        { off: 'Giảm 15%', when: 'từ 100 xe' }
+      ],
+      papers: [
+        { t: 'Hoá đơn VAT điện tử', d: 'Xuất theo tháng, gửi qua email kế toán. Tách chi phí theo biển số.' },
+        { t: 'Hợp đồng và biên bản nghiệm thu', d: 'Mỗi lần làm có biên bản kèm ảnh trước và sau khi sửa.' },
+        { t: 'Bảo hành rõ ràng', d: 'Phụ tùng bảo hành 6 tháng, tiền công bảo hành 3 tháng.' }
+      ],
+      showForm: !st.sent, sent: st.sent,
+      agree: st.agree, agreeErr: st.agreeErr,
+      toggleAgree: () => this.setState({ agree: !st.agree, agreeErr: false }),
+      send: () => { if (!st.agree) { this.setState({ agreeErr: true }); return; } this.setState({ sent: true }); },
+      reset: () => this.setState({ sent: false, agree: false, agreeErr: false })
+    };
+  }
+}
+</script>
+</body>
+</html>
