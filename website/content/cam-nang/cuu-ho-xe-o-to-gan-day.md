@@ -113,9 +113,9 @@ Nếu có người lạ tự dừng lại mời kéo xe khi bạn chưa gọi ai
 - Chuẩn bị sẵn giấy tờ xe, chìa khoá và đồ cá nhân cần mang theo nếu xe phải kéo đi.
 - Ghi lại những gì xảy ra trước khi xe hỏng: tiếng kêu, mùi, đèn báo, xe đang chạy hay đang đỗ. Thông tin này giúp thợ chẩn đoán nhanh hơn.
 
-## VC Mobile Care hỗ trợ thế nào khi xe gặp sự cố tại Hà Nội
+## ThợTới hỗ trợ thế nào khi xe gặp sự cố tại Hà Nội
 
-VC Mobile Care là dịch vụ sửa ô tô tận nơi tại Hà Nội, thuộc VC Phồn Vinh. Khi bạn gọi, chúng tôi hỏi vị trí, loại xe và hiện tượng để quyết định phương án. Nếu sự cố có thể xử lý an toàn tại chỗ, như ắc quy hay lốp, thợ lưu động sẽ tới chỗ xe đang dừng. Nếu xe cần kéo, chúng tôi sắp xếp [cứu hộ, kéo xe về xưởng đối tác Auto Speedy](/dich-vu/cuu-ho-keo-xe/). Xưởng kiểm tra và báo giá trước, chỉ sửa khi bạn đồng ý.
+ThợTới là dịch vụ sửa ô tô tận nơi tại Hà Nội, thuộc VC Phồn Vinh. Khi bạn gọi, chúng tôi hỏi vị trí, loại xe và hiện tượng để quyết định phương án. Nếu sự cố có thể xử lý an toàn tại chỗ, như ắc quy hay lốp, thợ lưu động sẽ tới chỗ xe đang dừng. Nếu xe cần kéo, chúng tôi sắp xếp [cứu hộ, kéo xe về xưởng đối tác Auto Speedy](/dich-vu/cuu-ho-keo-xe/). Xưởng kiểm tra và báo giá trước, chỉ sửa khi bạn đồng ý.
 
 Xe dừng đâu, thợ tới đó.
 
