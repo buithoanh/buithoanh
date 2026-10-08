@@ -2,7 +2,7 @@
 // Máy tính: menu ngang theo thiết kế TrangChuMayTinh.
 import Link from "next/link";
 import Icon from "../Icon";
-import { telHref } from "../../lib/giao-dien";
+import { telHref } from "../../lib/tel";
 import s from "./Header.module.css";
 
 export const MENU = [

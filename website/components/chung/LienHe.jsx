@@ -1,7 +1,7 @@
 // Nút gọi hotline và nhắn Zalo. Số và link lấy từ Cấu hình chung (layChung()). Cú bấm được ghi số liệu
 // tự động (components/chung/TheoDoiSuKien.jsx bắt mọi link tel: và zalo.me).
 import Icon from "../Icon";
-import { telHref } from "../../lib/giao-dien";
+import { telHref } from "../../lib/tel";
 
 /** Chưa có hotline: nút vẫn hiện nhưng ghi "Hotline sắp có" và không bấm được. */
 export function NutGoi({ hotline, className = "nut nut-chinh", children, icon = true }) {

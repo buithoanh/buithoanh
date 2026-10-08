@@ -1,0 +1,6 @@
+.khung { display: flex; flex-direction: column; gap: 10px; }
+.ngay { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.gio { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.thu { font-size: 12px; }
+.dd { font-size: 15px; }
+.loi { font-size: 13px; color: var(--do); font-weight: 600; }

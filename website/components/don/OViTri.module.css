@@ -1,0 +1,9 @@
+.khung { display: flex; flex-direction: column; gap: 14px; }
+.nutLay {
+  display: flex; align-items: center; justify-content: center; gap: 8px; border: 0; background: var(--toi); color: #fff;
+  border-radius: 10px; min-height: 50px; font: inherit; font-weight: 700; cursor: pointer; padding: 0 16px;
+}
+.nutLay:hover { background: var(--toi-2); }
+.nutLay:disabled { opacity: .75; cursor: progress; }
+.nutLon { border-radius: 12px; min-height: 54px; font-size: 16px; }
+.dangKiem { font-size: 14px; color: var(--chu-phu); }
