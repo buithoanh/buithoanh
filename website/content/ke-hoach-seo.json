@@ -1,0 +1,43 @@
+{
+  "_nguon": "Kế hoạch kinh doanh – Sửa chữa ô tô lưu động (VCservice), tab 6, mục 4.1 và 4.2. Lượt tìm là giả định của kế hoạch, cần kiểm lại bằng Google Keyword Planner.",
+  "nhomTuKhoa": [
+    { "nhom": "Khẩn cấp", "yDinh": "Gọi ngay", "luotTimThang": "2.000–4.000", "dichVu": "cuu-ho-keo-xe",
+      "tuKhoa": ["cứu hộ ô tô Hà Nội", "cứu hộ xe ô tô gần đây"] },
+    { "nhom": "Ắc quy", "yDinh": "Gọi ngay", "luotTimThang": "2.500–5.000", "dichVu": "ac-quy",
+      "tuKhoa": ["kích bình ô tô", "câu bình ắc quy ô tô", "thay ắc quy ô tô tận nơi"] },
+    { "nhom": "Lốp", "yDinh": "Gọi ngay", "luotTimThang": "1.500–3.000", "dichVu": "lop",
+      "tuKhoa": ["vá lốp ô tô lưu động", "thay lốp ô tô tận nơi", "cứu hộ lốp"] },
+    { "nhom": "Tận nơi", "yDinh": "Gọi/đặt", "luotTimThang": "1.000–2.000", "dichVu": "bao-duong-dinh-ky",
+      "tuKhoa": ["sửa xe ô tô tận nơi Hà Nội", "thợ sửa ô tô lưu động"] },
+    { "nhom": "Bảo dưỡng", "yDinh": "Đặt lịch", "luotTimThang": "600–1.300", "dichVu": "bao-duong-dinh-ky",
+      "tuKhoa": ["bảo dưỡng ô tô tại nhà", "thay dầu ô tô tại nhà"] },
+    { "nhom": "Chẩn đoán", "yDinh": "Hỏi → đặt", "luotTimThang": "500–1.500", "dichVu": "doc-loi-chan-doan",
+      "tuKhoa": ["đọc lỗi ô tô tận nơi", "đèn check engine sáng"] },
+    { "nhom": "Xe điện", "yDinh": "Đặt", "luotTimThang": "300–800", "dichVu": "lop",
+      "tuKhoa": ["sửa xe điện VinFast lưu động", "thay lốp VinFast tận nơi"] },
+    { "nhom": "Bản đồ", "yDinh": "Chọn trên Maps", "luotTimThang": "5.000–10.000", "dichVu": null,
+      "tuKhoa": ["gara ô tô gần đây", "sửa ô tô [tên quận]"],
+      "ghiChu": "Nhóm này làm bằng Google Business Profile và trang dịch vụ × quận, không viết bài cẩm nang." },
+    { "nhom": "Thông tin", "yDinh": "Đọc → nhớ thương hiệu", "luotTimThang": "hàng trăm cụm, mỗi cụm 100–2.000", "dichVu": null,
+      "tuKhoa": ["xe ô tô kêu khi phanh", "bao lâu thay dầu ô tô", "lốp ô tô bao lâu phải thay", "ắc quy ô tô dùng được bao lâu", "xe ô tô không nổ máy", "đèn báo áp suất lốp sáng", "xe ô tô bị ngập nước phải làm gì", "chuẩn bị xe đi xa dịp Tết"] }
+  ],
+  "lichDang": [
+    { "thang": "2026-11", "baiCamNang": 8, "trangKhac": "6 trang dịch vụ" },
+    { "thang": "2026-12", "baiCamNang": 8, "trangKhac": "24 trang dịch vụ × quận" },
+    { "thang": "2027-01", "baiCamNang": 12, "trangKhac": "5 trang hãng xe" },
+    { "thang": "2027-02", "baiCamNang": 12, "chuDe": "Tết, đi xa" },
+    { "thang": "2027-03", "baiCamNang": 16, "trangKhac": "10 trang hãng xe" },
+    { "thang": "2027-04", "baiCamNang": 16, "trangKhac": "trang xe điện" },
+    { "thang": "2027-05", "baiCamNang": 16, "chuDe": "mùa mưa, ngập" },
+    { "thang": "2027-06", "baiCamNang": 16, "trangKhac": "+24 trang quận mới" },
+    { "thang": "2027-07", "baiCamNang": 16, "chuDe": "phượt hè" },
+    { "thang": "2027-08", "baiCamNang": 16, "trangKhac": "+24 trang quận" },
+    { "thang": "2027-09", "baiCamNang": 16 },
+    { "thang": "2027-10", "baiCamNang": 16 }
+  ],
+  "quyTac": [
+    "Mỗi trang khu vực phải có ảnh việc thật tại khu đó và bảng giá; không sao chép rồi đổi tên quận.",
+    "Không nêu giá khi chưa có người phụ trách duyệt (trường giaDaDuyet).",
+    "Một từ khoá chính cho một bài; không viết 2 bài cùng nhắm một từ khoá."
+  ]
+}

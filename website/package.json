@@ -1,0 +1,22 @@
+{
+  "name": "vc-mobile-care-website",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "kiem-tra": "node scripts/kiem-tra-bai.mjs",
+    "build": "node scripts/kiem-tra-bai.mjs && next build && node scripts/sau-build.mjs",
+    "start": "npx serve out"
+  },
+  "dependencies": {
+    "gray-matter": "4.0.3",
+    "marked": "18.0.13",
+    "next": "16.3.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
