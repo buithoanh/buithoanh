@@ -14,8 +14,24 @@ Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tớ
 | `content/dich-vu/*.md` | 6 trang dịch vụ (bảo dưỡng, ắc quy, lốp, đọc lỗi, phanh, cứu hộ) |
 | `content/cam-nang/*.md` | Bài cẩm nang SEO |
 | `content/ke-hoach-seo.json` | Bộ từ khoá và lịch đăng, lấy từ kế hoạch mục 4.1 và 4.2 |
-| `scripts/kiem-tra-bai.mjs` | Kiểm tra bài trước khi build: độ dài tiêu đề và mô tả, số chữ, từ khoá, liên kết hỏng, bài có giá chưa duyệt |
+| `lib/kiem-tra.mjs` | Bộ quy tắc kiểm tra bài (độ dài tiêu đề và mô tả, số chữ, từ khoá, liên kết hỏng, bài có giá chưa duyệt, chép nguyên văn transcript), dùng chung cho build và trang quản trị |
+| `scripts/kiem-tra-bai.mjs` | Chạy bộ quy tắc trước khi build; có lỗi thì dừng |
+| `scripts/quan-tri/` | Tạo trang quản trị `/quan-tri/` sau khi build |
+| `scripts/so-trung.mjs` | So bài hoặc kịch bản với transcript, báo đoạn chép nguyên văn |
+| `../tu-lieu/transcript/` | Tư liệu transcript từ TIKTIKTOTEXT (xem `tu-lieu/README.md`) |
 | `app/` | Giao diện: trang chủ, dịch vụ, cẩm nang, đặt lịch, sitemap, robots |
+
+## Trang quản trị `/quan-tri/`
+
+Mở `https://vc-mobile-care.pages.dev/quan-tri/` (hoặc `out/quan-tri/index.html` sau khi build trên máy). Trang chỉ đọc và được tạo lại mỗi lần build:
+
+- **Tổng quan**: số trang, trang có lỗi, tỉ lệ từ khoá đã có trang, tiến độ bài trong tháng, tư liệu chưa dùng, danh sách cần xử lý.
+- **Trang & bài**: bảng mọi trang, lọc theo loại và trạng thái. Bấm vào một trang (ví dụ `#trang/dich-vu/ac-quy`) để xem bản xem trước trên Google, thử tiêu đề và mô tả khác, điểm kiểm tra, số liệu, dàn ý, liên kết vào/ra, tư liệu cùng chủ đề và câu khách hỏi chưa có trong FAQ.
+- **Từ khoá**, **Lịch đăng**: đối chiếu với `ke-hoach-seo.json`.
+- **Tư liệu transcript**: video nào đã dùng ở bài nào, câu khách hỏi.
+- **Viết bài mới**: điền từ khoá, tiêu đề, chọn tư liệu, rồi chép lệnh cho SEO Editor hoặc tạo bản nháp trên GitHub.
+
+Sửa bài luôn đi qua GitHub và pull request, nên trang quản trị không cần đăng nhập hay server. Trang gắn `noindex`, không nằm trong sitemap; nên khoá thêm bằng Cloudflare Access (xem mục Hướng dẫn trong trang).
 
 ## Quy trình đăng bài SEO (có duyệt)
 
@@ -46,6 +62,7 @@ cd website
 npm install
 npm run dev          # http://localhost:3000
 npm run kiem-tra     # chỉ kiểm tra bài
+npm run quan-tri     # tạo lại trang quản trị (cần build trước)
 npm run build        # kiểm tra + xuất trang tĩnh ra out/
 ```
 
