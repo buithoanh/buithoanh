@@ -5,3 +5,7 @@ out/
 media/
 next-env.d.ts
 tsconfig.tsbuildinfo
+
+# Playwright
+/test-results/
+/playwright-report/
