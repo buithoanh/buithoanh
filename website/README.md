@@ -14,11 +14,27 @@ Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tớ
 | `content/dich-vu/*.md` | 6 trang dịch vụ (bảo dưỡng, ắc quy, lốp, đọc lỗi, phanh, cứu hộ) |
 | `content/cam-nang/*.md` | Bài cẩm nang SEO |
 | `content/ke-hoach-seo.json` | Bộ từ khoá và lịch đăng, lấy từ kế hoạch mục 4.1 và 4.2 |
-| `scripts/kiem-tra-bai.mjs` | Kiểm tra bài trước khi build: độ dài tiêu đề và mô tả, số chữ, từ khoá, liên kết hỏng, bài có giá chưa duyệt |
+| `lib/kiem-tra.mjs` | Bộ quy tắc kiểm tra bài (độ dài tiêu đề và mô tả, số chữ, từ khoá, liên kết hỏng, bài có giá chưa duyệt, chép nguyên văn transcript), dùng chung cho build và trang quản trị |
+| `scripts/kiem-tra-bai.mjs` | Chạy bộ quy tắc trước khi build; có lỗi thì dừng |
+| `scripts/quan-tri/` | Tạo trang quản trị `/quan-tri/` sau khi build |
+| `scripts/so-trung.mjs` | So bài hoặc kịch bản với transcript, báo đoạn chép nguyên văn |
+| `../tu-lieu/transcript/` | Tư liệu transcript từ TIKTIKTOTEXT (xem `tu-lieu/README.md`) |
+| `app/` | Giao diện: trang chủ, dịch vụ, cẩm nang, đặt lịch, lịch hẹn (`app/quan-tri/lich-hen/`), sitemap, robots |
 | `content/thong-tin.json` | Hotline, Zalo, email, quận phục vụ, xưởng đối tác (sửa được ở trang quản trị) |
-| `app/` | Giao diện: trang chủ, dịch vụ, cẩm nang, đặt lịch, quản trị, sitemap, robots |
 | `functions/`, `cf/` | Hàm chạy trên Cloudflare Pages: nhận lịch hẹn, API trang quản trị, đăng nhập GitHub cho trang soạn bài |
 | `public/quan-tri/bai-viet/` | Trang soạn bài (Decap CMS) và cấu hình `config.yml` |
+
+## Trang quản trị `/quan-tri/`
+
+Mở `https://vc-mobile-care.pages.dev/quan-tri/` (hoặc `out/quan-tri/index.html` sau khi build trên máy). Trang chỉ đọc và được tạo lại mỗi lần build:
+
+- **Tổng quan**: số trang, trang có lỗi, tỉ lệ từ khoá đã có trang, tiến độ bài trong tháng, tư liệu chưa dùng, danh sách cần xử lý.
+- **Trang & bài**: bảng mọi trang, lọc theo loại và trạng thái. Bấm vào một trang (ví dụ `#trang/dich-vu/ac-quy`) để xem bản xem trước trên Google, thử tiêu đề và mô tả khác, điểm kiểm tra, số liệu, dàn ý, liên kết vào/ra, tư liệu cùng chủ đề và câu khách hỏi chưa có trong FAQ.
+- **Từ khoá**, **Lịch đăng**: đối chiếu với `ke-hoach-seo.json`.
+- **Tư liệu transcript**: video nào đã dùng ở bài nào, câu khách hỏi.
+- **Viết bài mới**: điền từ khoá, tiêu đề, chọn tư liệu, rồi chép lệnh cho SEO Editor hoặc tạo bản nháp trên GitHub.
+
+Sửa bài luôn đi qua GitHub và pull request, nên trang quản trị không cần đăng nhập hay server. Trang gắn `noindex`, không nằm trong sitemap; nên khoá thêm bằng Cloudflare Access (xem mục Hướng dẫn trong trang). Thanh bên có lối sang **Lịch hẹn** và **Soạn bài** (mục dưới).
 
 ## Quy trình đăng bài SEO (có duyệt)
 
@@ -42,11 +58,13 @@ Agent **không bao giờ tự merge**. Bài có nêu giá phải được ngư�
 
 Muốn bắt buộc duyệt trên GitHub: Settings → Branches → thêm quy tắc cho nhánh `main`, bật "Require a pull request before merging" và "Require status checks" (chọn "Website – kiểm tra bài và build").
 
-## Trang quản trị `/quan-tri/`
+## Lịch hẹn và soạn bài trên web
+
+Ngoài bảng nội dung & SEO ở `/quan-tri/` (mục trên), khu quản trị có thêm hai trang:
 
 | Địa chỉ | Việc | Đăng nhập |
 |---|---|---|
-| `/quan-tri/` | Xem lịch hẹn khách đặt trên web, đổi trạng thái (Mới → Đã gọi → Đang làm → Xong / Huỷ), ghi chú nội bộ, bấm gọi / Zalo / mở bản đồ. Tự làm mới mỗi phút. | Mật khẩu chung (`ADMIN_PASSWORD`) |
+| `/quan-tri/lich-hen/` | Xem lịch hẹn khách đặt trên web, đổi trạng thái (Mới → Đã gọi → Đang làm → Xong / Huỷ), ghi chú nội bộ, bấm gọi / Zalo / mở bản đồ. Tự làm mới mỗi phút. | Mật khẩu chung (`ADMIN_PASSWORD`) |
 | `/quan-tri/bai-viet/` | Soạn, sửa bài cẩm nang và trang dịch vụ, tải ảnh, sửa hotline/Zalo/quận phục vụ. Mỗi lần lưu là một pull request; bấm **Publish** trong trang soạn bài = merge = lên web. | Tài khoản GitHub có quyền ghi repo |
 
 Trang soạn bài chỉ đăng nhập được trên địa chỉ chính (`vc-mobile-care.pages.dev` hoặc tên miền), không chạy trên link xem trước của pull request.
@@ -60,7 +78,7 @@ Trang soạn bài chỉ đăng nhập được trên địa chỉ chính (`vc-mo
 
 **2. Mật khẩu trang quản trị**
 - Pages → **Settings** → **Variables and Secrets** → **Add** → loại **Secret**, tên `ADMIN_PASSWORD`, giá trị là mật khẩu dài (từ 12 ký tự). Đổi mật khẩu là mọi người đang đăng nhập bị đăng xuất.
-- Muốn mỗi nhân viên đăng nhập bằng email riêng: bật thêm **Cloudflare Access** (Zero Trust → Access → Applications) cho `/quan-tri/*` và `/api/quan-tri/*`.
+- Muốn mỗi nhân viên đăng nhập bằng email riêng: bật thêm **Cloudflare Access** (Zero Trust → Access → Applications) cho `/quan-tri/lich-hen/*` và `/api/quan-tri/*` (hoặc cả `/quan-tri/*`).
 
 **3. Đăng nhập GitHub cho trang soạn bài**
 - GitHub → **Settings** → **Developer settings** → **OAuth Apps** → **New OAuth App**:
@@ -79,6 +97,7 @@ cd website
 npm install
 npm run dev          # http://localhost:3000
 npm run kiem-tra     # chỉ kiểm tra bài
+npm run quan-tri     # tạo lại trang quản trị (cần build trước)
 npm run build        # kiểm tra + xuất trang tĩnh ra out/
 # Chạy cả API (đặt lịch, quản trị) với D1 giả lập trên máy:
 npx wrangler pages dev out --d1 DB=local --binding ADMIN_PASSWORD=thu123
@@ -108,6 +127,6 @@ npx wrangler pages dev out --d1 DB=local --binding ADMIN_PASSWORD=thu123
 
 - Hotline, Zalo OA, email, quận đợt 1: sửa ở `/quan-tri/bai-viet/` → Cài đặt → Thông tin liên hệ (đang hiện "sắp có").
 - Gắn D1 và đặt mật khẩu quản trị (mục "Trang quản trị") để nhận lịch hẹn. Khi VCsoft có API nhận lịch, đặt `NEXT_PUBLIC_BOOKING_ENDPOINT` để form gửi thẳng sang đó.
-- Chưa có báo tin cho nhân viên khi có lịch mới (Zalo/Telegram); hiện phải mở `/quan-tri/` để xem.
+- Chưa có báo tin cho nhân viên khi có lịch mới (Zalo/Telegram); hiện phải mở `/quan-tri/lich-hen/` để xem.
 - Bảng giá: kế hoạch muốn lấy giá phụ tùng từ dữ liệu VCparts, nên cần người phụ trách duyệt giá trước khi đưa lên.
 - Ảnh việc thật (kế hoạch yêu cầu mỗi trang khu vực có ảnh tại khu đó). Đặt trong `public/anh/` và chèn vào bài bằng `![mô tả](/anh/ten-anh.jpg)`.

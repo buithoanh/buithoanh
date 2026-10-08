@@ -48,6 +48,7 @@ collections:
         widget: select
         options: ["Khẩn cấp", "Ắc quy", "Lốp", "Tận nơi", "Bảo dưỡng", "Chẩn đoán", "Phanh", "Xe điện", "Bản đồ", "Thông tin"]
       - { name: ngay, label: Ngày đăng, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { name: capNhat, label: "Ngày cập nhật (khi sửa nội dung đáng kể)", widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
       - name: dichVuLienQuan
         label: Dịch vụ liên quan
         widget: relation
@@ -57,6 +58,7 @@ collections:
         display_fields: [ten]
         multiple: true
         required: false
+      - { name: tuLieu, label: "Tư liệu transcript đã dùng", widget: list, required: false, hint: "Tên file trong tu-lieu/transcript/ (không có .md), mỗi dòng một tư liệu." }
       - { name: giaDaDuyet, label: "Giá trong bài đã được người phụ trách duyệt", widget: boolean, default: false, required: false, hint: "Bài có nêu giá tiền mà không bật ô này thì không build được." }
       - name: faq
         label: Câu hỏi thường gặp
@@ -84,6 +86,7 @@ collections:
       - { name: ten, label: "Tên ngắn (hiện trên menu, form đặt lịch)", widget: string }
       - { name: tomTat, label: Tóm tắt một câu, widget: text }
       - { name: thuTu, label: Thứ tự hiển thị, widget: number, value_type: int, required: false }
+      - { name: capNhat, label: "Ngày cập nhật (khi sửa nội dung đáng kể)", widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
       - { name: giaDaDuyet, label: "Giá trong trang đã được duyệt", widget: boolean, default: false, required: false }
       - name: faq
         label: Câu hỏi thường gặp

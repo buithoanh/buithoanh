@@ -75,6 +75,7 @@ export default function QuanTri() {
       <div className="admin-head">
         <h1>Lịch hẹn</h1>
         <div className="admin-actions">
+          <a className="btn btn-ghost" href="/quan-tri/">Nội dung &amp; SEO</a>
           <a className="btn btn-ghost" href="/quan-tri/bai-viet/">Soạn bài, sửa thông tin</a>
           <button className="btn btn-ghost" onClick={logout}>Đăng xuất</button>
         </div>
@@ -151,7 +152,7 @@ function Login({ onDone, note }) {
   }
   return (
     <form className="prose admin-login" onSubmit={submit}>
-      <h1>Quản trị</h1>
+      <h1>Lịch hẹn</h1>
       <label htmlFor="pw">Mật khẩu
         <input id="pw" type="password" autoComplete="current-password" required value={pw} onChange={(e) => setPw(e.target.value)} />
       </label>

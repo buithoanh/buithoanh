@@ -44,7 +44,7 @@ export default function BookingForm({ services, endpoint, hotline, zalo }) {
       <label htmlFor="ghiChu">Tình trạng xe (không bắt buộc)<textarea id="ghiChu" rows={3} value={f.ghiChu} onChange={set("ghiChu")} /></label>
       {/* Ô bẫy chống spam: người thật không thấy và không điền. */}
       <input name="web" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px" }} value={f.web} onChange={set("web")} />
-      <button className="btn btn-primary" type="submit" disabled={state === "sending"}>{state === "sending" ? "Đang gửi…" : "Gửi lịch hẹn"}</button>
+      <button className="btn btn-primary btn-lg" type="submit" disabled={state === "sending"}>{state === "sending" ? "Đang gửi…" : "Gửi lịch hẹn"}</button>
       {state === "error" && <p className="notice">Chưa gửi được. Thử lại, hoặc gọi {hotline || "hotline"} để đặt ngay.</p>}
       {state === "offline" && (
         <div className="notice">
