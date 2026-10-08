@@ -22,6 +22,7 @@ Gõ `/agents` để xem danh sách.
 | Bán hàng | Sales Coach, Proposal Strategist | Huấn luyện sale, viết đề xuất / báo giá |
 | Quản lý | Meeting Notes Specialist, Executive Summary Generator, Product Manager | Biên bản họp, báo cáo tóm tắt cho HĐQT, định hướng sản phẩm |
 | Tài chính | Financial Analyst | Phân tích tài chính, mô hình dự báo |
+| Web VC Mobile Care (tự viết) | Research Gatherer → SEO Editor | Gom tư liệu từ kho transcript VCWIKI (MCP `vc-content`, chạy trên máy có kho), rồi viết bài và mở PR duyệt |
 
 ## Thêm agent khác
 
