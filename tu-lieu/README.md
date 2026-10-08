@@ -35,3 +35,9 @@ Thân file: lời nói, mỗi câu một dòng, có mốc thời gian dạng `[0
 ## Lấy từ TIKTIKTOTEXT
 TIKTIKTOTEXT chạy trên máy anh Thọ Anh (`/Users/apple/projects/TIKTIKTOTEXT`, FastAPI + React).
 Khi có quyền đọc mã, viết script xuất thẳng ra định dạng trên. Trước đó, xuất tay: mỗi video một file.
+
+## Tư liệu gom theo dịch vụ: `tu-lieu/dich-vu/<slug>.md`
+Agent **Research Gatherer** ghi ở đây: triệu chứng, nguyên nhân, quy trình, câu hỏi khách hay hỏi của từng dịch vụ, **tóm
+tắt bằng lời của mình**, mỗi ý kèm nguồn `document_id · [mm:ss] · kênh` trong kho VCWIKI (MCP `vc-content`). Không chép đoạn
+transcript của kênh khác vào. Agent **SEO Planner** và **SEO Editor** đọc thư mục này. Hướng dẫn dùng kho và danh sách
+kênh: `agent-web-sua-chua-nhanh.md`.

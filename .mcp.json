@@ -3,6 +3,10 @@
     "photocraft": {
       "command": "photocraft-cli",
       "args": ["mcp", "--automation-read-root", ".", "--automation-write-root", "./output"]
+    },
+    "vc-content": {
+      "type": "http",
+      "url": "http://localhost:8000/mcp"
     }
   }
 }
