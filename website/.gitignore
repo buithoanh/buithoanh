@@ -1,3 +1,7 @@
 node_modules/
 .next/
 out/
+
+# Next.js tự tạo khi chạy npm run dev
+AGENTS.md
+CLAUDE.md
