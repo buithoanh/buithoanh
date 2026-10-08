@@ -207,7 +207,7 @@ export async function noiDungHtml(payload: Payload, noiDung: unknown) {
         const f = node.fields;
         const dvSlug = f.dichVu ? slugDv.get(idCua(f.dichVu)) : "";
         const href = f.khanCap ? "/goi-gap/" : `/dat-lich/${dvSlug ? `?dv=${encodeURIComponent(dvSlug)}` : ""}`;
-        return `<aside class="khoi-dat-lich"><p class="khoi-dat-lich-tieu-de">${esc(f.tieuDe || "Cần thợ tới tận nơi?")}</p>${f.moTa ? `<p>${esc(f.moTa)}</p>` : ""}<a class="btn btn-primary" href="${esc(href)}">${f.khanCap ? "Gọi thợ gấp" : "Đặt lịch"}</a></aside>`;
+        return `<aside class="khoi-dat-lich"><p class="khoi-dat-lich-tieu-de">${esc(f.tieuDe || "Cần thợ tới tận nơi?")}</p>${f.moTa ? `<p>${esc(f.moTa)}</p>` : ""}<a class="btn btn-primary nut nut-chinh" href="${esc(href)}">${f.khanCap ? "Gọi thợ gấp" : "Đặt lịch"}</a></aside>`;
       },
       videoYoutube: ({ node }: { node: { fields: Record<string, unknown> } }) => {
         const id = maYoutube(String(node.fields.url || ""));

@@ -4,3 +4,5 @@
 .dd a { color: var(--chu-phu); text-decoration: none; }
 .dd a:hover { color: var(--toi); text-decoration: underline; }
 .dd span { color: var(--chu); }
+.toi, .toi a, .toi li + li::before { color: var(--chu-tren-toi-2); }
+.toi a:hover, .toi span { color: #fff; }

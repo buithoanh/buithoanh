@@ -1,0 +1,9 @@
+.hop { background: var(--nhan-nhat); border-radius: var(--bo); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.tieuDe { font-size: 16px; color: var(--toi); }
+.form, .xong { display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
+.mo { font-size: 14px; }
+.form :global(.nut) { min-height: 50px; font-weight: 800; }
+.lai {
+  align-self: flex-start; border: 0; background: transparent; padding: 0; font-size: 13px; color: var(--toi-2);
+  text-decoration: underline; cursor: pointer; min-height: 44px;
+}

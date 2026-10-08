@@ -1,0 +1,45 @@
+.dsGoi { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.goi {
+  text-align: left; border-radius: var(--bo); padding: 12px; cursor: pointer; display: flex; flex-direction: column;
+  align-items: flex-start; gap: 4px; min-height: 150px; background: var(--nen-trang); border: 2px solid var(--vien);
+}
+.goi:hover { border-color: var(--vien-o); }
+.goiChon, .goiChon:hover { background: var(--nhan-nhat); border-color: var(--nhan); }
+.nhanGoi {
+  font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 2px 8px; margin-bottom: 2px;
+  background: var(--vien-nhat); color: var(--chu-phu);
+}
+.goiChon .nhanGoi { background: var(--nhan); color: #fff; }
+.tenGoi { font-size: 16px; color: var(--toi); }
+.gia { font-size: 21px; color: var(--nhan); }
+.giaThang { font-size: 12.5px; color: var(--chu-phu); }
+
+.bang { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); overflow: hidden; }
+.hang {
+  display: grid; grid-template-columns: 1.3fr repeat(var(--so-cot, 2), 1fr); gap: 6px; padding: 11px 12px;
+  border-top: 1px solid var(--vien-nhat); font-size: 13.5px; align-items: center;
+}
+.dauBang { border-top: 0; padding: 10px 12px; background: var(--vien-nhat); font-size: 12.5px; font-weight: 700; color: var(--toi); }
+.cotChon { color: var(--nhan); }
+.co { color: var(--xanh); font-weight: 500; }
+.khong { color: var(--chu-phu); font-weight: 500; }
+.oChon { font-weight: 700; background: var(--nhan-nhat); border-radius: 6px; padding: 2px 6px; margin: -2px -6px; }
+
+.loiIch {
+  background: var(--xanh-nhat); color: var(--xanh); border-radius: var(--bo); padding: 12px 14px;
+  display: flex; gap: 10px; align-items: flex-start; font-size: 14px;
+}
+.loiIch svg { flex: none; margin-top: 1px; }
+
+.dangKy { margin-top: 4px; padding: 16px; }
+.dangKy h2 { font-size: 19px; }
+.form { display: flex; flex-direction: column; gap: 12px; }
+.hai { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.bienSo { font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+.giua { text-align: center; }
+.xong { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+.xongDau { display: flex; gap: 10px; align-items: center; }
+.xongDau h2 { font-size: 17px; }
+.dauTich { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--xanh-nhat); color: var(--xanh); display: grid; place-items: center; }
+
+@media (max-width: 359px) { .hai { grid-template-columns: 1fr; } }

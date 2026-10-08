@@ -4,7 +4,8 @@ import JsonLd from "../JsonLd";
 import site from "@/site.config.mjs";
 import s from "./DuongDan.module.css";
 
-export default function DuongDan({ cap, an = false }) {
+// toi: breadcrumb đặt trên nền tối (hero tối).
+export default function DuongDan({ cap, an = false, toi = false }) {
   const day = [{ ten: "Trang chủ", href: "/" }, ...cap];
   return (
     <>
@@ -13,7 +14,7 @@ export default function DuongDan({ cap, an = false }) {
         itemListElement: day.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.ten, item: `${site.url}${c.href}` })),
       }} />
       {!an && (
-        <nav aria-label="Đường dẫn" className={s.dd}>
+        <nav aria-label="Đường dẫn" className={`${s.dd} ${toi ? s.toi : ""}`}>
           <ol>
             {day.map((c, i) => (
               <li key={c.href}>
