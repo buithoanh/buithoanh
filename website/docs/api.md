@@ -1857,6 +1857,7 @@ Trả `200 { "id": "<mã bên điều phối>" }`. Lỗi được ghi vào đơn
 - **Lưu nhiều một lần** ("Lưu 3 thay đổi giá"): `POST /api/hang-muc-gia/luu-nhieu`
   `{ "thayDoi": [{ "id": 6, "gia": 170000 }], "lyDo": "Giá nhập tăng" }`. Lưu cả lô hoặc không lưu gì.
 - Nhật ký đổi giá: `GET /api/nhat-ky-gia?sort=-createdAt&limit=50` (`moTa`, `giaCu`, `giaMoi`, `lyDo`, `tenNguoi`, `vaiTro`, `createdAt`).
+  Tải cả nhật ký: `GET /api/nhat-ky-gia/xuat?dinhDang=xlsx|csv` (quanTri, quanLyDichVu; file `nhat-ky-gia-<ngày>.xlsx`).
 - Phí chung, bảo hành, phân khúc: `GET/POST /api/globals/bang-gia-chung` (thêm `lyDoDoi` để ghi nhật ký).
 - Danh mục dịch vụ (bật/tắt nhận đặt, báo giá sơ bộ): `PATCH /api/danh-muc-dich-vu/:id`.
 - Hãng, dòng xe: `/api/hang-xe`, `/api/dong-xe` (`where[canGan][equals]=true` = dòng mới cần gán phân khúc);
