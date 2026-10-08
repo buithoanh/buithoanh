@@ -3,7 +3,11 @@
 Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tới đó", kèm CMS (trang quản trị) để đội marketing viết, duyệt, đăng bài mà không cần biết Git.
 
 - **Next.js 16 + Payload CMS 3** trong cùng một ứng dụng. Database **PostgreSQL**.
-- Web công khai: `/`, `/dich-vu/...`, `/cam-nang/...`, `/dat-lich/`.
+- Web công khai dựng theo thiết kế `docs/thiet-ke/` (điện thoại 390px là chuẩn, máy tính co giãn): `/`, `/dich-vu/...`,
+  `/hang-xe/...`, `/xe-dien/`, `/bang-gia/`, `/hoi-vien/`, `/doanh-nghiep/`, `/tuyen-tho/`, `/ve-chung-toi/`, `/cam-nang/...`,
+  `/tra-cuu-xe/`; luồng đơn `/dat-lich/`, `/goi-gap/`, link riêng của khách `/don/<token>/` (theo dõi, báo giá, thanh toán, đánh giá).
+- Màn quản trị: `/quan-tri/bai-viet/`, `/quan-tri/bang-gia/`, `/quan-tri/ma-khuyen-mai/`, `/quan-tri/so-lieu/` (đăng nhập bằng tài khoản CMS).
+  Danh sách màn, chỗ khác thiết kế, việc còn lại: `docs/BAN-GIAO-FE.md`.
 - Trang quản trị: `/admin` (giao diện tiếng Việt).
 - Chưa có tên miền thì Google bị chặn lập chỉ mục (thanh vàng trên đầu trang, `robots.txt` chặn, header `noindex`).
 
@@ -82,8 +86,14 @@ Khi nối phải giữ hai luật: chỉ lấy trang được đánh dấu công
 | `lib/bai.ts`, `lib/quyen.ts` | Trường dùng chung, hook duyệt bài, phân quyền 5 vai trò |
 | `lib/ai/` | Gọi Claude viết bài, luồng tạo bản nháp |
 | `lib/vcwiki.ts` | Cổng tra VCwiki (chờ nối) |
-| `lib/cms.js` | Web công khai đọc dữ liệu từ CMS |
-| `app/(frontend)/` | Giao diện web công khai |
+| `lib/cms.js`, `lib/giao-dien.js` | Web công khai đọc dữ liệu từ CMS; dữ liệu header/footer (`layChung()`) |
+| `app/(frontend)/(trang)/` | Trang công khai (header, footer, thanh liên hệ dưới đáy điện thoại) |
+| `app/(frontend)/(don)/` | Đặt lịch, gọi gấp, link riêng của khách (khung điện thoại, máy tính canh giữa) |
+| `app/(frontend)/globals.css` | Biến màu theo thiết kế (`--toi`, `--nhan`, `--nen`…) và lớp dùng chung |
+| `app/(quan-tri)/`, `components/quan-tri/`, `lib/quan-tri/phien.js` | Màn quản trị bài viết, bảng giá, mã khuyến mãi, số liệu (ẩn/khoá theo vai trò) |
+| `components/chung/` | Header, footer, thanh liên hệ, ô nhập form, ô đồng ý dữ liệu, chọn xe, khung ảnh, breadcrumb, ghi sự kiện |
+| `components/trang/`, `noi-dung/`, `p2/`, `don/`, `phuc-vu/` | Component theo nhóm màn (CSS Modules cạnh file) |
+| `lib/su-kien-client.js` | Ghi xem trang, bấm gọi/Zalo, gửi form; giữ nguồn khách (utm, `?ma=`) suốt phiên |
 | `app/(payload)/` | Trang admin và API của Payload (file sinh tự động, không sửa tay) |
 | `migrations/` | Thay đổi cấu trúc database cho production |
 | `du-lieu-mau/` | Dữ liệu ban đầu (trang dịch vụ, bài, từ khoá, `bang-gia.json`, `xe.json`, `vung.json`) để nạp lần đầu. Sửa ở đây **không** làm đổi web. |
@@ -122,12 +132,24 @@ NODE_ENV=production npm run migrate:create -- ten-thay-doi
 
 Lệnh khác: `npm run kiem-tra` (kiểm tra mọi bài đã đăng), `npm run typecheck`, `npm run build`, `npm start`.
 
-Kiểm thử: `npm test` (tính giá, biển số, vùng, khung giờ, trạng thái đơn; không cần database) và
-`npm run test:tich-hop` (phân quyền, đơn hàng, báo giá trên database đã nạp dữ liệu mẫu). CI chạy cả hai.
+Kiểm thử: `npm test` (tính giá, biển số, vùng, khung giờ, trạng thái đơn; không cần database),
+`npm run test:tich-hop` (phân quyền, đơn hàng, báo giá trên database đã nạp dữ liệu mẫu) và `npm run test:e2e`
+(Playwright, bấm thử giao diện trên bản build: trang công khai 390/1440px, đặt lịch, gọi gấp, báo giá, thanh toán, đánh giá,
+tra cứu xe, sửa giá, phân quyền, mã khuyến mãi). CI chạy cả ba. Chạy e2e trên máy:
+
+```bash
+export NODE_ENV=production TICH_HOP_GIA_LAP=tat-ca NAP_DU_LIEU_THU=1   # database kiểm thử, không phải database thật
+npm run migrate && npm run nap-du-lieu && npm run build && npm start   # cửa sổ 1
+npm run test:e2e                                                       # cửa sổ 2
+node scripts/tao-don-thu.mjs        # tạo đơn ở mọi trạng thái, in link /don/... để mở tay
+node scripts/chup-man-hinh.mjs / /bang-gia/ --rong=390   # chụp màn hình để so với thiết kế
+```
+
+e2e nâng "Số đơn tối đa" mỗi khung giờ lên 1000 trước khi chạy (`tests/e2e/chuan-bi.mjs`), nên chỉ chạy trên database kiểm thử.
 
 `npm run nap-du-lieu` khi chạy thử còn tạo tài khoản thử cho từng vai trò (`quantri@thotoi.test`, `quanly@`, `bientap@`,
 `marketing@`, `dieuphoi@`; mật khẩu `ThoToi-ThuNghiem-2026` hoặc biến `MAT_KHAU_TAI_KHOAN_THU`), đơn mẫu và đánh giá mẫu.
-Chạy trên production thì không tạo những thứ đó.
+Chạy trên production thì không tạo những thứ đó (trừ khi đặt `NAP_DU_LIEU_THU=1`, chỉ dùng cho máy kiểm thử).
 
 ## Đưa lên server
 
@@ -157,4 +179,6 @@ Sao lưu: database (volume `db`, dùng `pg_dump`) và ảnh tải lên (volume `
 - Khoá tích hợp thật: bản đồ, điều phối, Zalo ZNS, SMS, VCparts (xem `docs/BAN-GIAO-BE.md`).
 - Kéo số liệu Google Search Console về từng từ khoá để chọn bài cần viết lại.
 - Chọn nơi đặt server và sao lưu.
-- Ảnh việc thật: tải lên ở admin → Ảnh, chèn vào bài bằng trình soạn thảo.
+- Ảnh việc thật: tải lên ở admin → Ảnh, chèn vào bài bằng trình soạn thảo. Giao diện đang hiện khung giữ chỗ ở chỗ chưa có ảnh.
+- Chốt danh sách khu vực phục vụ theo địa giới mới (phường); giao diện lấy tên khu vực từ dữ liệu nên chỉ cần sửa trong admin.
+- Duyệt nội dung pháp lý: `/chinh-sach-bao-hanh/`, `/chinh-sach-du-lieu/`, câu bảo hành hãng ở `/xe-dien/`.

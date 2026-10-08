@@ -13,7 +13,8 @@ fs.mkdirSync(ra, { recursive: true });
 const trinhDuyet = await chromium.launch({ executablePath: fs.existsSync("/opt/pw-browsers/chromium") ? undefined : undefined });
 const trang = await trinhDuyet.newPage({ viewport: { width: rong, height: 844 } });
 for (const p of duongDan) {
-  const r = await trang.goto(goc + p, { waitUntil: "networkidle" });
+  const r = await trang.goto(goc + p, { waitUntil: "load" });
+  await trang.waitForTimeout(800);
   const ten = `${ra}/${(p.replace(/[^\w-]+/g, "_") || "goc")}-${rong}.png`;
   await trang.screenshot({ path: ten, fullPage: true });
   const cuonNgang = await trang.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);

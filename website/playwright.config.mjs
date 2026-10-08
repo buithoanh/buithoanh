@@ -7,6 +7,7 @@ import { IP_GIA } from "./tests/e2e/chung.mjs";
 
 export default defineConfig({
   testDir: "tests/e2e",
+  globalSetup: "./tests/e2e/chuan-bi.mjs",
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: false,
