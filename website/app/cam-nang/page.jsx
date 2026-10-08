@@ -1,25 +1,34 @@
 import Link from "next/link";
 import { sortedArticles, formatDate } from "../../lib/content.mjs";
+import Icon from "../../components/Icon";
 
 export const metadata = { title: "Cẩm nang xe", description: "Hướng dẫn tự kiểm tra, bảo dưỡng và xử lý sự cố ô tô thường gặp.", alternates: { canonical: "/cam-nang/" } };
 
 export default function ArticleIndex() {
   const articles = sortedArticles();
   return (
-    <section className="block">
-      <div className="wrap">
-        <h2>Cẩm nang xe</h2>
-        <p className="sub">{articles.length} bài hướng dẫn, mới nhất trước.</p>
-        <div className="grid">
-          {articles.map((a) => (
-            <Link key={a.slug} className="card" href={`/cam-nang/${a.slug}/`}>
-              <h3>{a.data.title}</h3>
-              <p>{a.data.description}</p>
-              <span className="meta">{formatDate(a.data.ngay)}</span>
-            </Link>
-          ))}
+    <>
+      <section className="page-hero page-hero-compact">
+        <div className="wrap">
+          <nav className="crumbs" aria-label="Breadcrumb"><Link href="/">Trang chủ</Link> / <span aria-current="page">Cẩm nang xe</span></nav>
+          <h1>Cẩm nang xe</h1>
+          <p className="lead">Hướng dẫn tự kiểm tra và xử lý những sự cố hay gặp. {articles.length} bài, mới nhất trước.</p>
         </div>
-      </div>
-    </section>
+      </section>
+      <section className="block">
+        <div className="wrap">
+          <div className="grid">
+            {articles.map((a) => (
+              <Link key={a.slug} className="card card-article" href={`/cam-nang/${a.slug}/`}>
+                {a.data.nhom && <span className="tag">{a.data.nhom}</span>}
+                <h2 className="card-title">{a.data.title}</h2>
+                <p>{a.data.description}</p>
+                <span className="card-foot"><span className="meta">{formatDate(a.data.ngay)}</span><span className="more">Đọc bài <Icon name="arrow" size={16} /></span></span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

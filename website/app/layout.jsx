@@ -9,6 +9,7 @@ export const metadata = {
   description: `${site.slogan}. Thợ tới tận nơi: ắc quy, lốp, bảo dưỡng, phanh, đọc lỗi, cứu hộ ô tô tại ${site.city}.`,
   robots: site.allowIndex ? { index: true, follow: true } : { index: false, follow: false },
   openGraph: { siteName: site.name, locale: "vi_VN", type: "website" },
+  icons: { icon: "/favicon.svg" },
 };
 
 export const viewport = { themeColor: "#13283f" };
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Header />
-        <main>{children}</main>
+        <main id="noi-dung" tabIndex={-1}>{children}</main>
         <Footer />
       </body>
     </html>
