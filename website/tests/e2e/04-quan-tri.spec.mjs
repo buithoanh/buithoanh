@@ -8,6 +8,20 @@ test.use({ viewport: { width: 1440, height: 900 } });
 const HANG_MUC = "Công thay ắc quy";
 const tien = (n) => `${n.toLocaleString("vi-VN").replace(/,/g, ".")}đ`;
 
+/** Slug một trang khu vực của dịch vụ ắc quy (nháp cũng được): có sẵn thì dùng, chưa có thì tạo từ mẫu. */
+async function trangKhuVucAcQuy(context, jwt) {
+  const h = { Authorization: `JWT ${jwt}`, Origin: GOC };
+  const ds = await (await context.request.get(`${GOC}/api/trang-khu-vuc?draft=true&depth=1&limit=200`, { headers: h })).json();
+  const co = (ds.docs || []).find((d) => d.dichVu?.slug === "ac-quy");
+  if (co) return co.slug;
+  const chung = await (await context.request.get(`${GOC}/api/trang/chung`)).json();
+  const quan = chung.vungPhucVu.quan[0].slug;
+  const r = await context.request.post(`${GOC}/api/trang-khu-vuc/tao-tu-mau`, { headers: h, data: { dichVu: "ac-quy", quan } });
+  expect(r.ok(), `tạo trang khu vực từ mẫu: ${r.status()} ${await r.text()}`).toBeTruthy();
+  const moi = await r.json();
+  return moi.slug || moi.doc?.slug || moi.bai?.slug;
+}
+
 async function suaGia(page, gia, lyDo) {
   await page.goto("/quan-tri/bang-gia/");
   await page.getByRole("tab", { name: /^Ắc quy/ }).click();
@@ -30,7 +44,8 @@ test("Quản lý dịch vụ sửa giá: trang dịch vụ, trang khu vực, for
   expect(giaCu, `tìm được giá hiện tại của "${HANG_MUC}"`).toBeGreaterThan(0);
   const giaMoi = giaCu + 20000;
 
-  await dangNhap(context, "quanly@thotoi.test");
+  const jwt = await dangNhap(context, "quanly@thotoi.test");
+  const slugKhuVuc = await trangKhuVucAcQuy(context, jwt);
   // Thiếu lý do thì không lưu
   await page.goto("/quan-tri/bang-gia/");
   await page.getByRole("tab", { name: /^Ắc quy/ }).click();
@@ -43,7 +58,7 @@ test("Quản lý dịch vụ sửa giá: trang dịch vụ, trang khu vực, for
     await page.goto("/dich-vu/ac-quy/");
     await expect(page.getByText(tien(giaMoi)).first()).toBeVisible();
     // Trang khu vực mẫu đang là bản nháp: xem qua chế độ xem trước (đã đăng nhập), cùng component với trang đã đăng
-    await page.goto(`/xem-truoc/?loai=khu-vuc&slug=ac-quy-thanh-xuan`);
+    await page.goto(`/xem-truoc/?loai=khu-vuc&slug=${slugKhuVuc}`);
     await expect(page).toHaveURL(/\/dich-vu\/ac-quy\/[\w-]+\/$/);
     await expect(page.getByText(tien(giaMoi)).first()).toBeVisible();
     await page.goto("/xem-truoc/thoat/");

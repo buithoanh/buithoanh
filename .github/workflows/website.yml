@@ -39,7 +39,8 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: website/package-lock.json
-      - run: npm ci
+      # NODE_ENV=production ở cấp job làm npm ci bỏ devDependencies (typescript types, tsx, playwright): cài cả dev
+      - run: npm ci --include=dev
       - run: npm run typecheck
       - name: Kiểm thử đơn vị (tính giá, mã giảm giá, quyền lợi hội viên, hoa hồng, biển số, vùng, khung giờ, trạng thái đơn)
         run: npm test

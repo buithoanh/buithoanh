@@ -87,9 +87,13 @@ const HANG_MUC = [
 const dieuPhoi = await dangNhap("dieuphoi@thotoi.test");
 const quanTri = await dangNhap("quantri@thotoi.test");
 const duKien = () => new Date(Date.now() + 25 * 60000).toISOString();
+// Thợ đang hoạt động bất kỳ (thợ mẫu THO-1… chỉ có khi nap-du-lieu chạy trên database chưa có thợ nào)
+const thoCo = (await phai("GET", "/api/tho?where[dangHoatDong][equals]=true&limit=1&depth=0", null, quanTri)).docs[0];
+if (!thoCo) throw new Error("Chưa có thợ đang hoạt động (chạy npm run nap-du-lieu ở chế độ chạy thử).");
+const MA_THO = thoCo.maBenDieuPhoi || String(thoCo.id);
 
 async function denThoDangDen(d) {
-  await phai("POST", `/api/don-hang/${d.ma}/xep-tho`, { tho: "THO-1", duKienDenLuc: duKien() }, dieuPhoi);
+  await phai("POST", `/api/don-hang/${d.ma}/xep-tho`, { tho: MA_THO, duKienDenLuc: duKien() }, dieuPhoi);
   await phai("POST", `/api/don-hang/${d.ma}/vi-tri-tho`, { lat: 21.0298, lng: 105.7931 }, dieuPhoi);
 }
 async function denChoDuyet(d, hangMuc = HANG_MUC) {
