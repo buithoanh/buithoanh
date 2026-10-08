@@ -100,6 +100,8 @@ export async function taoDon(payload: Payload, loai: "datLich" | "khanCap", tho:
   // Mã giới thiệu bạn bè (ô "Mã giới thiệu" hoặc link ?ma=). Link ?ma= cũng có thể là mã đối tác: khi đó coi như mã khuyến mãi.
   // Mã có thật nhưng không áp (đơn không phải đơn đầu, mã của chính mình): vẫn nhận đơn, báo lý do trong kết quả.
   let gioiThieu: { id?: number; ma: string; apDung: boolean; moTa?: string; lyDo?: string } | null = null;
+  // Mã từ link ?ma= đã được khách dùng làm mã khuyến mãi (cùng mã) thì không xét thêm như mã giới thiệu.
+  if (d.maGioiThieu && d.maGioiThieu === d.maKhuyenMai?.toUpperCase()) d.maGioiThieu = "";
   if (d.maGioiThieu) {
     const gt = await timMaGioiThieu(payload, d.maGioiThieu);
     if (gt) {
