@@ -40,7 +40,7 @@ const ID_TRUONG = {
 
 const ngayDauCoCho = (lich) => (lich.find((n) => !n.nghi && n.khung.some(datDuoc)) || lich[0])?.ngay || "";
 
-export default function DatLich({ duLieu, dvChon = [], maLink = "", giaDau = null, khongJs = null }) {
+export default function DatLich({ duLieu, dvChon = [], maLink = "", giaDau = null, khongJs = null, xeChon = null }) {
   const { dichVu: dsDichVu, hangXe, choDo: dsChoDo, phi, lienHe, gioiHanTep } = duLieu;
   const hotline = lienHe?.hotline;
 
@@ -51,7 +51,7 @@ export default function DatLich({ duLieu, dvChon = [], maLink = "", giaDau = nul
   const [trieuChung, setTrieuChung] = useState("");
   const [tep, setTep] = useState([]);
   // Bước 2
-  const [xe, setXe] = useState({ hang: "", dong: "", doi: null });
+  const [xe, setXe] = useState(xeChon || { hang: "", dong: "", doi: null });
   const [bienSo, setBienSo] = useState("");
   const [soKm, setSoKm] = useState("");
   // Bước 3

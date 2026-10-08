@@ -29,13 +29,19 @@ export default async function TrangDatLich({ searchParams }) {
   const coDichVu = new Set(duLieu.dichVu.map((d) => d.slug));
   const dvChon = [...new Set(motGiaTri(sp?.dv).split(",").map((x) => x.trim()).filter((x) => coDichVu.has(x)))].slice(0, 6);
   const maLink = motGiaTri(sp?.ma).trim().toUpperCase().replace(/[^A-Z0-9_-]/g, "").slice(0, 40);
-  const giaDau = await tinhBaoGiaSoBo(payload, { dichVu: dvChon, chiDichVuNhanDat: true }).catch(() => null);
+  // ?hang=&dong=&doi= (link từ trang hãng xe, xe điện, khối xem giá): chọn sẵn xe nếu dòng có thật trong danh mục
+  const slugSach = (v) => motGiaTri(v).trim().toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 60);
+  const hangCo = (duLieu.hangXe || []).find((h) => h.slug === slugSach(sp?.hang));
+  const dongCo = hangCo?.dong?.find((d) => d.slug === slugSach(sp?.dong));
+  const doi = Number(motGiaTri(sp?.doi)) || null;
+  const xeChon = dongCo ? { hang: hangCo.slug, dong: dongCo.slug, doi: doi && doi >= (dongCo.doiTu || 1980) && doi <= (dongCo.doiDen || 2100) ? doi : null } : null;
+  const giaDau = await tinhBaoGiaSoBo(payload, { dichVu: dvChon, chiDichVuNhanDat: true, ...(xeChon && { dongXe: xeChon.dong }) }).catch(() => null);
   const { hotline, zalo } = duLieu.lienHe || {};
 
   return (
     <>
       <DatLich
-        duLieu={duLieu} dvChon={dvChon} maLink={maLink}
+        duLieu={duLieu} dvChon={dvChon} maLink={maLink} xeChon={xeChon}
         giaDau={giaDau ? { trangThai: giaDau.trangThai, hienThi: giaDau.hienThi, ghiChu: giaDau.ghiChu } : null}
         khongJs={
           <noscript>
