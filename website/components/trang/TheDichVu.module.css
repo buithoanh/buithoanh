@@ -6,9 +6,10 @@
   transition: border-color .15s, box-shadow .15s;
 }
 .the:hover { border-color: var(--nhan); color: var(--chu); box-shadow: var(--bong); }
+.the:hover .ma { background: var(--nhan); color: var(--nen-trang); }
 .ma {
   flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--nhan-nhat); color: var(--nhan);
-  display: grid; place-items: center; font-weight: 800; font-size: 13px;
+  display: grid; place-items: center; font-weight: 800; font-size: 13px; transition: background-color .15s, color .15s;
 }
 .chu { display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .ten { font-size: 15px; color: var(--toi); line-height: 1.25; }
@@ -19,8 +20,13 @@
   .luoi { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; }
   .the { flex-direction: row; align-items: flex-start; gap: 16px; padding: 22px; border-radius: 14px; min-height: 0; }
   .ma { width: 46px; height: 46px; border-radius: 12px; font-size: 15px; }
+  .ma svg { width: 24px; height: 24px; }
   .chu { gap: 4px; }
   .ten { font-size: 18px; }
   .moTa { font-size: 15px; margin-top: 0; }
   .gia { display: block; font-size: 14px; color: var(--nhan); font-weight: 700; margin-top: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .the, .ma { transition: none; }
 }

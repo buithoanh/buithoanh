@@ -1,12 +1,15 @@
-// Thẻ dịch vụ (trang chủ, 404): mã viết tắt, tên, một dòng mô tả; máy tính thêm "Giá công từ …".
+// Thẻ dịch vụ (trang chủ, 404): biểu tượng (chưa có thì mã viết tắt), tên, một dòng mô tả; máy tính thêm "Giá công từ …".
 // dv: phần tử dichVu của layTrangChu() (ma, ten, slug, moTaNgan, giaCongTuHienThi).
 import Link from "next/link";
+import Icon, { iconDichVu } from "../Icon";
 import s from "./TheDichVu.module.css";
 
 export function TheDichVu({ dv, hienGia = true }) {
   return (
     <Link href={`/dich-vu/${dv.slug}/`} className={s.the}>
-      <span className={s.ma} aria-hidden="true">{dv.ma}</span>
+      <span className={s.ma} aria-hidden="true">
+        {iconDichVu[dv.slug] ? <Icon name={iconDichVu[dv.slug]} size={20} /> : dv.ma}
+      </span>
       <span className={s.chu}>
         <b className={s.ten}>{dv.ten}</b>
         {dv.moTaNgan ? <span className={s.moTa}>{dv.moTaNgan}</span> : null}

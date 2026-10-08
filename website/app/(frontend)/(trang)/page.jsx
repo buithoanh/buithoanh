@@ -12,6 +12,7 @@ import BangGiaTomTat from "@/components/trang/BangGiaTomTat";
 import CacBuoc from "@/components/trang/CacBuoc";
 import KhoiVungPhucVu from "@/components/trang/KhoiVungPhucVu";
 import KhoiDoanhNghiep from "@/components/trang/KhoiDoanhNghiep";
+import KhoiCta from "@/components/trang/KhoiCta";
 import XemGiaXe from "@/components/trang/XemGiaXe";
 import s from "./trang-chu.module.css";
 
@@ -60,7 +61,9 @@ export default async function TrangChu() {
         </div>
         <ul className={s.thongSo}>
           {camKet.cuuHoPhut ? <li><b>{camKet.cuuHoPhut} phút</b><span>có mặt cứu hộ</span></li> : null}
-          <li><b>Giá công khai</b><span>báo trước khi làm</span></li>
+          {google.diem
+            ? <li><b>{diem(google.diem)} ★</b><span>{google.soDanhGia ? `${google.soDanhGia} đánh giá Google` : "đánh giá Google"}</span></li>
+            : <li><b>Báo giá trước</b><span>đồng ý mới làm</span></li>}
           {camKet.baoHanhPhuTungThang ? <li><b>{camKet.baoHanhPhuTungThang} tháng</b><span>bảo hành phụ tùng</span></li> : null}
         </ul>
         <ul className={s.tinCay}>
@@ -85,14 +88,22 @@ export default async function TrangChu() {
           <LuoiDichVu dichVu={dichVuCoTrang} />
         </section>
 
+        {/* Bằng chứng (đánh giá thật) đặt ngay sau dịch vụ, trước bảng giá: khách tin rồi mới xem giá. */}
+        <DanhGiaKhach danhGia={t.danhGia} google={google} />
+
         <div className={s.cum}>
           <BangGiaTomTat dong={t.giaNhanh} className={s.oGia} />
           <CacBuoc className={s.oBuoc} />
           <KhoiVungPhucVu chung={t} className={s.oVung} />
         </div>
 
-        <DanhGiaKhach danhGia={t.danhGia} google={google} />
         <KhoiDoanhNghiep hoSoNangLuc={caiDat.hoSoNangLucUrl || null} />
+        <KhoiCta
+          nhan="Báo giá trước, bạn đồng ý mới làm"
+          tieuDe="Xe đang gặp vấn đề? Thợ tới tận chỗ xe đỗ."
+          moTa={camKet.cuuHoPhut ? `Nội thành ${thuongHieu.thanhPho}, thợ có mặt trong khoảng ${camKet.cuuHoPhut} phút.` : null}
+          href="/dat-lich/" chuNut="Đặt lịch ngay"
+        />
       </div>
     </>
   );
