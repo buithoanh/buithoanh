@@ -1,9 +1,9 @@
 // Trang hãng xe, bản tối thiểu nối dữ liệu; frontend dựng lại theo màn `HangXe`. Chỉ có trang khi đã viết và đăng.
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cheDoNhap, layPayload, laySite } from "../../../../lib/cms";
-import { layTrangHangXe } from "../../../../lib/cong-khai";
-import { CallButton } from "../../../../components/Contact";
+import { cheDoNhap, layPayload, laySite } from "@/lib/cms";
+import { layTrangHangXe } from "@/lib/cong-khai";
+import { CallButton } from "@/components/Contact";
 
 async function lay(params) {
   const { hang } = await params;

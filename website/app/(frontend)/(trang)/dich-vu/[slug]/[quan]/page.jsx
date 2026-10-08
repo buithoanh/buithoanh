@@ -2,10 +2,10 @@
 // Chỉ có trang khi đã viết và đăng trang khu vực (tránh trang mỏng giống nhau giữa các quận).
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cheDoNhap, layPayload, laySite } from "../../../../../lib/cms";
-import { layTrangKhuVuc } from "../../../../../lib/cong-khai";
-import { CallButton } from "../../../../../components/Contact";
-import JsonLd from "../../../../../components/JsonLd";
+import { cheDoNhap, layPayload, laySite } from "@/lib/cms";
+import { layTrangKhuVuc } from "@/lib/cong-khai";
+import { CallButton } from "@/components/Contact";
+import JsonLd from "@/components/JsonLd";
 
 async function lay(params) {
   const { slug, quan } = await params;

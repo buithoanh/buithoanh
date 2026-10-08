@@ -1,7 +1,7 @@
 // Nút "Xem trước" trong admin trỏ vào đây. Chỉ người đã đăng nhập admin mới bật được chế độ xem bản nháp.
 import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
-import { layPayload } from "../../../lib/cms";
+import { layPayload } from "@/lib/cms";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);

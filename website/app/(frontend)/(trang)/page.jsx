@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { layDanhSachBai, layDanhSachDichVu, laySite } from "../../lib/cms";
-import { CallButton, ZaloButton } from "../../components/Contact";
-import JsonLd from "../../components/JsonLd";
-import Icon, { iconDichVu } from "../../components/Icon";
-import { anhTrangChu, anhDichVu } from "../../components/anh";
+import { layDanhSachBai, layDanhSachDichVu, laySite } from "@/lib/cms";
+import { CallButton, ZaloButton } from "@/components/Contact";
+import JsonLd from "@/components/JsonLd";
+import Icon, { iconDichVu } from "@/components/Icon";
+import { anhTrangChu, anhDichVu } from "@/components/anh";
 
 // Lối tắt cho khách đang gặp sự cố: chọn triệu chứng, tới thẳng trang dịch vụ.
 const suCo = [

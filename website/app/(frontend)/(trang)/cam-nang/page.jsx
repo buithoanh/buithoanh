@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { formatDate, layDanhSachBai } from "../../../lib/cms";
-import Icon from "../../../components/Icon";
+import { formatDate, layDanhSachBai } from "@/lib/cms";
+import Icon from "@/components/Icon";
 
 export const metadata = { title: "Cẩm nang xe", description: "Hướng dẫn tự kiểm tra, bảo dưỡng và xử lý sự cố ô tô thường gặp.", alternates: { canonical: "/cam-nang/" } };
 

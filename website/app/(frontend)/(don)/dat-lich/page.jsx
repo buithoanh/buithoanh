@@ -1,8 +1,8 @@
 import Link from "next/link";
-import site from "../../../site.config.mjs";
-import { layPayload, laySite } from "../../../lib/cms";
-import { layTrangDatLich } from "../../../lib/cong-khai";
-import { CallButton, ZaloButton } from "../../../components/Contact";
+import site from "@/site.config.mjs";
+import { layPayload, laySite } from "@/lib/cms";
+import { layTrangDatLich } from "@/lib/cong-khai";
+import { CallButton, ZaloButton } from "@/components/Contact";
 import BookingForm from "./BookingForm";
 
 export const metadata = { title: "Đặt lịch thợ tới tận nơi", description: `Đặt lịch bảo dưỡng, thay ắc quy, lốp, phanh tận nơi tại ${site.city}. Báo giá trước khi làm.`, alternates: { canonical: "/dat-lich/" } };

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { demChuHtml, formatDate, isoDate, layBai, laySite, sangHtmlDayDu } from "../../../../lib/cms";
-import { CallButton, ZaloButton } from "../../../../components/Contact";
-import JsonLd from "../../../../components/JsonLd";
-import Icon, { iconDichVu } from "../../../../components/Icon";
-import { anhDichVu } from "../../../../components/anh";
+import { demChuHtml, formatDate, isoDate, layBai, laySite, sangHtmlDayDu } from "@/lib/cms";
+import { CallButton, ZaloButton } from "@/components/Contact";
+import JsonLd from "@/components/JsonLd";
+import Icon, { iconDichVu } from "@/components/Icon";
+import { anhDichVu } from "@/components/anh";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
