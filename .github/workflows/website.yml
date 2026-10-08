@@ -50,3 +50,24 @@ jobs:
       - name: Kiểm thử tích hợp (phân quyền, đơn hàng, báo giá, thanh toán, hội viên, giới thiệu trên database)
         run: npm run test:tich-hop
       - run: npm run build
+      # Kiểm thử end-to-end trên bản build: nạp thêm tài khoản và dữ liệu thử, chạy server, bấm thử các luồng chính.
+      - name: Nạp dữ liệu thử cho e2e
+        run: npm run nap-du-lieu
+        env:
+          NAP_DU_LIEU_THU: "1"
+      - run: npx playwright install --with-deps chromium
+      - name: Kiểm thử end-to-end (trang công khai 390/1440px, đặt lịch, gọi gấp, báo giá, thanh toán, đánh giá, tra cứu xe, quản trị)
+        run: |
+          npm start > server.log 2>&1 &
+          for i in $(seq 60); do curl -sf -o /dev/null http://localhost:3000/ && break; sleep 1; done
+          curl -sf -o /dev/null http://localhost:3000/ || (cat server.log; exit 1)
+          npm run test:e2e
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            website/playwright-report
+            website/test-results
+            website/server.log
+          retention-days: 7

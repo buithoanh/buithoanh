@@ -3,6 +3,7 @@
 //   npm run test:e2e
 // Đặt BASE_URL nếu server không ở http://localhost:3000.
 import { defineConfig, devices } from "@playwright/test";
+import { IP_GIA } from "./tests/e2e/chung.mjs";
 
 export default defineConfig({
   testDir: "tests/e2e",
@@ -15,6 +16,7 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL || "http://localhost:3000",
     locale: "vi-VN",
+    extraHTTPHeaders: IP_GIA,
     timezoneId: "Asia/Ho_Chi_Minh",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",

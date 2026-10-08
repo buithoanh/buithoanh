@@ -16,7 +16,8 @@
     "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
     "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
     "test": "node --test \"tests/don-vi/*.test.mjs\"",
-    "test:tich-hop": "cross-env NODE_OPTIONS=--no-deprecation sh -c 'for f in tests/tich-hop/*.test.ts; do node --env-file-if-exists=.env --import tsx --test \"$f\" || exit 1; done'"
+    "test:tich-hop": "cross-env NODE_OPTIONS=--no-deprecation sh -c 'for f in tests/tich-hop/*.test.ts; do node --env-file-if-exists=.env --import tsx --test \"$f\" || exit 1; done'",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.132.1",
