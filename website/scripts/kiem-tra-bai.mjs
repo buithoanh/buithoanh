@@ -43,7 +43,7 @@ for (const section of Object.keys(RULES)) {
       if (m && !slugsOf(m[1]).includes(m[2])) err(`liên kết nội bộ hỏng: ${href}`);
     }
     if (section === "cam-nang" && !/\]\(\/dich-vu\//.test(e.body)) warn("nên có ít nhất 1 liên kết tới trang dịch vụ");
-    if (/\d[\d.]*\s*(đ|đồng|vnđ|k)\b|triệu đồng|nghìn đồng/i.test(e.body) && !e.data.giaDaDuyet) {
+    if (/\d[\d.,]*\s*(đ|đồng|vnđ|vnd|k|nghìn|ngàn|triệu)(?!\p{L})/iu.test(e.body) && !e.data.giaDaDuyet) {
       err("bài có nêu giá tiền: cần người phụ trách xác nhận rồi thêm giaDaDuyet: true ở phần đầu bài");
     }
   }
