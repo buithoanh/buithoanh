@@ -156,7 +156,7 @@ Mỗi lần chạy e2e dùng một IP giả (`X-Forwarded-For`) vì server giớ
 2. **Trang 404 khi gọi `notFound()`** (dịch vụ, bài, khu vực không có): mã HTTP 404 đúng, nhưng Next 16.3.5 trả HTML vỏ lỗi
    (`__next_error__`), giao diện 404 chỉ hiện sau khi JavaScript chạy. Đã tái hiện trên app Next tối giản một layout gốc: lỗi của
    framework, không phải code. Đường dẫn không khớp trang nào thì `global-not-found` render đủ phía server. Theo dõi bản Next mới.
-   Trang 404 toàn cục render lúc build (hotline trên trang đó là giá trị lúc build).
+   Trang 404 toàn cục render lúc có request (`await connection()`), nên build không cần database (build trong Docker).
 3. **Dữ liệu chưa có**: ảnh thật (dịch vụ, khu vực, xưởng, thợ), ảnh đại diện bài cẩm nang, trang hãng xe đã đăng, trang khu vực đã
    đăng (mẫu đang nháp vì thiếu ảnh thật và đánh giá thật), chủ đề cho bài mẫu, chức danh người duyệt kỹ thuật, giá doanh nghiệp theo
    xe (cần global mới), tỷ lệ công thợ, khoá Google Maps nhúng.
