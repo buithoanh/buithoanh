@@ -1,0 +1,53 @@
+/* Trang quản trị: dùng lại màu và nút của website, thêm thẻ, bảng, nhãn trạng thái. */
+.qt { padding-block: 24px 64px; }
+.qt h1 { font-size: 26px; margin: 0; color: var(--navy); }
+.qt h2 { font-size: 20px; margin: 0 0 12px; color: var(--navy); }
+.qt h3 { font-size: 17px; margin: 16px 0 8px; }
+.qt-dau { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
+.qt-toi, .qt-mo { color: var(--muted); font-size: 14px; }
+.qt-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 16px; overflow-x: auto; }
+.qt-tabs a { padding: 10px 14px; text-decoration: none; color: var(--muted); font-weight: 600; white-space: nowrap; border-bottom: 3px solid transparent; }
+.qt-tabs a[aria-current="page"] { color: var(--navy); border-color: var(--orange); }
+.qt-the { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; margin-bottom: 16px; }
+.qt form { display: grid; gap: 12px; justify-items: start; }
+.qt label { font-weight: 600; font-size: 15px; }
+.qt-khoi { display: grid; gap: 6px; width: 100%; }
+.qt select, .qt textarea { font: inherit; font-size: 15px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); width: 100%; max-width: 100%; }
+.qt select { width: auto; }
+.qt .btn:disabled { opacity: .5; cursor: not-allowed; }
+.qt-nut-bo { background: transparent; color: #c92a2a; }
+.qt-ds { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.qt-ds a { font-weight: 600; }
+.qt-hang { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0; }
+.qt-nhan { display: inline-block; font-size: 12.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #eef1f4; color: var(--muted); white-space: nowrap; }
+.qt-ok { background: #e6f4ea; color: var(--ok); }
+.qt-loi { background: #fdecec; color: #b42318; }
+.qt-dang { background: #e7f0fb; color: #1c5fa8; }
+.qt-cho { background: var(--orange-soft); color: #b5470b; }
+.qt-thongbao { padding: 10px 14px; border-radius: 8px; background: #e7f0fb; color: #1c3d63; font-size: 15px; }
+.qt-thongbao.qt-loi { background: #fdecec; color: #b42318; }
+.qt-bang-cuon { overflow-x: auto; }
+.qt-bang { width: 100%; border-collapse: collapse; font-size: 15px; }
+.qt-bang th, .qt-bang td { text-align: left; vertical-align: top; padding: 8px; border-bottom: 1px solid var(--line); }
+.qt-bang th { font-size: 13px; color: var(--muted); font-weight: 600; }
+.qt-khung { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: #fff; resize: vertical; }
+.qt-meta { display: grid; gap: 6px; margin: 0 0 12px; }
+.qt-meta div { display: grid; grid-template-columns: 110px 1fr; gap: 8px; }
+.qt-meta dt { color: var(--muted); font-size: 14px; }
+.qt-meta dd { margin: 0; }
+.qt-pre, .qt-gopy-nd { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
+.qt-pre { background: #f6f7f9; padding: 10px; border-radius: 8px; }
+.qt details { margin-bottom: 12px; }
+.qt summary { cursor: pointer; font-weight: 600; }
+.qt-gopy { border-left: 3px solid var(--line); padding: 4px 0 4px 12px; margin-bottom: 12px; }
+/* Nút gọi/Zalo của trang khách không cần ở trang quản trị. */
+body:has(.qt) .callbar { display: none; }
+@media (max-width: 600px) {
+  .qt-meta div { grid-template-columns: 1fr; gap: 0; }
+  /* Bảng thành từng thẻ trên điện thoại. */
+  .qt-bang thead { display: none; }
+  .qt-bang tr { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .qt-bang td { display: block; border: 0; padding: 0; grid-column: 2; }
+  .qt-bang td:has(input) { grid-column: 1; grid-row: 1 / span 6; }
+  .qt-bang td[data-nhan]::before { content: attr(data-nhan) ": "; color: var(--muted); font-size: 13px; }
+}

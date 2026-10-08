@@ -2,10 +2,10 @@ name: Website – kiểm tra bài và build
 
 on:
   pull_request:
-    paths: ["website/**"]
+    paths: ["website/**", ".github/workflows/website.yml"]
   push:
     branches: [main]
-    paths: ["website/**"]
+    paths: ["website/**", ".github/workflows/website.yml"]
 
 permissions:
   contents: read
@@ -24,4 +24,5 @@ jobs:
           cache: npm
           cache-dependency-path: website/package-lock.json
       - run: npm ci
+      - run: npm test
       - run: npm run build

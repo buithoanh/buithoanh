@@ -35,6 +35,7 @@
     { "thang": "2027-09", "baiCamNang": 16 },
     { "thang": "2027-10", "baiCamNang": 16 }
   ],
+  "baiKeHoach": [],
   "quyTac": [
     "Mỗi trang khu vực phải có ảnh việc thật tại khu đó và bảng giá; không sao chép rồi đổi tên quận.",
     "Không nêu giá khi chưa có người phụ trách duyệt (trường giaDaDuyet).",

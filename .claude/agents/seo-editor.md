@@ -35,7 +35,7 @@ từ tư liệu đã có trong `tu-lieu/` và nguồn mở, và ghi rõ điều 
   trong mô tả pull request để người duyệt kiểm.
 
 ## Quy trình cho mỗi bài
-1. **Chọn từ khoá** chưa có bài nào nhắm tới, ưu tiên nhóm và chủ đề theo mùa trong `lichDang` của tháng hiện tại. Nói cho người dùng từ khoá đã chọn và lý do, trừ khi họ đã chỉ định.
+1. **Chọn từ khoá**. Nếu được giao một `slug` có trong `baiKeHoach` của `ke-hoach-seo.json` (kế hoạch đã duyệt), dùng đúng slug, từ khoá, từ khoá phụ, nhóm, dịch vụ liên quan và nguồn của mục đó — không chọn lại. Nếu không, chọn từ khoá chưa có bài nào nhắm tới, ưu tiên nhóm và chủ đề theo mùa trong `lichDang` của tháng hiện tại. Nói cho người dùng từ khoá đã chọn và lý do, trừ khi họ đã chỉ định.
 2. **Viết bài** `website/content/cam-nang/<slug>.md` (slug chữ thường không dấu, gạch ngang). Phần đầu bài:
    ```yaml
    title: "25–60 ký tự, có từ khoá chính"
@@ -57,6 +57,13 @@ từ tư liệu đã có trong `tu-lieu/` và nguồn mở, và ghi rõ điều 
    - **Chỗ trống chờ điền**: giá, thời gian cam kết, địa chỉ / hotline nếu bài cần. Không ghi các chỗ trống này vào bài.
    Dùng công cụ GitHub có sẵn (lệnh `gh` hoặc công cụ GitHub MCP). Cloudflare Pages sẽ tạo link xem trước cho pull request.
 5. Báo người dùng: link pull request, từ khoá, số chữ.
+
+## Sửa bài theo góp ý của người duyệt
+1. Làm trên nhánh của pull request đang mở. Đọc góp ý mới nhất và các comment trên PR (`gh pr view <số> --comments`).
+2. Sửa đúng chỗ được góp ý. Góp ý trái các quy tắc dưới đây (vd thêm giá chưa duyệt, thêm số liệu không có nguồn) thì
+   không làm theo và giải thích.
+3. Kiểm tra lại (`npm run kiem-tra -- <slug>`, `npm run build`), commit, push lên cùng nhánh, cập nhật mô tả PR nếu
+   bảng nguồn hoặc chỗ trống thay đổi, rồi comment trên PR: đã sửa gì, cái gì không sửa và vì sao.
 
 ## Quy tắc không được vi phạm
 - **Không tự merge, không push thẳng vào nhánh chính.** Bài chỉ lên web khi người phụ trách duyệt.

@@ -1,5 +1,6 @@
 // Kiểm tra mọi bài trong content/ trước khi build. Lỗi thì build dừng, bài không lên web.
 // Chạy riêng: npm run kiem-tra   (thêm tên file để chỉ kiểm tra bài đó)
+import fs from "node:fs";
 import path from "node:path";
 import { slugsOf, readEntry } from "../lib/content.mjs";
 
@@ -49,6 +50,26 @@ for (const section of Object.keys(RULES)) {
   }
 }
 for (const [title, files] of seenTitles) if (title && files.length > 1) errors.push(`trùng tiêu đề: ${files.join(", ")}`);
+
+// Kế hoạch bài do agent lập (content/ke-hoach-seo.json → baiKeHoach), duyệt trên trang quản trị.
+const plan = JSON.parse(fs.readFileSync(path.join("content", "ke-hoach-seo.json"), "utf8"));
+const planSlugs = new Set();
+const planKeywords = new Map(slugsOf("cam-nang").map((s) => [norm(readEntry("cam-nang", s).data.keyword), `content/cam-nang/${s}.md`]));
+for (const [i, b] of (plan.baiKeHoach || []).entries()) {
+  const where = `ke-hoach-seo.json baiKeHoach[${i}]${b?.slug ? ` (${b.slug})` : ""}`;
+  for (const k of ["thang", "slug", "tieuDe", "tuKhoa", "nhom"]) if (!b?.[k]) errors.push(`${where}: thiếu trường "${k}"`);
+  if (b.thang && !/^\d{4}-\d{2}$/.test(b.thang)) errors.push(`${where}: "thang" phải dạng YYYY-MM`);
+  if (b.slug && !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(b.slug)) errors.push(`${where}: slug phải chữ thường không dấu, nối bằng gạch ngang`);
+  if (b.slug && planSlugs.has(b.slug)) errors.push(`${where}: trùng slug trong kế hoạch`);
+  planSlugs.add(b.slug);
+  if (b.nhom && !plan.nhomTuKhoa.some((n) => n.nhom === b.nhom)) errors.push(`${where}: nhóm "${b.nhom}" không có trong nhomTuKhoa`);
+  for (const s of b.dichVuLienQuan || []) if (!services.has(s)) errors.push(`${where}: dichVuLienQuan "${s}" không có trong content/dich-vu`);
+  const kw = norm(b.tuKhoa);
+  const owner = planKeywords.get(kw);
+  // Bài đã viết theo đúng mục kế hoạch thì dùng chung từ khoá là hợp lệ.
+  if (kw && owner && owner !== `content/cam-nang/${b.slug}.md`) errors.push(`${where}: từ khoá "${b.tuKhoa}" đã có ở ${owner}`);
+  if (kw) planKeywords.set(kw, `content/cam-nang/${b.slug}.md`);
+}
 
 for (const w of warnings) console.warn(`Cảnh báo  ${w}`);
 if (errors.length) {

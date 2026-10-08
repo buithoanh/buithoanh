@@ -37,7 +37,68 @@ Dùng SEO Editor viết bài cho từ khoá "thay dầu ô tô tại nhà"
 
 Agent **không bao giờ tự merge**. Bài có nêu giá phải được người phụ trách xác nhận (trường `giaDaDuyet: true`), nếu không thì không build được.
 
-Muốn bắt buộc duyệt trên GitHub: Settings → Branches → thêm quy tắc cho nhánh `main`, bật "Require a pull request before merging" và "Require status checks" (chọn "Website – kiểm tra bài và build").
+Muốn bắt buộc duyệt trên GitHub: Settings → Branches → thêm quy tắc cho nhánh `main`, bật "Require a pull request before merging" và "Require status checks" (chọn "Website – kiểm tra bài và build"). Không đặt số lượt approve bắt buộc, vì trang quản trị merge bằng token của repo; việc duyệt đã do trang quản trị kiểm soát.
+
+## Trang quản trị `/quan-tri`
+
+```
+Quản trị bấm "AI lập kế hoạch" (chọn tháng, ghi định hướng)
+  → AI (agent SEO Planner) mở PR "Kế hoạch SEO <tháng>" sửa baiKeHoach trong ke-hoach-seo.json
+  → quản trị đọc bảng kế hoạch, góp ý → AI sửa trên cùng PR → "Duyệt kế hoạch" (merge)
+  → quản trị tick các bài, bấm "AI viết bài" → AI (SEO Editor) mở mỗi bài một PR "Bài mới: …"
+  → người duyệt đăng nhập, đọc bài, góp ý → AI sửa → "Duyệt và đăng" (merge) → bài lên web
+```
+
+- Hai vai trò: **quản trị** (`ADMIN_EMAILS`) làm mọi việc; **duyệt bài** (`REVIEWER_EMAILS`) chỉ duyệt / góp ý / bỏ bài.
+- Đăng nhập bằng email nhận mã qua Cloudflare Access; không cần tài khoản GitHub.
+- Mọi góp ý và lần duyệt được ghi thành comment trên PR, kèm email người làm.
+- Trang chỉ merge được PR nhánh `ke-hoach/*` hoặc `bai/*`, chỉ đổi đúng file của nó, kiểm tra tự động đã đạt, và đúng
+  phiên bản người duyệt vừa đọc. PR khác phải duyệt trên GitHub.
+- Mã: giao diện `app/quan-tri/`, API `functions/api/quan-tri/` (Cloudflare Pages Functions), `lib/quan-tri/`,
+  AI chạy bằng `.github/workflows/ai-agent.yml`. Test: `npm test`.
+
+### Cài đặt (làm một lần)
+
+**1. Đưa code vào nhánh `main`.** Workflow AI chỉ gọi được khi file đã nằm trên `main`.
+
+**2. Token cho AI (GitHub → repo → Settings → Secrets and variables → Actions):**
+
+| Secret | Lấy ở đâu |
+|---|---|
+| `CLAUDE_CODE_OAUTH_TOKEN` | Trên máy Mac đã đăng nhập Claude: chạy `claude setup-token`, dán token. AI dùng hạn mức gói Claude của tài khoản này. |
+| `GH_PAT` | GitHub → Settings → Developer settings → Fine-grained token, chỉ repo này, quyền: Contents, Pull requests, Issues, Actions = Read and write. |
+| `VC_CONTENT_URL` | Địa chỉ kho tư liệu qua đường hầm, ví dụ `https://vc-content.<tên miền>/mcp` (bước 5). Bỏ trống thì AI chạy không có kho. |
+| `VC_CONTENT_CLIENT_ID`, `VC_CONTENT_CLIENT_SECRET` | Service token của Cloudflare Access (bước 5). |
+
+**3. Cloudflare Access cho trang quản trị.** Cloudflare → Zero Trust → Access → Applications → Add → Self-hosted:
+- Tên miền: tên miền web (hoặc `<project>.pages.dev`), thêm 2 đường dẫn `quan-tri` và `api/quan-tri`.
+- Policy: Allow, Include → Emails → email quản trị và người duyệt. Login method: One-time PIN.
+- Lưu lại **Application Audience (AUD) Tag**; tên team ở Zero Trust → Settings (dạng `<team>.cloudflareaccess.com`).
+
+**4. Biến môi trường Cloudflare Pages** (project → Settings → Variables and secrets, Production):
+
+| Biến | Giá trị |
+|---|---|
+| `GITHUB_TOKEN` (secret) | Fine-grained token như `GH_PAT` (có thể dùng chung) |
+| `GITHUB_REPO` | `buithoanh/buithoanh` |
+| `ACCESS_TEAM_DOMAIN` | `<team>.cloudflareaccess.com` |
+| `ACCESS_AUD` | AUD Tag ở bước 3 |
+| `ADMIN_EMAILS` | email quản trị, cách nhau dấu phẩy |
+| `REVIEWER_EMAILS` | email người duyệt bài, cách nhau dấu phẩy |
+
+Thêm/bớt người: sửa cả policy Access (bước 3) và biến email, rồi deploy lại.
+
+**5. Đường hầm tới kho `vc-content` trên máy Mac** (cần một tên miền đã đưa vào Cloudflare):
+```bash
+brew install cloudflared
+cloudflared tunnel login
+cloudflared tunnel create vc-content
+cloudflared tunnel route dns vc-content vc-content.<tên miền>
+cloudflared tunnel run --url http://localhost:8000 vc-content
+```
+Rồi Zero Trust → Access → Service Auth → tạo Service token (lấy Client ID / Secret cho bước 2), và tạo Access
+application cho `vc-content.<tên miền>` với policy **Service Auth** → token đó. Không có token thì không ai gọi được kho.
+Máy Mac phải bật và `vc-content` + `cloudflared` phải chạy khi AI cần tra kho.
 
 ## Chạy thử trên máy
 

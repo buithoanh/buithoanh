@@ -1,0 +1,134 @@
+name: AI agent – kế hoạch và bài SEO
+
+# Trang quản trị (/quan-tri) gọi workflow này qua GitHub API khi bấm nút.
+# AI chỉ mở / cập nhật pull request; không merge, không push vào main.
+run-name: "${{ inputs.viec }} ${{ inputs.thang }}${{ inputs.slug }}${{ inputs.pr && format(' #{0}', inputs.pr) || '' }} – ${{ inputs.nguoi }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      viec:
+        description: "Việc cần làm"
+        required: true
+        type: choice
+        options: [lap-ke-hoach, sua-ke-hoach, viet-bai, sua-bai]
+      thang:
+        description: "Tháng (YYYY-MM) – cho lap-ke-hoach"
+        required: false
+      slug:
+        description: "Slug bài trong baiKeHoach – cho viet-bai"
+        required: false
+      pr:
+        description: "Số pull request – cho sua-ke-hoach / sua-bai"
+        required: false
+      gop_y:
+        description: "Góp ý / định hướng"
+        required: false
+      nguoi:
+        description: "Email người bấm (trang quản trị điền)"
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  # Không cho hai lượt AI cùng sửa một kế hoạch / một bài.
+  group: ai-agent-${{ inputs.pr || inputs.slug || inputs.thang || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  agent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      # PAT (không dùng GITHUB_TOKEN) để pull request do AI mở vẫn kích hoạt workflow kiểm tra bài.
+      GH_TOKEN: ${{ secrets.GH_PAT }}
+      VIEC: ${{ inputs.viec }}
+      THANG: ${{ inputs.thang }}
+      SLUG: ${{ inputs.slug }}
+      PR: ${{ inputs.pr }}
+      GOP_Y: ${{ inputs.gop_y }}
+      NGUOI: ${{ inputs.nguoi }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Dựng lời giao việc
+        run: node .github/scripts/ai-prompt.mjs "$RUNNER_TEMP/prompt.txt"
+
+      - name: Chuẩn bị nhánh
+        run: |
+          git config user.name "VC SEO Agent"
+          git config user.email "seo-agent@users.noreply.github.com"
+          case "$VIEC" in
+            sua-ke-hoach|sua-bai)
+              want=$([ "$VIEC" = sua-bai ] && echo bai/ || echo ke-hoach/)
+              info=$(gh pr view "$PR" --json headRefName,state,isCrossRepository \
+                --jq '[.headRefName, .state, (.isCrossRepository|tostring)] | join(" ")')
+              read -r head state cross <<<"$info"
+              if [ "$state" != OPEN ] || [ "$cross" != false ] || [[ "$head" != "$want"* ]]; then
+                echo "::error::PR #$PR không phải PR $want* đang mở trong repo này ($info)"; exit 1
+              fi
+              gh pr checkout "$PR"
+              ;;
+            viet-bai)
+              node -e '
+                const p = require("./website/content/ke-hoach-seo.json");
+                if (!(p.baiKeHoach || []).some((b) => b.slug === process.env.SLUG)) {
+                  console.error(`::error::slug ${process.env.SLUG} không có trong baiKeHoach của main`); process.exit(1);
+                }'
+              if [ -e "website/content/cam-nang/$SLUG.md" ] || git ls-remote --exit-code --heads origin "bai/$SLUG" >/dev/null; then
+                echo "::error::Bài $SLUG đã có hoặc đang chờ duyệt (nhánh bai/$SLUG)"; exit 1
+              fi
+              ;;
+            lap-ke-hoach)
+              if git ls-remote --exit-code --heads origin "ke-hoach/$THANG" >/dev/null; then
+                echo "::error::Đã có nhánh ke-hoach/$THANG – sửa trên pull request đó thay vì lập mới"; exit 1
+              fi
+              ;;
+          esac
+
+      - name: Cài thư viện website
+        working-directory: website
+        run: npm ci
+
+      - name: Cấu hình kho tư liệu vc-content
+        env:
+          VC_CONTENT_URL: ${{ secrets.VC_CONTENT_URL }}
+          VC_CONTENT_CLIENT_ID: ${{ secrets.VC_CONTENT_CLIENT_ID }}
+          VC_CONTENT_CLIENT_SECRET: ${{ secrets.VC_CONTENT_CLIENT_SECRET }}
+        run: |
+          node -e '
+            const { VC_CONTENT_URL: url, VC_CONTENT_CLIENT_ID: id, VC_CONTENT_CLIENT_SECRET: secret } = process.env;
+            const servers = {};
+            if (url) servers["vc-content"] = {
+              type: "http", url,
+              // Khoá truy cập dịch vụ của Cloudflare Access bảo vệ đường hầm tới máy có kho.
+              headers: id ? { "CF-Access-Client-Id": id, "CF-Access-Client-Secret": secret } : {},
+            };
+            require("fs").writeFileSync(process.env.RUNNER_TEMP + "/mcp.json", JSON.stringify({ mcpServers: servers }));
+            console.log(url ? "Có kho vc-content." : "Chưa cấu hình VC_CONTENT_URL – AI chạy không có kho tư liệu.");'
+
+      - name: Chạy Claude Code
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude -p "$(cat "$RUNNER_TEMP/prompt.txt")" \
+            --mcp-config "$RUNNER_TEMP/mcp.json" --strict-mcp-config \
+            --max-turns 120 \
+            --allowedTools "Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(node:*),Bash(cd:*),Bash(ls:*),Bash(cat:*),Bash(wc:*),Bash(mkdir:*),mcp__vc-content__search_cards,mcp__vc-content__get_card,mcp__vc-content__search_documents,mcp__vc-content__list_documents,mcp__vc-content__get_document,mcp__vc-content__list_sources,mcp__vc-content__get_source" \
+            --disallowedTools "Bash(git push origin main:*),Bash(git push --force:*),Bash(git push -f:*),Bash(gh pr merge:*),Bash(gh api:*),mcp__vc-content__create_card,mcp__vc-content__update_card,mcp__vc-content__mark_document,mcp__vc-content__claim_documents,mcp__vc-content__prioritize_source,mcp__vc-content__save_memory"
+
+      - name: Báo lỗi lên pull request
+        if: failure() && inputs.pr != ''
+        run: |
+          gh pr comment "$PR" --body "AI chưa làm xong yêu cầu (${VIEC}). Xem nhật ký: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
