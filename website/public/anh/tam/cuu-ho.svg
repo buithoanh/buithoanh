@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3ebf4"/><stop offset="1" stop-color="#f6f8fb"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a9c6e3"/><stop offset="1" stop-color="#5f86ad"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <g fill="#d3dde9">
+    <rect x="30" y="220" width="80" height="230"/><rect x="120" y="270" width="60" height="180"/><rect x="560" y="200" width="70" height="250"/><rect x="640" y="250" width="100" height="200"/><rect x="330" y="280" width="60" height="170"/>
+  </g>
+  <rect x="0" y="448" width="800" height="152" fill="#2a3b4f"/>
+  <rect x="0" y="448" width="800" height="14" fill="#9fb0c3"/>
+  <g fill="#f3f6f9"><rect x="40" y="540" width="70" height="8" rx="4"/><rect x="190" y="540" width="70" height="8" rx="4"/><rect x="340" y="540" width="70" height="8" rx="4"/><rect x="490" y="540" width="70" height="8" rx="4"/><rect x="640" y="540" width="70" height="8" rx="4"/></g>
+  <rect x="0" y="572" width="800" height="28" fill="#22303f"/>
+  <ellipse cx="400" cy="486" rx="350" ry="10" fill="#1b2633" opacity=".45"/>
+  <!-- flatbed -->
+  <g>
+    <rect x="70" y="390" width="470" height="30" rx="6" fill="#13283f"/>
+    <rect x="70" y="384" width="470" height="10" fill="#e8590c"/>
+    <path d="M70 420 L40 448 L70 448 Z" fill="#13283f"/>
+    <rect x="80" y="420" width="450" height="22" fill="#1d3a5a"/>
+    <!-- cab -->
+    <path d="M540 448 V300 c0-14 10-24 24-24 h90 c12 0 22 6 28 16 l50 80 c4 6 6 14 6 22 v54 z" fill="#ffffff"/>
+    <path d="M600 296 h50 c8 0 14 4 18 10 l36 60 h-104z" fill="url(#glass)"/>
+    <rect x="540" y="384" width="198" height="18" fill="#e8590c"/>
+    <rect x="540" y="402" width="198" height="8" fill="#13283f"/>
+    <rect x="566" y="262" width="60" height="14" rx="5" fill="#13283f"/><rect x="572" y="264" width="22" height="10" rx="3" fill="#e8590c"/><rect x="596" y="264" width="22" height="10" rx="3" fill="#ff9a5c"/>
+    <rect x="718" y="420" width="20" height="12" rx="4" fill="#ffd36b"/>
+    <circle cx="150" cy="452" r="30" fill="#1b2430"/><circle cx="150" cy="452" r="12" fill="#c3cdd8"/>
+    <circle cx="420" cy="452" r="30" fill="#1b2430"/><circle cx="420" cy="452" r="12" fill="#c3cdd8"/>
+    <circle cx="660" cy="452" r="30" fill="#1b2430"/><circle cx="660" cy="452" r="12" fill="#c3cdd8"/>
+  </g>
+  <!-- carried car -->
+  <g transform="translate(130 288)">
+    <path d="M10 92c-6 0-10-4-10-10V66c0-10 6-18 16-20l40-8 38-30c8-6 18-8 28-8h70c12 0 22 4 30 12l30 28 26 6c12 3 20 12 20 24v12c0 6-4 10-10 10z" fill="#5d7088"/>
+    <path d="M70 40l30-24c6-4 12-6 20-6h28v30z" fill="url(#glass)"/>
+    <path d="M160 10h22c8 0 16 3 21 9l22 21h-65z" fill="url(#glass)"/>
+    <circle cx="70" cy="94" r="22" fill="#1b2430"/><circle cx="70" cy="94" r="9" fill="#c3cdd8"/>
+    <circle cx="214" cy="94" r="22" fill="#1b2430"/><circle cx="214" cy="94" r="9" fill="#c3cdd8"/>
+  </g>
+  <!-- route to workshop -->
+  <path d="M700 230 C 640 150, 520 130, 430 160" fill="none" stroke="#e8590c" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14"/>
+  <g transform="translate(330 100)">
+    <path d="M0 40 L50 10 L100 40 V110 H0 Z" fill="#13283f"/>
+    <rect x="22" y="58" width="56" height="52" fill="#ffd8bd"/>
+    <g stroke="#13283f" stroke-width="4"><path d="M22 72h56"/><path d="M22 86h56"/><path d="M22 100h56"/></g>
+  </g>
+</svg>
