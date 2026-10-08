@@ -46,17 +46,28 @@ def photocraft_bin() -> str | None:
 
 
 def frame_photocraft(cli: str, src: Path, dst: Path, title: str) -> None:
-    # Đặt ảnh vào khung 1080x1920 nền trắng, rồi chèn tiêu đề ở phần trên.
+    # Thu ảnh vừa khung 1080x1920 (giữ tỉ lệ), mở rộng nền trắng, rồi chèn tiêu đề ở phần trên.
+    # Tham số lấy từ `photocraft-cli commands --json` (PhotoCraft 0.3.0).
+    w, h = image_size(src)
+    scale = min(W / w, H / h)
     cmds: list[tuple[str, dict]] = [
-        ("image.imageSize", {"width": W, "constrain": True}),
-        ("image.canvasSize", {"width": W, "height": H, "anchor": "center"}),
+        ("image.imageSize", {"width": max(1, round(w * scale)), "height": max(1, round(h * scale)), "resample": "lanczos"}),
+        ("image.canvasSize", {"width": W, "height": H, "anchor": "center", "extensionColor": "white"}),
     ]
     if title:
-        cmds.append(("type.create", {"text": title, "x": W // 2, "y": 220, "size": 72, "align": "center"}))
+        cmds.append(("type.create", {"text": title, "x": W // 2, "y": 240, "align": "center",
+                                     "size": 64, "weight": 800, "color": "#111111"}))
     argv = [cli, "run", str(src)]
     for name, params in cmds:
         argv += ["--cmd", name, "--params", json.dumps(params, ensure_ascii=False)]
     run(argv + ["--out", str(dst)])
+
+
+def image_size(path: Path) -> tuple[int, int]:
+    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
+                        "-of", "csv=p=0", str(path)], capture_output=True, text=True)
+    w, h = (int(x) for x in r.stdout.strip().split(",")[:2])
+    return w, h
 
 
 def frame_ffmpeg(src: Path, dst: Path) -> None:
