@@ -6,6 +6,7 @@
 //   sự cố gọi gấp.
 // Chỉ nạp khi chạy thử (NODE_ENV khác production): hotline/pháp nhân mẫu, đánh giá khách mẫu, đơn mẫu ở mỗi
 //   trạng thái, tài khoản thử cho từng vai trò. KHÔNG BAO GIỜ nạp các thứ này lên máy chạy thật.
+//   Máy kiểm thử e2e/CI chạy NODE_ENV=production (không tự đổi bảng) mà vẫn cần dữ liệu thử: đặt NAP_DU_LIEU_THU=1.
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
@@ -127,7 +128,7 @@ console.log("Xong.");
 process.exit(0);
 
 async function napDuLieuP0() {
-  const CHAY_THU = process.env.NODE_ENV !== "production";
+  const CHAY_THU = process.env.NODE_ENV !== "production" || process.env.NAP_DU_LIEU_THU === "1";
   const docJson = (f: string) => JSON.parse(fs.readFileSync(path.join(GOC, f), "utf8"));
   const bg = docJson("bang-gia.json");
   const vung = docJson("vung.json");
