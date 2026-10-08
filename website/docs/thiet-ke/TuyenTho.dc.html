@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Tuyển thợ cộng tác</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 3220px; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.55; display: flex; flex-direction: column; position: relative">
+
+  <header style="background: #13283f; color: #ffffff; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+    <a href="Main.dc.html" style="color: #ffffff; text-decoration: none; display: flex; flex-direction: column; line-height: 1.15">
+      <b style="font-size: 18px; font-weight: 800; letter-spacing: -0.01em">ThợTới</b>
+      <span style="font-size: 11px; color: #ffc9a3">by VC Phồn Vinh</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 4px">
+      <a href="#" aria-label="Gọi hotline" style="display: inline-flex; align-items: center; gap: 6px; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 10px 8px; min-height: 44px; box-sizing: border-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb27a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        1900 1068
+      </a>
+      <button type="button" aria-label="Mở menu" style="width: 44px; height: 44px; border: 0; background: transparent; color: #ffffff; display: grid; place-items: center; cursor: pointer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <section style="background: #13283f; color: #ffffff; padding: 20px 16px 26px; display: flex; flex-direction: column; gap: 14px">
+    <span style="align-self: flex-start; background: rgba(255,255,255,0.1); color: #ffd8bd; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px">Tuyển thợ cộng tác · Hà Nội</span>
+    <h1 style="margin: 0; font-size: 29px; line-height: 1.18; font-weight: 800; letter-spacing: -0.02em">Tay nghề của bạn,<br>đơn của chúng tôi</h1>
+    <p style="margin: 0; color: #d6e0eb; font-size: 15px">Bạn lo sửa cho tốt. Tìm khách, báo giá, thu tiền để ThợTới lo. Tiền công chia đôi, rõ ràng từng đơn.</p>
+    <div style="background: rgba(255,255,255,0.07); border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 14px">
+      <b style="font-size: 40px; line-height: 1; color: #ffb27a; font-weight: 800">50%</b>
+      <span style="font-size: 14px; color: #d6e0eb">tiền công mỗi đơn về tay thợ. Thanh toán mỗi tuần vào thứ 2.</span>
+    </div>
+    <a href="#dang-ky" style="display: flex; align-items: center; justify-content: center; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 17px; border-radius: 12px; min-height: 54px">Đăng ký làm thợ</a>
+  </section>
+
+  <section style="padding: 28px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <div>
+      <h2 style="margin: 0; font-size: 22px; color: #13283f">Chia tiền thế nào?</h2>
+      <p style="margin: 2px 0 0; color: #5a6575; font-size: 14px">Tiền công theo bảng giá công khai trên web. Bạn nhận một nửa.</p>
+    </div>
+    <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+      <div style="display: grid; grid-template-columns: 1fr auto auto; gap: 12px; padding: 10px 14px; background: #13283f; color: #ffffff; font-size: 13px; font-weight: 600">
+        <span>Việc</span><span>Tiền công</span><span>Bạn nhận</span>
+      </div>
+      <sc-for list="{{splits}}" as="sp" hint-placeholder-count="3">
+        <div style="display: grid; grid-template-columns: 1fr auto auto; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #eef1f4; align-items: center; font-size: 14px">
+          <span>{{sp.job}}</span>
+          <span style="color: #5a6575; white-space: nowrap">{{sp.fee}}</span>
+          <b style="color: #c2410c; white-space: nowrap">{{sp.you}}</b>
+        </div>
+      </sc-for>
+      <div style="padding: 12px 14px; background: #fff1e6; font-size: 14px; color: #13283f">Ví dụ một ngày 2 bảo dưỡng, 2 ắc quy, 2 lốp: tiền công 1.240.000đ, <b>bạn nhận 620.000đ</b>. Phụ tùng do công ty cấp, không tính vào phần chia.</div>
+    </div>
+  </section>
+
+  <section style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 22px; color: #13283f">Điều kiện</h2>
+    <ul style="list-style: none; margin: 0; padding: 0; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px">
+      <sc-for list="{{needs}}" as="nd" hint-placeholder-count="5">
+        <li style="display: flex; gap: 10px; padding: 12px 14px; border-bottom: 1px solid #eef1f4; font-size: 14.5px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b8a3e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 3px"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>{{nd.t}}</span>
+        </li>
+      </sc-for>
+    </ul>
+  </section>
+
+  <section style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 22px; color: #13283f">Bạn được gì</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <sc-for list="{{perks}}" as="pk" hint-placeholder-count="4">
+        <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px 12px; display: flex; flex-direction: column; gap: 6px">
+          <span style="width: 36px; height: 36px; border-radius: 10px; background: #fff1e6; color: #c2410c; display: grid; place-items: center; font-weight: 800; font-size: 13px">{{pk.code}}</span>
+          <b style="font-size: 15px; color: #13283f; line-height: 1.25">{{pk.t}}</b>
+          <span style="font-size: 13px; color: #5a6575">{{pk.d}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 22px; color: #13283f">Từ đăng ký đến nhận đơn</h2>
+    <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+      <sc-for list="{{steps}}" as="st" hint-placeholder-count="4">
+        <li style="display: flex; gap: 12px; padding: 10px 0">
+          <span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #13283f; color: #ffffff; display: grid; place-items: center; font-weight: 800; font-size: 14px">{{st.n}}</span>
+          <div><b style="display: block; color: #13283f">{{st.t}}</b><span style="color: #5a6575; font-size: 14px">{{st.d}}</span></div>
+        </li>
+      </sc-for>
+    </ol>
+  </section>
+
+  <section id="dang-ky" style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 14px">
+    <sc-if value="{{showForm}}" hint-placeholder-val="{{ true }}">
+      <form style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 14px">
+        <div>
+          <h2 style="margin: 0; font-size: 22px; color: #13283f">Đăng ký làm thợ cộng tác</h2>
+          <p style="margin: 2px 0 0; color: #5a6575; font-size: 14px">Mất khoảng 3 phút. Hồ sơ chuyển thẳng tới bộ phận nhân sự.</p>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Họ tên
+          <input type="text" placeholder="Nguyễn Văn Tùng" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+        </label>
+        <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 10px">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Số điện thoại
+            <input type="tel" placeholder="0975 123 456" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Năm kinh nghiệm
+            <select style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; width: 100%"><option>2–3 năm</option><option>4–5 năm</option><option>6–10 năm</option><option>Trên 10 năm</option></select>
+          </label>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Khu vực muốn nhận đơn
+          <select style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; width: 100%"><option>Cầu Giấy</option><option>Đống Đa</option><option>Thanh Xuân</option><option>Ba Đình</option><option>Quận khác (chờ mở rộng)</option></select>
+        </label>
+        <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+          <legend style="font-weight: 600; font-size: 14px; padding: 0; margin-bottom: 4px">Dụng cụ bạn đang có</legend>
+          <span style="font-size: 12.5px; color: #5a6575; margin-top: -4px">Chọn nhiều. Thiếu cũng không sao, công ty cấp bộ đồ nghề khi vào tổ.</span>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+            <sc-for list="{{tools}}" as="tl" hint-placeholder-count="8">
+              <button type="button" aria-pressed="{{tl.on}}" onClick="{{tl.pick}}" style="{{tl.style}}">
+                <span style="{{tl.box}}">
+                  <sc-if value="{{tl.on}}" hint-placeholder-val="{{ false }}">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </sc-if>
+                </span>
+                <span>{{tl.name}}</span>
+              </button>
+            </sc-for>
+          </div>
+          <span style="font-size: 13px; color: #1d3a5a; font-weight: 600">{{toolCount}}</span>
+        </fieldset>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-weight: 600; font-size: 14px">Ảnh chứng chỉ, bằng nghề</span>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+            <sc-for list="{{certs}}" as="c" hint-placeholder-count="2">
+              <div style="position: relative; height: 84px; border-radius: 10px; background: #e6ebf0">
+                <button type="button" aria-label="Xoá ảnh" onClick="{{c.remove}}" style="position: absolute; top: 2px; right: 2px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(19,40,63,0.75); color: #ffffff; display: grid; place-items: center; cursor: pointer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+                </button>
+                <span style="position: absolute; left: 6px; bottom: 4px; font-size: 11px; color: #3d4957">{{c.name}}</span>
+              </div>
+            </sc-for>
+            <sc-if value="{{canAdd}}" hint-placeholder-val="{{ true }}">
+              <label style="position: relative; height: 84px; border-radius: 10px; border: 1.5px dashed #a9b6c4; background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 12.5px; font-weight: 600; color: #1d3a5a; cursor: pointer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                Thêm ảnh
+                <input type="file" accept="image/*" onChange="{{addCert}}" style="position: absolute; width: 1px; height: 1px; opacity: 0">
+              </label>
+            </sc-if>
+          </div>
+          <span style="font-size: 12.5px; color: #5a6575">Tối đa 3 ảnh: chứng chỉ nghề, bằng lái, chứng chỉ hãng nếu có.</span>
+        </div>
+        <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px">
+          <input type="checkbox" checked="{{agree}}" onChange="{{toggleAgree}}" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #13283f">
+          <span>Tôi đồng ý cho ThợTới dùng thông tin này để xét tuyển (<a href="#">chính sách dữ liệu</a>). <b style="color: #8a2c06">Bắt buộc</b></span>
+        </label>
+        <sc-if value="{{agreeErr}}" hint-placeholder-val="{{ false }}">
+          <span style="color: #a8320a; font-size: 13.5px; font-weight: 600">Bạn cần tích ô đồng ý để gửi hồ sơ.</span>
+        </sc-if>
+        <button type="button" onClick="{{send}}" style="border: 0; border-radius: 12px; min-height: 52px; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; color: #ffffff; background: #c2410c">Gửi hồ sơ</button>
+      </form>
+    </sc-if>
+    <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+      <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 22px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px">
+        <span style="width: 64px; height: 64px; border-radius: 50%; background: #e9f6ec; color: #2b8a3e; display: grid; place-items: center">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </span>
+        <h2 style="margin: 0; font-size: 22px; color: #13283f">Đã nhận hồ sơ của bạn</h2>
+        <p style="margin: 0; color: #5a6575">Bộ phận nhân sự sẽ gọi cho bạn trong 2 ngày làm việc để hẹn lịch kiểm tra tay nghề.</p>
+        <div style="background: #f6f7f9; border-radius: 10px; padding: 12px 16px; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 13px; color: #5a6575">Mã hồ sơ</span>
+          <b style="font-size: 20px; letter-spacing: 0.05em; color: #13283f">TH-000087</b>
+        </div>
+        <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: #0068ff; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 12px; min-height: 50px">Nhắn Zalo nhân sự nếu cần hỏi thêm</a>
+        <button type="button" onClick="{{reset}}" style="border: 0; background: transparent; font: inherit; color: #1d3a5a; text-decoration: underline; cursor: pointer; min-height: 44px">Xem lại form (bản mẫu)</button>
+      </div>
+    </sc-if>
+  </section>
+
+  <footer style="background: #13283f; color: #c3cfdc; padding: 24px 16px 96px; margin-top: 28px; font-size: 13px; display: flex; flex-direction: column; gap: 10px">
+    <b style="color: #ffffff; font-size: 15px">Công ty TNHH ThợTới · MST 0109876543</b>
+    <span>18 Trần Thái Tông, Cầu Giấy, Hà Nội · Phục vụ: Cầu Giấy, Đống Đa, Thanh Xuân, Ba Đình</span>
+    <span style="display: flex; flex-wrap: wrap; gap: 6px 14px"><a href="#" style="color: #ffffff">Chính sách bảo hành</a><a href="#" style="color: #ffffff">Bảo vệ dữ liệu cá nhân</a><a href="DoanhNghiep.dc.html" style="color: #ffffff">Doanh nghiệp</a><a href="VeChungToi.dc.html" style="color: #ffffff">Về chúng tôi</a></span>
+    <span style="align-self: flex-start; border: 1px dashed #5a7a9c; border-radius: 6px; padding: 6px 10px">Đã thông báo Bộ Công Thương</span>
+  </footer>
+
+  <div style="flex: 1"></div>
+  <nav aria-label="Liên hệ nhanh" style="position: sticky; bottom: 0; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 8px; padding: 8px 12px 12px; background: rgba(19,40,63,0.97); margin-top: -76px">
+    <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 10px; min-height: 50px; font-size: 15px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      Gọi thợ
+    </a>
+    <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #0068ff; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 10px; min-height: 50px; font-size: 15px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      Zalo
+    </a>
+    <a href="DatLich.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #ffffff; color: #13283f; text-decoration: none; font-weight: 700; border-radius: 10px; min-height: 50px; font-size: 15px">Đặt lịch</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3220}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tools: ['obd', 'kich', 'acquy'], certs: ['Chứng chỉ nghề', 'Bằng lái B2'], agree: false, agreeErr: false, sent: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const toolStyle = (on) => 'display: flex; align-items: center; gap: 8px; text-align: left; font: inherit; font-size: 13.5px; font-weight: 600; border-radius: 10px; min-height: 48px; cursor: pointer; padding: 8px 10px; line-height: 1.25; color: #13283f; ' +
+      (on ? 'background: #fff1e6; border: 1.5px solid #c2410c;' : 'background: #ffffff; border: 1.5px solid #c9d0d8;');
+    const boxStyle = (on) => 'flex: none; width: 20px; height: 20px; border-radius: 5px; display: grid; place-items: center; ' +
+      (on ? 'background: #c2410c; border: 1.5px solid #c2410c;' : 'background: #ffffff; border: 1.5px solid #8a96a3;');
+    const tools = [
+      { id: 'obd', name: 'Máy đọc lỗi OBD' },
+      { id: 'kich', name: 'Kích nâng cá sấu' },
+      { id: 'acquy', name: 'Bộ kích nổ ắc quy' },
+      { id: 'sung', name: 'Súng xiết bu lông' },
+      { id: 'bom', name: 'Máy bơm lốp' },
+      { id: 'va', name: 'Bộ vá lốp không săm' },
+      { id: 'cole', name: 'Cờ lê lực' },
+      { id: 'xe', name: 'Xe máy đi lại' }
+    ].map((t) => {
+      const on = st.tools.includes(t.id);
+      return { ...t, on, style: toolStyle(on), box: boxStyle(on), pick: () => this.setState({ tools: on ? st.tools.filter((x) => x !== t.id) : st.tools.concat(t.id) }) };
+    });
+    const certs = st.certs.map((name, i) => ({ name, remove: () => this.setState({ certs: st.certs.filter((_, j) => j !== i) }) }));
+    return {
+      splits: [
+        { job: 'Bảo dưỡng cấp nhỏ', fee: '350.000đ', you: '175.000đ' },
+        { job: 'Thay ắc quy', fee: '150.000đ', you: '75.000đ' },
+        { job: 'Vá lốp không săm', fee: '120.000đ', you: '60.000đ' }
+      ],
+      needs: [
+        { t: 'Từ 2 năm kinh nghiệm sửa ô tô con (gara, xưởng dịch vụ hãng)' },
+        { t: 'Có bằng lái B2 trở lên' },
+        { t: 'Ở hoặc làm quanh Cầu Giấy, Đống Đa, Thanh Xuân, Ba Đình' },
+        { t: 'Dùng được điện thoại thông minh để nhận đơn và chụp ảnh báo giá' },
+        { t: 'Thật thà với khách: báo đúng bệnh, không vẽ thêm việc' }
+      ],
+      perks: [
+        { code: 'Đơn', t: 'Đơn đều mỗi ngày', d: 'Điều phối chia đơn gần bạn, không phải tự đi tìm khách.' },
+        { code: 'Xe', t: 'Xe van đồ nghề', d: 'Thợ tổ chính được giao xe van có đủ đồ nghề, phụ tùng.' },
+        { code: 'Học', t: 'Đào tạo VCedu', d: 'Học miễn phí xe điện, chẩn đoán, có chứng chỉ VCedu.' },
+        { code: 'BH', t: 'Bảo hiểm tai nạn', d: 'Mua cho thợ trong giờ nhận đơn. Phụ tùng VCparts giao tận nơi.' }
+      ],
+      steps: [
+        { n: 1, t: 'Đăng ký trên web', d: 'Điền form bên dưới, gửi ảnh chứng chỉ.' },
+        { n: 2, t: 'Nhân sự gọi lại', d: 'Trong 2 ngày làm việc, hỏi thêm về kinh nghiệm.' },
+        { n: 3, t: 'Kiểm tra tay nghề', d: 'Nửa ngày tại xưởng Auto Speedy, sau đó học 3 ngày với VCedu.' },
+        { n: 4, t: 'Nhận đơn đầu tiên', d: 'Cài ứng dụng thợ, đi kèm thợ cũ 2 đơn đầu rồi tự làm.' }
+      ],
+      tools, toolCount: 'Đã chọn ' + st.tools.length + ' dụng cụ',
+      certs, canAdd: st.certs.length < 3,
+      addCert: () => this.setState({ certs: st.certs.concat('Ảnh ' + (st.certs.length + 1)) }),
+      showForm: !st.sent, sent: st.sent,
+      agree: st.agree, agreeErr: st.agreeErr,
+      toggleAgree: () => this.setState({ agree: !st.agree, agreeErr: false }),
+      send: () => { if (!st.agree) { this.setState({ agreeErr: true }); return; } this.setState({ sent: true }); },
+      reset: () => this.setState({ sent: false, agree: false, agreeErr: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

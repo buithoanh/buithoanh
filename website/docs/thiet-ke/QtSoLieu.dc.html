@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Quản trị – Số liệu</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.55; display: flex; flex-direction: column">
+
+  <header style="background: #13283f; color: #ffffff; border-bottom: 1px solid #24405f">
+    <div style="padding: 10px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; min-height: 44px">
+      <a href="#" style="color: #ffffff; text-decoration: none; display: flex; align-items: baseline; gap: 8px">
+        <b style="font-size: 20px; font-weight: 800">ThợTới</b>
+        <span style="font-size: 15px; color: #ffc9a3; font-weight: 600">· Quản trị</span>
+      </a>
+      <div style="flex: 1"></div>
+      <a href="TrangChuMayTinh.dc.html" style="color: #dfe7f1; font-size: 14px">Xem website</a>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <span style="width: 36px; height: 36px; border-radius: 50%; background: #1d3a5a; border: 2px solid #3c5f86; color: #ffffff; display: grid; place-items: center; font-size: 13px; font-weight: 700">TH</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.2"><b style="font-size: 14px">Nguyễn Thu Hà</b><span style="font-size: 12px; color: #b9c8d8">Marketing</span></span>
+      </div>
+    </div>
+  </header>
+
+  <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: stretch">
+
+    <aside style="flex: 1 1 220px; background: #13283f; color: #dfe7f1; padding: 16px 12px 24px">
+      <nav aria-label="Menu quản trị" style="display: flex; flex-wrap: wrap; gap: 4px">
+        <a href="#" style="flex: 1 1 190px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: #dfe7f1; text-decoration: none; font-weight: 500">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>Tổng quan</a>
+        <a href="#" style="flex: 1 1 190px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: #dfe7f1; text-decoration: none; font-weight: 500">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg>Bài viết &amp; trang</a>
+        <a href="#" style="flex: 1 1 190px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: #dfe7f1; text-decoration: none; font-weight: 500">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>Bảng giá &amp; dịch vụ</a>
+        <a href="#" style="flex: 1 1 190px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: #dfe7f1; text-decoration: none; font-weight: 500">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Vùng phục vụ &amp; giờ</a>
+        <a href="QtMaKhuyenMai.dc.html" style="flex: 1 1 190px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: #dfe7f1; text-decoration: none; font-weight: 500">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><line x1="14" y1="14" x2="21" y2="14"></line><line x1="14" y1="18" x2="16" y2="18"></line><line x1="19" y1="18" x2="21" y2="21"></line></svg>Mã khuyến mãi</a>
+        <a href="QtSoLieu.dc.html" aria-current="page" style="flex: 1 1 190px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: #ffffff; text-decoration: none; font-weight: 700; background: rgba(255,255,255,0.12); box-shadow: inset 3px 0 0 #ff8a4c">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb27a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>Số liệu</a>
+        <a href="#" style="flex: 1 1 190px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: #dfe7f1; text-decoration: none; font-weight: 500">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Lịch hẹn</a>
+      </nav>
+    </aside>
+
+    <main style="flex: 999 1 640px; min-width: 0">
+      <div style="max-width: 1180px; margin: 0 auto; padding: 24px 24px 48px; display: flex; flex-direction: column; gap: 20px">
+
+        <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px">
+          <div style="flex: 1 1 380px; min-width: 0">
+            <h1 style="margin: 0; font-size: 28px; color: #13283f; letter-spacing: -0.01em">Số liệu website</h1>
+            <p style="margin: 2px 0 0; color: #5a6575">Đang xem: <b style="color: #18212c">{{periodName}}</b>, so với {{prevName}}.</p>
+          </div>
+          <div role="group" aria-label="Xem theo" style="display: flex; background: #ffffff; border: 1px solid #c9d0d8; border-radius: 12px; padding: 3px; gap: 3px">
+            <sc-for list="{{periods}}" as="p" hint-placeholder-count="3">
+              <button type="button" aria-pressed="{{p.on}}" onClick="{{p.pick}}" style="{{p.style}}">{{p.label}}</button>
+            </sc-for>
+          </div>
+          <button type="button" style="display: flex; align-items: center; gap: 8px; border: 1.5px solid #c9d0d8; background: #ffffff; color: #13283f; font: inherit; font-weight: 700; border-radius: 10px; min-height: 46px; padding: 0 16px; cursor: pointer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Xuất Excel</button>
+        </div>
+
+        <div role="status" style="background: #e9f6ec; border: 1px solid #bfe3c8; border-radius: 12px; padding: 10px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; color: #1f6b30">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <b>Số đơn khớp với phần mềm điều phối: {{recon}}</b>
+          <span style="color: #2f5d3a; font-size: 14px">Đối soát tự động lúc 06:00 ngày 01/10/2027 · lệch 0 đơn</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 12px">
+          <sc-for list="{{kpis}}" as="k" hint-placeholder-count="5">
+            <div style="{{k.cardStyle}}">
+              <span style="font-size: 13.5px; color: #5a6575; font-weight: 600">{{k.label}}</span>
+              <b style="font-size: 28px; line-height: 1.15; color: #13283f; font-variant-numeric: tabular-nums">{{k.value}}</b>
+              <span style="{{k.deltaStyle}}">{{k.delta}}</span>
+              <sc-if value="{{k.hasGoal}}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top: 6px">
+                  <div style="position: relative; height: 8px; background: #eef1f4; border-radius: 4px">
+                    <div style="{{k.meterStyle}}"></div>
+                    <div style="{{k.goalStyle}}"></div>
+                  </div>
+                  <span style="font-size: 12.5px; color: #5a6575">{{k.goalNote}}</span>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+
+        <section aria-labelledby="bd-nguon" style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 14px">
+          <div>
+            <span style="font-size: 13px; color: #5a6575; font-weight: 600">Số đơn theo nguồn khách, {{rangeName}}</span>
+            <h2 id="bd-nguon" style="margin: 2px 0 0; font-size: 20px; color: #13283f; line-height: 1.35">{{srcTitle}}</h2>
+            <p style="margin: 2px 0 0; color: #5a6575; font-size: 14px">{{srcSub}}</p>
+          </div>
+          <ul aria-label="Chú giải" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px">
+            <sc-for list="{{legend}}" as="l" hint-placeholder-count="6">
+              <li style="display: flex; align-items: center; gap: 8px">
+                <span style="{{l.swatch}}"></span>
+                <span>{{l.name}}</span>
+                <b style="color: #13283f; font-variant-numeric: tabular-nums">{{l.count}}</b>
+                <span style="color: #5a6575">{{l.share}}</span>
+              </li>
+            </sc-for>
+          </ul>
+          <div style="display: flex; gap: 8px">
+            <div aria-hidden="true" style="position: relative; width: 36px; flex: none; height: 280px">
+              <sc-for list="{{yTicks}}" as="t" hint-placeholder-count="5">
+                <span style="{{t.labelStyle}}">{{t.label}}</span>
+              </sc-for>
+            </div>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+              <div style="position: relative; height: 280px; border-bottom: 1.5px solid #5a6575">
+                <sc-for list="{{yTicks}}" as="t" hint-placeholder-count="5">
+                  <div style="{{t.lineStyle}}"></div>
+                </sc-for>
+                <svg width="100%" height="100%" viewBox="{{barViewBox}}" preserveAspectRatio="none" role="img" aria-label="{{srcAria}}" style="position: absolute; inset: 0; display: block">
+                  <path d="{{barPaths.s0}}" fill="#13283f" stroke="#ffffff" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+                  <path d="{{barPaths.s1}}" fill="#2a5482" stroke="#ffffff" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+                  <path d="{{barPaths.s2}}" fill="#c2410c" stroke="#ffffff" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+                  <path d="{{barPaths.s3}}" fill="#d9692a" stroke="#ffffff" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+                  <path d="{{barPaths.s4}}" fill="#93b2d4" stroke="#ffffff" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+                  <path d="{{barPaths.s5}}" fill="#c9daee" stroke="#ffffff" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+                </svg>
+                <sc-for list="{{totals}}" as="b" hint-placeholder-count="6">
+                  <span style="{{b.style}}">{{b.label}}</span>
+                </sc-for>
+              </div>
+              <div aria-hidden="true" style="position: relative; height: 26px">
+                <sc-for list="{{xLabels}}" as="x" hint-placeholder-count="6">
+                  <span style="{{x.style}}">{{x.label}}</span>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <span style="font-size: 12.5px; color: #5a6575">Trục dọc: số đơn. Số trên mỗi cột là tổng đơn của {{unitName}} đó. Nguồn lấy từ link, mã QR hoặc mã đối tác khách dùng khi gọi, nhắn Zalo hay gửi form.</span>
+        </section>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+
+          <section aria-labelledby="bd-tyle" style="flex: 1 1 420px; min-width: 0; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+            <div>
+              <span style="font-size: 13px; color: #5a6575; font-weight: 600">Tỷ lệ người vào web rồi đặt lịch, gọi hoặc nhắn Zalo</span>
+              <h2 id="bd-tyle" style="margin: 2px 0 0; font-size: 19px; color: #13283f; line-height: 1.35">{{rateTitle}}</h2>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: #5a6575">
+              <span style="display: flex; align-items: center; gap: 8px"><span style="width: 22px; height: 3px; background: #13283f; border-radius: 2px"></span>Tỷ lệ thực tế</span>
+              <span style="display: flex; align-items: center; gap: 8px"><span style="width: 22px; border-top: 2px dashed #c2410c"></span>Mục tiêu 4% (tháng 6/2027)</span>
+            </div>
+            <div style="display: flex; gap: 8px">
+              <div aria-hidden="true" style="position: relative; width: 36px; flex: none; height: 200px">
+                <sc-for list="{{rTicks}}" as="t" hint-placeholder-count="4">
+                  <span style="{{t.labelStyle}}">{{t.label}}</span>
+                </sc-for>
+              </div>
+              <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+                <div style="position: relative; height: 200px; border-bottom: 1.5px solid #5a6575">
+                  <sc-for list="{{rTicks}}" as="t" hint-placeholder-count="4">
+                    <div style="{{t.lineStyle}}"></div>
+                  </sc-for>
+                  <div style="{{goalLineStyle}}"></div>
+                  <svg width="100%" height="100%" viewBox="{{lineViewBox}}" preserveAspectRatio="none" role="img" aria-label="{{rateAria}}" style="position: absolute; inset: 0; display: block; overflow: visible">
+                    <path d="{{linePath}}" fill="none" stroke="#13283f" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+                  </svg>
+                  <sc-for list="{{dots}}" as="d" hint-placeholder-count="6">
+                    <span style="{{d.style}}"></span>
+                  </sc-for>
+                  <span style="{{lastLabelStyle}}">{{lastRate}}</span>
+                </div>
+                <div aria-hidden="true" style="position: relative; height: 26px">
+                  <sc-for list="{{xLabels}}" as="x" hint-placeholder-count="6">
+                    <span style="{{x.style}}">{{x.label}}</span>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="bd-hanhdong" style="flex: 1 1 460px; min-width: 0; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column">
+            <div style="padding: 18px 20px 10px">
+              <h2 id="bd-hanhdong" style="margin: 0; font-size: 19px; color: #13283f">Khách làm gì, đến từ đâu</h2>
+              <p style="margin: 2px 0 0; font-size: 13.5px; color: #5a6575">Mỗi lượt bấm gọi, bấm Zalo, gửi form đều lưu nguồn. {{periodName}}.</p>
+            </div>
+            <div style="overflow-x: auto">
+              <table style="width: 100%; min-width: 440px; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums">
+                <thead>
+                  <tr style="background: #fafbfc; color: #5a6575">
+                    <th style="padding: 9px 20px; font-weight: 600; text-align: left">Nguồn</th>
+                    <th style="padding: 9px 10px; font-weight: 600; text-align: right">Đơn</th>
+                    <th style="padding: 9px 10px; font-weight: 600; text-align: right">Bấm gọi</th>
+                    <th style="padding: 9px 10px; font-weight: 600; text-align: right">Nhắn Zalo</th>
+                    <th style="padding: 9px 20px; font-weight: 600; text-align: right">Tỷ trọng đơn</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{srcRows}}" as="r" hint-placeholder-count="6">
+                    <tr style="border-top: 1px solid #eef1f4">
+                      <td style="padding: 9px 20px"><span style="display: flex; align-items: center; gap: 8px"><span style="{{r.swatch}}"></span>{{r.name}}</span></td>
+                      <td style="padding: 9px 10px; text-align: right; font-weight: 700; color: #13283f">{{r.orders}}</td>
+                      <td style="padding: 9px 10px; text-align: right">{{r.calls}}</td>
+                      <td style="padding: 9px 10px; text-align: right">{{r.zalo}}</td>
+                      <td style="padding: 9px 20px; text-align: right">{{r.share}}</td>
+                    </tr>
+                  </sc-for>
+                  <tr style="border-top: 2px solid #13283f; font-weight: 800; background: #fafbfc">
+                    <td style="padding: 10px 20px; color: #13283f">Tổng</td>
+                    <td style="padding: 10px 10px; text-align: right">{{sumOrders}}</td>
+                    <td style="padding: 10px 10px; text-align: right">{{sumCalls}}</td>
+                    <td style="padding: 10px 10px; text-align: right">{{sumZalo}}</td>
+                    <td style="padding: 10px 20px; text-align: right">100%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+          <section aria-labelledby="bd-toptrang" style="flex: 3 1 560px; min-width: 0; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+            <div style="padding: 18px 20px 10px">
+              <h2 id="bd-toptrang" style="margin: 0; font-size: 19px; color: #13283f">Top trang: {{topNote}}</h2>
+              <p style="margin: 2px 0 0; font-size: 13.5px; color: #5a6575">10 trang nhiều lượt vào nhất, {{periodName}}. Tỷ lệ = đơn / lượt vào trang. Xanh: cao hơn trung bình toàn web ({{siteAvg}}), cam: thấp hơn.</p>
+            </div>
+            <div style="overflow-x: auto">
+              <table style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums">
+                <thead>
+                  <tr style="background: #fafbfc; color: #5a6575">
+                    <th style="padding: 9px 20px; font-weight: 600; text-align: left">Trang</th>
+                    <th style="padding: 9px 10px; font-weight: 600; text-align: right; width: 210px">Lượt vào</th>
+                    <th style="padding: 9px 10px; font-weight: 600; text-align: right">Đơn</th>
+                    <th style="padding: 9px 20px; font-weight: 600; text-align: right">Tỷ lệ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{pages}}" as="g" hint-placeholder-count="10">
+                    <tr style="border-top: 1px solid #eef1f4">
+                      <td style="padding: 8px 20px"><b style="font-weight: 600; color: #13283f">{{g.title}}</b><div style="font-size: 12.5px; color: #5a6575">{{g.path}}</div></td>
+                      <td style="padding: 8px 10px">
+                        <div style="display: flex; align-items: center; gap: 8px; justify-content: flex-end">
+                          <div style="flex: 1; height: 8px; background: #eef1f4; border-radius: 4px; max-width: 120px"><div style="{{g.bar}}"></div></div>
+                          <span style="min-width: 52px; text-align: right">{{g.visits}}</span>
+                        </div>
+                      </td>
+                      <td style="padding: 8px 10px; text-align: right; font-weight: 700; color: #13283f">{{g.orders}}</td>
+                      <td style="padding: 8px 20px; text-align: right"><span style="{{g.rateStyle}}">{{g.rate}}</span></td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section aria-labelledby="bd-donmoi" style="flex: 2 1 340px; min-width: 0; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+            <div style="padding: 18px 20px 10px">
+              <h2 id="bd-donmoi" style="margin: 0; font-size: 19px; color: #13283f">Đơn mới nhất kèm nguồn</h2>
+              <p style="margin: 2px 0 0; font-size: 13.5px; color: #5a6575">Mã đối tác khách dùng được lưu luôn vào đơn.</p>
+            </div>
+            <sc-for list="{{recent}}" as="o" hint-placeholder-count="6">
+              <div style="border-top: 1px solid #eef1f4; padding: 10px 20px; display: flex; gap: 12px; align-items: flex-start">
+                <span style="{{o.swatch}}"></span>
+                <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+                  <span style="display: flex; justify-content: space-between; gap: 8px"><b style="color: #13283f">{{o.id}}</b><span style="font-size: 13px; color: #5a6575">{{o.time}}</span></span>
+                  <span style="font-size: 14px">{{o.source}} · {{o.action}}</span>
+                  <span style="font-size: 13px; color: #5a6575">{{o.detail}}</span>
+                </div>
+              </div>
+            </sc-for>
+            <a href="#" style="display: flex; align-items: center; min-height: 46px; padding: 0 20px; border-top: 1px solid #eef1f4; font-weight: 700; color: #c2410c; text-decoration: none; background: #fafbfc">Xem tất cả đơn trong phần mềm điều phối →</a>
+          </section>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1950}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { period: 'thang' };
+  }
+  renderVals() {
+    const st = this.state;
+    const SRC = [
+      { key: 's0', name: 'Google', color: '#13283f', callShare: 0.45, zaloShare: 0.30 },
+      { key: 's1', name: 'Facebook', color: '#2a5482', callShare: 0.15, zaloShare: 0.25 },
+      { key: 's2', name: 'QR cây xăng', color: '#c2410c', callShare: 0.12, zaloShare: 0.10 },
+      { key: 's3', name: 'KOC', color: '#d9692a', callShare: 0.06, zaloShare: 0.15 },
+      { key: 's4', name: 'Trực tiếp', color: '#93b2d4', callShare: 0.18, zaloShare: 0.05 },
+      { key: 's5', name: 'Zalo', color: '#c9daee', callShare: 0.04, zaloShare: 0.15 }
+    ];
+    const DATA = {
+      ngay: {
+        label: 'Ngày', unit: 'ngày', rangeName: '14 ngày gần nhất', periodName: 'ngày 30/09/2027', prevName: 'ngày 29/09',
+        x: ['17/9', '18/9', '19/9', '20/9', '21/9', '22/9', '23/9', '24/9', '25/9', '26/9', '27/9', '28/9', '29/9', '30/9'],
+        src: [
+          [5, 6, 4, 7, 5, 6, 3, 5, 6, 7, 5, 6, 4, 6],
+          [2, 3, 2, 2, 3, 2, 1, 3, 2, 3, 2, 2, 2, 3],
+          [1, 2, 2, 1, 2, 1, 2, 2, 1, 2, 2, 1, 2, 2],
+          [1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1],
+          [2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 2, 2, 1, 2],
+          [1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1]
+        ],
+        visits: [500, 520, 480, 530, 510, 540, 470, 505, 525, 535, 500, 530, 490, 520],
+        calls: [5, 6, 5, 7, 6, 6, 4, 5, 6, 7, 6, 6, 5, 6],
+        zalo: [4, 5, 4, 4, 5, 4, 3, 4, 5, 4, 4, 5, 4, 4]
+      },
+      tuan: {
+        label: 'Tuần', unit: 'tuần', rangeName: '8 tuần gần nhất', periodName: 'tuần 27/09 – 03/10/2027', prevName: 'tuần trước',
+        x: ['9/8', '16/8', '23/8', '30/8', '6/9', '13/9', '20/9', '27/9'],
+        src: [
+          [31, 33, 35, 36, 38, 37, 39, 40],
+          [14, 15, 16, 15, 17, 16, 18, 17],
+          [8, 9, 10, 10, 11, 12, 12, 12],
+          [7, 8, 8, 9, 9, 8, 10, 9],
+          [10, 10, 11, 10, 11, 12, 11, 11],
+          [7, 8, 8, 9, 9, 10, 9, 9]
+        ],
+        visits: [3200, 3300, 3350, 3400, 3420, 3480, 3500, 3540],
+        calls: [36, 37, 38, 38, 39, 40, 40, 41],
+        zalo: [28, 29, 29, 30, 30, 31, 31, 32]
+      },
+      thang: {
+        label: 'Tháng', unit: 'tháng', rangeName: '6 tháng gần nhất', periodName: 'tháng 9/2027', prevName: 'tháng 8/2027',
+        x: ['T4/27', 'T5/27', 'T6/27', 'T7/27', 'T8/27', 'T9/27'],
+        src: [
+          [62, 78, 95, 118, 142, 168],
+          [40, 44, 52, 58, 63, 70],
+          [8, 15, 24, 33, 41, 52],
+          [12, 18, 20, 27, 31, 38],
+          [30, 32, 35, 38, 41, 44],
+          [18, 20, 23, 26, 32, 40]
+        ],
+        visits: [9800, 10900, 11800, 12900, 13800, 14820],
+        calls: [120, 128, 140, 150, 160, 168],
+        zalo: [90, 98, 105, 112, 120, 131]
+      }
+    };
+    const D = DATA[st.period];
+    const n = D.x.length, L = n - 1;
+    const fmt = (v) => v.toLocaleString('vi-VN');
+    const pct1 = (v) => v.toLocaleString('vi-VN', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+    const totalsArr = D.x.map((_, i) => D.src.reduce((a, s) => a + s[i], 0));
+    const rates = D.x.map((_, i) => (totalsArr[i] + D.calls[i] + D.zalo[i]) / D.visits[i] * 100);
+
+    const periods = ['ngay', 'tuan', 'thang'].map((id) => ({
+      label: DATA[id].label, on: st.period === id,
+      style: 'border: 0; font: inherit; font-size: 14.5px; font-weight: 700; border-radius: 9px; min-height: 42px; min-width: 76px; padding: 0 14px; cursor: pointer; ' +
+        (st.period === id ? 'background: #13283f; color: #ffffff;' : 'background: transparent; color: #13283f;'),
+      pick: () => this.setState({ period: id })
+    }));
+
+    const delta = (cur, prev, isPct) => {
+      const diff = cur - prev;
+      const up = diff >= 0;
+      const flat = isPct ? Math.abs(diff) < 0.05 : Math.round(Math.abs(diff) / prev * 100) === 0;
+      if (flat) return { delta: '■ không đổi so với ' + D.prevName, deltaStyle: 'font-size: 13px; font-weight: 600; color: #5a6575' };
+      const txt = isPct ? (up ? '+' : '−') + Math.abs(diff).toLocaleString('vi-VN', { maximumFractionDigits: 1, minimumFractionDigits: 1 }) + ' điểm' : (up ? '+' : '−') + Math.abs(Math.round(diff / prev * 100)) + '%';
+      return { delta: (up ? '▲ ' : '▼ ') + txt + ' so với ' + D.prevName, deltaStyle: 'font-size: 13px; font-weight: 600; color: ' + (up ? '#2b8a3e' : '#b42318') };
+    };
+    const card = (hl) => 'background: #ffffff; border: 1px solid ' + (hl ? '#f3c9a8' : '#e1e5ea') + '; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px;' + (hl ? ' box-shadow: inset 0 3px 0 #c2410c;' : '');
+    const rateNow = rates[L];
+    const kpis = [
+      { label: 'Lượt vào web', value: fmt(D.visits[L]), ...delta(D.visits[L], D.visits[L - 1]), cardStyle: card(false), hasGoal: false, meterStyle: '', goalStyle: '', goalNote: '' },
+      { label: 'Số đơn', value: fmt(totalsArr[L]), ...delta(totalsArr[L], totalsArr[L - 1]), cardStyle: card(false), hasGoal: false, meterStyle: '', goalStyle: '', goalNote: '' },
+      {
+        label: 'Tỷ lệ đặt lịch', value: pct1(rateNow), ...delta(rateNow, rates[L - 1], true), cardStyle: card(true), hasGoal: true,
+        meterStyle: 'position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: ' + (rateNow >= 4 ? '#2b8a3e' : '#c2410c') + '; width: ' + Math.min(rateNow / 6 * 100, 100) + '%',
+        goalStyle: 'position: absolute; top: -3px; bottom: -3px; width: 2px; background: #13283f; left: ' + (4 / 6 * 100) + '%',
+        goalNote: rateNow >= 4 ? 'Đạt mục tiêu ≥ 4% (vạch đen)' : 'Chưa đạt mục tiêu ≥ 4% (vạch đen)'
+      },
+      { label: 'Cuộc gọi từ web', value: fmt(D.calls[L]), ...delta(D.calls[L], D.calls[L - 1]), cardStyle: card(false), hasGoal: false, meterStyle: '', goalStyle: '', goalNote: '' },
+      { label: 'Lượt nhắn Zalo', value: fmt(D.zalo[L]), ...delta(D.zalo[L], D.zalo[L - 1]), cardStyle: card(false), hasGoal: false, meterStyle: '', goalStyle: '', goalNote: '' }
+    ];
+
+    // Biểu đồ cột chồng: đơn theo nguồn
+    const maxTotal = Math.max(...totalsArr);
+    const stepCands = [1, 2, 5, 10, 20, 25, 50, 100, 200];
+    const step = stepCands.find((s) => maxTotal * 1.12 / s <= 5) || 200;
+    const yMax = Math.ceil(maxTotal * 1.12 / step) * step;
+    const H = 100, SLOT = 10, BW = 6.4;
+    const barPaths = {};
+    const acc = new Array(n).fill(0);
+    SRC.forEach((s, si) => {
+      let d = '';
+      for (let i = 0; i < n; i++) {
+        const v = D.src[si][i];
+        if (!v) continue;
+        const y0 = H - acc[i] / yMax * H, h = v / yMax * H;
+        const x = i * SLOT + (SLOT - BW) / 2;
+        d += 'M' + x.toFixed(2) + ' ' + (y0 - h).toFixed(2) + 'h' + BW + 'v' + h.toFixed(2) + 'h' + (-BW) + 'z';
+        acc[i] += v;
+      }
+      barPaths[s.key] = d;
+    });
+    const yTicks = [];
+    for (let v = 0; v <= yMax; v += step) {
+      const top = (1 - v / yMax) * 100;
+      yTicks.push({
+        label: fmt(v),
+        labelStyle: 'position: absolute; right: 0; top: ' + top + '%; transform: translateY(-50%); font-size: 12px; color: #5a6575; font-variant-numeric: tabular-nums',
+        lineStyle: 'position: absolute; left: 0; right: 0; top: ' + top + '%; border-top: 1px solid ' + (v === 0 ? 'transparent' : '#eef1f4')
+      });
+    }
+    const xLabels = D.x.map((lb, i) => ({
+      label: lb,
+      style: 'position: absolute; top: 4px; left: ' + ((i + 0.5) / n * 100) + '%; transform: translateX(-50%); font-size: 12px; white-space: nowrap; color: ' + (i === L ? '#13283f; font-weight: 700' : '#5a6575')
+    }));
+    const totals = totalsArr.map((t, i) => ({
+      label: fmt(t),
+      style: 'position: absolute; transform: translate(-50%, -4px); font-size: 12px; font-weight: 700; color: #13283f; font-variant-numeric: tabular-nums; left: ' + ((i + 0.5) / n * 100) + '%; bottom: ' + (t / yMax * 100) + '%'
+    }));
+    const lastTotal = totalsArr[L];
+    const shares = SRC.map((s, si) => ({ ...s, v: D.src[si][L], share: D.src[si][L] / lastTotal * 100 }));
+    const top = shares.slice().sort((a, b) => b.v - a.v)[0];
+    const k = Math.min(3, Math.floor(n / 2));
+    const growth = SRC.map((s, si) => {
+      const a = D.src[si].slice(0, k).reduce((x, y) => x + y, 0) / k;
+      const b = D.src[si].slice(n - k).reduce((x, y) => x + y, 0) / k;
+      return { name: s.name, a, b, g: b / a };
+    }).sort((p, q) => q.g - p.g)[0];
+    const legend = shares.map((s) => ({
+      name: s.name, count: fmt(s.v), share: Math.round(s.share) + '%',
+      swatch: 'width: 14px; height: 14px; border-radius: 3px; flex: none; background: ' + s.color + (s.color === '#c9daee' ? '; box-shadow: inset 0 0 0 1px #93a9c2' : '')
+    }));
+    const avgPer = (totalsArr.reduce((a, b) => a + b, 0) / n).toLocaleString('vi-VN', { maximumFractionDigits: 0 });
+    const growthTxt = growth.g < 1.2
+      ? 'Số đơn khá đều, bình quân ' + avgPer + ' đơn mỗi ' + D.unit + ' trong ' + D.rangeName + '. Google luôn đứng đầu.'
+      : st.period === 'thang'
+      ? growth.name + ' tăng nhanh nhất: từ ' + fmt(D.src[SRC.findIndex((s) => s.name === growth.name)][0]) + ' lên ' + fmt(D.src[SRC.findIndex((s) => s.name === growth.name)][L]) + ' đơn mỗi tháng kể từ T4/2027.'
+      : growth.name + ' tăng nhanh nhất: bình quân ' + growth.a.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' lên ' + growth.b.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' đơn mỗi ' + D.unit + ' (3 ' + D.unit + ' đầu so với 3 ' + D.unit + ' cuối).';
+
+    // Biểu đồ đường: tỷ lệ đặt lịch
+    const rLo = 3, rHi = 6;
+    const LW = n * SLOT;
+    const ry = (r) => (1 - (r - rLo) / (rHi - rLo)) * 100;
+    const linePath = rates.map((r, i) => (i ? 'L' : 'M') + ((i + 0.5) * SLOT).toFixed(2) + ' ' + ry(r).toFixed(2)).join(' ');
+    const dots = rates.map((r, i) => ({
+      style: 'position: absolute; width: 9px; height: 9px; border-radius: 50%; transform: translate(-50%, -50%); border: 2px solid #ffffff; left: ' + ((i + 0.5) / n * 100) + '%; top: ' + ry(r) + '%; background: ' + (r >= 4 ? '#13283f' : '#c2410c')
+    }));
+    const rTicks = [3, 4, 5, 6].map((v) => ({
+      label: v + '%',
+      labelStyle: 'position: absolute; right: 0; top: ' + ry(v) + '%; transform: translateY(-50%); font-size: 12px; color: ' + (v === 4 ? '#9a330a; font-weight: 700' : '#5a6575'),
+      lineStyle: 'position: absolute; left: 0; right: 0; top: ' + ry(v) + '%; border-top: 1px solid ' + (v === rLo ? 'transparent' : '#eef1f4')
+    }));
+    let from = n;
+    for (let i = n - 1; i >= 0 && rates[i] >= 4; i--) from = i;
+    const rateTitle = from === 0
+      ? 'Đạt ' + pct1(rateNow) + ', luôn trên mục tiêu 4% trong ' + D.rangeName
+      : from < n
+        ? 'Đạt ' + pct1(rateNow) + ', liên tục trên mục tiêu 4% từ ' + D.x[from]
+        : 'Đang ở ' + pct1(rateNow) + ', chưa đạt mục tiêu 4%';
+
+    // Hành động theo nguồn
+    const split = (total, key) => {
+      const arr = SRC.map((s) => Math.round(total * s[key]));
+      arr[0] += total - arr.reduce((a, b) => a + b, 0);
+      return arr;
+    };
+    const callsBy = split(D.calls[L], 'callShare'), zaloBy = split(D.zalo[L], 'zaloShare');
+    const srcRows = shares.map((s, i) => ({
+      name: s.name, orders: fmt(s.v), calls: fmt(callsBy[i]), zalo: fmt(zaloBy[i]), share: pct1(s.share),
+      swatch: 'width: 12px; height: 12px; border-radius: 3px; flex: none; background: ' + s.color + (s.color === '#c9daee' ? '; box-shadow: inset 0 0 0 1px #93a9c2' : '')
+    }));
+
+    // Top trang
+    const f = D.visits[L] / 14820, fo = lastTotal / 412;
+    const PAGES = [
+      { title: 'Trang chủ', path: '/', v: 4210, o: 118 },
+      { title: 'Thay ắc quy tận nơi', path: '/dich-vu/thay-ac-quy', v: 2380, o: 86 },
+      { title: 'Sửa xe tận nơi Cầu Giấy', path: '/khu-vuc/cau-giay', v: 1640, o: 41 },
+      { title: 'Bảng giá', path: '/bang-gia', v: 1420, o: 38 },
+      { title: 'Bảo dưỡng định kỳ', path: '/dich-vu/bao-duong-dinh-ky', v: 1180, o: 34 },
+      { title: 'Xe không đề được máy, làm gì?', path: '/cam-nang/xe-khong-de-duoc-may', v: 960, o: 12 },
+      { title: 'Sửa xe tận nơi Thanh Xuân', path: '/khu-vuc/thanh-xuan', v: 870, o: 22 },
+      { title: 'Vá lốp lưu động', path: '/dich-vu/va-lop-luu-dong', v: 760, o: 25 },
+      { title: 'Toyota Vios', path: '/hang-xe/toyota-vios', v: 640, o: 14 },
+      { title: 'Khách doanh nghiệp', path: '/doanh-nghiep', v: 410, o: 6 }
+    ];
+    const pv = PAGES.map((p) => ({ ...p, vv: Math.max(1, Math.round(p.v * f)), oo: Math.round(p.o * fo) }));
+    const maxV = Math.max(...pv.map((p) => p.vv));
+    const siteAvg = lastTotal / D.visits[L] * 100;
+    const pages = pv.map((p) => {
+      const r = p.oo / p.vv * 100;
+      const good = p.o / p.v >= siteAvg / 100;
+      return {
+        title: p.title, path: p.path, visits: fmt(p.vv), orders: fmt(p.oo), rate: pct1(r),
+        bar: 'height: 8px; border-radius: 4px; background: #2a5482; width: ' + (p.vv / maxV * 100) + '%',
+        rateStyle: 'font-weight: 700; padding: 2px 8px; border-radius: 6px; ' + (good ? 'color: #1f6b30; background: #e9f6ec' : 'color: #9a330a; background: #fff1e6')
+      };
+    });
+    const best = PAGES.slice().sort((a, b) => b.o / b.v - a.o / a.v)[0];
+
+    return {
+      periods, periodName: D.periodName, prevName: D.prevName, rangeName: D.rangeName, unitName: D.unit,
+      recon: fmt(lastTotal) + '/' + fmt(lastTotal),
+      kpis,
+      srcTitle: top.name + ' mang về nhiều đơn nhất: ' + Math.round(top.share) + '% đơn ' + D.periodName,
+      srcSub: growthTxt,
+      srcAria: 'Biểu đồ cột chồng số đơn theo 6 nguồn trong ' + D.rangeName + '. ' + top.name + ' chiếm ' + Math.round(top.share) + '% đơn ' + D.periodName + '.',
+      legend, yTicks, xLabels, totals, barPaths,
+      barViewBox: '0 0 ' + (n * SLOT) + ' ' + H,
+      rateTitle, rTicks, dots, linePath,
+      lineViewBox: '0 0 ' + LW + ' 100',
+      goalLineStyle: 'position: absolute; left: 0; right: 0; top: ' + ry(4) + '%; border-top: 2px dashed #c2410c',
+      lastRate: pct1(rateNow),
+      lastLabelStyle: 'position: absolute; transform: translate(-100%, -150%); font-size: 13px; font-weight: 800; color: #13283f; background: #ffffff; padding: 0 4px; border-radius: 4px; left: ' + ((L + 0.5) / n * 100) + '%; top: ' + ry(rateNow) + '%',
+      rateAria: 'Biểu đồ đường tỷ lệ đặt lịch, gọi, nhắn Zalo trên lượt vào. Hiện ' + pct1(rateNow) + ', mục tiêu 4%.',
+      srcRows, sumOrders: fmt(lastTotal), sumCalls: fmt(D.calls[L]), sumZalo: fmt(D.zalo[L]),
+      pages, siteAvg: pct1(siteAvg), topNote: best.title + ' chốt đơn tốt nhất',
+      recent: [
+        { id: 'TT-000412', time: '30/09 17:42', source: 'Google', action: 'Gửi form đặt lịch', detail: 'Từ trang Thay ắc quy tận nơi', swatch: 'width: 12px; height: 12px; border-radius: 3px; margin-top: 6px; flex: none; background: #13283f' },
+        { id: 'TT-000411', time: '30/09 16:15', source: 'QR cây xăng', action: 'Gửi form đặt lịch', detail: 'Mã XANG-TDH12 · giảm 10% công', swatch: 'width: 12px; height: 12px; border-radius: 3px; margin-top: 6px; flex: none; background: #c2410c' },
+        { id: 'TT-000410', time: '30/09 14:03', source: 'KOC', action: 'Bấm gọi', detail: 'Mã KOC-LINHXEHOP · điều phối viên nhập khi nghe máy', swatch: 'width: 12px; height: 12px; border-radius: 3px; margin-top: 6px; flex: none; background: #d9692a' },
+        { id: 'TT-000409', time: '30/09 11:27', source: 'Zalo', action: 'Nhắn Zalo', detail: 'Khách cũ, nhắc lịch bảo dưỡng', swatch: 'width: 12px; height: 12px; border-radius: 3px; margin-top: 6px; flex: none; background: #c9daee; box-shadow: inset 0 0 0 1px #93a9c2' },
+        { id: 'TT-000408', time: '30/09 09:50', source: 'Trực tiếp', action: 'Gửi form đặt lịch', detail: 'Mã BQL-GOLDSEASON · hầm B2 toà Gold Season', swatch: 'width: 12px; height: 12px; border-radius: 3px; margin-top: 6px; flex: none; background: #93b2d4' },
+        { id: 'TT-000407', time: '30/09 08:12', source: 'Facebook', action: 'Bấm gọi', detail: 'Từ bài quảng cáo Cứu hộ 60 phút', swatch: 'width: 12px; height: 12px; border-radius: 3px; margin-top: 6px; flex: none; background: #2a5482' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

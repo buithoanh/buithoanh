@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Quản trị – Bài viết và trang</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.55">
+
+  <header style="background: #13283f; color: #ffffff">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 10px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; box-sizing: border-box">
+      <a href="#" style="color: #ffffff; text-decoration: none; display: flex; flex-direction: column; line-height: 1.15; min-height: 44px; justify-content: center">
+        <b style="font-size: 19px; font-weight: 800">ThợTới · Quản trị</b>
+        <span style="font-size: 12px; color: #ffc9a3">by VC Phồn Vinh</span>
+      </a>
+      <div style="flex: 1"></div>
+      <a href="TrangChuMayTinh.dc.html" style="color: #dfe7f1; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        Xem website
+      </a>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <span style="width: 38px; height: 38px; border-radius: 50%; background: #1d3a5a; border: 2px solid #3d5c7e; color: #ffffff; display: grid; place-items: center; font-weight: 700; font-size: 14px">{{user.initials}}</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.25">
+          <b style="font-size: 14px">{{user.name}}</b>
+          <span style="font-size: 12.5px; color: #c3cfdc">{{user.role}}</span>
+        </span>
+      </div>
+      <button type="button" style="font: inherit; font-size: 14px; color: #ffffff; background: transparent; border: 1.5px solid rgba(255,255,255,0.45); border-radius: 10px; min-height: 44px; padding: 0 14px; cursor: pointer">Đăng xuất</button>
+    </div>
+  </header>
+
+  <div style="max-width: 1440px; margin: 0 auto; padding: 20px 24px 48px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; box-sizing: border-box">
+
+    <aside style="flex: 1 1 220px; min-width: 0; max-width: 100%; display: flex; flex-direction: column; gap: 12px">
+      <nav aria-label="Menu quản trị" style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 8px; display: flex; flex-wrap: wrap; gap: 2px">
+        <a href="#" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          Tổng quan
+        </a>
+        <a href="QtBaiViet.dc.html" aria-current="page" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #13283f; background: #fff1e6; font-weight: 700; text-decoration: none; box-shadow: inset 3px 0 0 #c2410c">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          Bài viết &amp; trang
+        </a>
+        <a href="QtBangGia.dc.html" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+          <span style="flex: 1">Bảng giá &amp; dịch vụ</span>
+          <sc-if value="{{isBT}}" hint-placeholder-val="{{ true }}">
+            <svg aria-label="Không có quyền" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </sc-if>
+        </a>
+        <a href="QtBangGia.dc.html" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span style="flex: 1">Vùng phục vụ &amp; giờ</span>
+          <sc-if value="{{isBT}}" hint-placeholder-val="{{ true }}">
+            <svg aria-label="Không có quyền" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </sc-if>
+        </a>
+        <a href="#" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 0 0 2-2V5h14v2a2 2 0 0 0 0 4v2a2 2 0 0 0 0 4v2H5v-2a2 2 0 0 0-2-2"></path><line x1="10" y1="9" x2="14" y2="15"></line></svg>
+          Mã khuyến mãi
+        </a>
+        <a href="#" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          Số liệu
+        </a>
+        <a href="#" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Lịch hẹn
+        </a>
+      </nav>
+      <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <b style="font-size: 13px; color: #5a6575; text-transform: uppercase; letter-spacing: 0.04em">Xem màn này với vai trò</b>
+        <div role="radiogroup" aria-label="Vai trò" style="display: flex; flex-direction: column; gap: 6px">
+          <sc-for list="{{roles}}" as="r" hint-placeholder-count="2">
+            <button type="button" role="radio" aria-checked="{{r.on}}" onClick="{{r.pick}}" style="{{r.style}}">
+              <b style="font-size: 14px">{{r.ten}}</b>
+              <span style="font-size: 12.5px; color: #5a6575">{{r.sub}}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </aside>
+
+    <main style="flex: 999 1 760px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; justify-content: space-between">
+        <div>
+          <h1 style="margin: 0; font-size: 26px; color: #13283f; letter-spacing: -0.01em">Bài viết &amp; trang</h1>
+          <p style="margin: 2px 0 0; color: #5a6575">Viết bài cẩm nang, sửa trang dịch vụ và trang khu vực. Bài nào cũng phải được duyệt rồi mới lên web.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px">
+          <button type="button" onClick="{{openTpl}}" style="font: inherit; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 44px; padding: 0 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Tạo trang khu vực mới từ mẫu
+          </button>
+          <button type="button" style="font: inherit; font-weight: 800; color: #ffffff; background: #c2410c; border: 0; border-radius: 10px; min-height: 44px; padding: 0 18px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Viết bài mới
+          </button>
+        </div>
+      </div>
+
+      <sc-if value="{{msg}}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="{{msgStyle}}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 1px"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span style="flex: 1">{{msg}}</span>
+          <button type="button" onClick="{{closeMsg}}" aria-label="Đóng thông báo" style="flex: none; width: 44px; height: 44px; margin: -12px -8px -12px 0; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; font-size: 20px">×</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{tpl}}" hint-placeholder-val="{{ false }}">
+        <section aria-label="Tạo trang khu vực từ mẫu" style="background: #ffffff; border: 2px solid #1d3a5a; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline">
+            <h2 style="margin: 0; font-size: 19px; color: #13283f">Tạo trang khu vực mới từ mẫu</h2>
+            <span style="font-size: 13.5px; color: #5a6575">Mẫu “Dịch vụ × khu vực” · đang có 24 trang</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px">
+            <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Dịch vụ
+              <select style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 46px"><option>Ắc quy</option><option>Bảo dưỡng định kỳ</option><option>Lốp</option><option>Phanh</option><option>Đọc lỗi, chẩn đoán</option><option>Cứu hộ, kéo xe</option></select>
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Quận (trong vùng phục vụ)
+              <select style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 46px"><option>Thanh Xuân</option><option>Cầu Giấy</option><option>Đống Đa</option><option>Ba Đình</option></select>
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Đường dẫn (tự tạo)
+              <input type="text" value="/thay-ac-quy-o-to/thanh-xuan" style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 46px; box-sizing: border-box; background: #f6f7f9">
+            </label>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px">
+            <div style="background: #f6f7f9; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px">
+              <b style="font-size: 14px; color: #13283f">Mẫu điền sẵn cho bạn</b>
+              <span style="font-size: 14px">Tiêu đề, khung bài, bảng giá ắc quy (lấy từ Bảng giá), câu hỏi thường gặp, nút đặt lịch đã chọn sẵn dịch vụ.</span>
+              <span style="font-size: 14px">Thời gian đến dự kiến ở Thanh Xuân: <b>35 phút</b> (lấy từ Vùng phục vụ).</span>
+            </div>
+            <div style="background: #fff1e6; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px">
+              <b style="font-size: 14px; color: #8a2c06">Bạn phải tự thêm trước khi gửi duyệt</b>
+              <span style="font-size: 14px">Đoạn mô tả riêng về khu này (ít nhất 150 chữ) · ít nhất 2 ảnh việc thật chụp tại Thanh Xuân · ít nhất 1 đánh giá thật của khách ở Thanh Xuân.</span>
+              <span style="font-size: 13.5px; color: #5a6575">Hệ thống so với các trang khác: trùng nội dung quá 70% thì chưa gửi duyệt được.</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end">
+            <button type="button" onClick="{{closeTpl}}" style="font: inherit; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 44px; padding: 0 16px; cursor: pointer">Huỷ</button>
+            <button type="button" onClick="{{createTpl}}" style="font: inherit; font-weight: 800; color: #ffffff; background: #13283f; border: 0; border-radius: 10px; min-height: 44px; padding: 0 18px; cursor: pointer">Tạo bản nháp từ mẫu</button>
+          </div>
+        </section>
+      </sc-if>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+        <section aria-label="Danh sách bài" style="flex: 1 1 340px; min-width: 0; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+          <div style="padding: 14px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #e1e5ea">
+            <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13.5px; font-weight: 600">Tìm bài
+              <input type="search" placeholder="Gõ tên bài hoặc đường dẫn" style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 44px; box-sizing: border-box">
+            </label>
+            <div>
+              <span style="font-size: 13.5px; font-weight: 600">Trạng thái</span>
+              <div role="radiogroup" aria-label="Lọc theo trạng thái" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px">
+                <sc-for list="{{stFilters}}" as="f" hint-placeholder-count="5">
+                  <button type="button" role="radio" aria-checked="{{f.on}}" onClick="{{f.pick}}" style="{{f.style}}">{{f.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div>
+              <span style="font-size: 13.5px; font-weight: 600">Loại</span>
+              <div role="radiogroup" aria-label="Lọc theo loại" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px">
+                <sc-for list="{{typeFilters}}" as="f" hint-placeholder-count="4">
+                  <button type="button" role="radio" aria-checked="{{f.on}}" onClick="{{f.pick}}" style="{{f.style}}">{{f.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <div style="padding: 8px 14px; font-size: 13px; color: #5a6575; background: #fafbfc; border-bottom: 1px solid #eef1f4">{{countText}}</div>
+          <ul style="list-style: none; margin: 0; padding: 0">
+            <sc-for list="{{list}}" as="it" hint-placeholder-count="8">
+              <li style="border-bottom: 1px solid #eef1f4">
+                <button type="button" aria-current="{{it.cur}}" onClick="{{it.pick}}" style="{{it.style}}">
+                  <b style="font-size: 14.5px; color: #13283f; line-height: 1.35">{{it.ten}}</b>
+                  <span style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center">
+                    <span style="{{it.ttStyle}}">{{it.ttLabel}}</span>
+                    <span style="font-size: 12px; font-weight: 600; color: #3c4654; background: #eef1f4; border-radius: 6px; padding: 2px 8px">{{it.loaiLabel}}</span>
+                  </span>
+                  <span style="font-size: 12.5px; color: #5a6575">{{it.meta}}</span>
+                </button>
+              </li>
+            </sc-for>
+          </ul>
+          <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 24px 14px; color: #5a6575; text-align: center">Không có bài nào khớp bộ lọc này.</p>
+          </sc-if>
+        </section>
+
+        <section aria-label="Soạn bài" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+          <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+            <div style="padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; border-bottom: 1px solid #e1e5ea; background: #fafbfc">
+              <span style="{{cur.ttStyle}}">{{cur.ttLabel}}</span>
+              <span style="font-size: 13.5px; color: #5a6575">{{cur.loaiLabel}} · {{cur.meta}}</span>
+              <div style="flex: 1"></div>
+              <span style="font-size: 13px; color: #1f6b2e; display: inline-flex; align-items: center; gap: 6px">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Tự lưu nháp lúc 09:42
+              </span>
+            </div>
+
+            <sc-if value="{{isBT}}" hint-placeholder-val="{{ true }}">
+              <div style="margin: 14px 16px 0; background: #f0f4f8; border-left: 4px solid #1d3a5a; border-radius: 8px; padding: 10px 14px; font-size: 14px; display: flex; gap: 10px; align-items: flex-start">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d3a5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 2px"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>Bạn đang dùng vai trò <b>Biên tập nội dung (VCmedia)</b>: được viết, sửa, tải ảnh và gửi duyệt. <b>Không có quyền sửa giá.</b> Giá trong bài là khối lấy tự động từ Bảng giá; muốn đổi giá, nhắn Quản lý dịch vụ.</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{isQL}}" hint-placeholder-val="{{ false }}">
+              <div style="margin: 14px 16px 0; background: #e9f6ec; border-left: 4px solid #2b8a3e; border-radius: 8px; padding: 10px 14px; font-size: 14px">
+                Bạn đang dùng vai trò <b>Quản lý dịch vụ</b>: đọc lại bài, góp ý hoặc bấm <b>Duyệt &amp; đăng</b>. Giá trong bài sửa ở mục <a href="QtBangGia.dc.html">Bảng giá &amp; dịch vụ</a>.
+              </div>
+            </sc-if>
+
+            <div style="padding: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px">
+              <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Loại trang
+                <select style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 46px"><option>{{cur.loaiLabel}}</option><option>Bài cẩm nang</option><option>Trang dịch vụ</option><option>Trang khu vực</option></select>
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Đường dẫn
+                <input type="text" value="{{cur.slug}}" style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 46px; box-sizing: border-box">
+              </label>
+            </div>
+            <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600; padding: 0 16px 14px">Tiêu đề bài (tiêu đề lớn duy nhất trên trang)
+              <input type="text" value="{{cur.ten}}" style="font: inherit; font-size: 22px; font-weight: 800; color: #13283f; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 52px; box-sizing: border-box">
+            </label>
+
+            <div role="toolbar" aria-label="Định dạng nội dung" style="margin: 0 16px; display: flex; flex-wrap: wrap; gap: 4px; padding: 6px; border: 1px solid #c9d0d8; border-bottom: 0; border-radius: 10px 10px 0 0; background: #fafbfc">
+              <button type="button" aria-label="Chữ đậm" style="font: inherit; font-weight: 800; min-width: 44px; min-height: 44px; border: 0; border-radius: 8px; background: transparent; color: #13283f; cursor: pointer">B</button>
+              <button type="button" aria-label="Tiêu đề mục" style="font: inherit; font-weight: 700; min-width: 44px; min-height: 44px; border: 0; border-radius: 8px; background: transparent; color: #13283f; cursor: pointer; padding: 0 8px">Tiêu đề</button>
+              <button type="button" aria-label="Danh sách" style="font: inherit; font-size: 14px; min-height: 44px; border: 0; border-radius: 8px; background: transparent; color: #13283f; cursor: pointer; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>Danh sách</button>
+              <button type="button" aria-label="Chèn bảng" style="font: inherit; font-size: 14px; min-height: 44px; border: 0; border-radius: 8px; background: transparent; color: #13283f; cursor: pointer; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="12" y1="3" x2="12" y2="21"></line></svg>Bảng</button>
+              <button type="button" aria-label="Chèn ảnh" style="font: inherit; font-size: 14px; min-height: 44px; border: 0; border-radius: 8px; background: transparent; color: #13283f; cursor: pointer; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>Ảnh</button>
+              <button type="button" aria-label="Chèn video YouTube" style="font: inherit; font-size: 14px; min-height: 44px; border: 0; border-radius: 8px; background: transparent; color: #13283f; cursor: pointer; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"></rect><polygon points="10 9 15 12 10 15 10 9"></polygon></svg>Video YouTube</button>
+              <button type="button" aria-label="Chèn khối đặt lịch" style="font: inherit; font-size: 14px; font-weight: 700; min-height: 44px; border: 0; border-radius: 8px; background: #fff1e6; color: #8a2c06; cursor: pointer; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="3" y1="10" x2="21" y2="10"></line><line x1="12" y1="14" x2="12" y2="18"></line><line x1="10" y1="16" x2="14" y2="16"></line></svg>Khối đặt lịch</button>
+              <button type="button" aria-label="Chèn giá từ Bảng giá" style="font: inherit; font-size: 14px; min-height: 44px; border: 0; border-radius: 8px; background: transparent; color: #13283f; cursor: pointer; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>Chèn giá</button>
+            </div>
+            <div role="textbox" aria-multiline="true" aria-label="Nội dung bài" style="margin: 0 16px 16px; border: 1px solid #c9d0d8; border-radius: 0 0 10px 10px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 1.7">
+              <p style="margin: 0">{{cur.intro}}</p>
+              <h2 style="margin: 4px 0 0; font-size: 20px; color: #13283f">{{cur.h2}}</h2>
+              <ul style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px">
+                <sc-for list="{{cur.bullets}}" as="b" hint-placeholder-count="3">
+                  <li>{{b.t}}</li>
+                </sc-for>
+              </ul>
+
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; background: #f6f7f9; border-radius: 10px; padding: 10px 12px; font-size: 15px">
+                <span>{{cur.giaTen}}:</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px; background: #ffffff; border: 1.5px solid #c2410c; color: #8a2c06; font-weight: 800; border-radius: 8px; padding: 2px 10px">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  {{cur.gia}}
+                </span>
+                <span style="font-size: 13px; color: #5a6575">Khối giá lấy từ Bảng giá, tự cập nhật khi giá đổi. Không gõ giá tay trong bài.</span>
+              </div>
+
+              <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+                <div style="height: 220px; border-radius: 10px; background: #e6ebf0"></div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13px; color: #5a6575">
+                  <span style="background: #e9f6ec; color: #1f6b2e; font-weight: 700; border-radius: 6px; padding: 2px 8px">Đã nén tự động</span>
+                  <span>tho-do-ac-quy-ham-b2.jpg · 4,2 MB → 196 KB (WebP), giảm 95%</span>
+                </div>
+                <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13.5px; font-weight: 600">Mô tả ảnh (bắt buộc)
+                  <input type="text" value="Thợ ThợTới đo điện áp ắc quy cho xe Vios dưới hầm chung cư" style="font: inherit; font-weight: 400; padding: 8px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 44px; box-sizing: border-box">
+                </label>
+              </figure>
+
+              <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+                <div style="height: 160px; border-radius: 10px; background: #e6ebf0"></div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13px; color: #5a6575">
+                  <span style="background: #e9f6ec; color: #1f6b2e; font-weight: 700; border-radius: 6px; padding: 2px 8px">Đã nén tự động</span>
+                  <span>kep-cuc-ac-quy.jpg · 3,1 MB → 158 KB (WebP), giảm 95%</span>
+                </div>
+                <sc-if value="{{altMissing}}" hint-placeholder-val="{{ true }}">
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13.5px; font-weight: 600; color: #a8320a">Mô tả ảnh (bắt buộc) · chưa điền
+                    <input type="text" value="" placeholder="Ảnh này chụp gì? Ví dụ: Thợ kẹp dây câu bình vào cực dương" style="font: inherit; font-weight: 400; color: #18212c; padding: 8px 12px; border: 2px solid #a8320a; border-radius: 10px; min-height: 44px; box-sizing: border-box">
+                  </label>
+                  <button type="button" onClick="{{fillAlt}}" style="align-self: flex-start; font: inherit; font-size: 13.5px; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 8px; min-height: 44px; padding: 0 12px; cursor: pointer">Dùng gợi ý: “Thợ kẹp dây câu bình vào cực dương ắc quy”</button>
+                </sc-if>
+                <sc-if value="{{altDone}}" hint-placeholder-val="{{ false }}">
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13.5px; font-weight: 600">Mô tả ảnh (bắt buộc)
+                    <input type="text" value="Thợ kẹp dây câu bình vào cực dương ắc quy" style="font: inherit; font-weight: 400; padding: 8px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 44px; box-sizing: border-box">
+                  </label>
+                </sc-if>
+              </figure>
+
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <div style="height: 200px; border-radius: 10px; background: #2a3442; display: grid; place-items: center">
+                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                </div>
+                <span style="font-size: 13px; color: #5a6575">Video YouTube · youtube.com/watch?v=Tt0kAqB2x9c · “Kích bình đúng thứ tự trong 2 phút” · chỉ tải khi khách bấm xem</span>
+              </div>
+
+              <div style="background: #fff1e6; border-radius: 12px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between">
+                <span style="display: flex; flex-direction: column">
+                  <span style="font-size: 12px; font-weight: 700; color: #8a2c06; text-transform: uppercase; letter-spacing: 0.04em">Khối đặt lịch · chọn sẵn {{cur.dv}}</span>
+                  <b style="color: #13283f; font-size: 17px">Cần thợ tới ngay? Có mặt trong 60 phút.</b>
+                </span>
+                <span style="display: flex; gap: 8px">
+                  <span style="background: #c2410c; color: #ffffff; font-weight: 800; border-radius: 10px; padding: 10px 16px; font-size: 14px">Gọi thợ</span>
+                  <span style="background: #13283f; color: #ffffff; font-weight: 800; border-radius: 10px; padding: 10px 16px; font-size: 14px">Đặt lịch</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; align-items: start">
+
+            <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+              <h2 style="margin: 0; font-size: 17px; color: #13283f">Hiển thị trên Google</h2>
+              <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">
+                <span style="display: flex; justify-content: space-between; gap: 8px">Tiêu đề cho Google <span style="{{seoT.style}}">{{seoT.text}}</span></span>
+                <input type="text" value="{{cur.seo}}" style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 46px; box-sizing: border-box">
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">
+                <span style="display: flex; justify-content: space-between; gap: 8px">Mô tả cho Google <span style="{{seoD.style}}">{{seoD.text}}</span></span>
+                <textarea rows="4" style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; resize: vertical">{{cur.desc}}</textarea>
+              </label>
+              <span style="font-size: 13px; color: #5a6575">Nên: tiêu đề 30–60 ký tự, mô tả 120–160 ký tự. Dài hơn Google sẽ cắt bớt.</span>
+              <div style="border: 1px solid #e1e5ea; border-radius: 10px; padding: 12px 14px; background: #ffffff; font-family: Arial, sans-serif">
+                <span style="font-size: 11.5px; font-weight: 700; color: #5a6575; text-transform: uppercase; letter-spacing: 0.04em; font-family: 'Be Vietnam Pro', sans-serif">Xem trước kết quả Google</span>
+                <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px">
+                  <span style="width: 26px; height: 26px; border-radius: 50%; background: #13283f; color: #ffffff; display: grid; place-items: center; font-size: 11px; font-weight: 700">TT</span>
+                  <span style="display: flex; flex-direction: column; line-height: 1.25">
+                    <span style="font-size: 14px; color: #202124">ThợTới</span>
+                    <span style="font-size: 12px; color: #4d5156">{{gUrl}}</span>
+                  </span>
+                </div>
+                <div style="font-size: 19px; color: #1a0dab; line-height: 1.3; margin-top: 6px">{{gTitle}}</div>
+                <div style="font-size: 14px; color: #4d5156; line-height: 1.5; margin-top: 2px">{{gDesc}}</div>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 16px">
+              <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+                <h2 style="margin: 0; font-size: 17px; color: #13283f">Ảnh chia sẻ (Facebook, Zalo)</h2>
+                <div style="aspect-ratio: 1200 / 630; border-radius: 10px; background: #e6ebf0"></div>
+                <span style="font-size: 13px; color: #5a6575">anh-chia-se-kich-binh.jpg · 1200×630 · 2,6 MB → 142 KB (WebP)</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                  <button type="button" style="font: inherit; font-size: 14px; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 44px; padding: 0 14px; cursor: pointer">Đổi ảnh</button>
+                  <button type="button" style="font: inherit; font-size: 14px; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 44px; padding: 0 14px; cursor: pointer">Dùng ảnh đầu bài</button>
+                </div>
+              </div>
+
+              <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+                <h2 style="margin: 0; font-size: 17px; color: #13283f">Ảnh trong bài</h2>
+                <span style="font-size: 13px; color: #5a6575">Ảnh tải lên được tự nén và đổi sang WebP. Tải dần khi khách cuộn tới.</span>
+                <sc-for list="{{imgs}}" as="im" hint-placeholder-count="3">
+                  <div style="display: flex; gap: 10px; align-items: center; border-top: 1px solid #eef1f4; padding-top: 10px">
+                    <span style="flex: none; width: 52px; height: 40px; border-radius: 6px; background: #e6ebf0"></span>
+                    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.35">
+                      <span style="font-size: 13.5px; font-weight: 600; overflow-wrap: anywhere">{{im.ten}}</span>
+                      <span style="font-size: 12.5px; color: #5a6575">{{im.size}}</span>
+                    </span>
+                    <span style="{{im.altStyle}}">{{im.alt}}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+              <h2 style="margin: 0; font-size: 17px; color: #13283f">Khi nào lên web</h2>
+              <div role="radiogroup" aria-label="Thời điểm đăng" style="display: flex; flex-direction: column; gap: 8px">
+                <sc-for list="{{scheds}}" as="sd" hint-placeholder-count="2">
+                  <button type="button" role="radio" aria-checked="{{sd.on}}" onClick="{{sd.pick}}" style="{{sd.style}}">
+                    <span style="{{sd.dot}}"></span>
+                    <span style="display: flex; flex-direction: column; text-align: left">
+                      <b style="font-size: 14.5px">{{sd.ten}}</b>
+                      <span style="font-size: 13px; color: #5a6575">{{sd.sub}}</span>
+                    </span>
+                  </button>
+                </sc-for>
+              </div>
+              <sc-if value="{{henGio}}" hint-placeholder-val="{{ true }}">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px">
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Ngày đăng
+                    <input type="date" value="2027-01-15" style="font: inherit; font-weight: 400; padding: 8px 10px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 46px; box-sizing: border-box">
+                  </label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Giờ đăng
+                    <input type="time" value="07:00" style="font: inherit; font-weight: 400; padding: 8px 10px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 46px; box-sizing: border-box">
+                  </label>
+                </div>
+                <span style="font-size: 13px; color: #5a6575">Bài lên web lúc 07:00 thứ Sáu 15/01/2027, chỉ khi đã được duyệt trước giờ đó.</span>
+              </sc-if>
+            </div>
+
+            <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+              <h2 style="margin: 0; font-size: 17px; color: #13283f">Soát trước khi gửi duyệt</h2>
+              <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px">
+                <sc-for list="{{checks}}" as="c" hint-placeholder-count="6">
+                  <li style="display: flex; gap: 8px; align-items: flex-start; font-size: 14px">
+                    <span style="{{c.dot}}">{{c.mark}}</span>
+                    <span>{{c.t}}</span>
+                  </li>
+                </sc-for>
+              </ul>
+            </div>
+          </div>
+
+          <div style="position: sticky; bottom: 0; background: rgba(255,255,255,0.97); border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; box-shadow: 0 -6px 18px rgba(19,40,63,0.08)">
+            <span style="flex: 1 1 240px; font-size: 13.5px; color: #5a6575">{{footNote}}</span>
+            <button type="button" onClick="{{saveDraft}}" style="font: inherit; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 48px; padding: 0 18px; cursor: pointer">Lưu nháp</button>
+            <button type="button" style="font: inherit; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 48px; padding: 0 18px; cursor: pointer">Xem thử trên điện thoại</button>
+            <sc-if value="{{isBT}}" hint-placeholder-val="{{ true }}">
+              <button type="button" onClick="{{submit}}" style="font: inherit; font-weight: 800; color: #ffffff; background: #c2410c; border: 0; border-radius: 10px; min-height: 48px; padding: 0 22px; cursor: pointer">Gửi duyệt</button>
+            </sc-if>
+            <sc-if value="{{isQL}}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{giveBack}}" style="font: inherit; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 48px; padding: 0 18px; cursor: pointer">Trả lại kèm góp ý</button>
+              <button type="button" onClick="{{approve}}" style="font: inherit; font-weight: 800; color: #ffffff; background: #2b8a3e; border: 0; border-radius: 10px; min-height: 48px; padding: 0 22px; cursor: pointer">{{approveLabel}}</button>
+            </sc-if>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { role: 'bt', st: 'all', loai: 'all', sel: 'a1', tpl: false, created: false, alt: false, sched: 'hen', msg: '', msgKind: 'ok' };
+  }
+  renderVals() {
+    const s = this.state;
+    const isBT = s.role === 'bt';
+    const vnd = (n) => n.toLocaleString('vi-VN') + 'đ';
+    const TT = {
+      'nhap': { label: 'Nháp', bg: '#eef1f4', fg: '#3c4654' },
+      'cho-duyet': { label: 'Chờ duyệt', bg: '#fff1e6', fg: '#8a2c06' },
+      'hen-gio': { label: 'Đã hẹn giờ', bg: '#e7f0ff', fg: '#0050c8' },
+      'da-dang': { label: 'Đã đăng', bg: '#e9f6ec', fg: '#1f6b2e' }
+    };
+    const LOAI = { 'cam-nang': 'Bài cẩm nang', 'dich-vu': 'Trang dịch vụ', 'khu-vuc': 'Trang khu vực' };
+    const base = [
+      { id: 'a1', ten: 'Kích bình ắc quy ô tô: tự làm hay gọi thợ?', loai: 'cam-nang', tt: 'cho-duyet', tg: 'Lan Phương', ngay: '11/01/2027 16:20', slug: '/cam-nang/kich-binh-ac-quy-o-to', dv: 'Ắc quy',
+        seo: 'Kích bình ắc quy ô tô: tự làm hay gọi thợ tận nơi?', desc: 'Xe không nổ máy vì hết ắc quy? Cách kích bình an toàn, khi nào nên gọi thợ và giá kích nổ tận nơi ở Hà Nội. Thợ có mặt trong 60 phút.',
+        intro: 'Sáng ra vặn chìa mà xe chỉ kêu tạch tạch, đèn táp-lô mờ dần: gần như chắc chắn ắc quy đã yếu. Bài này giúp bạn biết khi nào tự kích được, khi nào nên gọi thợ cho an toàn.',
+        h2: 'Tự kích bình cần những gì?', bullets: [{ t: 'Một bộ dây câu bình còn tốt, kẹp chắc tay.' }, { t: 'Một xe khác nổ máy được, đỗ sát xe bạn.' }, { t: 'Nắm đúng thứ tự: cực dương trước, cực âm sau, tháo theo chiều ngược lại.' }],
+        giaTen: 'Kích nổ tại chỗ', gia: 150000 },
+      { id: 'a2', ten: 'Đèn check engine sáng: nguyên nhân và cách xử lý', loai: 'cam-nang', tt: 'da-dang', tg: 'Lan Phương', ngay: '20/12/2026 08:00', slug: '/cam-nang/den-check-engine-sang', dv: 'Đọc lỗi, chẩn đoán',
+        seo: 'Đèn check engine sáng: 7 nguyên nhân hay gặp và cách xử lý', desc: 'Đèn check engine bật sáng có nguy hiểm không, còn đi tiếp được không? Thợ giải thích 7 nguyên nhân hay gặp và khi nào cần đọc lỗi bằng máy.',
+        intro: 'Đèn hình động cơ màu vàng bật sáng làm nhiều chủ xe lo. Phần lớn trường hợp xe vẫn chạy được, nhưng bạn nên đọc lỗi sớm để biết chính xác.',
+        h2: 'Đèn sáng liên tục hay nhấp nháy?', bullets: [{ t: 'Sáng liên tục: đi chậm, đặt lịch đọc lỗi trong vài ngày.' }, { t: 'Nhấp nháy: dừng xe nơi an toàn, gọi thợ.' }, { t: 'Nắp bình xăng chưa vặn chặt cũng có thể làm đèn sáng.' }],
+        giaTen: 'Đọc lỗi bằng máy chẩn đoán', gia: 200000 },
+      { id: 'a3', ten: 'Thay ắc quy ô tô tận nơi Cầu Giấy', loai: 'khu-vuc', tt: 'da-dang', tg: 'Quốc Bảo', ngay: '15/12/2026 10:00', slug: '/thay-ac-quy-o-to/cau-giay', dv: 'Ắc quy',
+        seo: 'Thay ắc quy ô tô tận nơi Cầu Giấy, có mặt 30 phút', desc: 'Thợ ThợTới thay ắc quy ô tô tận nơi ở Cầu Giấy: Dịch Vọng, Trung Hòa, Nghĩa Đô... Đo miễn phí, ắc quy chính hãng VCparts, bảo hành 6 tháng.',
+        intro: 'Ở Cầu Giấy, nhiều xe đỗ hầm chung cư Trung Hòa – Nhân Chính, nên sáng sớm là lúc hay hết ắc quy nhất. Tổ thợ trực ngay trên đường Trần Thái Tông.',
+        h2: 'Thợ làm gì khi tới nơi?', bullets: [{ t: 'Đo ắc quy và máy phát miễn phí.' }, { t: 'Ắc quy còn tốt thì nói thật, không ép thay.' }, { t: 'Thay xong, thu ắc quy cũ đúng quy định.' }],
+        giaTen: 'Công thay ắc quy', gia: 150000 },
+      { id: 'a4', ten: 'Vá lốp ô tô tận nơi Thanh Xuân', loai: 'khu-vuc', tt: 'nhap', tg: 'Quốc Bảo', ngay: '10/01/2027 14:05', slug: '/va-lop-o-to/thanh-xuan', dv: 'Lốp',
+        seo: 'Vá lốp ô tô tận nơi Thanh Xuân, thợ tới trong 35 phút', desc: 'Lốp xẹp ở Nguyễn Trãi, Khuất Duy Tiến hay hầm chung cư Thanh Xuân? Thợ tới vá lốp không săm tại chỗ, có giá trước khi làm.',
+        intro: 'Đường Nguyễn Trãi và Khuất Duy Tiến hay có đinh vít rơi từ công trình. Thợ ThợTới mang đủ đồ vá lốp không săm tới tận chỗ xe đỗ.',
+        h2: 'Lốp thế nào thì vá được?', bullets: [{ t: 'Vết thủng ở mặt lốp, nhỏ hơn 6 mm.' }, { t: 'Không thủng ở hông lốp.' }, { t: 'Lốp chưa bị chạy lâu khi xẹp hẳn.' }],
+        giaTen: 'Vá lốp không săm', gia: 120000 },
+      { id: 'a5', ten: 'Bảo dưỡng định kỳ ô tô tận nơi', loai: 'dich-vu', tt: 'da-dang', tg: 'Minh Đức', ngay: '01/12/2026 09:00', slug: '/bao-duong-dinh-ky', dv: 'Bảo dưỡng định kỳ',
+        seo: 'Bảo dưỡng ô tô định kỳ tận nơi tại Hà Nội, giá công khai', desc: 'Bảo dưỡng ô tô tại nhà, hầm chung cư hoặc bãi công ty. Thay dầu, lọc, kiểm tra 30 hạng mục, phụ tùng chính hãng VCparts, báo giá trước khi làm.',
+        intro: 'Bạn không cần mất nửa ngày ra gara. Thợ mang dầu, lọc và máy móc tới chỗ xe đỗ, làm xong trong khoảng 60–90 phút.',
+        h2: 'Bảo dưỡng cấp nhỏ gồm những gì?', bullets: [{ t: 'Thay dầu máy và lọc dầu.' }, { t: 'Kiểm tra 30 hạng mục: phanh, lốp, đèn, nước làm mát...' }, { t: 'Ghi số km và nhắc lần sau qua Zalo.' }],
+        giaTen: 'Bảo dưỡng cấp nhỏ (công)', gia: 350000 },
+      { id: 'a6', ten: 'Lốp ô tô mùa nồm: 5 điều cần kiểm tra', loai: 'cam-nang', tt: 'hen-gio', tg: 'Lan Phương', ngay: 'Lên web 15/01/2027 07:00', slug: '/cam-nang/lop-o-to-mua-nom', dv: 'Lốp',
+        seo: 'Lốp ô tô mùa nồm ẩm: 5 điều cần kiểm tra trước khi đi', desc: 'Mùa nồm đường trơn, lốp mòn dễ trượt. 5 điều chủ xe nên tự kiểm tra trong 5 phút, và khi nào cần gọi thợ thay lốp tận nơi.',
+        intro: 'Tháng 2, tháng 3 ở Hà Nội đường lúc nào cũng ướt. Lốp mòn là nguyên nhân hàng đầu khiến xe trượt khi phanh gấp.',
+        h2: 'Tự kiểm tra trong 5 phút', bullets: [{ t: 'Nhìn vạch chỉ báo mòn trên rãnh lốp.' }, { t: 'Đo áp suất khi lốp còn nguội.' }, { t: 'Xem hông lốp có vết nứt, phồng không.' }],
+        giaTen: 'Công tháo lắp, cân bằng 1 lốp', gia: 150000 },
+      { id: 'a7', ten: 'Phanh kêu rít: khi nào cần thay má phanh?', loai: 'cam-nang', tt: 'nhap', tg: 'Thu Hà', ngay: '09/01/2027 11:30', slug: '/cam-nang/phanh-keu-rit', dv: 'Phanh',
+        seo: 'Phanh ô tô kêu rít: nguyên nhân và khi nào thay má phanh', desc: 'Phanh kêu ken két mỗi sáng có sao không? Cách phân biệt kêu do ẩm và kêu do má phanh mòn, cùng giá thay má phanh tận nơi.',
+        intro: 'Sáng sớm phanh kêu vài lần rồi hết thường do hơi ẩm. Còn kêu rít suốt cả ngày thì nhiều khả năng má phanh đã mòn tới lớp báo.',
+        h2: 'Dấu hiệu má phanh đã mòn', bullets: [{ t: 'Tiếng rít kim loại kéo dài khi đạp phanh.' }, { t: 'Phải đạp sâu hơn mới dừng được.' }, { t: 'Vô lăng rung khi phanh.' }],
+        giaTen: 'Công thay má phanh (1 cầu)', gia: 250000 },
+      { id: 'a8', ten: 'Cứu hộ kéo xe Ba Đình', loai: 'khu-vuc', tt: 'cho-duyet', tg: 'Quốc Bảo', ngay: '11/01/2027 10:15', slug: '/cuu-ho-keo-xe/ba-dinh', dv: 'Cứu hộ, kéo xe',
+        seo: 'Cứu hộ kéo xe ô tô Ba Đình, có mặt trong 60 phút', desc: 'Xe chết máy ở Kim Mã, Liễu Giai, Đội Cấn? Gọi cứu hộ ThợTới, có mặt trong 60 phút, kéo xe về xưởng Auto Speedy nếu không sửa tại chỗ được.',
+        intro: 'Phố Ba Đình nhiều đường một chiều và giờ cấm, tổ cứu hộ đã quen lối đi để tới nhanh nhất có thể.',
+        h2: 'Khi nào phải kéo xe?', bullets: [{ t: 'Hộp số hoặc động cơ hỏng nặng.' }, { t: 'Xe ngập nước, không được đề máy.' }, { t: 'Tai nạn làm xe không lái được.' }],
+        giaTen: 'Kéo xe nội thành về xưởng Auto Speedy', gia: 400000 },
+      { id: 'a9', ten: 'VinFast VF 5 bảo dưỡng những gì ngoài pin?', loai: 'cam-nang', tt: 'hen-gio', tg: 'Thu Hà', ngay: 'Lên web 18/01/2027 07:00', slug: '/cam-nang/vinfast-vf5-bao-duong', dv: 'Bảo dưỡng định kỳ',
+        seo: 'VinFast VF 5 cần bảo dưỡng gì ngoài pin? Thợ giải thích', desc: 'Xe điện vẫn cần thay dầu phanh, kiểm tra lốp, ắc quy 12V và điều hòa. Danh sách việc cho VF 5 và việc thợ ThợTới không làm (pin cao áp).',
+        intro: 'Xe điện không thay dầu máy, nhưng không có nghĩa là không cần bảo dưỡng. Phanh, lốp, ắc quy 12V và điều hòa vẫn mòn như xe xăng.',
+        h2: 'Việc thợ làm được tại chỗ', bullets: [{ t: 'Kiểm tra, đảo lốp và cân bằng.' }, { t: 'Thay dầu phanh, lọc gió điều hòa.' }, { t: 'Đo và thay ắc quy 12V.' }],
+        giaTen: 'Thay dầu phanh (gồm dầu)', gia: 350000 },
+      { id: 'a10', ten: 'Đọc lỗi ô tô tận nơi Đống Đa', loai: 'khu-vuc', tt: 'da-dang', tg: 'Quốc Bảo', ngay: '18/12/2026 10:00', slug: '/doc-loi-o-to/dong-da', dv: 'Đọc lỗi, chẩn đoán',
+        seo: 'Đọc lỗi ô tô tận nơi Đống Đa bằng máy chẩn đoán', desc: 'Đèn báo lỗi sáng khi đang ở Láng Hạ, Thái Hà, Kim Liên? Thợ mang máy chẩn đoán tới đọc lỗi tại chỗ, giải thích dễ hiểu, có giá trước.',
+        intro: 'Ở Đống Đa, khách hay gặp lỗi cảm biến oxy và bướm ga ở xe chạy phố nhiều. Máy chẩn đoán đọc được hầu hết các hãng phổ biến.',
+        h2: 'Đọc lỗi xong thì sao?', bullets: [{ t: 'Thợ giải thích lỗi bằng lời dễ hiểu.' }, { t: 'Lỗi nhẹ xử lý luôn, có báo giá trước.' }, { t: 'Lỗi nặng: cố vấn gọi lại trong 15 phút.' }],
+        giaTen: 'Đọc lỗi bằng máy chẩn đoán', gia: 200000 }
+    ];
+    const extra = { id: 'a0', ten: 'Thay ắc quy ô tô tận nơi Thanh Xuân', loai: 'khu-vuc', tt: 'nhap', tg: 'Lan Phương', ngay: 'Vừa tạo từ mẫu', slug: '/thay-ac-quy-o-to/thanh-xuan', dv: 'Ắc quy',
+      seo: 'Thay ắc quy ô tô tận nơi Thanh Xuân, có mặt 35 phút', desc: 'Thợ ThợTới thay ắc quy ô tô tận nơi ở Thanh Xuân. Đo miễn phí, ắc quy chính hãng VCparts, bảo hành 6 tháng. Viết thêm đoạn riêng cho khu này.',
+      intro: '[Mẫu] Viết đoạn mô tả riêng về Thanh Xuân ở đây: khu chung cư, tuyến đường, lỗi khách hay gặp. Ít nhất 150 chữ, không chép từ trang quận khác.',
+      h2: 'Thợ làm gì khi tới nơi?', bullets: [{ t: 'Đo ắc quy và máy phát miễn phí.' }, { t: 'Ắc quy còn tốt thì nói thật, không ép thay.' }, { t: 'Thay xong, thu ắc quy cũ đúng quy định.' }],
+      giaTen: 'Công thay ắc quy', gia: 150000 };
+    const all = s.created ? [extra].concat(base) : base;
+    const pill = (on) => 'font: inherit; font-size: 13.5px; font-weight: 600; min-height: 44px; padding: 0 12px; border-radius: 999px; cursor: pointer; ' +
+      (on ? 'background: #13283f; color: #ffffff; border: 1.5px solid #13283f;' : 'background: #ffffff; color: #13283f; border: 1.5px solid #c9d0d8;');
+    const badge = (tt) => 'font-size: 12px; font-weight: 700; border-radius: 6px; padding: 2px 8px; background: ' + TT[tt].bg + '; color: ' + TT[tt].fg;
+    const cnt = (k) => all.filter((x) => k === 'all' || x.tt === k).length;
+    const stFilters = [['all', 'Tất cả'], ['nhap', 'Nháp'], ['cho-duyet', 'Chờ duyệt'], ['hen-gio', 'Đã hẹn giờ'], ['da-dang', 'Đã đăng']].map(([k, l]) => ({
+      label: l + ' (' + cnt(k) + ')', on: s.st === k, style: pill(s.st === k), pick: () => this.setState({ st: k })
+    }));
+    const typeFilters = [['all', 'Mọi loại'], ['cam-nang', 'Bài cẩm nang'], ['dich-vu', 'Trang dịch vụ'], ['khu-vuc', 'Trang khu vực']].map(([k, l]) => ({
+      label: l, on: s.loai === k, style: pill(s.loai === k), pick: () => this.setState({ loai: k })
+    }));
+    const deco = (x) => ({ ...x, ttLabel: TT[x.tt].label, ttStyle: badge(x.tt), loaiLabel: LOAI[x.loai], meta: x.tg + ' · ' + x.ngay, gia: vnd(x.gia) });
+    const filtered = all.filter((x) => (s.st === 'all' || x.tt === s.st) && (s.loai === 'all' || x.loai === s.loai));
+    const list = filtered.map((x) => {
+      const on = x.id === s.sel;
+      return { ...deco(x), cur: on ? 'true' : 'false', pick: () => this.setState({ sel: x.id, alt: false, msg: '' }),
+        style: 'width: 100%; text-align: left; font: inherit; border: 0; cursor: pointer; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; min-height: 44px; ' +
+          (on ? 'background: #fff1e6; box-shadow: inset 4px 0 0 #c2410c;' : 'background: #ffffff;') };
+    });
+    const curRaw = all.find((x) => x.id === s.sel) || all[0];
+    const cur = deco(curRaw);
+    const counter = (n, lo, hi) => ({
+      text: n + '/' + hi + ' ký tự',
+      style: 'font-weight: 700; font-size: 13px; color: ' + (n >= lo && n <= hi ? '#1f6b2e' : '#a8320a')
+    });
+    const cut = (t, n) => t.length > n ? t.slice(0, n - 1).trim() + '…' : t;
+    const altMissing = curRaw.id === 'a1' ? !s.alt : false;
+    const altDone = !altMissing;
+    const henGio = s.sched === 'hen';
+    const scheds = [
+      { k: 'ngay', ten: 'Đăng ngay khi được duyệt', sub: 'Bài lên web ngay lúc Quản lý dịch vụ bấm duyệt.' },
+      { k: 'hen', ten: 'Hẹn giờ đăng', sub: 'Chọn ngày giờ. Nên đăng 7:00 sáng, lúc khách hay tìm.' }
+    ].map((o) => {
+      const on = s.sched === o.k;
+      return { ...o, on, pick: () => this.setState({ sched: o.k }),
+        style: 'font: inherit; display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; min-height: 44px; border-radius: 10px; cursor: pointer; color: #18212c; ' + (on ? 'background: #f0f4f8; border: 2px solid #13283f;' : 'background: #ffffff; border: 2px solid #e1e5ea;'),
+        dot: 'flex: none; width: 16px; height: 16px; border-radius: 50%; margin-top: 3px; box-sizing: border-box; ' + (on ? 'border: 5px solid #13283f;' : 'border: 2px solid #8a94a3;') };
+    });
+    const ok = (t) => ({ t, mark: '✓', dot: 'flex: none; width: 20px; height: 20px; border-radius: 50%; background: #e9f6ec; color: #1f6b2e; display: grid; place-items: center; font-size: 12px; font-weight: 800' });
+    const bad = (t) => ({ t, mark: '!', dot: 'flex: none; width: 20px; height: 20px; border-radius: 50%; background: #fdeee8; color: #a8320a; display: grid; place-items: center; font-size: 12px; font-weight: 800' });
+    const sl = cur.seo.length, dl = cur.desc.length;
+    const checks = [
+      ok('Có tiêu đề bài và đường dẫn không dấu'),
+      sl >= 30 && sl <= 60 ? ok('Tiêu đề cho Google dài ' + sl + ' ký tự') : bad('Tiêu đề cho Google nên dài 30–60 ký tự (đang ' + sl + ')'),
+      dl >= 120 && dl <= 160 ? ok('Mô tả cho Google dài ' + dl + ' ký tự') : bad('Mô tả cho Google nên dài 120–160 ký tự (đang ' + dl + ')'),
+      altMissing ? bad('Mô tả ảnh: 1/2 ảnh còn thiếu') : ok('Mô tả ảnh: đủ 2/2 ảnh'),
+      ok('Giá trong bài lấy từ Bảng giá, không gõ tay'),
+      ok('Có ảnh chia sẻ và khối đặt lịch')
+    ];
+    if (curRaw.loai === 'khu-vuc') checks.push(curRaw.id === 'a0' ? bad('Trang khu vực: chưa có đoạn riêng, ảnh thật và đánh giá khách tại Thanh Xuân') : ok('Trang khu vực: trùng nội dung 31% so với trang gần nhất (dưới 70%)'));
+    const roleUser = isBT
+      ? { initials: 'LP', name: 'Nguyễn Lan Phương', role: 'Biên tập nội dung · VCmedia' }
+      : { initials: 'MĐ', name: 'Trần Minh Đức', role: 'Quản lý dịch vụ · GĐ dự án' };
+    const roles = [
+      { k: 'bt', ten: 'Biên tập nội dung', sub: 'VCmedia · không sửa giá' },
+      { k: 'ql', ten: 'Quản lý dịch vụ', sub: 'Sửa giá, duyệt bài' }
+    ].map((r) => {
+      const on = s.role === r.k;
+      return { ...r, on, pick: () => this.setState({ role: r.k, msg: '' }),
+        style: 'font: inherit; text-align: left; display: flex; flex-direction: column; padding: 8px 12px; min-height: 44px; border-radius: 10px; cursor: pointer; color: #13283f; ' + (on ? 'background: #f0f4f8; border: 2px solid #13283f;' : 'background: #ffffff; border: 2px solid #e1e5ea;') };
+    });
+    const msgColors = { ok: 'background: #e9f6ec; color: #1f6b2e; border: 1px solid #b7dfc1;', err: 'background: #fdeee8; color: #8a2c06; border: 1px solid #f3c3ae;', info: 'background: #f0f4f8; color: #13283f; border: 1px solid #c9d6e3;' };
+    const imgs = [
+      { ten: 'tho-do-ac-quy-ham-b2.jpg', size: '4,2 MB → 196 KB · WebP', alt: 'Có mô tả', altStyle: 'flex: none; font-size: 12px; font-weight: 700; border-radius: 6px; padding: 2px 8px; background: #e9f6ec; color: #1f6b2e' },
+      { ten: 'kep-cuc-ac-quy.jpg', size: '3,1 MB → 158 KB · WebP', alt: altMissing ? 'Thiếu mô tả' : 'Có mô tả', altStyle: 'flex: none; font-size: 12px; font-weight: 700; border-radius: 6px; padding: 2px 8px; ' + (altMissing ? 'background: #fdeee8; color: #a8320a' : 'background: #e9f6ec; color: #1f6b2e') },
+      { ten: 'anh-chia-se-kich-binh.jpg', size: '2,6 MB → 142 KB · WebP · 1200×630', alt: 'Có mô tả', altStyle: 'flex: none; font-size: 12px; font-weight: 700; border-radius: 6px; padding: 2px 8px; background: #e9f6ec; color: #1f6b2e' }
+    ];
+    return {
+      user: roleUser, roles, isBT, isQL: !isBT,
+      stFilters, typeFilters, list, empty: list.length === 0,
+      countText: 'Đang xem ' + list.length + ' / ' + all.length + ' bài và trang',
+      cur,
+      seoT: counter(sl, 30, 60), seoD: counter(dl, 120, 160),
+      gUrl: 'thotoi.vn › ' + cur.slug.replace(/^\//, '').split('/').join(' › '),
+      gTitle: cut(cur.seo, 60), gDesc: cut(cur.desc, 160),
+      altMissing, altDone, fillAlt: () => this.setState({ alt: true }),
+      imgs, scheds, henGio, checks,
+      approveLabel: henGio ? 'Duyệt & hẹn giờ đăng' : 'Duyệt & đăng',
+      footNote: isBT ? 'Gửi duyệt xong, anh Minh Đức (Quản lý dịch vụ) nhận thông báo Zalo. Bài chỉ lên web sau khi được duyệt.' : 'Bài của ' + cur.tg + ' · gửi duyệt 11/01/2027 16:20. Duyệt xong, bài lên web đúng giờ đã chọn.',
+      tpl: s.tpl,
+      openTpl: () => this.setState({ tpl: true }),
+      closeTpl: () => this.setState({ tpl: false }),
+      createTpl: () => this.setState({ tpl: false, created: true, sel: 'a0', st: 'all', loai: 'all', msg: 'Đã tạo bản nháp “Thay ắc quy ô tô tận nơi Thanh Xuân” từ mẫu. Viết đoạn riêng, thêm ảnh thật và đánh giá khách ở Thanh Xuân rồi gửi duyệt.', msgKind: 'info' }),
+      msg: s.msg,
+      msgStyle: 'display: flex; gap: 10px; align-items: flex-start; border-radius: 12px; padding: 12px 16px; font-size: 14.5px; font-weight: 600; ' + msgColors[s.msgKind],
+      closeMsg: () => this.setState({ msg: '' }),
+      saveDraft: () => this.setState({ msg: 'Đã lưu nháp lúc 09:43. Bài chưa lên web.', msgKind: 'ok' }),
+      submit: () => altMissing
+        ? this.setState({ msg: 'Chưa gửi được: còn 1 ảnh chưa có mô tả. Điền mô tả ảnh “kep-cuc-ac-quy.jpg” rồi gửi lại nhé.', msgKind: 'err' })
+        : this.setState({ msg: 'Đã gửi duyệt. Anh Minh Đức sẽ nhận thông báo Zalo và duyệt trước giờ đăng.', msgKind: 'ok' }),
+      giveBack: () => this.setState({ msg: 'Đã trả bài lại cho ' + cur.tg + ' kèm góp ý. Bài chuyển về Nháp.', msgKind: 'info' }),
+      approve: () => this.setState({ msg: henGio ? 'Đã duyệt. Bài sẽ tự lên web lúc 07:00 ngày 15/01/2027.' : 'Đã duyệt và đăng. Bài lên web trong vòng 5 phút.', msgKind: 'ok' })
+    };
+  }
+}
+</script>
+</body>
+</html>

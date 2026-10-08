@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Theo dõi thợ đang đến</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.5; display: flex; flex-direction: column; overflow: hidden; position: relative">
+
+  <header style="background: #13283f; color: #ffffff; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between">
+    <div style="display: flex; flex-direction: column; line-height: 1.2">
+      <b style="font-size: 16px">Đơn TT-000123</b>
+      <span style="font-size: 12px; color: #c3cfdc">Thay ắc quy · Toyota Vios · 30A-123.45</span>
+    </div>
+    <b style="font-size: 13px; color: #ffc9a3">ThợTới</b>
+  </header>
+
+  <div style="height: 300px; flex: none; background: #e6ecf2; position: relative; overflow: hidden">
+    <svg width="390" height="300" viewBox="0 0 390 300" style="position: absolute; inset: 0">
+      <path d="M0 90 L390 70 M0 210 L390 190 M110 0 L140 300 M280 0 L250 300 M0 150 L390 140" stroke="#ffffff" stroke-width="10" fill="none"></path>
+      <path d="M60 250 L130 216 L140 145 L262 135 L300 92" stroke="#1d3a5a" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 0"></path>
+      <circle cx="300" cy="92" r="22" fill="#c2410c" fill-opacity="0.18"></circle>
+      <path d="M300 64c-9 0-16 7-16 16 0 12 16 26 16 26s16-14 16-26c0-9-7-16-16-16z" fill="#c2410c"></path>
+      <circle cx="300" cy="80" r="5" fill="#ffffff"></circle>
+      <rect x="114" y="200" width="36" height="24" rx="6" fill="#13283f"></rect>
+      <path d="M120 212 h24" stroke="#ffb27a" stroke-width="3" stroke-linecap="round"></path>
+    </svg>
+    <span style="position: absolute; left: 12px; top: 12px; background: #ffffff; border-radius: 8px; padding: 4px 10px; font-size: 12px; color: #5a6575; box-shadow: 0 1px 3px rgba(0,0,0,0.12)">Cập nhật vị trí mỗi 30 giây</span>
+  </div>
+
+  <section style="flex: 1; margin-top: -20px; background: #ffffff; border-radius: 18px 18px 0 0; box-shadow: 0 -4px 16px rgba(19,40,63,0.12); padding: 16px 16px 12px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; position: relative">
+    <span style="align-self: center; width: 40px; height: 4px; border-radius: 2px; background: #d5dde6; margin-top: -6px"></span>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end">
+      <div style="display: flex; flex-direction: column; line-height: 1.2">
+        <span style="font-size: 13px; color: #5a6575">Thợ đang đến · dự kiến</span>
+        <b style="font-size: 30px; color: #13283f; letter-spacing: -0.02em">10:42</b>
+      </div>
+      <span style="background: #fff1e6; color: #8a2c06; font-weight: 700; border-radius: 999px; padding: 6px 12px; font-size: 14px">còn 12 phút</span>
+    </div>
+
+    <div style="display: flex; gap: 12px; align-items: center; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px">
+      <div style="width: 56px; height: 56px; border-radius: 50%; background: #1d3a5a; color: #ffffff; flex: none; display: grid; place-items: center; font-size: 18px; font-weight: 800">MĐ</div>
+      <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.35">
+        <b style="color: #13283f">Trần Minh Đức <span style="color: #c2410c; font-weight: 700">★ 4,9</span></b>
+        <span style="font-size: 13px; color: #5a6575">Chứng chỉ VCedu · 7 năm kinh nghiệm</span>
+        <span style="font-size: 13px; margin-top: 2px">Xe van <b style="letter-spacing: 0.04em">29H-512.36</b></span>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 12px; min-height: 50px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        Gọi thợ
+      </a>
+      <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #ffffff; color: #13283f; text-decoration: none; font-weight: 700; border-radius: 12px; min-height: 50px; border: 1.5px solid #c9d0d8">Nhắn tổng đài</a>
+    </div>
+
+    <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+      <sc-for list="{{steps}}" as="s" hint-placeholder-count="7">
+        <li style="display: flex; gap: 12px; align-items: stretch; min-height: 34px">
+          <div style="display: flex; flex-direction: column; align-items: center; width: 18px; flex: none">
+            <span style="{{s.dot}}"></span>
+            <span style="{{s.line}}"></span>
+          </div>
+          <div style="display: flex; justify-content: space-between; flex: 1; gap: 8px; padding-bottom: 8px">
+            <span style="{{s.text}}">{{s.label}}</span>
+            <span style="font-size: 12.5px; color: #5a6575">{{s.time}}</span>
+          </div>
+        </li>
+      </sc-for>
+    </ol>
+    <p style="margin: 0; font-size: 12px; color: #5a6575">Link riêng cho đơn của bạn, hết hạn 24 giờ sau khi đơn hoàn thành.</p>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const list = [
+      { label: 'Đã nhận', time: '10:18', st: 'done' },
+      { label: 'Đã xếp thợ', time: '10:24', st: 'done' },
+      { label: 'Thợ đang đến', time: 'bây giờ', st: 'now' },
+      { label: 'Chờ duyệt báo giá', time: '', st: 'todo' },
+      { label: 'Đang sửa', time: '', st: 'todo' },
+      { label: 'Chờ thanh toán', time: '', st: 'todo' },
+      { label: 'Hoàn thành', time: '', st: 'todo' }
+    ];
+    const steps = list.map((s, i) => ({
+      ...s,
+      dot: 'width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; margin-top: 4px; flex: none; ' +
+        (s.st === 'done' ? 'background: #2b8a3e;' : s.st === 'now' ? 'background: #c2410c; box-shadow: 0 0 0 4px rgba(194,65,12,0.2);' : 'background: #ffffff; border: 2px solid #c9d0d8;'),
+      line: i === list.length - 1 ? 'display: none' : 'flex: 1; width: 2px; background: ' + (s.st === 'done' ? '#2b8a3e' : '#e1e5ea'),
+      text: s.st === 'now' ? 'font-weight: 700; color: #c2410c' : s.st === 'done' ? 'color: #18212c' : 'color: #6b7684'
+    }));
+    return { steps };
+  }
+}
+</script>
+</body>
+</html>

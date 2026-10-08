@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Tra cứu lịch sử xe</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 1940px; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.5; display: flex; flex-direction: column; position: relative">
+
+  <header style="background: #13283f; color: #ffffff; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+    <a href="Main.dc.html" style="color: #ffffff; text-decoration: none; display: flex; flex-direction: column; line-height: 1.15">
+      <b style="font-size: 18px; font-weight: 800; letter-spacing: -0.01em">ThợTới</b>
+      <span style="font-size: 11px; color: #ffc9a3">by VC Phồn Vinh</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 4px">
+      <a href="#" aria-label="Gọi hotline" style="display: inline-flex; align-items: center; gap: 6px; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 10px 8px; min-height: 44px; box-sizing: border-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb27a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        1900 1068
+      </a>
+      <button type="button" aria-label="Mở menu" style="width: 44px; height: 44px; border: 0; background: transparent; color: #ffffff; display: grid; place-items: center; cursor: pointer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <div style="background: #ffffff; border-bottom: 1px solid #e1e5ea; padding: 10px 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+    <sc-for list="{{steps}}" as="sp" hint-placeholder-count="3">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="{{sp.bar}}"></span>
+        <span style="{{sp.txt}}">{{sp.label}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <main style="padding: 20px 16px 28px; display: flex; flex-direction: column; gap: 16px">
+
+    <sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <h1 style="margin: 0; font-size: 26px; line-height: 1.2; color: #13283f">Tra cứu lịch sử xe</h1>
+        <p style="margin: 0; color: #5a6575">Xem lại xe đã sửa gì, bảo hành còn bao lâu, khi nào bảo dưỡng tiếp. Không cần tạo tài khoản hay nhớ mật khẩu.</p>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Biển số xe
+          <input type="text" value="30A-123.45" placeholder="30A-123.45" style="font: inherit; font-size: 22px; font-weight: 800; letter-spacing: 0.06em; text-align: center; padding: 12px; border: 2px solid #13283f; border-radius: 12px; background: #ffffff; min-height: 58px; box-sizing: border-box; color: #13283f">
+          <span style="font-weight: 400; font-size: 12.5px; color: #5a6575">Gõ liền cũng được, hệ thống tự thêm dấu.</span>
+        </label>
+        <button type="button" onClick="{{sendCode}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; border: 0; background: #0068ff; color: #ffffff; border-radius: 12px; min-height: 54px; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Gửi mã xác nhận qua Zalo
+        </button>
+        <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; font-size: 14px">
+          <b style="color: #13283f">Vì sao cần mã?</b>
+          <span style="color: #3d4856">Mã 6 số gửi vào Zalo của số điện thoại đã dùng khi đặt sửa xe này. Chỉ chủ xe mới xem được lịch sử, người khác biết biển số cũng không xem được.</span>
+          <span style="color: #5a6575">Đổi số điện thoại? Gọi 1900 1068 để cập nhật.</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+          <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px 8px; text-align: center; font-size: 13px; color: #3d4856"><b style="display: block; color: #13283f; font-size: 14px">Các lần sửa</b>ngày, việc, thợ</div>
+          <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px 8px; text-align: center; font-size: 13px; color: #3d4856"><b style="display: block; color: #13283f; font-size: 14px">Bảo hành</b>còn bao lâu</div>
+          <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px 8px; text-align: center; font-size: 13px; color: #3d4856"><b style="display: block; color: #13283f; font-size: 14px">Lịch tới</b>bảo dưỡng</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <button type="button" onClick="{{back}}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; border: 0; background: transparent; padding: 0; font: inherit; font-size: 14px; color: #1d3a5a; cursor: pointer; min-height: 44px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Đổi biển số
+        </button>
+        <h1 style="margin: 0; font-size: 26px; line-height: 1.2; color: #13283f">Nhập mã trong Zalo</h1>
+        <div style="background: #eaf2ff; border-radius: 12px; padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start; font-size: 14px">
+          <span style="width: 34px; height: 34px; border-radius: 50%; background: #0068ff; color: #ffffff; display: grid; place-items: center; flex: none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </span>
+          <span>Đã gửi mã 6 số vào Zalo của số <b>091••••678</b> (chủ xe <b>30A-123.45</b>). Mã dùng được trong 5 phút.</span>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Mã xác nhận 6 số
+          <input type="text" inputmode="numeric" value="482915" maxlength="6" style="font: inherit; font-size: 30px; font-weight: 800; letter-spacing: 0.5em; text-align: center; padding: 10px 0 10px 0.5em; border: 2px solid #13283f; border-radius: 12px; background: #ffffff; min-height: 64px; box-sizing: border-box; color: #13283f">
+        </label>
+        <button type="button" onClick="{{verify}}" style="border: 0; background: #c2410c; color: #ffffff; border-radius: 12px; min-height: 54px; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Xem lịch sử xe</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px">
+          <span style="color: #5a6575">Chưa nhận được mã?</span>
+          <span style="color: #5a6575">Gửi lại sau <b style="color: #13283f">0:45</b></span>
+        </div>
+        <a href="#" style="font-size: 14px; font-weight: 600">Không dùng Zalo? Nhận mã qua SMS</a>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <div style="background: #13283f; color: #ffffff; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+            <div style="display: flex; flex-direction: column; line-height: 1.3">
+              <span style="font-size: 13px; color: #c3cfdc">Toyota Vios 2019 · số tự động</span>
+              <b style="font-size: 24px; letter-spacing: 0.05em">30A-123.45</b>
+            </div>
+            <span style="background: #2b8a3e; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px">Đã xác minh</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; font-size: 12.5px; color: #c3cfdc">
+            <div><b style="display: block; color: #ffffff; font-size: 16px">48.200</b>km gần nhất</div>
+            <div><b style="display: block; color: #ffffff; font-size: 16px">3</b>lần sửa</div>
+            <div><b style="display: block; color: #ffffff; font-size: 16px">2</b>còn bảo hành</div>
+          </div>
+        </div>
+
+        <section style="background: #fff1e6; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 13px; font-weight: 700; color: #8a2c06; letter-spacing: 0.04em">BẢO DƯỠNG TIẾP THEO</span>
+          <b style="font-size: 19px; color: #13283f; line-height: 1.3">Mốc 50.000 km: thay dầu, lọc dầu, lọc gió</b>
+          <span style="font-size: 14px; color: #3d4856">Khoảng <b>15/06/2027</b>, hoặc khi xe chạy thêm <b>1.800 km</b>, tùy cái nào đến trước.</span>
+          <a href="DatLich.dc.html" style="display: flex; align-items: center; justify-content: center; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 12px; min-height: 52px; font-size: 16px">Đặt lịch bảo dưỡng</a>
+          <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px">
+            <input type="checkbox" checked="checked" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #13283f">
+            <span>Nhắc tôi qua Zalo trước 7 ngày.</span>
+          </label>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: 10px">
+          <h2 style="margin: 0; font-size: 19px; color: #13283f">Bảo hành còn lại</h2>
+          <p style="margin: -4px 0 0; font-size: 13px; color: #5a6575">Phụ tùng 6 tháng, công sửa 3 tháng. Tính đến hôm nay 20/05/2027.</p>
+          <sc-for list="{{warranty}}" as="w" hint-placeholder-count="4">
+            <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+                <b style="font-size: 14.5px; color: #13283f">{{w.name}}</b>
+                <b style="{{w.leftStyle}}">{{w.left}}</b>
+              </div>
+              <div style="height: 8px; border-radius: 4px; background: #e6ebf0; overflow: hidden">
+                <div style="{{w.bar}}"></div>
+              </div>
+              <span style="font-size: 12.5px; color: #5a6575">{{w.range}}</span>
+            </div>
+          </sc-for>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: 10px">
+          <h2 style="margin: 0; font-size: 19px; color: #13283f">Các lần sửa</h2>
+          <sc-for list="{{history}}" as="h" hint-placeholder-count="3">
+            <article style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+                <b style="color: #13283f; font-size: 15px">{{h.date}}</b>
+                <span style="font-size: 12.5px; color: #5a6575">{{h.code}}</span>
+              </div>
+              <span style="font-size: 14.5px">{{h.work}}</span>
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #3d4856">
+                <span style="width: 30px; height: 30px; border-radius: 50%; background: #1d3a5a; color: #ffffff; display: grid; place-items: center; font-size: 11.5px; font-weight: 700; flex: none">{{h.ini}}</span>
+                <span style="flex: 1">{{h.tech}}</span>
+                <b style="color: #13283f">{{h.km}}</b>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eef1f4; padding-top: 8px; font-size: 13.5px">
+                <span style="color: #5a6575">Đã thanh toán <b style="color: #13283f">{{h.paid}}</b></span>
+                <a href="#" style="font-weight: 600; min-height: 32px; display: inline-flex; align-items: center">Hóa đơn</a>
+              </div>
+            </article>
+          </sc-for>
+        </section>
+
+        <button type="button" onClick="{{reset}}" style="border: 1.5px solid #c9d0d8; background: #ffffff; color: #13283f; border-radius: 12px; min-height: 48px; font: inherit; font-weight: 700; cursor: pointer">Thoát, tra xe khác</button>
+        <p style="margin: 0; font-size: 12.5px; color: #5a6575; text-align: center">Phiên xem tự đóng sau 30 phút không dùng.</p>
+      </div>
+    </sc-if>
+  </main>
+
+  <div style="flex: 1"></div>
+
+  <nav aria-label="Liên hệ nhanh" style="position: sticky; bottom: 0; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 8px; padding: 8px 12px 12px; background: rgba(19,40,63,0.97)">
+    <a href="GoiGap.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 10px; min-height: 50px; font-size: 15px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      Gọi thợ
+    </a>
+    <a href="TinZalo.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #0068ff; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 10px; min-height: 50px; font-size: 15px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      Zalo
+    </a>
+    <a href="DatLich.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #ffffff; color: #13283f; text-decoration: none; font-weight: 700; border-radius: 10px; min-height: 50px; font-size: 15px">Đặt lịch</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1940}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 1 };
+  }
+  renderVals() {
+    const st = this.state;
+    const steps = ['Biển số', 'Mã Zalo', 'Lịch sử'].map((label, i) => ({
+      label,
+      bar: 'height: 4px; border-radius: 2px; background: ' + (i + 1 <= st.step ? '#c2410c' : '#e1e5ea'),
+      txt: 'font-size: 12.5px; font-weight: ' + (i + 1 === st.step ? '700' : '500') + '; color: ' + (i + 1 <= st.step ? '#13283f' : '#5a6575')
+    }));
+    const warranty = [
+      { name: 'Ắc quy 12V 45Ah (phụ tùng)', pct: 64, left: 'còn 118 ngày', range: '15/03/2027 – 15/09/2027 · đơn TT-000123' },
+      { name: 'Má phanh trước (phụ tùng)', pct: 41, left: 'còn 74 ngày', range: '02/02/2027 – 02/08/2027 · đơn TT-000087' },
+      { name: 'Công thay ắc quy', pct: 28, left: 'còn 26 ngày', range: '15/03/2027 – 15/06/2027' },
+      { name: 'Công thay má phanh', pct: 0, left: 'Hết hạn', range: 'Hết hạn ngày 02/05/2027' }
+    ].map((w) => ({
+      ...w,
+      bar: 'height: 100%; width: ' + w.pct + '%; border-radius: 4px; background: ' + (w.pct >= 40 ? '#2b8a3e' : '#c2410c'),
+      leftStyle: 'font-size: 13.5px; white-space: nowrap; color: ' + (w.pct === 0 ? '#5a6575' : w.pct >= 40 ? '#2b8a3e' : '#c2410c')
+    }));
+    const history = [
+      { date: '15/03/2027', code: 'TT-000123', work: 'Thay ắc quy 12V 45Ah, vệ sinh cọc và thay đầu cos, thay lưỡi gạt mưa', ini: 'MĐ', tech: 'Thợ Trần Minh Đức', km: '47.950 km', paid: '2.250.000đ' },
+      { date: '02/02/2027', code: 'TT-000087', work: 'Thay má phanh trước, đọc lỗi đèn ABS (lỗi cảm biến bánh, đã vệ sinh)', ini: 'VH', tech: 'Thợ Nguyễn Văn Hải', km: '46.300 km', paid: '1.180.000đ' },
+      { date: '08/01/2027', code: 'TT-000031', work: 'Bảo dưỡng mốc 45.000 km: thay dầu máy, lọc dầu, kiểm tra 30 hạng mục', ini: 'QT', tech: 'Thợ Lê Quang Tùng', km: '45.120 km', paid: '890.000đ' }
+    ];
+    return {
+      s1: st.step === 1, s2: st.step === 2, s3: st.step === 3,
+      steps, warranty, history,
+      sendCode: () => this.setState({ step: 2 }),
+      back: () => this.setState({ step: 1 }),
+      verify: () => this.setState({ step: 3 }),
+      reset: () => this.setState({ step: 1 })
+    };
+  }
+}
+</script>
+</body>
+</html>
