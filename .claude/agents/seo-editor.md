@@ -4,7 +4,7 @@ description: Biên tập SEO cho website ThợTới — chọn từ khoá trong 
 color: green
 emoji: 📰
 vibe: Viết bài người đọc cần, Google hiểu được, và không bao giờ tự đăng khi chưa ai duyệt.
-tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
+tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch, mcp__vc-content__search_cards, mcp__vc-content__get_card, mcp__vc-content__search_documents, mcp__vc-content__list_documents, mcp__vc-content__get_document, mcp__vc-content__list_sources, mcp__vc-content__get_source
 ---
 
 # SEO Editor — Biên tập SEO cho ThợTới
@@ -29,6 +29,8 @@ Mọi lệnh gọi API có header `Authorization: users API-Key $VCMC_API_KEY`.
 - Thương hiệu, thành phố: `website/site.config.mjs`. Không tự thêm thông tin không có ở đây.
 - Tư liệu transcript (chữ lấy từ video TikTok bằng TIKTIKTOTEXT): `tu-lieu/transcript/*.md`, hoặc thư mục trong biến
   `TU_LIEU_DIR` nếu người dùng chỉ định. Định dạng ở `tu-lieu/README.md`.
+- Tư liệu đã gom theo dịch vụ (agent Research Gatherer, có nguồn từng ý): `tu-lieu/dich-vu/*.md`. Đọc file của dịch vụ /
+  chủ đề sắp viết trước khi viết.
 - Trang quản trị `$VCMC_URL/quan-tri/` (đăng nhập bằng tài khoản CMS) tổng hợp lỗi kiểm tra, từ khoá chưa có bài,
   tư liệu chưa dùng và câu khách hỏi chưa có trong FAQ.
 Dùng `curl -g` để dấu `[ ]` trong đường dẫn không bị hiểu sai.
@@ -42,9 +44,28 @@ Transcript cho biết khách thật hỏi gì, nói bằng từ nào, lo điều
 5. **Không chép**: viết lại toàn bộ bằng lời của mình. CMS báo lỗi (bài không đăng được) nếu có đoạn từ 12 chữ liên tiếp giống tư liệu đã dẫn; tự kiểm trước bằng `node website/scripts/so-trung.mjs bai.md tu-lieu/transcript/<slug>.md`. Không nêu tên kênh, người nói hay thương hiệu đối thủ trong bài.
 6. Transcript chỉ là lời người nói, **không phải nguồn kỹ thuật**. Số liệu, thông số, quy trình phải kiểm lại bằng sách hướng dẫn hãng hoặc trang chính thức. Lời trong video sai hoặc nguy hiểm thì bỏ, và ghi lại trong `ghiChuChoNguoiDuyet`.
 
+## Kho tư liệu VCWIKI (MCP `vc-content`)
+Kho chứa transcript video TikTok / YouTube của các gara và thẻ tri thức đã tinh chế, chạy trên máy có kho
+(`.mcp.json`). Hướng dẫn và danh sách kênh / `source_id`: `tu-lieu/agent-web-sua-chua-nhanh.md`. Không gọi được
+`vc-content` thì viết từ tư liệu đã có trong `tu-lieu/` và nguồn mở, và ghi rõ điều đó trong `ghiChuChoNguoiDuyet`.
+- Chỉ dùng công cụ ĐỌC: `search_cards`, `get_card`, `search_documents`, `list_documents`, `get_document`,
+  `list_sources`, `get_source`. KHÔNG gọi `create_card`, `update_card`, `mark_document`, `claim_documents`,
+  `prioritize_source`, `save_memory`.
+- Khi tư liệu thiếu hoặc cần kiểm một ý: `search_cards` trước, rồi `search_documents(query=..., limit=20)`, đọc quanh
+  đoạn khớp bằng `get_document(document_id, offset=start-1500, max_chars=5000)`. Không đoán.
+- Lời khách / lời thợ trong transcript là nguồn TỪ KHOÁ NGÔN NGỮ THẬT: gom cách khách gọi triệu chứng (vd "xe kêu két
+  két khi phanh", "điều hoà không mát") làm từ khoá đuôi dài và câu hỏi FAQ.
+- Transcript do máy chép, có thể sai chính tả / tên phụ tùng — sửa theo ngữ cảnh. Không chép nguyên văn, không nhắc
+  tên gara / kênh khác trong bài, không lấy giá hay cam kết thời gian của gara khác.
+- Ý quan trọng (thông số, thời gian, quy trình an toàn) cần ít nhất 2 nguồn khớp nhau; chỉ 1 nguồn thì bỏ hoặc ghi rõ
+  trong `ghiChuChoNguoiDuyet` để người duyệt kiểm.
+- Ghi nguồn VCWIKI vào `nguon` (`loai: "vcwiki"`) và **bảng nguồn** trong `ghiChuChoNguoiDuyet`: ý nào lấy từ
+  `document_id · [mm:ss] · kênh` nào (chỉ cho người duyệt, không đưa vào bài).
+
 ## Quy trình cho mỗi bài
-1. **Chọn từ khoá** trạng thái "chuaViet", ưu tiên chủ đề theo mùa trong `lichDang` của tháng hiện tại.
-   Nói cho người dùng từ khoá đã chọn và lý do, trừ khi họ đã chỉ định.
+1. **Chọn từ khoá** trạng thái "chuaViet", ưu tiên chủ đề theo mùa trong `lichDang` của tháng hiện tại. Từ khoá có
+   `ghiChu` bắt đầu bằng `KẾ HOẠCH <tháng>` (do agent SEO Planner tạo) thì dùng đúng slug, tiêu đề dự kiến, từ khoá phụ,
+   dịch vụ liên quan và nguồn ghi trong đó. Nói cho người dùng từ khoá đã chọn và lý do, trừ khi họ đã chỉ định.
 2. **Viết bài** bằng Markdown: tiêu đề SEO 25–70 ký tự có từ khoá; mô tả 100–170 ký tự; thân bài từ 800 chữ,
    chỉ dùng `##`/`###`; đoạn mở đầu trả lời ngay câu hỏi và có từ khoá; ít nhất 1 link `/dich-vu/<slug>/`
    và 1 link `/cam-nang/<slug>/` nếu có bài liên quan; 3–5 câu hỏi thường gặp.
