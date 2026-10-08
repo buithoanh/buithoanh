@@ -133,7 +133,10 @@ export async function layDichVuKemGia(payload: Payload, loc: { nhanDatLich?: boo
 }
 
 const tomTatCong = (hm: HangMucDb[]) => {
-  const cong = hm.filter((h) => h.loai === "cong" && (h.gia ?? 0) > 0).map((h) => h.gia as number);
+  // Bỏ hạng mục tính theo đơn vị (vd 15.000đ/km) khi có giá trọn gói, để "Giá công từ" không thấp ảo
+  const coGia = hm.filter((h) => h.loai === "cong" && (h.gia ?? 0) > 0);
+  const tronGoi = coGia.filter((h) => !h.donVi);
+  const cong = (tronGoi.length ? tronGoi : coGia).map((h) => h.gia as number);
   return cong.length ? Math.min(...cong) : null;
 };
 

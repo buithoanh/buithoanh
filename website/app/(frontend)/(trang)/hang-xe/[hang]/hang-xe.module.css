@@ -1,0 +1,14 @@
+.nhan { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.nhan li { background: rgba(255, 255, 255, .1); color: var(--nhan-tren-toi-3); font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+.h2 { font-size: 20px !important; }
+.hang { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.oHang {
+  display: flex; align-items: center; justify-content: center; text-align: center; min-height: 48px; padding: 6px; border-radius: 10px;
+  text-decoration: none; font-size: 13.5px; font-weight: 700; line-height: 1.2; background: var(--nen-trang); color: var(--toi); border: 1.5px solid var(--vien);
+}
+.oHang:hover { border-color: var(--toi); color: var(--toi); }
+.oHangChon, .oHangChon:hover { background: var(--toi); color: var(--nen-trang); border-color: var(--toi); }
+.noiDung { padding-top: 24px; max-width: 760px; }
+@media (min-width: 900px) {
+  .hang { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+}

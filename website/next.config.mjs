@@ -20,6 +20,8 @@ const nextConfig = {
   outputFileTracingIncludes: { "/quan-tri": ["./lib/quan-tri/giao-dien.*"] },
   images: { localPatterns: [{ pathname: "/api/media/file/**" }] },
   turbopack: { root: path.resolve(dirname) },
+  // App có 2 layout gốc ((frontend), (payload)): trang 404 chung cho mọi đường dẫn lạ nằm ở app/global-not-found.jsx.
+  experimental: { globalNotFound: true },
   async headers() {
     return [
       // Chưa có tên miền thì chặn Google ở mọi trang; trang admin và API thì luôn chặn.

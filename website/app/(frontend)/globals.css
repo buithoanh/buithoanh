@@ -37,6 +37,15 @@
   --le: 16px;              /* lề hai bên trên điện thoại */
   --cao-nut: 44px;         /* nút, ô bấm tối thiểu */
   --bong: 0 1px 2px rgba(19, 40, 63, 0.06), 0 4px 16px rgba(19, 40, 63, 0.06);
+  /* Luồng đơn (DatLich, GoiGap) */
+  --nhan-sang: #ff8a4c;    /* đoạn thanh bước đã qua (trên nền tối) */
+  --nhan-chu-dam: #8a2c06; /* chữ cam đậm trên nền cam nhạt */
+  --xam-tat: #9aa5b1;      /* nút chưa bấm được */
+  --chu-khoa: #6b7684;     /* chữ ô bị khoá (khung đầy) */
+  --vien-net-dut: #a9b6c4; /* nút thêm ảnh viền nét đứt */
+  --xanh-duong-nhat: #eef3f9;
+  --do-vien: #f3b8b1;
+  --do-khan: #b42318;      /* nhãn KHẨN CẤP */
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -137,3 +146,45 @@ main:focus { outline: none; }
   background: #fde68a; color: #422006; font-size: 13px; text-align: center; padding: 6px 12px;
 }
 .thanh-thu a { color: inherit; font-weight: 700; }
+
+/* Thêm cho nhóm nội dung + P2 (cẩm nang, hội viên, doanh nghiệp, tuyển thợ). */
+:root {
+  --nen-khung-anh: #e6ecf2; /* khung giữ chỗ ảnh nhỏ */
+  --chu-2: #3d4754;         /* chữ thân hơi nhạt (đoạn dẫn) */
+  --vien-cam: #f3cfb2;      /* viền trên nền cam nhạt */
+}
+
+/* ---------- thêm cho trang công khai (nhóm A: trang chủ, dịch vụ, bảng giá…) ---------- */
+:root {
+  --nen-ban-do: #e6ecf2;   /* khung bản đồ, khung ảnh giữ chỗ */
+  --vien-ban-do: #d5dde6;
+  --xanh-nen: #e9f6ec;     /* ô bảo hành, "việc chúng tôi làm" */
+  --xanh-dam: #1e6b2f;
+  --xanh-vua: #2b8a3e;     /* chữ "Miễn phí", dấu tích */
+  --do-nen: #fdecea;       /* "việc KHÔNG làm" */
+  --do-vien: #f3c2bd;
+  --chu-tren-do: #4a3330;
+  --chu-404: #3d4754;
+  --net-404: #a9b6c4;
+  --chu-tren-cam: #ffe2cf; /* chữ phụ trên nút cam */
+  --chu-menu-toi: #dfe7f1;
+}
+
+/* Màu thêm cho các màn phục vụ khách (link riêng /don/..., tra cứu xe) — components/phuc-vu/ */
+:root {
+  --nhan-chu: #8a2c06;       /* chữ cam đậm trên nền cam nhạt */
+  --nhan-vien: #f6d3b8;      /* viền khối cam nhạt */
+  --xanh-dam: #1f6b30;       /* chữ xanh đậm trên nền xanh nhạt */
+  --xanh-vien: #c6e6cf;
+  --muc-gap-nen: #fde8e0;    /* nhãn "Cần làm ngay" */
+  --muc-nen-nen: #fff4d6;    /* nhãn "Nên làm" */
+  --muc-nen-chu: #6b4e00;
+  --chu-xam: #4a5768;        /* nhãn "Có thể để sau", chú thích */
+  --chu-phu-2: #3d4856;
+  --nen-xanh-nhat: #eef3f9;  /* nền ô thông tin xanh nhạt */
+  --zalo-nhat: #eaf2ff;
+  --nen-ban-do: #e6ecf2;
+  --vien-dam: #d5dde6;
+  --sao: #e8890c;
+  --sao-tat: #d3d9e0;
+}

@@ -1,0 +1,35 @@
+.h2 { font-size: 20px !important; }
+.dong { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.oDong {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 10px 12px; border-radius: var(--bo);
+  cursor: pointer; min-height: 60px; background: var(--nen-trang); border: 2px solid var(--vien);
+}
+.oDong b { font-size: 15px; color: var(--toi); }
+.oDong span { font-size: 12.5px; color: var(--chu-phu); }
+.oDong:hover { border-color: var(--toi); }
+.chon, .chon:hover { background: var(--nhan-nhat); border-color: var(--nhan); }
+.nhanDoi { font-weight: 600; font-size: 14px; margin-top: 4px; }
+.doi { display: flex; gap: 8px; flex-wrap: wrap; }
+.oDoi {
+  flex: 1; min-width: 90px; font-size: 14px; font-weight: 700; border-radius: 10px; min-height: 46px; cursor: pointer; padding: 6px;
+  background: var(--nen-trang); color: var(--toi); border: 1.5px solid var(--vien-o);
+}
+.chonDoi { background: var(--toi); color: var(--nen-trang); border-color: var(--toi); }
+.dauGia { display: flex; flex-direction: column; gap: 2px; }
+.goiY { padding: 14px; background: var(--nhan-nhat); display: flex; flex-direction: column; gap: 4px; }
+.goiYTieuDe { font-size: 13px; font-weight: 700; color: var(--toi); }
+.goiY > div { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 14px; }
+.goiY b { color: var(--nhan); font-size: 18px; white-space: nowrap; }
+.chan { padding: 10px 14px; font-size: 12.5px; color: var(--chu-phu); background: var(--nen-nhat); }
+.benh { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.benh li { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); padding: 12px 14px; display: flex; gap: 12px; }
+.benh li > div { display: flex; flex-direction: column; gap: 2px; }
+.benh b { color: var(--toi); line-height: 1.3; }
+.iconBenh { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--nhan-nhat); color: var(--nhan); display: grid; place-items: center; }
+.benhDong { font-size: 12.5px; color: var(--nhan); font-weight: 600; }
+.benhMoTa { font-size: 14px; color: var(--chu-phu); }
+@media (min-width: 900px) {
+  .dong { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .doi { max-width: 560px; }
+  .benh { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

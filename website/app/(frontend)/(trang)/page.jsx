@@ -1,171 +1,99 @@
+// Trang chủ: thiết kế Main (điện thoại) + TrangChuMayTinh (máy tính ≥900px). Mọi giá, dịch vụ, khu vực, cam kết lấy từ backend.
 import Link from "next/link";
-import { layDanhSachBai, layDanhSachDichVu, laySite } from "@/lib/cms";
-import { CallButton, ZaloButton } from "@/components/Contact";
+import site from "@/site.config.mjs";
+import { layDanhSachDichVu, layPayload } from "@/lib/cms";
+import { layTrangChu } from "@/lib/cong-khai";
 import JsonLd from "@/components/JsonLd";
-import Icon, { iconDichVu } from "@/components/Icon";
-import { anhTrangChu, anhDichVu } from "@/components/anh";
+import { NutGoi } from "@/components/chung/LienHe";
+import DanhGiaKhach from "@/components/chung/DanhGiaKhach";
+import Hero from "@/components/trang/Hero";
+import LuoiDichVu from "@/components/trang/TheDichVu";
+import BangGiaTomTat from "@/components/trang/BangGiaTomTat";
+import CacBuoc from "@/components/trang/CacBuoc";
+import KhoiVungPhucVu from "@/components/trang/KhoiVungPhucVu";
+import KhoiDoanhNghiep from "@/components/trang/KhoiDoanhNghiep";
+import XemGiaXe from "@/components/trang/XemGiaXe";
+import s from "./trang-chu.module.css";
 
-// Lối tắt cho khách đang gặp sự cố: chọn triệu chứng, tới thẳng trang dịch vụ.
-const suCo = [
-  { slug: "ac-quy", text: "Xe không nổ máy, đề yếu" },
-  { slug: "lop", text: "Lốp xịt, bị đinh đâm" },
-  { slug: "doc-loi-chan-doan", text: "Đèn check engine sáng" },
-  { slug: "phanh", text: "Phanh kêu rít, đạp sâu" },
-  { slug: "cuu-ho-keo-xe", text: "Hỏng nặng, cần kéo xe" },
-  { slug: "bao-duong-dinh-ky", text: "Đến hạn thay dầu, bảo dưỡng" },
-];
+export const metadata = { alternates: { canonical: "/" } };
 
-export default async function Home() {
-  const [site, services, articles] = await Promise.all([laySite(), layDanhSachDichVu(), layDanhSachBai(3)]);
-  const slugs = new Set(services.map((s) => s.slug));
-  const areas = site.serviceAreas.length ? site.serviceAreas.join(", ") : site.city;
+const diem = (n) => String(n).replace(".", ",");
+
+export default async function TrangChu() {
+  const payload = await layPayload();
+  const [t, caiDat, trangDv] = await Promise.all([layTrangChu(payload), payload.findGlobal({ slug: "cai-dat", depth: 0 }), layDanhSachDichVu()]);
+  // Thẻ dịch vụ chỉ trỏ tới dịch vụ đã có trang đăng
+  const coTrang = new Set(trangDv.map((d) => d.slug));
+  const dichVuCoTrang = t.dichVu.filter((d) => coTrang.has(d.slug));
+  const { thuongHieu, lienHe, camKet, google, phapNhan, vungPhucVu } = t;
+  const [dau, ...sau] = thuongHieu.slogan.split(",");
+  const dichVuXemGia = t.dichVu.filter((d) => d.nhanDatLich && d.baoGiaSoBo).map((d) => ({ slug: d.slug, ten: d.ten }));
+
   return (
     <>
       <JsonLd data={{
-        "@context": "https://schema.org", "@type": "AutoRepair", name: site.name, slogan: site.slogan, url: site.url,
-        ...(site.hotline && { telephone: site.hotline }),
-        areaServed: site.serviceAreas.length ? site.serviceAreas.map((a) => ({ "@type": "AdministrativeArea", name: `${a}, ${site.city}` })) : site.city,
-        parentOrganization: { "@type": "Organization", name: site.parent },
+        "@context": "https://schema.org", "@type": "AutoRepair", name: thuongHieu.ten, slogan: thuongHieu.slogan, url: `${site.url}/`,
+        ...(lienHe.hotline && { telephone: lienHe.hotline }),
+        ...(lienHe.email && { email: lienHe.email }),
+        ...(phapNhan.ten && { legalName: phapNhan.ten }),
+        ...(phapNhan.mst && { taxID: phapNhan.mst }),
+        ...(phapNhan.diaChi && { address: { "@type": "PostalAddress", streetAddress: phapNhan.diaChi, addressLocality: thuongHieu.thanhPho, addressCountry: "VN" } }),
+        areaServed: vungPhucVu.quan.length
+          ? vungPhucVu.quan.map((q) => ({ "@type": "AdministrativeArea", name: `${q.ten}, ${thuongHieu.thanhPho}` }))
+          : { "@type": "City", name: thuongHieu.thanhPho },
+        parentOrganization: { "@type": "Organization", name: thuongHieu.congTyMe },
+        makesOffer: dichVuCoTrang.map((d) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: d.ten, url: `${site.url}/dich-vu/${d.slug}/` } })),
       }} />
 
-      <section className="hero">
-        <div className="wrap hero-grid">
-          <div className="hero-text">
-            <p className="eyebrow"><Icon name="pin" size={16} /> Sửa ô tô lưu động tại {site.city}</p>
-            <h1>{site.slogan}</h1>
-            <p className="lead">Thợ {site.name} mang đồ nghề và phụ tùng tới tận nơi xe bạn đang đỗ: ắc quy, lốp, bảo dưỡng, phanh, đọc lỗi. Báo giá trước khi làm.</p>
-            <div className="ctas">
-              <CallButton hotline={site.hotline} className="btn btn-primary btn-lg" />
-              <Link className="btn btn-light btn-lg" href="/dat-lich/"><Icon name="calendar" /><span>Đặt lịch bảo dưỡng</span></Link>
-            </div>
-            <ul className="facts">
-              <li><Icon name="check" size={18} />Báo giá trước, đồng ý mới làm</li>
-              <li><Icon name="check" size={18} />Phụ tùng từ hệ thống VCparts</li>
-              <li><Icon name="check" size={18} />Ca phức tạp kéo về {site.partnerWorkshop}</li>
-              <li><Icon name="check" size={18} />Khu vực: {areas}</li>
-            </ul>
-          </div>
-          <figure className="hero-art">
-            <img src={anhTrangChu.src} alt={anhTrangChu.alt} width={anhTrangChu.width} height={anhTrangChu.height} fetchPriority="high" decoding="async" />
-          </figure>
+      <Hero
+        lon
+        nhan={camKet.cuuHoPhut ? `Thợ có mặt trong ${camKet.cuuHoPhut} phút · nội thành ${thuongHieu.thanhPho}` : `Sửa ô tô tận nơi · ${thuongHieu.thanhPho}`}
+        tieuDe={sau.length ? <><span className={s.dongDau}>{dau},</span> {sau.join(",").trim()}</> : thuongHieu.slogan}
+        moTa={<>Ắc quy, lốp, bảo dưỡng, phanh, đọc lỗi ngay tại nhà, hầm chung cư hay bên đường. Báo giá trước, bạn đồng ý mới làm.<span className={s.chiMayTinh}> Phụ tùng chính hãng từ VCparts.</span></>}
+        phai={dichVuXemGia.length ? <div className={s.chiMayTinhKhoi}><XemGiaXe dichVu={dichVuXemGia} kieu="the" /></div> : null}
+      >
+        <div className={s.nut}>
+          <NutGoi hotline={lienHe.hotline} className={`nut nut-chinh nut-lon ${s.nutGoi}`}>
+            Gọi thợ ngay<span className={s.chiMayTinh}> · {lienHe.hotline}</span>
+          </NutGoi>
+          <Link href="/dat-lich/" className={`nut nut-vien-trang ${s.nutDat}`}>Đặt lịch bảo dưỡng</Link>
         </div>
-      </section>
+        <ul className={s.thongSo}>
+          {camKet.cuuHoPhut ? <li><b>{camKet.cuuHoPhut} phút</b><span>có mặt cứu hộ</span></li> : null}
+          <li><b>Giá công khai</b><span>báo trước khi làm</span></li>
+          {camKet.baoHanhPhuTungThang ? <li><b>{camKet.baoHanhPhuTungThang} tháng</b><span>bảo hành phụ tùng</span></li> : null}
+        </ul>
+        <ul className={s.tinCay}>
+          {google.diem ? <li>{diem(google.diem)} ★{google.soDanhGia ? ` · ${google.soDanhGia} đánh giá Google` : ""}</li> : null}
+          {camKet.baoHanhPhuTungThang ? <li>Bảo hành {camKet.baoHanhPhuTungThang} tháng phụ tùng{camKet.baoHanhCongThang ? `, ${camKet.baoHanhCongThang} tháng công` : ""}</li> : null}
+          <li>Hoá đơn điện tử</li>
+        </ul>
+      </Hero>
 
-      <section className="triage" aria-labelledby="su-co">
-        <div className="wrap">
-          <div className="triage-box">
-            <h2 id="su-co">Xe bạn đang gặp chuyện gì?</h2>
-            <ul className="chips">
-              {suCo.filter((c) => slugs.has(c.slug)).map((c) => (
-                <li key={c.slug}>
-                  <Link className="chip" href={`/dich-vu/${c.slug}/`}>
-                    <span className="chip-icon"><Icon name={iconDichVu[c.slug]} /></span>
-                    <span>{c.text}</span>
-                    <Icon name="arrow" size={18} className="chip-arrow" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
+      <div className="wrap">
+        <section className="khoi" id="dich-vu" aria-labelledby="dich-vu-h">
+          <div>
+            <h2 id="dich-vu-h">
+              <span className={s.chiDienThoai}>Xe bạn đang cần gì?</span>
+              <span className={s.chiMayTinh}>Dịch vụ tận nơi</span>
+            </h2>
+            <p className="phu">
+              <span className={s.chiDienThoai}>Chọn việc, giá tham khảo hiện ngay.</span>
+              <span className={s.chiMayTinh}>Những việc chủ xe hay cần nhất, làm ngay tại chỗ xe đỗ.</span>
+            </p>
           </div>
-        </div>
-      </section>
-
-      <section className="block" id="dich-vu" aria-labelledby="dv-h">
-        <div className="wrap">
-          <div className="section-head">
-            <p className="kicker">Dịch vụ</p>
-            <h2 id="dv-h">Dịch vụ tận nơi</h2>
-            <p className="sub">Chọn việc xe bạn cần. Mỗi trang có quy trình, câu hỏi thường gặp và cách đặt thợ.</p>
-          </div>
-          <div className="grid">
-            {services.map((s) => {
-              const a = anhDichVu(s.slug);
-              return (
-                <Link key={s.slug} className="card card-media" href={`/dich-vu/${s.slug}/`}>
-                  <span className="card-img"><img src={a.src} alt="" width={a.width} height={a.height} loading="lazy" decoding="async" /></span>
-                  <span className="card-body">
-                    <span className="card-icon"><Icon name={iconDichVu[s.slug] || "wrench"} /></span>
-                    <h3>{s.ten}</h3>
-                    <p>{s.tomTat}</p>
-                    <span className="more">Xem chi tiết <Icon name="arrow" size={16} /></span>
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="block block-alt" aria-labelledby="quy-trinh">
-        <div className="wrap">
-          <div className="section-head">
-            <p className="kicker">Quy trình</p>
-            <h2 id="quy-trinh">Gọi thợ thế nào</h2>
-          </div>
-          <ol className="steps">
-            <li><b>Gọi hoặc đặt lịch</b>Cho biết dòng xe, vị trí và tình trạng.</li>
-            <li><b>Nhận báo giá</b>Thợ báo giá công và phụ tùng trước, bạn đồng ý mới làm.</li>
-            <li><b>Thợ tới tận nơi</b>Xe van đủ đồ nghề, có lót ghế và thảm giữ sạch xe.</li>
-            <li><b>Thanh toán, đánh giá</b>Chuyển khoản VietQR hoặc tiền mặt, có hoá đơn điện tử.</li>
-          </ol>
-        </div>
-      </section>
-
-      <section className="block" aria-labelledby="cam-ket">
-        <div className="wrap">
-          <div className="section-head">
-            <p className="kicker">Cam kết</p>
-            <h2 id="cam-ket">Rõ ràng từ lúc gọi tới lúc xong</h2>
-          </div>
-          <ul className="pledges">
-            <li><span className="pledge-icon"><Icon name="receipt" size={24} /></span><b>Báo giá trước khi làm</b><span>Thợ kiểm tra, báo giá từng hạng mục công và phụ tùng. Bạn đồng ý mới bắt đầu.</span></li>
-            <li><span className="pledge-icon"><Icon name="shield" size={24} /></span><b>Phụ tùng có nguồn gốc</b><span>Phụ tùng lấy từ hệ thống VCparts của tập đoàn {site.parent}.</span></li>
-            <li><span className="pledge-icon"><Icon name="tow" size={24} /></span><b>Một đầu mối tới khi xong</b><span>Việc không làm được tại chỗ, xe được đưa về {site.partnerWorkshop}, xưởng đối tác của tập đoàn.</span></li>
-            <li><span className="pledge-icon"><Icon name="check" size={24} /></span><b>Giữ sạch xe, có hoá đơn</b><span>Lót ghế và thảm khi làm. Thanh toán VietQR hoặc tiền mặt, có hoá đơn điện tử.</span></li>
-          </ul>
-        </div>
-      </section>
-
-      {articles.length > 0 && (
-        <section className="block block-alt" aria-labelledby="cn-h">
-          <div className="wrap">
-            <div className="section-head section-head-row">
-              <div>
-                <p className="kicker">Cẩm nang</p>
-                <h2 id="cn-h">Cẩm nang xe</h2>
-                <p className="sub">Hướng dẫn tự kiểm tra và xử lý những sự cố hay gặp.</p>
-              </div>
-              <Link className="link-more" href="/cam-nang/">Tất cả bài viết <Icon name="arrow" size={16} /></Link>
-            </div>
-            <div className="grid">
-              {articles.map((a) => (
-                <Link key={a.slug} className="card card-article" href={`/cam-nang/${a.slug}/`}>
-                  {a.nhom && <span className="tag">{a.nhom}</span>}
-                  <h3>{a.title}</h3>
-                  <p>{a.description}</p>
-                  <span className="more">Đọc bài <Icon name="arrow" size={16} /></span>
-                </Link>
-              ))}
-            </div>
-          </div>
+          <LuoiDichVu dichVu={dichVuCoTrang} />
         </section>
-      )}
 
-      <section className="block" aria-labelledby="cta-h">
-        <div className="wrap">
-          <div className="cta-band">
-            <div>
-              <h2 id="cta-h">Xe đang nằm đường?</h2>
-              <p>Gọi thợ, cho biết vị trí và tình trạng xe. Không gấp thì đặt lịch trước.</p>
-            </div>
-            <div className="cta-actions">
-              <CallButton hotline={site.hotline} className="btn btn-primary btn-lg" />
-              <ZaloButton zalo={site.zalo} className="btn btn-zalo btn-lg" />
-              <Link className="btn btn-light btn-lg" href="/dat-lich/"><Icon name="calendar" /><span>Đặt lịch</span></Link>
-            </div>
-          </div>
+        <div className={s.cum}>
+          <BangGiaTomTat dong={t.giaNhanh} className={s.oGia} />
+          <CacBuoc className={s.oBuoc} />
+          <KhoiVungPhucVu chung={t} className={s.oVung} />
         </div>
-      </section>
+
+        <DanhGiaKhach danhGia={t.danhGia} google={google} />
+        <KhoiDoanhNghiep hoSoNangLuc={caiDat.hoSoNangLucUrl || null} />
+      </div>
     </>
   );
 }

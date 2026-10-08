@@ -1,0 +1,38 @@
+.capNhat {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, .1); color: var(--nhan-tren-toi-3);
+  font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 999px;
+}
+.h2 { font-size: 20px !important; }
+.phi { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); overflow: hidden; }
+.phi > div { display: flex; justify-content: space-between; gap: 12px; padding: 13px 14px; }
+.phi > div + div { border-top: 1px solid var(--vien-nhat); }
+.phi > div > span { display: flex; flex-direction: column; }
+.phi > div > span b { color: var(--toi); }
+.phi > div > span span { font-size: 13px; color: var(--chu-phu); }
+.phi > div > b { color: var(--toi); white-space: nowrap; }
+.baoHanh { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.baoHanh > div { background: var(--xanh-nen); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; color: var(--xanh-dam); }
+.baoHanh b { font-size: 16px; }
+.baoHanh span { font-size: 12.5px; }
+.goi { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.goi li { display: flex; }
+.theGoi {
+  flex: 1; text-decoration: none; color: var(--chu); border-radius: var(--bo); padding: 14px 12px; display: flex; flex-direction: column; gap: 6px;
+  background: var(--nen-trang); border: 1px solid var(--vien);
+}
+.theGoi:hover { border-color: var(--toi); color: var(--chu); }
+.noiBat, .noiBat:hover { background: var(--nhan-nhat); border: 2px solid var(--nhan); }
+.tenGoi { font-size: 15px; color: var(--toi); }
+.giaGoi { font-size: 19px; color: var(--nhan); }
+.tomGoi { font-size: 13px; }
+.luuY {
+  margin-top: 24px; background: var(--nen-trang); border: 1px solid var(--vien); border-left: 4px solid var(--nhan); border-radius: var(--bo);
+  padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
+}
+.luuY h2 { font-size: 15.5px; }
+.luuY ul { margin: 0; padding-left: 18px; font-size: 14px; display: flex; flex-direction: column; gap: 4px; }
+@media (min-width: 900px) {
+  .goi { max-width: 760px; }
+  .luuY { margin-top: 40px; padding: 20px 24px; }
+  .luuY h2 { font-size: 18px; }
+}
