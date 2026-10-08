@@ -93,3 +93,33 @@ form.booking input, form.booking select, form.booking textarea { font: inherit; 
 .callbar .btn { padding: 12px 10px; }
 .callbar .zalo { background: #0068ff; color: #fff; }
 @media (min-width: 900px) { .callbar { left: auto; right: 20px; bottom: 20px; grid-template-columns: auto auto; background: transparent; padding: 0; } .footer { padding-bottom: 36px; } }
+
+/* Trang quản trị /quan-tri/ */
+.admin h1 { margin: 0; color: var(--navy); font-size: 28px; }
+.admin-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.admin-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.admin-actions .btn { padding: 8px 14px; font-size: 14px; color: var(--navy); }
+.admin-filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.admin-filters button { font: inherit; font-size: 15px; white-space: nowrap; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+.admin-filters button span { color: var(--muted); font-weight: 700; margin-left: 4px; }
+.admin-filters button.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+.admin-filters button.on span { color: #ffc9a3; }
+.admin-search input, .admin-edit input, .admin-edit select, .admin-login input { font: inherit; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 8px; background: #fff; width: 100%; }
+.admin-search { margin: 12px 0 16px; }
+.admin-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.admin-item { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--orange); border-radius: var(--r); padding: 16px; }
+.admin-item.s-da-goi { border-left-color: #1c7ed6; }
+.admin-item.s-dang-lam { border-left-color: #f08c00; }
+.admin-item.s-xong { border-left-color: var(--ok); }
+.admin-item.s-huy { border-left-color: #adb5bd; opacity: .75; }
+.admin-top { display: flex; flex-wrap: wrap; gap: 4px 12px; justify-content: space-between; align-items: baseline; color: var(--navy); }
+.admin-top .meta { margin: 0; }
+.admin-item dl { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: 10px 0; font-size: 15px; }
+.admin-item dt { color: var(--muted); }
+.admin-item dd { margin: 0; overflow-wrap: anywhere; }
+.admin-item .meta { margin: 8px 0 0; font-size: 13px; }
+.admin-edit { display: grid; grid-template-columns: minmax(140px, 1fr) 3fr; gap: 10px; }
+.admin-edit label, .admin-login label { display: grid; gap: 4px; font-size: 14px; font-weight: 600; }
+@media (max-width: 560px) { .admin-edit { grid-template-columns: 1fr; } }
+.admin-login { max-width: 420px; margin: 0 auto; display: grid; gap: 14px; }
+body:has(.admin, .admin-login) .callbar { display: none; } /* thanh gọi/Zalo là cho khách, ẩn ở trang quản trị */

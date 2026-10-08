@@ -15,7 +15,10 @@ Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tớ
 | `content/cam-nang/*.md` | Bài cẩm nang SEO |
 | `content/ke-hoach-seo.json` | Bộ từ khoá và lịch đăng, lấy từ kế hoạch mục 4.1 và 4.2 |
 | `scripts/kiem-tra-bai.mjs` | Kiểm tra bài trước khi build: độ dài tiêu đề và mô tả, số chữ, từ khoá, liên kết hỏng, bài có giá chưa duyệt |
-| `app/` | Giao diện: trang chủ, dịch vụ, cẩm nang, đặt lịch, sitemap, robots |
+| `content/thong-tin.json` | Hotline, Zalo, email, quận phục vụ, xưởng đối tác (sửa được ở trang quản trị) |
+| `app/` | Giao diện: trang chủ, dịch vụ, cẩm nang, đặt lịch, quản trị, sitemap, robots |
+| `functions/`, `cf/` | Hàm chạy trên Cloudflare Pages: nhận lịch hẹn, API trang quản trị, đăng nhập GitHub cho trang soạn bài |
+| `public/quan-tri/bai-viet/` | Trang soạn bài (Decap CMS) và cấu hình `config.yml` |
 
 ## Quy trình đăng bài SEO (có duyệt)
 
@@ -39,6 +42,36 @@ Agent **không bao giờ tự merge**. Bài có nêu giá phải được ngư�
 
 Muốn bắt buộc duyệt trên GitHub: Settings → Branches → thêm quy tắc cho nhánh `main`, bật "Require a pull request before merging" và "Require status checks" (chọn "Website – kiểm tra bài và build").
 
+## Trang quản trị `/quan-tri/`
+
+| Địa chỉ | Việc | Đăng nhập |
+|---|---|---|
+| `/quan-tri/` | Xem lịch hẹn khách đặt trên web, đổi trạng thái (Mới → Đã gọi → Đang làm → Xong / Huỷ), ghi chú nội bộ, bấm gọi / Zalo / mở bản đồ. Tự làm mới mỗi phút. | Mật khẩu chung (`ADMIN_PASSWORD`) |
+| `/quan-tri/bai-viet/` | Soạn, sửa bài cẩm nang và trang dịch vụ, tải ảnh, sửa hotline/Zalo/quận phục vụ. Mỗi lần lưu là một pull request; bấm **Publish** trong trang soạn bài = merge = lên web. | Tài khoản GitHub có quyền ghi repo |
+
+Trang soạn bài chỉ đăng nhập được trên địa chỉ chính (`vc-mobile-care.pages.dev` hoặc tên miền), không chạy trên link xem trước của pull request.
+
+### Cài đặt một lần trên Cloudflare
+
+**1. Nơi lưu lịch hẹn (D1)**
+- Cloudflare → **Storage & Databases** → **D1** → **Create** → đặt tên `vc-mobile-care`.
+- Pages → project → **Settings** → **Bindings** → **Add** → **D1 database**: tên biến `DB`, chọn database vừa tạo.
+- Bảng `lich_hen` tự tạo ở lần đặt lịch đầu tiên, không cần chạy SQL.
+
+**2. Mật khẩu trang quản trị**
+- Pages → **Settings** → **Variables and Secrets** → **Add** → loại **Secret**, tên `ADMIN_PASSWORD`, giá trị là mật khẩu dài (từ 12 ký tự). Đổi mật khẩu là mọi người đang đăng nhập bị đăng xuất.
+- Muốn mỗi nhân viên đăng nhập bằng email riêng: bật thêm **Cloudflare Access** (Zero Trust → Access → Applications) cho `/quan-tri/*` và `/api/quan-tri/*`.
+
+**3. Đăng nhập GitHub cho trang soạn bài**
+- GitHub → **Settings** → **Developer settings** → **OAuth Apps** → **New OAuth App**:
+  - Homepage URL: `https://vc-mobile-care.pages.dev`
+  - Authorization callback URL: `https://vc-mobile-care.pages.dev/api/cms/callback`
+- Tạo xong, bấm **Generate a new client secret**.
+- Cloudflare Pages → **Variables and Secrets**: thêm `GITHUB_CLIENT_ID` (Text) và `GITHUB_CLIENT_SECRET` (Secret).
+- Khi đổi sang tên miền thật: sửa hai địa chỉ trên trong OAuth App, và `site_url` trong `public/quan-tri/bai-viet/config.yml`.
+
+Thêm biến/binding xong phải **deploy lại** (Deployments → bản mới nhất → Retry deployment) mới có hiệu lực. Chưa gắn D1 thì form đặt lịch tự chuyển sang hiện nội dung để khách gửi Zalo/gọi, như trước.
+
 ## Chạy thử trên máy
 
 ```bash
@@ -47,6 +80,8 @@ npm install
 npm run dev          # http://localhost:3000
 npm run kiem-tra     # chỉ kiểm tra bài
 npm run build        # kiểm tra + xuất trang tĩnh ra out/
+# Chạy cả API (đặt lịch, quản trị) với D1 giả lập trên máy:
+npx wrangler pages dev out --d1 DB=local --binding ADMIN_PASSWORD=thu123
 ```
 
 ## Đưa lên Cloudflare Pages (làm một lần)
@@ -71,8 +106,8 @@ npm run build        # kiểm tra + xuất trang tĩnh ra out/
 
 ## Việc còn thiếu trước khi chạy thật
 
-- Hotline, Zalo OA, email trong `site.config.mjs` (đang hiện "sắp có").
-- Danh sách quận đợt 1 trong `serviceAreas`.
-- Form đặt lịch chưa có nơi nhận. Khi VCsoft có API nhận lịch, đặt biến `NEXT_PUBLIC_BOOKING_ENDPOINT`. Trước đó form hiện nội dung để khách gửi qua Zalo hoặc đọc khi gọi.
+- Hotline, Zalo OA, email, quận đợt 1: sửa ở `/quan-tri/bai-viet/` → Cài đặt → Thông tin liên hệ (đang hiện "sắp có").
+- Gắn D1 và đặt mật khẩu quản trị (mục "Trang quản trị") để nhận lịch hẹn. Khi VCsoft có API nhận lịch, đặt `NEXT_PUBLIC_BOOKING_ENDPOINT` để form gửi thẳng sang đó.
+- Chưa có báo tin cho nhân viên khi có lịch mới (Zalo/Telegram); hiện phải mở `/quan-tri/` để xem.
 - Bảng giá: kế hoạch muốn lấy giá phụ tùng từ dữ liệu VCparts, nên cần người phụ trách duyệt giá trước khi đưa lên.
 - Ảnh việc thật (kế hoạch yêu cầu mỗi trang khu vực có ảnh tại khu đó). Đặt trong `public/anh/` và chèn vào bài bằng `![mô tả](/anh/ten-anh.jpg)`.

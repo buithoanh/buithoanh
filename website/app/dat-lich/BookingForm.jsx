@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const empty = { dichVu: "", xe: "", bienSo: "", viTri: "", gio: "", sdt: "", ghiChu: "" };
+const empty = { dichVu: "", xe: "", bienSo: "", viTri: "", gio: "", sdt: "", ghiChu: "", web: "" };
 
 export default function BookingForm({ services, endpoint, hotline, zalo }) {
   const [f, setF] = useState(empty);
@@ -14,7 +14,8 @@ export default function BookingForm({ services, endpoint, hotline, zalo }) {
     setState("sending");
     try {
       const r = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...f, nguon: "website" }) });
-      setState(r.ok ? "sent" : "error");
+      // 404/405/503: nơi nhận lịch chưa được bật (chạy trên máy, hoặc chưa gắn D1) → chuyển sang gọi/Zalo.
+      setState(r.ok ? "sent" : [404, 405, 503].includes(r.status) ? "offline" : "error");
     } catch { setState("error"); }
   }
 
@@ -41,6 +42,8 @@ export default function BookingForm({ services, endpoint, hotline, zalo }) {
         <label htmlFor="sdt">Số điện thoại<input id="sdt" required type="tel" inputMode="tel" pattern="[0-9 +.]{9,15}" placeholder="09xx xxx xxx" value={f.sdt} onChange={set("sdt")} /></label>
       </div>
       <label htmlFor="ghiChu">Tình trạng xe (không bắt buộc)<textarea id="ghiChu" rows={3} value={f.ghiChu} onChange={set("ghiChu")} /></label>
+      {/* Ô bẫy chống spam: người thật không thấy và không điền. */}
+      <input name="web" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px" }} value={f.web} onChange={set("web")} />
       <button className="btn btn-primary" type="submit" disabled={state === "sending"}>{state === "sending" ? "Đang gửi…" : "Gửi lịch hẹn"}</button>
       {state === "error" && <p className="notice">Chưa gửi được. Thử lại, hoặc gọi {hotline || "hotline"} để đặt ngay.</p>}
       {state === "offline" && (

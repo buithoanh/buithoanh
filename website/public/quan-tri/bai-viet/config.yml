@@ -1,0 +1,110 @@
+# Cấu hình trang soạn bài (Decap CMS). Đường dẫn tính từ gốc repo.
+backend:
+  name: github
+  repo: buithoanh/buithoanh
+  branch: main
+  auth_endpoint: api/cms/auth
+  # base_url đặt trong index.html = địa chỉ website đang mở.
+  commit_messages:
+    create: "Bài mới: {{slug}}"
+    update: "Sửa bài: {{slug}}"
+    delete: "Xoá bài: {{slug}}"
+    uploadMedia: "Ảnh: {{path}}"
+    deleteMedia: "Xoá ảnh: {{path}}"
+
+# Bản nháp → Chờ duyệt → Sẵn sàng. Mỗi bài là một pull request; GitHub Actions kiểm tra,
+# Cloudflare tạo link xem trước. Bấm "Publish" trong CMS = merge vào main = bài lên web.
+publish_mode: editorial_workflow
+locale: vi
+
+site_url: https://vc-mobile-care.pages.dev
+display_url: https://vc-mobile-care.pages.dev
+
+media_folder: website/public/anh
+public_folder: /anh
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: cam-nang
+    label: Cẩm nang
+    label_singular: bài cẩm nang
+    folder: website/content/cam-nang
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} ({{ngay}})"
+    sortable_fields: [ngay, title]
+    preview_path: "cam-nang/{{slug}}/"
+    fields:
+      - { name: title, label: "Tiêu đề (25–70 ký tự, có từ khoá chính)", widget: string }
+      - { name: description, label: "Mô tả trên Google (100–170 ký tự)", widget: text }
+      - { name: keyword, label: "Từ khoá chính", widget: string, hint: "Lấy trong content/ke-hoach-seo.json. Phải có trong tiêu đề hoặc đoạn mở đầu." }
+      - name: nhom
+        label: Nhóm
+        widget: select
+        options: ["Khẩn cấp", "Ắc quy", "Lốp", "Tận nơi", "Bảo dưỡng", "Chẩn đoán", "Phanh", "Xe điện", "Bản đồ", "Thông tin"]
+      - { name: ngay, label: Ngày đăng, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - name: dichVuLienQuan
+        label: Dịch vụ liên quan
+        widget: relation
+        collection: dich-vu
+        search_fields: [ten, title]
+        value_field: "{{slug}}"
+        display_fields: [ten]
+        multiple: true
+        required: false
+      - { name: giaDaDuyet, label: "Giá trong bài đã được người phụ trách duyệt", widget: boolean, default: false, required: false, hint: "Bài có nêu giá tiền mà không bật ô này thì không build được." }
+      - name: faq
+        label: Câu hỏi thường gặp
+        widget: list
+        required: false
+        summary: "{{fields.q}}"
+        fields:
+          - { name: q, label: Câu hỏi, widget: string }
+          - { name: a, label: Trả lời, widget: text }
+      - { name: body, label: "Nội dung (tối thiểu 600 chữ, dùng tiêu đề ## trở xuống)", widget: markdown }
+
+  - name: dich-vu
+    label: Dịch vụ
+    label_singular: trang dịch vụ
+    folder: website/content/dich-vu
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{thuTu}}. {{ten}}"
+    preview_path: "dich-vu/{{slug}}/"
+    fields:
+      - { name: title, label: "Tiêu đề (25–70 ký tự)", widget: string }
+      - { name: description, label: "Mô tả trên Google (100–170 ký tự)", widget: text }
+      - { name: keyword, label: Từ khoá chính, widget: string }
+      - { name: ten, label: "Tên ngắn (hiện trên menu, form đặt lịch)", widget: string }
+      - { name: tomTat, label: Tóm tắt một câu, widget: text }
+      - { name: thuTu, label: Thứ tự hiển thị, widget: number, value_type: int, required: false }
+      - { name: giaDaDuyet, label: "Giá trong trang đã được duyệt", widget: boolean, default: false, required: false }
+      - name: faq
+        label: Câu hỏi thường gặp
+        widget: list
+        required: false
+        summary: "{{fields.q}}"
+        fields:
+          - { name: q, label: Câu hỏi, widget: string }
+          - { name: a, label: Trả lời, widget: text }
+      - { name: body, label: "Nội dung (tối thiểu 350 chữ)", widget: markdown }
+
+  - name: cai-dat
+    label: Cài đặt
+    editor: { preview: false }
+    files:
+      - name: thong-tin
+        label: Thông tin liên hệ
+        file: website/content/thong-tin.json
+        fields:
+          - { name: hotline, label: Hotline, widget: string, required: false, hint: "Ví dụ 0912 345 678. Để trống thì web hiện “Sắp có”." }
+          - { name: zalo, label: Link Zalo OA, widget: string, required: false, hint: "Ví dụ https://zalo.me/123456789" }
+          - { name: email, label: Email, widget: string, required: false }
+          - { name: serviceAreas, label: Quận đang phục vụ, widget: list, required: false, hint: "Mỗi quận một dòng. Để trống thì ghi “Hà Nội”." }
+          - { name: partnerWorkshop, label: Xưởng đối tác, widget: string, required: false }

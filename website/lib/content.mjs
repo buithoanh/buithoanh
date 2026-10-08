@@ -26,7 +26,7 @@ export function allEntries(section) {
 }
 
 export function sortedArticles() {
-  return allEntries(SECTIONS.camNang).sort((a, b) => String(b.data.ngay).localeCompare(String(a.data.ngay)));
+  return allEntries(SECTIONS.camNang).sort((a, b) => String(isoDate(b.data.ngay) || "").localeCompare(String(isoDate(a.data.ngay) || "")));
 }
 
 export function formatDate(d) {
