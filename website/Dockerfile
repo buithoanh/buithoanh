@@ -1,4 +1,4 @@
-# Web + CMS VC Mobile Care. Dùng cùng docker-compose.yml.
+# Web + CMS ThợTới. Dùng cùng docker-compose.yml.
 FROM node:22-alpine AS base
 
 FROM base AS deps

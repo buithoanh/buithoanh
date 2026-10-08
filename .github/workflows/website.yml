@@ -1,4 +1,4 @@
-name: Website – kiểm tra và build
+name: Website – kiểm tra, kiểm thử và build
 
 on:
   pull_request:
@@ -22,14 +22,16 @@ jobs:
         env:
           POSTGRES_USER: vc
           POSTGRES_PASSWORD: vc
-          POSTGRES_DB: vcmobilecare
+          POSTGRES_DB: thotoi
         ports: ["5432:5432"]
         options: >-
           --health-cmd "pg_isready -U vc" --health-interval 5s --health-timeout 5s --health-retries 10
     env:
-      DATABASE_URL: postgres://vc:vc@localhost:5432/vcmobilecare
+      DATABASE_URL: postgres://vc:vc@localhost:5432/thotoi
       PAYLOAD_SECRET: chi-dung-cho-ci
       NODE_ENV: production
+      # CI không có khoá bản đồ, điều phối, Zalo, SMS, VCparts: cho phép giả lập (production thật thì không đặt biến này)
+      TICH_HOP_GIA_LAP: tat-ca
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -39,8 +41,12 @@ jobs:
           cache-dependency-path: website/package-lock.json
       - run: npm ci
       - run: npm run typecheck
+      - name: Kiểm thử đơn vị (tính giá, biển số, vùng, khung giờ, trạng thái đơn)
+        run: npm test
       # Migration phải tạo được database từ đầu, dữ liệu mẫu phải qua được luật kiểm tra bài.
       - run: npx payload migrate
       - run: npm run nap-du-lieu
       - run: npm run kiem-tra
+      - name: Kiểm thử tích hợp (phân quyền, đơn hàng, báo giá trên database)
+        run: npm run test:tich-hop
       - run: npm run build

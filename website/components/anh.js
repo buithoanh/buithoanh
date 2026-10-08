@@ -5,7 +5,7 @@ const H = 600;
 
 export const anhTrangChu = {
   src: "/anh/tam/xe-van-dich-vu.svg",
-  alt: "Minh hoạ xe van dịch vụ VC Mobile Care đỗ cạnh ô tô bị hỏng bên đường, thợ đang tới kiểm tra",
+  alt: "Minh hoạ xe van dịch vụ ThợTới đỗ cạnh ô tô bị hỏng bên đường, thợ đang tới kiểm tra",
   width: W,
   height: H,
 };

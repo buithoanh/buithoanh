@@ -15,7 +15,7 @@ Phong cách viết theo `.claude/agents/marketing-content-creator.md`, chiến l
 
 ## Kết nối
 Cần hai biến môi trường. Thiếu thì dừng và hướng dẫn người dùng tạo:
-- `VCMC_URL`: địa chỉ web, ví dụ `https://vcmobilecare.vn`.
+- `VCMC_URL`: địa chỉ web, ví dụ `https://thotoi.vn`.
 - `VCMC_API_KEY`: khoá API của tài khoản "Agent SEO Editor" (vai trò **Biên tập**). Quản trị tạo ở admin:
   Người dùng → Tạo mới → vai trò Biên tập → bật "Enable API Key" → Lưu.
 

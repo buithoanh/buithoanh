@@ -1,4 +1,4 @@
-# Website VC Mobile Care
+# Website ThợTới
 
 Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tới đó", kèm CMS (trang quản trị) để đội marketing viết, duyệt, đăng bài mà không cần biết Git.
 
@@ -11,22 +11,29 @@ Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tớ
 
 | Mục | Dùng để |
 |---|---|
+| Đơn hàng → Đơn hàng | Đơn đặt lịch và gọi gấp (khẩn cấp luôn ở đầu). Đổi trạng thái theo thứ tự, xem lịch sử, nguồn khách, giá sơ bộ lúc đặt. |
+| Bảng giá & danh mục | Danh mục dịch vụ (bật/tắt nhận đặt, báo giá sơ bộ), hạng mục giá (công cố định, phụ tùng theo phân khúc A–D), **nhật ký đổi giá** (tự ghi), phí chung – bảo hành – phân khúc, hãng và dòng xe (nút đồng bộ VCparts). |
+| Vùng phục vụ & lịch | Quận (thời gian thợ tới), phường (bật/tắt), giờ nhận đơn gấp, khung giờ đặt lịch (giới hạn đơn mỗi khung), ngày nghỉ. |
+| Khách hàng → Đánh giá hiển thị | Đánh giá thật của khách để hiện trên web. |
 | Nội dung → Bài cẩm nang / Trang dịch vụ | Viết, sửa, xem trước, đăng bài. Mỗi bài lưu lịch sử phiên bản. |
-| SEO → Từ khoá SEO | Bộ từ khoá (mỗi từ khoá một bài), trạng thái, nút **"AI viết bản nháp"**. |
-| SEO → Kế hoạch SEO | Lịch đăng theo tháng, quy tắc nội dung. |
-| Khách hàng → Lịch hẹn | Lịch khách đặt từ form `/dat-lich/`. Cập nhật trạng thái: đã gọi, đã hẹn thợ… |
-| Hệ thống → Thông tin liên hệ | Hotline, Zalo, email, quận phục vụ. Sửa là web đổi ngay. |
-| Hệ thống → Người dùng | Tài khoản và vai trò. |
+| SEO → Từ khoá SEO, Kế hoạch SEO | Bộ từ khoá (nút **"AI viết bản nháp"**), lịch đăng, quy tắc. |
+| Hệ thống → Cấu hình chung | Hotline, Zalo OA, pháp nhân, MST, địa chỉ, điểm Google, sự cố trên màn gọi gấp. Sửa là web đổi ngay. |
+| Hệ thống → Người dùng | Tài khoản, vai trò, khoá API (agent SEO Editor, phần mềm điều phối). |
+
+Trang `/quan-tri/` là bảng điều khiển nội dung & SEO (xem bên dưới). API cho giao diện và cho VCsoft: `docs/api.md`.
+Việc backend đã làm, chưa làm, tích hợp đang giả lập: `docs/BAN-GIAO-BE.md`.
 
 ### Vai trò
 
 | Vai trò | Được làm |
 |---|---|
-| Quản trị | Mọi việc, thêm người dùng |
-| Duyệt bài | Đăng bài, tick "Giá đã duyệt", sửa thông tin liên hệ, xoá bài |
-| Biên tập | Viết và sửa bản nháp. **Không đăng được.** |
+| Quản trị | Mọi việc, thêm người dùng, sửa tay trạng thái đơn đã xong |
+| Quản lý dịch vụ | Sửa giá, danh mục, vùng, giờ, ngày nghỉ; duyệt và đăng bài; xử lý đơn |
+| Biên tập nội dung (VCmedia) | Viết, sửa bản nháp, tải ảnh, gửi duyệt. **Không đăng, không sửa giá, không xem đơn.** |
+| Marketing | Viết nháp, quản lý đánh giá hiển thị (mã khuyến mãi, số liệu: P1) |
+| Điều phối | Xem, nhập đơn, đổi trạng thái đơn (người hoặc tài khoản máy của phần mềm điều phối có khoá API) |
 
-Người đầu tiên tạo tài khoản ở `/admin` tự thành Quản trị.
+Người đầu tiên tạo tài khoản ở `/admin` tự thành Quản trị. Vai trò "Duyệt bài" cũ được migration đổi thành "Quản lý dịch vụ".
 
 ## Quy trình một bài (có AI hỗ trợ, có người duyệt)
 
@@ -58,17 +65,22 @@ Khi nối phải giữ hai luật: chỉ lấy trang được đánh dấu công
 | Đường dẫn | Nội dung |
 |---|---|
 | `payload.config.ts` | Cấu hình CMS: database, các bảng, trình soạn thảo, tiếng Việt |
-| `collections/` | Bảng dữ liệu: bài cẩm nang, trang dịch vụ, từ khoá, lịch hẹn, ảnh, người dùng |
-| `globals/` | Thông tin liên hệ, kế hoạch SEO |
+| `collections/` | Bảng dữ liệu: đơn hàng, danh mục và giá, xe, quận/phường, đánh giá, bài cẩm nang, trang dịch vụ, từ khoá, ảnh, người dùng |
+| `globals/` | Cấu hình chung, phí chung, giờ nhận đơn, kế hoạch SEO |
+| `lib/cong-khai.ts` | Dữ liệu công khai cho từng màn (bảng giá, báo giá sơ bộ, vùng, khung giờ); trang server và `/api/trang/...` dùng chung |
+| `lib/don/` | Tạo đơn, kiểm tra đầu vào, luồng trạng thái, link theo dõi |
+| `lib/tich-hop/` | Adapter tích hợp ngoài: bản đồ, điều phối, Zalo ZNS, SMS, VCparts (bản thật + giả lập) |
+| `lib/*.mjs` | Phần thuần, có kiểm thử: tính giá, biển số, số điện thoại, vùng, khung giờ |
+| `tests/` | Kiểm thử đơn vị (`don-vi/`) và tích hợp (`tich-hop/`) |
 | `lib/kiem-tra.mjs` | Luật kiểm tra bài (dùng khi lưu/đăng và trong `npm run kiem-tra`) |
-| `lib/bai.ts`, `lib/quyen.ts` | Trường dùng chung, hook duyệt bài, phân quyền |
+| `lib/bai.ts`, `lib/quyen.ts` | Trường dùng chung, hook duyệt bài, phân quyền 5 vai trò |
 | `lib/ai/` | Gọi Claude viết bài, luồng tạo bản nháp |
 | `lib/vcwiki.ts` | Cổng tra VCwiki (chờ nối) |
 | `lib/cms.js` | Web công khai đọc dữ liệu từ CMS |
 | `app/(frontend)/` | Giao diện web công khai |
 | `app/(payload)/` | Trang admin và API của Payload (file sinh tự động, không sửa tay) |
 | `migrations/` | Thay đổi cấu trúc database cho production |
-| `du-lieu-mau/` | Dữ liệu ban đầu (6 trang dịch vụ, 2 bài, bộ từ khoá) để nạp lần đầu. Sửa ở đây **không** làm đổi web. |
+| `du-lieu-mau/` | Dữ liệu ban đầu (trang dịch vụ, bài, từ khoá, `bang-gia.json`, `xe.json`, `vung.json`) để nạp lần đầu. Sửa ở đây **không** làm đổi web. |
 | `site.config.mjs` | Tên thương hiệu, slogan, thành phố, địa chỉ web |
 | `app/quan-tri/`, `lib/quan-tri/` | Trang quản trị nội dung & SEO `/quan-tri/` (đọc từ CMS, cần đăng nhập) |
 | `lib/tu-lieu.mjs`, `scripts/so-trung.mjs` | Đọc tư liệu transcript, so bài với transcript để bắt đoạn chép nguyên văn |
@@ -93,7 +105,7 @@ cd website
 cp .env.example .env        # điền DATABASE_URL, PAYLOAD_SECRET (openssl rand -hex 32)
 npm install
 npm run dev                 # http://localhost:3000 và http://localhost:3000/admin
-npm run nap-du-lieu         # lần đầu: nạp 6 trang dịch vụ, 2 bài, 26 từ khoá
+npm run nap-du-lieu         # lần đầu: trang dịch vụ, bài, từ khoá, bảng giá, xe, quận, khung giờ (dữ liệu mẫu)
 ```
 
 Khi chạy `npm run dev`, database tự cập nhật theo code. **Sửa cấu trúc bảng (thêm/bớt trường) xong thì tạo migration** trước khi đưa lên server:
@@ -104,13 +116,20 @@ NODE_ENV=production npm run migrate:create -- ten-thay-doi
 
 Lệnh khác: `npm run kiem-tra` (kiểm tra mọi bài đã đăng), `npm run typecheck`, `npm run build`, `npm start`.
 
+Kiểm thử: `npm test` (tính giá, biển số, vùng, khung giờ, trạng thái đơn; không cần database) và
+`npm run test:tich-hop` (phân quyền, đơn hàng, báo giá trên database đã nạp dữ liệu mẫu). CI chạy cả hai.
+
+`npm run nap-du-lieu` khi chạy thử còn tạo tài khoản thử cho từng vai trò (`quantri@thotoi.test`, `quanly@`, `bientap@`,
+`marketing@`, `dieuphoi@`; mật khẩu `ThoToi-ThuNghiem-2026` hoặc biến `MAT_KHAU_TAI_KHOAN_THU`), đơn mẫu và đánh giá mẫu.
+Chạy trên production thì không tạo những thứ đó.
+
 ## Đưa lên server
 
 Web giờ cần server chạy liên tục (không còn là trang tĩnh trên Cloudflare Pages). Cách gọn nhất là một VPS có Docker:
 
 ```bash
 git clone … && cd buithoanh/website
-cp .env.example .env          # điền PAYLOAD_SECRET, POSTGRES_PASSWORD, SITE_URL, ANTHROPIC_API_KEY
+cp .env.example .env          # điền PAYLOAD_SECRET, POSTGRES_PASSWORD, SITE_URL, ANTHROPIC_API_KEY và khoá tích hợp
 docker compose up -d --build  # web + PostgreSQL; migration tự chạy khi khởi động
 docker compose run --rm cong-cu npm run nap-du-lieu   # lần đầu
 ```
@@ -128,8 +147,8 @@ Sao lưu: database (volume `db`, dùng `pg_dump`) và ảnh tải lên (volume `
 ## Việc còn thiếu
 
 - **Nối VCwiki** (chờ tài liệu API).
-- Điền hotline, Zalo, email, quận phục vụ trong admin → Thông tin liên hệ.
-- Thông báo khi có lịch hẹn mới (Gmail hoặc Zalo) — hiện chỉ xem được trong admin.
+- Điền hotline, Zalo, pháp nhân trong admin → Cấu hình chung; duyệt lại bảng giá, quận, khung giờ (đang là dữ liệu mẫu).
+- Khoá tích hợp thật: bản đồ, điều phối, Zalo ZNS, SMS, VCparts (xem `docs/BAN-GIAO-BE.md`).
 - Kéo số liệu Google Search Console về từng từ khoá để chọn bài cần viết lại.
 - Chọn nơi đặt server và sao lưu.
 - Ảnh việc thật: tải lên ở admin → Ảnh, chèn vào bài bằng trình soạn thảo.
