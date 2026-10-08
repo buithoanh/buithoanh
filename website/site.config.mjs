@@ -17,6 +17,9 @@ const site = {
   allowIndex: process.env.ALLOW_INDEX === "1",
   // Nơi nhận form đặt lịch (API của VCsoft). Để trống thì form chuyển sang gọi/Zalo.
   bookingEndpoint: process.env.NEXT_PUBLIC_BOOKING_ENDPOINT || "",
+  // Repo GitHub chứa website. Trang quản trị (/quan-tri/) dùng để mở trình sửa bài và tạo bài mới.
+  repo: "buithoanh/buithoanh",
+  repoBranch: "main",
 };
 
 export default site;

@@ -1,5 +1,5 @@
 ---
-title: "Đọc lỗi ô tô tận nơi bằng máy chẩn đoán OBD | VC Mobile Care"
+title: "Đọc lỗi ô tô tận nơi bằng máy chẩn đoán OBD"
 description: "Đèn check engine sáng? Thợ mang máy chẩn đoán OBD tới đọc lỗi, giải thích nguyên nhân và báo giá trước khi sửa. Đặt lịch VC Mobile Care."
 keyword: "đọc lỗi ô tô tận nơi"
 ten: "Đọc lỗi, chẩn đoán"

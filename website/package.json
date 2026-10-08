@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "kiem-tra": "node scripts/kiem-tra-bai.mjs",
-    "build": "node scripts/kiem-tra-bai.mjs && next build && node scripts/sau-build.mjs",
+    "build": "node scripts/kiem-tra-bai.mjs && next build && node scripts/quan-tri/index.mjs && node scripts/sau-build.mjs",
+    "quan-tri": "node scripts/quan-tri/index.mjs",
     "start": "npx serve out"
   },
   "dependencies": {
