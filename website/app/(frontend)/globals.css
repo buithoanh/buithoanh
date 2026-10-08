@@ -292,3 +292,6 @@ form.booking button { justify-self: start; }
 /* Bảng từ trình soạn thảo CMS: nội dung ô được bọc trong <p> */
 .prose .lexical-table-container { overflow-x: auto; }
 .prose td p, .prose th p { margin: 0; }
+
+.field-error { display: block; color: #a8320a; font-size: 14px; font-weight: 600; margin-top: 4px; }
+form.booking .check { display: flex; gap: 8px; align-items: flex-start; font-weight: 400; }

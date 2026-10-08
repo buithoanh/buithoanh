@@ -1,13 +1,14 @@
 import Link from "next/link";
 import site from "../../../site.config.mjs";
-import { layDanhSachDichVu, laySite } from "../../../lib/cms";
+import { layPayload, laySite } from "../../../lib/cms";
+import { layTrangDatLich } from "../../../lib/cong-khai";
 import { CallButton, ZaloButton } from "../../../components/Contact";
 import BookingForm from "./BookingForm";
 
 export const metadata = { title: "Đặt lịch thợ tới tận nơi", description: `Đặt lịch bảo dưỡng, thay ắc quy, lốp, phanh tận nơi tại ${site.city}. Báo giá trước khi làm.`, alternates: { canonical: "/dat-lich/" } };
 
 export default async function BookingPage() {
-  const [s, dichVu] = await Promise.all([laySite(), layDanhSachDichVu()]);
+  const [s, duLieu] = await Promise.all([laySite(), layPayload().then(layTrangDatLich)]);
   return (
     <>
       <section className="page-hero page-hero-compact">
@@ -19,7 +20,7 @@ export default async function BookingPage() {
       </section>
       <div className="wrap page-body">
         <div className="form-card">
-          <BookingForm services={dichVu.map((d) => d.ten)} endpoint={s.bookingEndpoint} hotline={s.hotline} zalo={s.zalo} />
+          <BookingForm duLieu={duLieu} endpoint={site.bookingEndpoint} hotline={s.hotline} />
         </div>
         <aside className="side" aria-label="Cần thợ gấp">
           <div className="side-card side-call">

@@ -16,7 +16,7 @@ faq:
     a: "Không nên. Hãy dừng xe ở nơi an toàn và gọi thợ. Nếu có rò dầu phanh hoặc mất áp lực phanh, xe cần được kéo về xưởng, không lái tiếp."
 ---
 
-Phanh là hệ thống an toàn quan trọng nhất trên xe. Dịch vụ **thay má phanh ô tô tận nơi** của VC Mobile Care giúp bạn kiểm tra và thay má phanh ngay tại nơi xe đang đỗ, không cần chờ đợi ở xưởng. Thợ kiểm tra cả đĩa phanh, dầu phanh và báo rõ tình trạng trước khi làm.
+Phanh là hệ thống an toàn quan trọng nhất trên xe. Dịch vụ **thay má phanh ô tô tận nơi** của ThợTới giúp bạn kiểm tra và thay má phanh ngay tại nơi xe đang đỗ, không cần chờ đợi ở xưởng. Thợ kiểm tra cả đĩa phanh, dầu phanh và báo rõ tình trạng trước khi làm.
 
 ## Dấu hiệu cần kiểm tra phanh
 
@@ -62,10 +62,10 @@ Rò dầu phanh, hỏng xi lanh, hỏng tổng phanh, lỗi hệ thống ABS, ho
 
 Với xe điện và hybrid, hệ thống phanh có kết hợp phanh tái sinh. Chúng tôi chỉ làm các hạng mục không ảnh hưởng bảo hành hãng; các trường hợp khác bạn nên làm tại đại lý.
 
-## Cam kết của VC Mobile Care
+## Cam kết của ThợTới
 
 - **Báo giá trước khi làm**, cho bạn xem má phanh cũ và độ mòn đĩa.
 - **Giữ sạch xe**: thợ đi xe van, có lót ghế và lót sàn khi cần vào xe chạy thử.
 - **Thanh toán VietQR hoặc tiền mặt**, có hoá đơn điện tử.
 
-Phanh có dấu hiệu lạ? Đặt lịch VC Mobile Care để thợ tới kiểm tra tận nơi. Bạn cũng có thể kết hợp với [bảo dưỡng định kỳ](/dich-vu/bao-duong-dinh-ky/) trong cùng một lần hẹn.
+Phanh có dấu hiệu lạ? Đặt lịch ThợTới để thợ tới kiểm tra tận nơi. Bạn cũng có thể kết hợp với [bảo dưỡng định kỳ](/dich-vu/bao-duong-dinh-ky/) trong cùng một lần hẹn.

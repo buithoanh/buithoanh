@@ -1,6 +1,6 @@
 ---
 title: "Đọc lỗi ô tô tận nơi bằng máy chẩn đoán OBD"
-description: "Đèn check engine sáng? Thợ mang máy chẩn đoán OBD tới đọc lỗi, giải thích nguyên nhân và báo giá trước khi sửa. Đặt lịch VC Mobile Care."
+description: "Đèn check engine sáng? Thợ mang máy chẩn đoán OBD tới đọc lỗi, giải thích nguyên nhân và báo giá trước khi sửa. Đặt lịch ThợTới."
 keyword: "đọc lỗi ô tô tận nơi"
 ten: "Đọc lỗi, chẩn đoán"
 tomTat: "Mang máy chẩn đoán OBD tới đọc lỗi, giải thích đèn check engine và tư vấn hướng sửa."
@@ -16,7 +16,7 @@ faq:
     a: "Chúng tôi chỉ đọc thông tin cơ bản không ảnh hưởng bảo hành. Lỗi liên quan pin và hệ thống điện cao áp nên được kiểm tra tại đại lý chính hãng."
 ---
 
-Đèn check engine bỗng sáng vàng trên đồng hồ và bạn không biết xe đang gặp vấn đề gì? Dịch vụ **đọc lỗi ô tô tận nơi** của VC Mobile Care đưa thợ mang máy chẩn đoán OBD tới chỗ xe đỗ. Thợ đọc mã lỗi, kiểm tra thực tế và giải thích cho bạn bằng lời dễ hiểu, trước khi quyết định có cần sửa hay không.
+Đèn check engine bỗng sáng vàng trên đồng hồ và bạn không biết xe đang gặp vấn đề gì? Dịch vụ **đọc lỗi ô tô tận nơi** của ThợTới đưa thợ mang máy chẩn đoán OBD tới chỗ xe đỗ. Thợ đọc mã lỗi, kiểm tra thực tế và giải thích cho bạn bằng lời dễ hiểu, trước khi quyết định có cần sửa hay không.
 
 ## Khi nào cần đọc lỗi
 
@@ -59,10 +59,10 @@ Những lỗi cần tháo lớn như hộp số, hệ thống phun nhiên liệu
 
 Với xe điện và xe hybrid, chúng tôi chỉ đọc thông tin cơ bản và không can thiệp vào hệ thống điện cao áp, để không ảnh hưởng bảo hành hãng.
 
-## Cam kết của VC Mobile Care
+## Cam kết của ThợTới
 
 - **Báo giá trước khi làm**, giải thích rõ lỗi gì, vì sao.
 - **Giữ sạch xe**: thợ đi xe van, trải lót ghế, lót sàn trước khi ngồi vào xe.
 - **Thanh toán VietQR hoặc tiền mặt**, có hoá đơn điện tử.
 
-Đèn cảnh báo sáng? Gọi VC Mobile Care để được đọc lỗi ngay tại nơi xe đỗ.
+Đèn cảnh báo sáng? Gọi ThợTới để được đọc lỗi ngay tại nơi xe đỗ.

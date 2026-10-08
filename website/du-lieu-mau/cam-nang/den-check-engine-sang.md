@@ -93,7 +93,7 @@ Bạn nên gọi thợ khi:
 - Đèn đã tắt rồi lại sáng nhiều lần.
 - Bạn không chắc xe có an toàn để tiếp tục lái hay không.
 
-Trong những tình huống này, việc cố lái xe đi xa để tìm gara có thể làm hư hỏng nặng hơn. Với dịch vụ [đọc lỗi ô tô tận nơi](/dich-vu/doc-loi-chan-doan/) của VC Mobile Care, thợ mang máy chẩn đoán đến chỗ xe đang dừng tại Hà Nội. Thợ đọc mã, xem dữ liệu cảm biến, giải thích rõ nguyên nhân và tư vấn hướng xử lý trước khi làm bất cứ việc gì. Xe dừng đâu, thợ tới đó.
+Trong những tình huống này, việc cố lái xe đi xa để tìm gara có thể làm hư hỏng nặng hơn. Với dịch vụ [đọc lỗi ô tô tận nơi](/dich-vu/doc-loi-chan-doan/) của ThợTới, thợ mang máy chẩn đoán đến chỗ xe đang dừng tại Hà Nội. Thợ đọc mã, xem dữ liệu cảm biến, giải thích rõ nguyên nhân và tư vấn hướng xử lý trước khi làm bất cứ việc gì. Xe dừng đâu, thợ tới đó.
 
 ## Tóm lại
 

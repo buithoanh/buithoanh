@@ -111,7 +111,7 @@ Tự kích bình ô tô phù hợp khi bạn có đủ dụng cụ, xe thông th
 - Xe nổ được nhưng ít hôm sau lại hết điện, hoặc đèn báo sạc trên táp lô sáng.
 - Bạn không tự tin làm đúng các bước an toàn.
 
-Lúc này, ắc quy có thể đã xuống cấp hoặc hệ thống sạc có lỗi. Với dịch vụ [thay ắc quy ô tô tận nơi](/dich-vu/ac-quy/) của VC Mobile Care, thợ đến chỗ xe đang dừng tại Hà Nội. Thợ kiểm tra tình trạng ắc quy, hệ thống sạc, tư vấn có cần thay hay không và lắp ắc quy phù hợp với xe nếu cần. Xe dừng đâu, thợ tới đó.
+Lúc này, ắc quy có thể đã xuống cấp hoặc hệ thống sạc có lỗi. Với dịch vụ [thay ắc quy ô tô tận nơi](/dich-vu/ac-quy/) của ThợTới, thợ đến chỗ xe đang dừng tại Hà Nội. Thợ kiểm tra tình trạng ắc quy, hệ thống sạc, tư vấn có cần thay hay không và lắp ắc quy phù hợp với xe nếu cần. Xe dừng đâu, thợ tới đó.
 
 ## Tóm lại
 

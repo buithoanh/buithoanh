@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { batDauAIVietNhap } from "../lib/ai/viet-nhap";
-import { chiNguoiDuyet, daDangNhap } from "../lib/quyen";
+import { chiNguoiDuyet, chiNguoiViet, daDangNhap } from "../lib/quyen";
 
 export const NHOM_TU_KHOA = [
   "Khẩn cấp", "Ắc quy", "Lốp", "Tận nơi", "Bảo dưỡng", "Chẩn đoán", "Xe điện", "Bản đồ", "Thông tin",
@@ -15,7 +15,7 @@ export const TuKhoa: CollectionConfig = {
     group: "SEO",
     description: "Mỗi từ khoá chỉ một bài. Mở một từ khoá chưa có bài rồi bấm \"AI viết bản nháp\".",
   },
-  access: { read: daDangNhap, create: daDangNhap, update: daDangNhap, delete: chiNguoiDuyet },
+  access: { read: daDangNhap, create: chiNguoiViet, update: chiNguoiViet, delete: chiNguoiDuyet },
   endpoints: [
     {
       path: "/:id/ai-viet-nhap",

@@ -16,7 +16,7 @@ faq:
     a: "Bật đèn cảnh báo, đưa xe vào làn dừng khẩn cấp nếu có thể, mọi người ra khỏi xe và đứng sau rào chắn, đặt biển cảnh báo rồi gọi cứu hộ. Không tự thay lốp sát làn xe chạy."
 ---
 
-Đang đi thì thấy xe lệch lái, đèn báo áp suất lốp sáng, hoặc sáng ra thấy một bánh xẹp lép? Dịch vụ **vá lốp ô tô lưu động** của VC Mobile Care đưa thợ và đồ nghề tới tận chỗ xe dừng. Thợ vá, thay lốp dự phòng, đảo lốp và bơm lại đúng áp suất ngay tại chỗ, để bạn tiếp tục hành trình an toàn.
+Đang đi thì thấy xe lệch lái, đèn báo áp suất lốp sáng, hoặc sáng ra thấy một bánh xẹp lép? Dịch vụ **vá lốp ô tô lưu động** của ThợTới đưa thợ và đồ nghề tới tận chỗ xe dừng. Thợ vá, thay lốp dự phòng, đảo lốp và bơm lại đúng áp suất ngay tại chỗ, để bạn tiếp tục hành trình an toàn.
 
 ## Khi nào cần gọi thợ lốp
 
@@ -60,10 +60,10 @@ Lốp runflat cho phép chạy thêm một quãng ngắn khi mất hơi, nhưng 
 
 Nếu mâm bị cong, nứt, ốc bánh gãy, hoặc xe bị va chạm làm hỏng hệ thống treo, lái, thợ sẽ không cố lắp bánh để chạy tiếp. Khi đó chúng tôi sắp xếp [cứu hộ kéo xe](/dich-vu/cuu-ho-keo-xe/) về xưởng đối tác Auto Speedy. Việc căn chỉnh góc đặt bánh xe cũng cần làm ở xưởng có máy chuyên dụng.
 
-## Cam kết của VC Mobile Care
+## Cam kết của ThợTới
 
 - **Báo giá trước khi làm**, nói rõ vá được hay phải thay.
 - **Giữ sạch xe**: thợ đi xe van, có lót ghế, lót sàn khi cần vào trong xe.
 - **Thanh toán VietQR hoặc tiền mặt**, có hoá đơn điện tử.
 
-Bạn có thể kết hợp kiểm tra [má phanh](/dich-vu/phanh/) khi thợ đã tháo bánh. Gọi VC Mobile Care khi xe gặp sự cố lốp.
+Bạn có thể kết hợp kiểm tra [má phanh](/dich-vu/phanh/) khi thợ đã tháo bánh. Gọi ThợTới khi xe gặp sự cố lốp.

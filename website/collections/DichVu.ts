@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { hookKiemTraVaDuyet, truongDuyet, truongFaq, truongSeo, truongSlug, truongTuLieu, xemTruoc } from "../lib/bai";
-import { chiNguoiDuyet, daDangNhap, docBaiDaDang } from "../lib/quyen";
+import { chiNguoiDuyet, chiNguoiViet, daDangNhap, docBaiDaDang } from "../lib/quyen";
 
 export const DichVu: CollectionConfig = {
   slug: "dich-vu",
@@ -13,7 +13,7 @@ export const DichVu: CollectionConfig = {
   },
   defaultSort: "thuTu",
   versions: { drafts: true, maxPerDoc: 50 },
-  access: { read: docBaiDaDang, create: daDangNhap, update: daDangNhap, delete: chiNguoiDuyet, readVersions: daDangNhap },
+  access: { read: docBaiDaDang, create: chiNguoiViet, update: chiNguoiViet, delete: chiNguoiDuyet, readVersions: daDangNhap },
   hooks: { beforeChange: [hookKiemTraVaDuyet("dich-vu")] },
   fields: [
     { name: "ten", label: "Tên dịch vụ", type: "text", required: true, admin: { description: "Ngắn, ví dụ: Thay ắc quy" } },

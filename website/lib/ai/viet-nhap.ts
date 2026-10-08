@@ -39,10 +39,11 @@ export async function batDauAIVietNhap(
 async function chayNen(payload: Payload, id: string) {
   try {
     const tk = await payload.findByID({ collection: "tu-khoa", id, depth: 1 });
-    const [dichVu, baiDaCo, caiDat] = await Promise.all([
+    const [dichVu, baiDaCo, caiDat, quan] = await Promise.all([
       payload.find({ collection: "dich-vu", limit: 100, depth: 0, pagination: false, select: { slug: true, ten: true } }),
       payload.find({ collection: "cam-nang", limit: 1000, depth: 0, pagination: false, draft: true, select: { slug: true, title: true, keyword: true } }),
       payload.findGlobal({ slug: "cai-dat" }),
+      payload.find({ collection: "quan", where: { dangPhucVu: { equals: true } }, sort: "thuTu", limit: 100, depth: 0, pagination: false }),
     ]);
     const dv = typeof tk.dichVu === "object" && tk.dichVu ? { slug: String(tk.dichVu.slug), ten: String(tk.dichVu.ten) } : null;
 
@@ -56,7 +57,7 @@ async function chayNen(payload: Payload, id: string) {
       thuongHieu: {
         ten: site.name,
         slogan: site.slogan,
-        thanhPho: caiDat.khuVuc?.length ? `${caiDat.khuVuc.map((k) => k.ten).join(", ")} (${site.city})` : site.city,
+        thanhPho: quan.docs.length ? `${quan.docs.map((k) => k.ten).join(", ")} (${site.city})` : site.city,
         xuongDoiTac: caiDat.xuongDoiTac || site.partnerWorkshop,
         congTyMe: site.parent,
       },

@@ -1,6 +1,6 @@
 import { addDataAndFileToRequest, type CollectionConfig } from "payload";
 import { hookKiemTraVaDuyet, truongDuyet, truongFaq, truongSeo, truongSlug, truongTuLieu, xemTruoc } from "../lib/bai";
-import { chiNguoiDuyet, daDangNhap, docBaiDaDang } from "../lib/quyen";
+import { chiNguoiDuyet, chiNguoiViet, daDangNhap, docBaiDaDang } from "../lib/quyen";
 import { nhanBanNhapTuNgoai } from "../lib/ai/viet-nhap";
 import { NHOM_TU_KHOA } from "./TuKhoa";
 
@@ -15,7 +15,7 @@ export const CamNang: CollectionConfig = {
   },
   defaultSort: "-ngay",
   versions: { drafts: true, maxPerDoc: 50 },
-  access: { read: docBaiDaDang, create: daDangNhap, update: daDangNhap, delete: chiNguoiDuyet, readVersions: daDangNhap },
+  access: { read: docBaiDaDang, create: chiNguoiViet, update: chiNguoiViet, delete: chiNguoiDuyet, readVersions: daDangNhap },
   hooks: { beforeChange: [hookKiemTraVaDuyet("cam-nang")] },
   endpoints: [
     {

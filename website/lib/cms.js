@@ -17,13 +17,16 @@ const chiBaiDaDang = (draft) => (draft ? {} : { _status: { equals: "published" }
 
 export const laySite = cache(async () => {
   const payload = await layPayload();
-  const c = await payload.findGlobal({ slug: "cai-dat", depth: 0 });
+  const [c, quan] = await Promise.all([
+    payload.findGlobal({ slug: "cai-dat", depth: 0 }),
+    payload.find({ collection: "quan", where: { dangPhucVu: { equals: true } }, sort: "thuTu", limit: 100, depth: 0, pagination: false }),
+  ]);
   return {
     ...siteConfig,
     hotline: c.hotline || "",
     zalo: c.zalo || "",
     email: c.email || "",
-    serviceAreas: (c.khuVuc || []).map((k) => k.ten),
+    serviceAreas: quan.docs.map((q) => q.ten),
     partnerWorkshop: c.xuongDoiTac || siteConfig.partnerWorkshop,
   };
 });

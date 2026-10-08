@@ -1,5 +1,5 @@
 import type { CollectionConfig } from "payload";
-import { chiQuanTri, daDangNhap, laQuanTri, truongChiQuanTri } from "../lib/quyen";
+import { VAI_TRO, chiQuanTri, daDangNhap, laQuanTri, truongChiQuanTri } from "../lib/quyen";
 
 export const Users: CollectionConfig = {
   slug: "users",
@@ -9,8 +9,8 @@ export const Users: CollectionConfig = {
     maxLoginAttempts: 5,
     lockTime: 15 * 60 * 1000,
     tokenExpiration: 8 * 60 * 60,
-    // Cho agent bên ngoài (SEO Editor trong Claude Code) gọi API bằng khoá. Tạo một tài khoản quyền
-    // "Biên tập" riêng cho agent rồi bật khoá API ở đó: agent chỉ tạo được bản nháp, không đăng được.
+    // Cho hệ thống bên ngoài gọi API bằng khoá: agent SEO Editor (tài khoản vai trò Biên tập: chỉ tạo bản nháp)
+    // và phần mềm điều phối (tài khoản vai trò Điều phối: chỉ xem, cập nhật đơn).
     useAPIKey: true,
   },
   access: {
@@ -42,11 +42,7 @@ export const Users: CollectionConfig = {
       defaultValue: "bienTap",
       saveToJWT: true,
       access: { create: truongChiQuanTri, update: truongChiQuanTri },
-      options: [
-        { label: "Quản trị", value: "quanTri" },
-        { label: "Duyệt bài (được đăng bài, xác nhận giá)", value: "duyetBai" },
-        { label: "Biên tập (viết, sửa nháp)", value: "bienTap" },
-      ],
+      options: [...VAI_TRO],
     },
   ],
 };

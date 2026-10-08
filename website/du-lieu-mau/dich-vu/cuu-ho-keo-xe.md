@@ -1,6 +1,6 @@
 ---
 title: "Cứu hộ ô tô Hà Nội – kéo xe về xưởng Auto Speedy"
-description: "Xe hỏng không sửa được tại chỗ? Chúng tôi cứu hộ, kéo xe về xưởng đối tác Auto Speedy và báo giá trước khi sửa. Gọi VC Mobile Care khi cần."
+description: "Xe hỏng không sửa được tại chỗ? Chúng tôi cứu hộ, kéo xe về xưởng đối tác Auto Speedy và báo giá trước khi sửa. Gọi ThợTới khi cần."
 keyword: "cứu hộ ô tô Hà Nội"
 ten: "Cứu hộ, kéo xe"
 tomTat: "Xe hỏng nặng không sửa tại chỗ được? Kéo xe an toàn về xưởng đối tác Auto Speedy."
@@ -16,7 +16,7 @@ faq:
     a: "Có. Xưởng kiểm tra và báo giá trước, chỉ sửa khi bạn đồng ý."
 ---
 
-Không phải sự cố nào cũng sửa được bên lề đường. Khi xe hỏng nặng hoặc không còn an toàn để chạy, dịch vụ **cứu hộ ô tô Hà Nội** của VC Mobile Care sẽ sắp xếp đưa xe về xưởng Auto Speedy, xưởng đối tác của tập đoàn VC Phồn Vinh. Bạn có một đầu mối duy nhất từ lúc xe dừng tới lúc xe được sửa xong.
+Không phải sự cố nào cũng sửa được bên lề đường. Khi xe hỏng nặng hoặc không còn an toàn để chạy, dịch vụ **cứu hộ ô tô Hà Nội** của ThợTới sẽ sắp xếp đưa xe về xưởng Auto Speedy, xưởng đối tác của tập đoàn VC Phồn Vinh. Bạn có một đầu mối duy nhất từ lúc xe dừng tới lúc xe được sửa xong.
 
 ## Khi nào cần cứu hộ kéo xe
 
@@ -67,11 +67,11 @@ Nếu xe của bạn còn bảo hành hãng, đặc biệt là xe điện, hãy 
 - Tình trạng xe: còn nổ máy không, có lăn bánh được không, có bị kẹt phanh tay không.
 - Giấy tờ xe và chìa khoá để bàn giao.
 
-## Cam kết của VC Mobile Care
+## Cam kết của ThợTới
 
 - **Báo giá trước khi làm**, cả phần cứu hộ và phần sửa chữa.
 - **Một đầu mối** từ lúc xe dừng tới lúc nhận lại xe.
 - **Thanh toán VietQR hoặc tiền mặt**, có hoá đơn điện tử.
 - **Tôn trọng xe của bạn**: thợ dùng lót ghế, lót sàn khi cần ngồi vào xe.
 
-Xe gặp sự cố trên đường? Gọi VC Mobile Care. Xe dừng đâu, thợ tới đó.
+Xe gặp sự cố trên đường? Gọi ThợTới. Xe dừng đâu, thợ tới đó.

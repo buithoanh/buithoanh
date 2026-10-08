@@ -1,6 +1,6 @@
 ---
 title: "Bảo dưỡng ô tô tại nhà Hà Nội – thợ tới tận nơi"
-description: "Bảo dưỡng định kỳ ngay tại nhà hoặc nơi làm việc: thay dầu, lọc, kiểm tra tổng quát. Báo giá trước khi làm, giữ sạch xe. Đặt lịch với VC Mobile Care."
+description: "Bảo dưỡng định kỳ ngay tại nhà hoặc nơi làm việc: thay dầu, lọc, kiểm tra tổng quát. Báo giá trước khi làm, giữ sạch xe. Đặt lịch với ThợTới."
 keyword: "bảo dưỡng ô tô tại nhà"
 ten: "Bảo dưỡng định kỳ"
 tomTat: "Thay dầu, thay lọc và kiểm tra tổng quát ngay nơi xe đỗ, không cần mang xe ra xưởng."
@@ -16,7 +16,7 @@ faq:
     a: "Có. Thợ kiểm tra xe, báo giá từng hạng mục và chỉ làm khi bạn đồng ý."
 ---
 
-Bạn bận rộn và không có thời gian mang xe ra xưởng rồi ngồi chờ? Dịch vụ **bảo dưỡng ô tô tại nhà** của VC Mobile Care đưa thợ và phụ tùng tới tận nơi xe đang đỗ: trước cửa nhà, bãi xe chung cư hay chỗ làm. Bạn vẫn làm việc của mình, xe vẫn được chăm sóc đúng định kỳ. Đúng như tinh thần "Xe dừng đâu, thợ tới đó".
+Bạn bận rộn và không có thời gian mang xe ra xưởng rồi ngồi chờ? Dịch vụ **bảo dưỡng ô tô tại nhà** của ThợTới đưa thợ và phụ tùng tới tận nơi xe đang đỗ: trước cửa nhà, bãi xe chung cư hay chỗ làm. Bạn vẫn làm việc của mình, xe vẫn được chăm sóc đúng định kỳ. Đúng như tinh thần "Xe dừng đâu, thợ tới đó".
 
 ## Khi nào xe cần bảo dưỡng định kỳ
 
@@ -58,11 +58,11 @@ Có những việc cần cầu nâng, máy chuyên dụng hoặc thời gian dà
 
 Với xe điện, chúng tôi chỉ làm các hạng mục không ảnh hưởng tới bảo hành hãng. Những phần liên quan đến pin và hệ thống điện cao áp, bạn nên làm tại đại lý.
 
-## Cam kết của VC Mobile Care
+## Cam kết của ThợTới
 
 - **Báo giá trước khi làm.** Không phát sinh khi bạn chưa đồng ý.
 - **Giữ sạch xe.** Thợ đi xe van, mang đủ đồ lót ghế, lót sàn, khay hứng dầu và khăn lau.
 - **Thanh toán tiện.** Chuyển khoản VietQR hoặc tiền mặt, có hoá đơn điện tử.
 - **Minh bạch.** Bạn được xem phụ tùng cũ và nghe giải thích về tình trạng xe.
 
-Đặt lịch bảo dưỡng tại nhà với VC Mobile Care để giữ xe luôn trong tình trạng tốt mà không mất nửa ngày ở xưởng.
+Đặt lịch bảo dưỡng tại nhà với ThợTới để giữ xe luôn trong tình trạng tốt mà không mất nửa ngày ở xưởng.
