@@ -1,0 +1,66 @@
+/* Khối dùng chung của các màn link riêng (theo dõi, báo giá, thanh toán, đánh giá) và tra cứu xe. */
+.vung { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.vungSat { padding: 0 16px; display: flex; flex-direction: column; gap: 10px; }
+.the {
+  background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo);
+  padding: 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0;
+}
+.theTieuDe { color: var(--toi); font-size: 16px; font-weight: 700; margin: 0; }
+.hang { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; }
+.hang > :first-child { color: var(--chu-phu); }
+.hang > :last-child { text-align: right; overflow-wrap: anywhere; }
+.ke { height: 1px; background: var(--vien); margin: 4px 0; }
+.tong { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.tong b:first-child { color: var(--toi); }
+.tongSo { font-size: 24px; color: var(--nhan); font-weight: 800; white-space: nowrap; }
+.ghiChu { font-size: 12.5px; color: var(--chu-phu); line-height: 1.45; }
+.giua { text-align: center; }
+
+/* Thợ */
+.tho { display: flex; gap: 12px; align-items: center; background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); padding: 12px; }
+.anhTho {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--toi-2); color: #fff; flex: none;
+  display: grid; place-items: center; font-weight: 800; font-size: 15px; overflow: hidden; object-fit: cover;
+}
+.anhThoLon { width: 56px; height: 56px; font-size: 18px; }
+.thoChu { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.35; font-size: 14px; }
+.thoChu b { color: var(--toi); }
+.thoChu span { color: var(--chu-phu); font-size: 13px; }
+.thoLon .thoChu { font-size: 15px; }
+.thoChu .sao { color: var(--nhan); font-weight: 700; white-space: nowrap; font-size: inherit; }
+.xeVan { color: var(--chu) !important; margin-top: 2px; }
+.xeVan b { color: var(--chu); letter-spacing: 0.04em; }
+
+/* Nút cỡ thiết kế màn đơn */
+.nutVien {
+  display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 16px;
+  border-radius: var(--bo); border: 1.5px solid var(--vien-o); background: var(--nen-trang); color: var(--toi);
+  font-weight: 700; font-size: 15px; text-decoration: none; cursor: pointer; text-align: center;
+}
+.nutVien:hover { border-color: var(--toi); color: var(--toi); }
+.nutVien:disabled { opacity: .55; cursor: not-allowed; }
+.nutChu {
+  border: 0; background: transparent; color: var(--toi-2); text-decoration: underline; cursor: pointer;
+  min-height: 44px; font-size: 14px; padding: 0 8px; align-self: center;
+}
+
+/* Màn báo kết quả (đã duyệt, đã gửi…) */
+.ketQua { padding: 24px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+.ketQua h1, .ketQua h2 { font-size: 23px; color: var(--toi); }
+.ketQua p { color: var(--chu-phu); }
+.ketQua .the { width: 100%; text-align: left; gap: 4px; }
+.vongXanh, .vongCam {
+  width: 68px; height: 68px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background: var(--xanh-nhat); color: var(--xanh);
+}
+.vongCam { background: var(--nhan-nhat); color: var(--nhan); }
+
+/* Chân trang ghi chú (link hết hạn…) */
+.chan {
+  margin: 16px; padding: 12px; border-radius: var(--bo); background: var(--vien-nhat);
+  display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; color: var(--chu-xam); line-height: 1.45;
+}
+.chan svg { flex: none; margin-top: 1px; }
+.dayXuong { flex: 1; }
+
+.loi { font-size: 13px; color: var(--do); font-weight: 600; }

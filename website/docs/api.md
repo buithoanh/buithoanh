@@ -1697,6 +1697,11 @@ Ai gọi: công khai, chỉ ai có link (token 32 ký tự ngẫu nhiên). Màn 
 thời điểm), dịch vụ, xe, địa chỉ, khung giờ, số điện thoại **đã che**, giá sơ bộ, `tho` (thợ, vị trí, giờ đến; `null` khi chưa xếp), `viecCanLam`, `thanhToan` (mục 6). Hỏi lại mỗi 30 giây. Link hết hạn 24 giờ sau khi đơn hoàn thành hoặc huỷ: 410 `LINK_HET_HAN`. Không bao giờ tra
 được bằng mã đơn.
 
+Trường thêm (phiên frontend): `tenSuCo` (tên sự cố của đơn gọi gấp, theo `cai-dat.suCoKhanCap`), `giaSoBo.hienThi`
+("1.550.000 – 2.200.000đ"), `linkDanhGia` (đường dẫn `/don/<tokenDanhGia>/danh-gia/` khi đơn đã xong, link đánh giá đã gửi
+và khách chưa chấm; còn lại `null`). `viecCanLam` thêm giá trị `"danhGia"` trong trường hợp đó.
+Trang server `/don/[token]/` gọi thẳng `donTheoToken(payload, token)` trong `lib/don/theo-doi.ts`.
+
 <!-- vi-du:theo-doi -->
 Request:
 ```http
@@ -5408,3 +5413,13 @@ Response `201`:
 | Mã giới thiệu: sửa (tạm dừng, cộng lượt) | | ✓ | | | ✓ | |
 | Yêu cầu doanh nghiệp | | ✓ | ✓ | | ✓ | |
 | Hồ sơ thợ cộng tác, ảnh hồ sơ | | ✓ | ✓ | | | |
+
+## Ghi chú thêm từ frontend (nhóm trang công khai)
+
+- `tomTat` / `giaCongTu` của dịch vụ ("Tiền công từ …", `layBangGia`, `layTrangChu`, `layTrangDichVu`): bỏ qua hạng mục tiền công
+  tính theo đơn vị (`donVi`, vd 15.000đ/km) khi dịch vụ có hạng mục trọn gói, để "từ" không thấp ảo (cứu hộ: 400.000đ thay vì 15.000đ).
+- `layTrangVeChungToi(payload)` trong `lib/ve-chung-toi.ts` (chỉ gọi phía server, không có endpoint HTTP): `soLieu`
+  `{ soXeDaPhucVu (đơn hoàn thành), soThoCoChungChi, soTho }` và `doiTho[]` (thợ đang hoạt động: `ten`, `anh`, `soNamNghe`,
+  `khuVuc[]`, `chungChi[]`, `gioiThieu`; không có số điện thoại, biển số, vị trí).
+- Bản đồ nhúng trên trang chủ / trang khu vực: đặt `GOOGLE_MAPS_EMBED_KEY` (khoá Maps Embed API, giới hạn theo tên miền, khoá này
+  lộ ra trình duyệt nên tách khỏi `GOOGLE_MAPS_API_KEY`). Chưa có thì hiện khung giữ chỗ liệt kê khu vực và thời gian thợ tới.
