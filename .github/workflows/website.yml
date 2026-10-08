@@ -1,11 +1,11 @@
-name: Website – kiểm tra bài và build
+name: Website – kiểm tra và build
 
 on:
   pull_request:
-    paths: ["website/**"]
+    paths: ["website/**", ".github/workflows/website.yml"]
   push:
     branches: [main]
-    paths: ["website/**"]
+    paths: ["website/**", ".github/workflows/website.yml"]
 
 permissions:
   contents: read
@@ -16,6 +16,20 @@ jobs:
     defaults:
       run:
         working-directory: website
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: vc
+          POSTGRES_PASSWORD: vc
+          POSTGRES_DB: vcmobilecare
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U vc" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://vc:vc@localhost:5432/vcmobilecare
+      PAYLOAD_SECRET: chi-dung-cho-ci
+      NODE_ENV: production
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,4 +38,9 @@ jobs:
           cache: npm
           cache-dependency-path: website/package-lock.json
       - run: npm ci
+      - run: npm run typecheck
+      # Migration phải tạo được database từ đầu, dữ liệu mẫu phải qua được luật kiểm tra bài.
+      - run: npx payload migrate
+      - run: npm run nap-du-lieu
+      - run: npm run kiem-tra
       - run: npm run build

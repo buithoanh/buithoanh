@@ -1,10 +1,17 @@
 import Link from "next/link";
 import site from "../site.config.mjs";
+import { cheDoNhap } from "../lib/cms";
 
-export default function Header() {
+export default async function Header() {
+  const xemTruoc = await cheDoNhap();
   return (
     <>
-      {!site.allowIndex && (
+      {xemTruoc && (
+        <div className="staging">
+          Đang xem trước bản nháp (khách không thấy). <a href="/xem-truoc/thoat/">Thoát xem trước</a>
+        </div>
+      )}
+      {!xemTruoc && !site.allowIndex && (
         <div className="staging">Bản chạy thử trước khi có tên miền chính thức. Google chưa lập chỉ mục trang này.</div>
       )}
       <header className="header">

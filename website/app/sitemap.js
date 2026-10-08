@@ -1,18 +1,16 @@
 import site from "../site.config.mjs";
-import { slugsOf, readEntry, isoDate } from "../lib/content.mjs";
+import { isoDate, layDanhSachBai, layDanhSachDichVu } from "../lib/cms";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
-export default function sitemap() {
+export default async function sitemap() {
   const u = (p) => `${site.url}${p}`;
+  const [dichVu, baiViet] = await Promise.all([layDanhSachDichVu(), layDanhSachBai()]);
   return [
     { url: u("/"), changeFrequency: "weekly", priority: 1 },
     { url: u("/dat-lich/"), priority: 0.8 },
     { url: u("/cam-nang/"), changeFrequency: "weekly", priority: 0.7 },
-    ...slugsOf("dich-vu").map((s) => ({ url: u(`/dich-vu/${s}/`), priority: 0.9 })),
-    ...slugsOf("cam-nang").map((s) => {
-      const d = readEntry("cam-nang", s).data;
-      return { url: u(`/cam-nang/${s}/`), lastModified: isoDate(d.capNhat || d.ngay), priority: 0.6 };
-    }),
+    ...dichVu.map((s) => ({ url: u(`/dich-vu/${s.slug}/`), priority: 0.9 })),
+    ...baiViet.map((a) => ({ url: u(`/cam-nang/${a.slug}/`), lastModified: isoDate(a.capNhat || a.ngay), priority: 0.6 })),
   ];
 }

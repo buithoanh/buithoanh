@@ -1,0 +1,38 @@
+# Chạy trên server:  cp .env.example .env  (điền), rồi  docker compose up -d --build
+# Nạp dữ liệu mẫu lần đầu:  docker compose run --rm cong-cu npm run nap-du-lieu
+services:
+  web:
+    build: { context: ., target: runner }
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://vc:${POSTGRES_PASSWORD}@db:5432/vcmobilecare
+    ports: ["127.0.0.1:3000:3000"]   # đặt Caddy/Nginx phía trước để có HTTPS
+    volumes: [media:/app/media]
+    depends_on: { db: { condition: service_healthy } }
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vc
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: vcmobilecare
+    volumes: [db:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vc -d vcmobilecare"]
+      interval: 5s
+      retries: 10
+
+  cong-cu:
+    build: { context: ., target: builder }
+    profiles: [cong-cu]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://vc:${POSTGRES_PASSWORD}@db:5432/vcmobilecare
+      NODE_ENV: production
+    depends_on: { db: { condition: service_healthy } }
+
+volumes:
+  db:
+  media:

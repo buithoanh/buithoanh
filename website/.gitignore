@@ -1,3 +1,7 @@
 node_modules/
 .next/
 out/
+.env
+media/
+next-env.d.ts
+tsconfig.tsbuildinfo

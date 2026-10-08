@@ -1,78 +1,122 @@
 # Website VC Mobile Care
 
-Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tới đó". Theo mục 3 và 4 của tài liệu "Kế hoạch kinh doanh – Sửa chữa ô tô lưu động (VCservice)".
+Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tới đó", kèm CMS (trang quản trị) để đội marketing viết, duyệt, đăng bài mà không cần biết Git.
 
-- Next.js xuất trang tĩnh, chạy trên **Cloudflare Pages** (miễn phí, địa chỉ tạm `https://<tên>.pages.dev`).
-- Bài viết là file Markdown trong `content/`. Thêm file, duyệt, merge là bài lên web.
-- **Chưa có tên miền thì Google bị chặn lập chỉ mục** (thanh vàng trên đầu trang, `robots.txt` chặn, header `noindex`). Lý do: thứ hạng trên địa chỉ tạm sẽ mất khi đổi tên miền, và hai địa chỉ cùng nội dung bị tính là trùng.
+- **Next.js 16 + Payload CMS 3** trong cùng một ứng dụng. Database **PostgreSQL**.
+- Web công khai: `/`, `/dich-vu/...`, `/cam-nang/...`, `/dat-lich/`.
+- Trang quản trị: `/admin` (giao diện tiếng Việt).
+- Chưa có tên miền thì Google bị chặn lập chỉ mục (thanh vàng trên đầu trang, `robots.txt` chặn, header `noindex`).
 
-## Cấu trúc
+## Trang admin có gì
+
+| Mục | Dùng để |
+|---|---|
+| Nội dung → Bài cẩm nang / Trang dịch vụ | Viết, sửa, xem trước, đăng bài. Mỗi bài lưu lịch sử phiên bản. |
+| SEO → Từ khoá SEO | Bộ từ khoá (mỗi từ khoá một bài), trạng thái, nút **"AI viết bản nháp"**. |
+| SEO → Kế hoạch SEO | Lịch đăng theo tháng, quy tắc nội dung. |
+| Khách hàng → Lịch hẹn | Lịch khách đặt từ form `/dat-lich/`. Cập nhật trạng thái: đã gọi, đã hẹn thợ… |
+| Hệ thống → Thông tin liên hệ | Hotline, Zalo, email, quận phục vụ. Sửa là web đổi ngay. |
+| Hệ thống → Người dùng | Tài khoản và vai trò. |
+
+### Vai trò
+
+| Vai trò | Được làm |
+|---|---|
+| Quản trị | Mọi việc, thêm người dùng |
+| Duyệt bài | Đăng bài, tick "Giá đã duyệt", sửa thông tin liên hệ, xoá bài |
+| Biên tập | Viết và sửa bản nháp. **Không đăng được.** |
+
+Người đầu tiên tạo tài khoản ở `/admin` tự thành Quản trị.
+
+## Quy trình một bài (có AI hỗ trợ, có người duyệt)
+
+```
+Từ khoá SEO → mở từ khoá "Chưa viết" → bấm "AI viết bản nháp"
+  → 2–5 phút sau có bản nháp bài cẩm nang (AI tra VCwiki + tài liệu công khai, ghi nguồn)
+  → Biên tập đọc, sửa trong trình soạn thảo → đổi "Trạng thái duyệt" = Chờ duyệt → Lưu nháp
+  → Người duyệt bấm "Xem trước" (biểu tượng ↗) để xem đúng như trên web
+  → bấm "Xuất bản" → bài lên web ngay
+```
+
+Mỗi lần lưu, ô **"Kiểm tra bài"** ở cột phải tự chạy luật: độ dài tiêu đề và mô tả, số chữ, từ khoá trong đoạn đầu,
+liên kết nội bộ hỏng, bài có giá chưa duyệt, trùng tiêu đề. **Còn lỗi thì không ai đăng được**, kể cả Quản trị.
+
+AI **không bao giờ đăng**: bài AI viết luôn là bản nháp, kèm "Ghi chú của AI cho người duyệt" (câu cần kiểm tra kỹ, chỗ chưa có nguồn).
+
+### Agent SEO Editor trong Claude Code
+
+Agent `.claude/agents/seo-editor.md` cũng gửi bài vào CMS dưới dạng bản nháp qua API `POST /api/cam-nang/nhap-tu-markdown`.
+Cần tạo một tài khoản vai trò **Biên tập** cho agent, bật "Enable API Key", rồi đặt `VCMC_URL` và `VCMC_API_KEY` trên máy chạy agent.
+
+## VCwiki
+
+`lib/vcwiki.ts` là chỗ nối VCwiki. **Chưa nối**, đang chờ tài liệu API. AI hiện vẫn viết được bằng nguồn công khai và ghi "Chưa dùng nguồn VCwiki" để người duyệt biết.
+Khi nối phải giữ hai luật: chỉ lấy trang được đánh dấu công khai (VCwiki có giá nhập, quy trình, nhân sự), và luôn trả kèm link trang gốc.
+
+## Cấu trúc code
 
 | Đường dẫn | Nội dung |
 |---|---|
-| `site.config.mjs` | Tên, slogan, hotline, Zalo, khu vực phục vụ, địa chỉ web. **Sửa thông tin thương hiệu ở đây.** |
-| `content/dich-vu/*.md` | 6 trang dịch vụ (bảo dưỡng, ắc quy, lốp, đọc lỗi, phanh, cứu hộ) |
-| `content/cam-nang/*.md` | Bài cẩm nang SEO |
-| `content/ke-hoach-seo.json` | Bộ từ khoá và lịch đăng, lấy từ kế hoạch mục 4.1 và 4.2 |
-| `scripts/kiem-tra-bai.mjs` | Kiểm tra bài trước khi build: độ dài tiêu đề và mô tả, số chữ, từ khoá, liên kết hỏng, bài có giá chưa duyệt |
-| `app/` | Giao diện: trang chủ, dịch vụ, cẩm nang, đặt lịch, sitemap, robots |
-
-## Quy trình đăng bài SEO (có duyệt)
-
-```
-Agent "SEO Editor" chọn từ khoá trong ke-hoach-seo.json
-  → viết content/cam-nang/<slug>.md → tự kiểm tra và build
-  → mở pull request "Bài mới: …" trên GitHub
-  → GitHub Actions kiểm tra lại; Cloudflare Pages tạo link xem trước của bài
-  → người phụ trách đọc bản xem trước → Approve + Merge
-  → Cloudflare Pages tự build, bài lên web sau khoảng 1–2 phút
-```
-
-Trong Claude Code, ở thư mục repo:
-
-```
-Dùng SEO Editor viết bài tuần này
-Dùng SEO Editor viết bài cho từ khoá "thay dầu ô tô tại nhà"
-```
-
-Agent **không bao giờ tự merge**. Bài có nêu giá phải được người phụ trách xác nhận (trường `giaDaDuyet: true`), nếu không thì không build được.
-
-Muốn bắt buộc duyệt trên GitHub: Settings → Branches → thêm quy tắc cho nhánh `main`, bật "Require a pull request before merging" và "Require status checks" (chọn "Website – kiểm tra bài và build").
+| `payload.config.ts` | Cấu hình CMS: database, các bảng, trình soạn thảo, tiếng Việt |
+| `collections/` | Bảng dữ liệu: bài cẩm nang, trang dịch vụ, từ khoá, lịch hẹn, ảnh, người dùng |
+| `globals/` | Thông tin liên hệ, kế hoạch SEO |
+| `lib/kiem-tra.mjs` | Luật kiểm tra bài (dùng khi lưu/đăng và trong `npm run kiem-tra`) |
+| `lib/bai.ts`, `lib/quyen.ts` | Trường dùng chung, hook duyệt bài, phân quyền |
+| `lib/ai/` | Gọi Claude viết bài, luồng tạo bản nháp |
+| `lib/vcwiki.ts` | Cổng tra VCwiki (chờ nối) |
+| `lib/cms.js` | Web công khai đọc dữ liệu từ CMS |
+| `app/(frontend)/` | Giao diện web công khai |
+| `app/(payload)/` | Trang admin và API của Payload (file sinh tự động, không sửa tay) |
+| `migrations/` | Thay đổi cấu trúc database cho production |
+| `du-lieu-mau/` | Dữ liệu ban đầu (6 trang dịch vụ, 2 bài, bộ từ khoá) để nạp lần đầu. Sửa ở đây **không** làm đổi web. |
+| `site.config.mjs` | Tên thương hiệu, slogan, thành phố, địa chỉ web |
 
 ## Chạy thử trên máy
 
+Cần Node 22 và PostgreSQL.
+
 ```bash
 cd website
+cp .env.example .env        # điền DATABASE_URL, PAYLOAD_SECRET (openssl rand -hex 32)
 npm install
-npm run dev          # http://localhost:3000
-npm run kiem-tra     # chỉ kiểm tra bài
-npm run build        # kiểm tra + xuất trang tĩnh ra out/
+npm run dev                 # http://localhost:3000 và http://localhost:3000/admin
+npm run nap-du-lieu         # lần đầu: nạp 6 trang dịch vụ, 2 bài, 26 từ khoá
 ```
 
-## Đưa lên Cloudflare Pages (làm một lần)
+Khi chạy `npm run dev`, database tự cập nhật theo code. **Sửa cấu trúc bảng (thêm/bớt trường) xong thì tạo migration** trước khi đưa lên server:
 
-1. Gộp nhánh này vào `main` trên GitHub.
-2. Đăng nhập [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → **Pages** → **Connect to Git** → chọn repo `buithoanh/buithoanh`.
-3. Cấu hình build:
-   - Production branch: `main`
-   - Framework preset: **None**
-   - Build command: `npm run build`
-   - Build output directory: `out`
-   - Root directory: `website`
-   - Biến môi trường: `NODE_VERSION` = `22`, `SITE_URL` = `https://<tên-project>.pages.dev`
-4. Bấm **Save and Deploy**. Cloudflare cấp địa chỉ `https://<tên-project>.pages.dev`. Từ đó mỗi lần merge vào `main` là web tự cập nhật, mỗi pull request có link xem trước riêng.
+```bash
+NODE_ENV=production npm run migrate:create -- ten-thay-doi
+```
 
-## Khi đã có tên miền
+Lệnh khác: `npm run kiem-tra` (kiểm tra mọi bài đã đăng), `npm run typecheck`, `npm run build`, `npm start`.
 
-1. Cloudflare Pages → project → **Custom domains** → thêm tên miền (ví dụ `vcmobilecare.vn`) và làm theo hướng dẫn trỏ DNS.
-2. Settings → Environment variables (Production): `SITE_URL` = `https://<tên miền>`, `ALLOW_INDEX` = `1`. Để preview không có `ALLOW_INDEX`, nhờ vậy bản xem trước luôn bị chặn Google.
-3. Chuyển hướng địa chỉ `pages.dev` cũ về tên miền (Bulk Redirects của Cloudflare, mã 301).
-4. Deploy lại, rồi khai báo tên miền trong [Google Search Console](https://search.google.com/search-console) và gửi `https://<tên miền>/sitemap.xml`.
+## Đưa lên server
 
-## Việc còn thiếu trước khi chạy thật
+Web giờ cần server chạy liên tục (không còn là trang tĩnh trên Cloudflare Pages). Cách gọn nhất là một VPS có Docker:
 
-- Hotline, Zalo OA, email trong `site.config.mjs` (đang hiện "sắp có").
-- Danh sách quận đợt 1 trong `serviceAreas`.
-- Form đặt lịch chưa có nơi nhận. Khi VCsoft có API nhận lịch, đặt biến `NEXT_PUBLIC_BOOKING_ENDPOINT`. Trước đó form hiện nội dung để khách gửi qua Zalo hoặc đọc khi gọi.
-- Bảng giá: kế hoạch muốn lấy giá phụ tùng từ dữ liệu VCparts, nên cần người phụ trách duyệt giá trước khi đưa lên.
-- Ảnh việc thật (kế hoạch yêu cầu mỗi trang khu vực có ảnh tại khu đó). Đặt trong `public/anh/` và chèn vào bài bằng `![mô tả](/anh/ten-anh.jpg)`.
+```bash
+git clone … && cd buithoanh/website
+cp .env.example .env          # điền PAYLOAD_SECRET, POSTGRES_PASSWORD, SITE_URL, ANTHROPIC_API_KEY
+docker compose up -d --build  # web + PostgreSQL; migration tự chạy khi khởi động
+docker compose run --rm cong-cu npm run nap-du-lieu   # lần đầu
+```
+
+Rồi đặt Caddy hoặc Nginx phía trước cổng 3000 để có HTTPS, mở `https://<tên miền>/admin` tạo tài khoản Quản trị đầu tiên.
+
+Sao lưu: database (volume `db`, dùng `pg_dump`) và ảnh tải lên (volume `media`). Nên sao lưu tự động hằng ngày ra nơi khác.
+
+### Khi đã có tên miền
+
+1. Trỏ DNS về server, cấu hình HTTPS.
+2. Trong `.env`: `SITE_URL=https://<tên miền>`, `ALLOW_INDEX=1`, rồi `docker compose up -d`.
+3. Khai báo tên miền trong Google Search Console, gửi `https://<tên miền>/sitemap.xml`.
+
+## Việc còn thiếu
+
+- **Nối VCwiki** (chờ tài liệu API).
+- Điền hotline, Zalo, email, quận phục vụ trong admin → Thông tin liên hệ.
+- Thông báo khi có lịch hẹn mới (Gmail hoặc Zalo) — hiện chỉ xem được trong admin.
+- Kéo số liệu Google Search Console về từng từ khoá để chọn bài cần viết lại.
+- Chọn nơi đặt server và sao lưu.
+- Ảnh việc thật: tải lên ở admin → Ảnh, chèn vào bài bằng trình soạn thảo.

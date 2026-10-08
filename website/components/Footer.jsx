@@ -1,10 +1,9 @@
 import Link from "next/link";
-import site from "../site.config.mjs";
-import { allEntries } from "../lib/content.mjs";
+import { layDanhSachDichVu, laySite } from "../lib/cms";
 import { CallButton, ZaloButton } from "./Contact";
 
-export default function Footer() {
-  const services = allEntries("dich-vu");
+export default async function Footer() {
+  const [site, services] = await Promise.all([laySite(), layDanhSachDichVu()]);
   return (
     <>
       <footer className="footer">
@@ -16,7 +15,7 @@ export default function Footer() {
           <div>
             <h4>Dịch vụ</h4>
             {services.map((s) => (
-              <div key={s.slug}><Link href={`/dich-vu/${s.slug}/`}>{s.data.ten}</Link></div>
+              <div key={s.slug}><Link href={`/dich-vu/${s.slug}/`}>{s.ten}</Link></div>
             ))}
           </div>
           <div>
@@ -27,8 +26,8 @@ export default function Footer() {
         </div>
       </footer>
       <div className="callbar">
-        <CallButton label="Gọi thợ" />
-        <ZaloButton />
+        <CallButton hotline={site.hotline} label="Gọi thợ" />
+        <ZaloButton zalo={site.zalo} />
       </div>
     </>
   );
