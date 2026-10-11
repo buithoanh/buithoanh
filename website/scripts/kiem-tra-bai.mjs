@@ -1,7 +1,7 @@
 // Kiểm tra mọi bài trong content/ trước khi build. Lỗi thì build dừng, bài không lên web.
 // Chạy riêng: npm run kiem-tra   (thêm tên file để chỉ kiểm tra bài đó)
 import path from "node:path";
-import { slugsOf, readEntry } from "../lib/content.mjs";
+import { slugsOf, readEntry, symptoms } from "../lib/content.mjs";
 
 const only = process.argv.slice(2).map((p) => path.basename(p, ".md"));
 const errors = [];
@@ -43,10 +43,17 @@ for (const section of Object.keys(RULES)) {
       if (m && !slugsOf(m[1]).includes(m[2])) err(`liên kết nội bộ hỏng: ${href}`);
     }
     if (section === "cam-nang" && !/\]\(\/dich-vu\//.test(e.body)) warn("nên có ít nhất 1 liên kết tới trang dịch vụ");
+    if (e.data.giaTu && !e.data.giaDaDuyet) err("có trường giaTu: cần người phụ trách xác nhận rồi thêm giaDaDuyet: true");
+    if (section === "dich-vu" && !e.data.icon) warn("nên có trường icon (oil, battery, tire, scan, brake, tow...) để hiện biểu tượng");
     if (/\d[\d.,]*\s*(đ|đồng|vnđ|vnd|k|nghìn|ngàn|triệu)(?!\p{L})/iu.test(e.body) && !e.data.giaDaDuyet) {
       err("bài có nêu giá tiền: cần người phụ trách xác nhận rồi thêm giaDaDuyet: true ở phần đầu bài");
     }
   }
+}
+// Liên kết trong danh sách "Xe bạn đang bị gì?" ở trang chủ.
+for (const t of symptoms()) {
+  const m = String(t.href).match(/^\/(dich-vu|cam-nang)\/([^/]+)\/?$/);
+  if (!m || !slugsOf(m[1]).includes(m[2])) errors.push(`content/trieu-chung.json: liên kết hỏng "${t.href}" (${t.ten})`);
 }
 for (const [title, files] of seenTitles) if (title && files.length > 1) errors.push(`trùng tiêu đề: ${files.join(", ")}`);
 

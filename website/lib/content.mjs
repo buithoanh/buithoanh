@@ -10,7 +10,7 @@ export const SECTIONS = { dichVu: "dich-vu", camNang: "cam-nang" };
 export function slugsOf(section) {
   const dir = path.join(ROOT, section);
   if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir).filter((f) => f.endsWith(".md")).map((f) => f.replace(/\.md$/, "")).sort();
+  return fs.readdirSync(dir).filter((f) => f.endsWith(".md") && !f.startsWith("_")).map((f) => f.replace(/\.md$/, "")).sort();
 }
 
 export function readEntry(section, slug) {
@@ -23,6 +23,21 @@ export function readEntry(section, slug) {
 
 export function allEntries(section) {
   return slugsOf(section).map((s) => readEntry(section, s));
+}
+
+/** Trang dịch vụ theo thứ tự hiển thị (trường thuTu). */
+export function sortedServices() {
+  return allEntries(SECTIONS.dichVu).sort((a, b) => (a.data.thuTu ?? 99) - (b.data.thuTu ?? 99));
+}
+
+/** Giá "từ ..." chỉ hiện khi người phụ trách đã duyệt (giaDaDuyet: true). */
+export function approvedPrice(data) {
+  return data.giaDaDuyet && data.giaTu ? String(data.giaTu) : "";
+}
+
+/** Danh sách "Xe đang bị gì?" ở trang chủ. */
+export function symptoms() {
+  return JSON.parse(fs.readFileSync(path.join(ROOT, "trieu-chung.json"), "utf8"));
 }
 
 export function sortedArticles() {

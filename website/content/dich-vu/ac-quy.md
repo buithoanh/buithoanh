@@ -4,6 +4,8 @@ description: "Xe không nổ máy vì hết điện? Thợ tới kích nổ, đo
 keyword: "thay ắc quy ô tô tận nơi"
 ten: "Thay ắc quy"
 tomTat: "Kích nổ, kiểm tra và thay ắc quy đúng loại ngay tại nơi xe dừng."
+tenNgan: "Ắc quy"
+icon: "battery"
 thuTu: 2
 faq:
   - q: "Xe không nổ máy có phải chắc chắn do ắc quy không?"

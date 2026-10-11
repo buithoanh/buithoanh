@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import site from "../../../site.config.mjs";
 import { slugsOf, readEntry, formatDate, isoDate } from "../../../lib/content.mjs";
 import { CallButton } from "../../../components/Contact";
+import Icon from "../../../components/Icon";
 import JsonLd from "../../../components/JsonLd";
 
 export const dynamicParams = false;
@@ -25,8 +26,9 @@ export default async function ArticlePage({ params }) {
   const e = readEntry("cam-nang", slug);
   const services = (e.data.dichVuLienQuan || []).filter((s) => slugsOf("dich-vu").includes(s)).map((s) => readEntry("dich-vu", s));
   const faq = e.data.faq || [];
+  const main = services[0];
   return (
-    <div className="wrap">
+    <>
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "Article", headline: e.data.title, description: e.data.description,
         datePublished: isoDate(e.data.ngay), dateModified: isoDate(e.data.capNhat || e.data.ngay), inLanguage: "vi",
@@ -37,25 +39,45 @@ export default async function ArticlePage({ params }) {
         "@context": "https://schema.org", "@type": "FAQPage",
         mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
       }} />}
-      <nav className="crumbs"><Link href="/">Trang chủ</Link> / <Link href="/cam-nang/">Cẩm nang xe</Link></nav>
-      <article className="prose">
-        <h1>{e.data.title}</h1>
-        <div className="meta">{site.name} · {formatDate(e.data.ngay)} · khoảng {Math.max(1, Math.round(e.words / 220))} phút đọc</div>
-        <div dangerouslySetInnerHTML={{ __html: e.html }} />
-        {faq.length > 0 && (
-          <section className="faq">
-            <h2>Câu hỏi thường gặp</h2>
-            {faq.map((f) => <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>)}
-          </section>
-        )}
-        <div className="cta-box"><p>Không muốn tự xử lý? Thợ tới tận nơi.</p><CallButton /></div>
-        {services.length > 0 && (
-          <>
-            <h2>Dịch vụ liên quan</h2>
-            <ul>{services.map((s) => <li key={s.slug}><Link href={`/dich-vu/${s.slug}/`}>{s.data.ten}</Link></li>)}</ul>
-          </>
-        )}
-      </article>
-    </div>
+      <section className="page-hero page-hero-article">
+        <div className="wrap">
+          <nav className="crumbs" aria-label="Đường dẫn"><Link href="/">Trang chủ</Link><span>/</span><Link href="/cam-nang/">Cẩm nang xe</Link></nav>
+          {e.data.nhom && <span className="chip">{e.data.nhom}</span>}
+          <h1>{e.data.title}</h1>
+          <p className="meta"><Icon name="calendar" size={16} />{formatDate(e.data.ngay)}<span>·</span><Icon name="clock" size={16} />khoảng {Math.max(1, Math.round(e.words / 220))} phút đọc</p>
+        </div>
+      </section>
+      <div className="wrap with-aside">
+        <article className="prose">
+          <div dangerouslySetInnerHTML={{ __html: e.html }} />
+          {faq.length > 0 && (
+            <section className="faq">
+              <h2>Câu hỏi thường gặp</h2>
+              {faq.map((f) => <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>)}
+            </section>
+          )}
+          <div className="cta-box">
+            <div><b>Không muốn tự xử lý?</b><p>Thợ tới tận nơi, báo giá trước khi làm.</p></div>
+            <CallButton />
+          </div>
+        </article>
+        <aside className="aside">
+          <div className="aside-card">
+            <b className="aside-title">Cần thợ tới tận nơi?</b>
+            <p className="aside-sub">Đặt lịch hoặc gọi, thợ mang đồ nghề và phụ tùng tới.</p>
+            <Link className="btn btn-primary btn-block" href={main ? `/dat-lich/?dv=${main.slug}` : "/dat-lich/"}><Icon name="calendar" size={20} />Đặt lịch</Link>
+            <CallButton className="btn btn-outline btn-block" label="Gọi thợ ngay" />
+            {services.length > 0 && (
+              <>
+                <p className="aside-label">Dịch vụ liên quan</p>
+                {services.map((s) => (
+                  <Link key={s.slug} className="mini" href={`/dich-vu/${s.slug}/`}><span className="mini-ic"><Icon name={s.data.icon} size={22} /></span>{s.data.ten}</Link>
+                ))}
+              </>
+            )}
+          </div>
+        </aside>
+      </div>
+    </>
   );
 }

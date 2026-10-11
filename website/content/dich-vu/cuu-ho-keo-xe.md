@@ -4,6 +4,8 @@ description: "Xe hỏng không sửa được tại chỗ? Chúng tôi cứu h�
 keyword: "cứu hộ ô tô Hà Nội"
 ten: "Cứu hộ, kéo xe"
 tomTat: "Xe hỏng nặng không sửa tại chỗ được? Kéo xe an toàn về xưởng đối tác Auto Speedy."
+tenNgan: "Cứu hộ"
+icon: "tow"
 thuTu: 6
 faq:
   - q: "Khi nào thì cần kéo xe thay vì sửa tại chỗ?"

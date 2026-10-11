@@ -4,6 +4,8 @@ description: "Bảo dưỡng định kỳ ngay tại nhà hoặc nơi làm việ
 keyword: "bảo dưỡng ô tô tại nhà"
 ten: "Bảo dưỡng định kỳ"
 tomTat: "Thay dầu, thay lọc và kiểm tra tổng quát ngay nơi xe đỗ, không cần mang xe ra xưởng."
+tenNgan: "Bảo dưỡng"
+icon: "oil"
 thuTu: 1
 faq:
   - q: "Bảo dưỡng ô tô tại nhà có đầy đủ như ở xưởng không?"

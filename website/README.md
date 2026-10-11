@@ -15,7 +15,23 @@ Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tớ
 | `content/cam-nang/*.md` | Bài cẩm nang SEO |
 | `content/ke-hoach-seo.json` | Bộ từ khoá và lịch đăng, lấy từ kế hoạch mục 4.1 và 4.2 |
 | `scripts/kiem-tra-bai.mjs` | Kiểm tra bài trước khi build: độ dài tiêu đề và mô tả, số chữ, từ khoá, liên kết hỏng, bài có giá chưa duyệt |
-| `app/` | Giao diện: trang chủ, dịch vụ, cẩm nang, đặt lịch, sitemap, robots |
+| `content/trieu-chung.json` | Danh sách "Xe bạn đang bị gì?" ở trang chủ (tên, mô tả, icon, liên kết tới trang dịch vụ hoặc bài cẩm nang) |
+| `content/ky-thuat-vien/*.md` | Hồ sơ kỹ thuật viên (trang `/doi-ngu/`). Xem file mẫu `_mau.md` |
+| `app/` | Giao diện: trang chủ, dịch vụ, cẩm nang, đặt lịch, tra cứu lệnh, đội ngũ, sitemap, robots |
+| `components/` | Thành phần dùng chung: đầu/chân trang, icon, ô đặt nhanh, thẻ trạng thái lệnh, huy hiệu cam kết |
+
+## Giao diện học từ đâu
+
+| Học từ | Áp dụng ở |
+|---|---|
+| bTaskee: đặt dịch vụ vài chạm, icon to | Ô đặt nhanh trang chủ; trang đặt lịch 3 bước (chọn dịch vụ → vị trí, giờ → liên hệ) |
+| Xanh SM / Grab: màn hình đầu chỉ một việc, biết ai đang tới | "Xe bạn đang ở đâu, cần gì?" + nút lấy vị trí GPS; thẻ KTV, biển số, thời gian dự kiến |
+| Điện Máy Xanh: hotline luôn hiện, cam kết dạng huy hiệu | Hotline ở đầu trang, thanh Gọi/Zalo/Đặt lịch ở đáy điện thoại; dải cam kết (sửa trong `camKet` của `site.config.mjs`) |
+| Long Châu / Tâm Anh: hồ sơ chuyên gia, bài tư vấn | Trang `/doi-ngu/`; mục "Xe bạn đang bị gì?" và cẩm nang |
+| Ahamove / GHN: tra cứu theo mã, dòng thời gian | Trang `/tra-cuu/`: tiếp nhận → đang tới → đang sửa → hoàn tất → đã thanh toán |
+| Cake / Timo: sáng, nhiều khoảng trắng, chữ to | Toàn bộ phong cách: nền trắng, chữ xanh than, một màu cam thương hiệu |
+
+Mỗi trang dịch vụ có thêm các trường: `tenNgan` (tên trên ô icon), `icon` (oil, battery, tire, scan, brake, tow…, xem `components/Icon.jsx`), và tuỳ chọn `giaTu` (ví dụ `"350.000đ"`, chỉ hiện khi có `giaDaDuyet: true`).
 
 ## Quy trình đăng bài SEO (có duyệt)
 
@@ -73,6 +89,9 @@ npm run build        # kiểm tra + xuất trang tĩnh ra out/
 
 - Hotline, Zalo OA, email trong `site.config.mjs` (đang hiện "sắp có").
 - Danh sách quận đợt 1 trong `serviceAreas`.
+- Tra cứu lệnh sửa chữa chưa có nguồn dữ liệu. Khi VCgarage có API, đặt biến `NEXT_PUBLIC_TRACKING_ENDPOINT`. Trang gọi `GET <endpoint>?sdt=<số điện thoại>&ma=<mã lệnh>` và cần nhận JSON dạng `{ ma, dichVu, xe, trangThai, duKienPhut, ktv: { ten, anh, chuyenMon, bienSo, sdt }, lichSu: [{ trangThai, luc }] }`, với `trangThai` là một trong `tiep-nhan`, `dang-toi`, `dang-sua`, `hoan-tat`, `da-thanh-toan`. API **phải kiểm tra khớp cả số điện thoại và mã lệnh**, trả 404 nếu không khớp, để người lạ không xem được lệnh (và vị trí xe) của khách khác. API cũng cần cho phép CORS từ tên miền website.
+- Hồ sơ kỹ thuật viên: thêm file vào `content/ky-thuat-vien/` (ảnh thật, được KTV đồng ý). Có ít nhất một hồ sơ thì menu "Đội ngũ" và mục đội ngũ ở trang chủ tự hiện.
+- Chính sách bảo hành: khi chốt, thêm một dòng vào `camKet` trong `site.config.mjs`.
 - Form đặt lịch chưa có nơi nhận. Khi VCsoft có API nhận lịch, đặt biến `NEXT_PUBLIC_BOOKING_ENDPOINT`. Trước đó form hiện nội dung để khách gửi qua Zalo hoặc đọc khi gọi.
 - Bảng giá: kế hoạch muốn lấy giá phụ tùng từ dữ liệu VCparts, nên cần người phụ trách duyệt giá trước khi đưa lên.
 - Ảnh việc thật (kế hoạch yêu cầu mỗi trang khu vực có ảnh tại khu đó). Đặt trong `public/anh/` và chèn vào bài bằng `![mô tả](/anh/ten-anh.jpg)`.

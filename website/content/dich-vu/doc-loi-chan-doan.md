@@ -4,6 +4,8 @@ description: "Đèn check engine sáng? Thợ mang máy chẩn đoán OBD tới 
 keyword: "đọc lỗi ô tô tận nơi"
 ten: "Đọc lỗi, chẩn đoán"
 tomTat: "Mang máy chẩn đoán OBD tới đọc lỗi, giải thích đèn check engine và tư vấn hướng sửa."
+tenNgan: "Đọc lỗi"
+icon: "scan"
 thuTu: 4
 faq:
   - q: "Đèn check engine sáng có cần dừng xe ngay không?"

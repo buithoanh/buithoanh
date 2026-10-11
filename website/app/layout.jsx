@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: { siteName: site.name, locale: "vi_VN", type: "website" },
 };
 
-export const viewport = { themeColor: "#13283f" };
+export const viewport = { themeColor: "#ffffff" };
 
 export default function RootLayout({ children }) {
   return (

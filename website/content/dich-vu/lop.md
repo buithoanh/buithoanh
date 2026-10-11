@@ -4,6 +4,8 @@ description: "Lốp xịt, đinh đâm hay cần đảo lốp? Thợ tới vá, 
 keyword: "vá lốp ô tô lưu động"
 ten: "Vá và thay lốp"
 tomTat: "Vá lốp, thay lốp dự phòng, đảo lốp và bơm đúng áp suất ngay nơi xe dừng."
+tenNgan: "Lốp xe"
+icon: "tire"
 thuTu: 3
 faq:
   - q: "Lốp thủng nào thì vá được?"

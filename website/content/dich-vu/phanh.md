@@ -4,6 +4,8 @@ description: "Phanh kêu rít, đạp sâu hay xe lệch khi phanh? Thợ tới 
 keyword: "thay má phanh ô tô tận nơi"
 ten: "Thay má phanh"
 tomTat: "Kiểm tra và thay má phanh đúng loại, kiểm tra đĩa và dầu phanh ngay nơi xe đỗ."
+tenNgan: "Phanh"
+icon: "brake"
 thuTu: 5
 faq:
   - q: "Bao lâu thì nên thay má phanh?"
