@@ -108,7 +108,8 @@ Response `200`:
     "cuuHoPhut": 60,
     "baoHanhPhuTungThang": 6,
     "baoHanhCongThang": 3,
-    "coVanGoiLaiPhut": 15
+    "coVanGoiLaiPhut": 15,
+    "khongSuaDuocMienPhi": true
   },
   "phi": {
     "phiDiLai": 50000,
@@ -181,7 +182,8 @@ Response `200`:
     "cuuHoPhut": 60,
     "baoHanhPhuTungThang": 6,
     "baoHanhCongThang": 3,
-    "coVanGoiLaiPhut": 15
+    "coVanGoiLaiPhut": 15,
+    "khongSuaDuocMienPhi": true
   },
   "phi": {
     "phiDiLai": 50000,
@@ -523,7 +525,8 @@ Response `200`:
     "cuuHoPhut": 60,
     "baoHanhPhuTungThang": 6,
     "baoHanhCongThang": 3,
-    "coVanGoiLaiPhut": 15
+    "coVanGoiLaiPhut": 15,
+    "khongSuaDuocMienPhi": true
   },
   "trang": {
     "title": "Thay ắc quy ô tô tận nơi, kích nổ câu bình tại Hà Nội",
@@ -1333,7 +1336,8 @@ Response `200`:
     "cuuHoPhut": 60,
     "baoHanhPhuTungThang": 6,
     "baoHanhCongThang": 3,
-    "coVanGoiLaiPhut": 15
+    "coVanGoiLaiPhut": 15,
+    "khongSuaDuocMienPhi": true
   },
   "vungPhucVu": {
     "quan": [
@@ -1398,7 +1402,8 @@ Response `200`:
     "cuuHoPhut": 60,
     "baoHanhPhuTungThang": 6,
     "baoHanhCongThang": 3,
-    "coVanGoiLaiPhut": 15
+    "coVanGoiLaiPhut": 15,
+    "khongSuaDuocMienPhi": true
   },
   "vungPhucVu": {
     "quan": [

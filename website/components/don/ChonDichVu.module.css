@@ -1,3 +1,5 @@
 .khung { display: flex; flex-direction: column; gap: 6px; }
 .luoi { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .loi { font-size: 13px; color: var(--do); font-weight: 600; }
+.icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: var(--nhan-nhat); color: var(--nhan); margin-bottom: 4px; }
+[aria-pressed="true"] > .icon { background: var(--nhan); color: #fff; }

@@ -127,7 +127,7 @@ export default function GoiGap({ duLieu, thuongHieu, linkKeoXe, khongJs = null }
             <Icon name="dong-ho" size={26} className={s.camKetIcon} />
             <span>
               {phut ? <b className={s.dam}>Thợ có mặt trong {phut} phút</b> : <b className={s.dam}>Thợ tới nhanh nhất</b>}
-              {khuVuc.length ? ` ở ${khuVuc.join(", ")}` : ""}. Chỉ cần 3 thông tin bên dưới.
+              {khuVuc.length ? ` ở ${khuVuc.join(", ")}` : ""}.{camKet?.khongSuaDuocMienPhi ? " Không sửa được, không lấy tiền." : ""} Chỉ cần 3 thông tin bên dưới.
             </span>
           </div>
         )}

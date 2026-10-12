@@ -1,0 +1,4 @@
+.khung { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.nut { min-height: 40px; padding: 0 14px; font-size: 14px; gap: 6px; }
+.bao { flex-basis: 100%; font-size: 13px; }
+.bao:empty { display: none; }
