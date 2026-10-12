@@ -65,6 +65,7 @@ export async function layPhiChung(payload: Payload) {
     baoHanhCongThang: g.baoHanhCongThang ?? 0,
     camKetCuuHoPhut: g.camKetCuuHoPhut ?? 0,
     coVanGoiLaiPhut: g.coVanGoiLaiPhut ?? 0,
+    camKetKhongSuaDuocMienPhi: Boolean(g.camKetKhongSuaDuocMienPhi),
     hienThi: { phiDiLai: dinhDangTien(g.phiDiLai ?? 0), phiKiemTra: dinhDangTien(g.phiKiemTra ?? 0) },
     phanKhuc: (g.phanKhuc || []).map((p) => ({ ma: p.ma, tenNgan: p.tenNgan, moTa: p.moTa })),
   };
@@ -100,7 +101,7 @@ export async function layCauHinhChung(payload: Payload) {
     google: { diem: c.diemGoogle ?? null, soDanhGia: c.soDanhGiaGoogle ?? null, linkDanhGia: c.googleDanhGiaUrl || "" },
     camKet: {
       cuuHoPhut: phi.camKetCuuHoPhut, baoHanhPhuTungThang: phi.baoHanhPhuTungThang, baoHanhCongThang: phi.baoHanhCongThang,
-      coVanGoiLaiPhut: phi.coVanGoiLaiPhut,
+      coVanGoiLaiPhut: phi.coVanGoiLaiPhut, khongSuaDuocMienPhi: phi.camKetKhongSuaDuocMienPhi,
     },
     phi: { phiDiLai: phi.phiDiLai, phiKiemTra: phi.phiKiemTra, hienThi: phi.hienThi },
     vungPhucVu: {

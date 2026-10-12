@@ -1,6 +1,6 @@
 {
   "_ghiChu": "DỮ LIỆU MẪU lấy từ thiết kế (BangGia, QtBangGia, XeDien). Mọi mức giá phải được Quản lý dịch vụ duyệt lại trước khi lên web thật. baoGiaSoBo: luonCo = luôn tính, coThe = có thể phát sinh (chỉ cộng vào giá cao), khong = không tính.",
-  "phi": { "phiDiLai": 50000, "phiKiemTra": 100000, "baoHanhPhuTungThang": 6, "baoHanhCongThang": 3, "camKetCuuHoPhut": 60, "coVanGoiLaiPhut": 15 },
+  "phi": { "phiDiLai": 50000, "phiKiemTra": 100000, "baoHanhPhuTungThang": 6, "baoHanhCongThang": 3, "camKetCuuHoPhut": 60, "coVanGoiLaiPhut": 15, "camKetKhongSuaDuocMienPhi": true },
   "phanKhuc": [
     { "ma": "A", "tenNgan": "Xe nhỏ", "moTa": "Xe cỡ nhỏ (i10, Morning, Fadil, VF 3)" },
     { "ma": "B", "tenNgan": "Sedan B", "moTa": "Sedan, hatchback hạng B (Vios, Accent, City, Mazda2)" },

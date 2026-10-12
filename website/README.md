@@ -20,7 +20,7 @@ Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tớ
 | Marketing → Mã khuyến mãi, Mã giới thiệu, Số liệu | Mã KM, KOC, cây xăng, BQL (giảm, hạn, hoa hồng, QR); mã giới thiệu bạn bè (tạm dừng, cộng lượt tay); sự kiện xem trang, bấm gọi, bấm Zalo. |
 | Khách hàng → Gói hội viên, Hội viên, Yêu cầu doanh nghiệp | Giá và quyền lợi 2 gói; đăng ký gói theo biển số (hạn dùng, đã trả tiền); yêu cầu báo giá hợp đồng của doanh nghiệp (giao sales). |
 | Đơn hàng → Hồ sơ thợ cộng tác | Hồ sơ thợ đăng ký trên web, ảnh chứng chỉ (chỉ quản trị, quản lý dịch vụ xem). |
-| Bảng giá & danh mục | Danh mục dịch vụ (bật/tắt nhận đặt, báo giá sơ bộ), hạng mục giá (công cố định, phụ tùng theo phân khúc A–D), **nhật ký đổi giá** (tự ghi), phí chung – bảo hành – phân khúc, hãng và dòng xe (nút đồng bộ VCparts). |
+| Bảng giá & danh mục | Danh mục dịch vụ (bật/tắt nhận đặt, báo giá sơ bộ), hạng mục giá (công cố định, phụ tùng theo phân khúc A–D), **nhật ký đổi giá** (tự ghi), phí chung – bảo hành – phân khúc (kèm ô bật cam kết "Không sửa được, không lấy tiền"), hãng và dòng xe (nút đồng bộ VCparts). |
 | Vùng phục vụ & lịch | Quận (thời gian thợ tới), phường (bật/tắt), giờ nhận đơn gấp, khung giờ đặt lịch (giới hạn đơn mỗi khung), ngày nghỉ. |
 | Khách hàng → Đánh giá hiển thị | Đánh giá thật của khách để hiện trên web. |
 | Nội dung → Bài cẩm nang / Trang dịch vụ / Trang khu vực / Trang hãng xe | Viết, sửa, xem trước, gửi duyệt, hẹn giờ, đăng. Mỗi bài lưu lịch sử phiên bản. |

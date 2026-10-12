@@ -2588,6 +2588,10 @@ export interface BangGiaChung {
   phiKiemTra: number;
   baoHanhPhuTungThang: number;
   baoHanhCongThang: number;
+  /**
+   * Bật: thợ không xử lý được thì không thu gì cả (không tiền công, không phí kiểm tra, không phí đi lại). Web hiện cam kết này ở trang chủ, trang dịch vụ, gọi gấp và chính sách bảo hành. Chỉ bật khi điều phối và thu tiền đã làm đúng như vậy.
+   */
+  camKetKhongSuaDuocMienPhi?: boolean | null;
   camKetCuuHoPhut: number;
   coVanGoiLaiPhut: number;
   chuKyBaoDuongKm?: number | null;
@@ -2732,6 +2736,7 @@ export interface BangGiaChungSelect<T extends boolean = true> {
   phiKiemTra?: T;
   baoHanhPhuTungThang?: T;
   baoHanhCongThang?: T;
+  camKetKhongSuaDuocMienPhi?: T;
   camKetCuuHoPhut?: T;
   coVanGoiLaiPhut?: T;
   chuKyBaoDuongKm?: T;

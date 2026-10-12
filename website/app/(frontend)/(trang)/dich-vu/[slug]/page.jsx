@@ -95,14 +95,16 @@ export default async function TrangDichVu({ params }) {
           </aside>
 
           <div className={s.phanSau}>
-            {camKet.baoHanhPhuTungThang || camKet.baoHanhCongThang ? (
+            {camKet.baoHanhPhuTungThang || camKet.baoHanhCongThang || camKet.khongSuaDuocMienPhi ? (
               <section className="khoi" aria-labelledby="bao-hanh">
                 <h2 id="bao-hanh">Bảo hành</h2>
                 <div className={s.baoHanh}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM8.5 12l2.5 2.5 4.5-5" /></svg>
                   <p>
                     Phụ tùng lấy từ VCparts, bảo hành {camKet.baoHanhPhuTungThang} tháng cho phụ tùng thay mới và {camKet.baoHanhCongThang} tháng cho tiền công.
-                    Hỏng trong thời gian bảo hành, thợ tới xử lý tại chỗ. <Link href="/chinh-sach-bao-hanh/">Xem chính sách bảo hành</Link>
+                    Hỏng trong thời gian bảo hành, thợ tới xử lý tại chỗ.
+                    {camKet.khongSuaDuocMienPhi ? <> <b>Không sửa được, không lấy tiền:</b> thợ không xử lý được thì bạn không trả tiền công, phí kiểm tra hay phí đi lại.</> : null}
+                    {" "}<Link href="/chinh-sach-bao-hanh/">Xem chính sách bảo hành</Link>
                   </p>
                 </div>
               </section>

@@ -13,6 +13,7 @@ import CacBuoc from "@/components/trang/CacBuoc";
 import KhoiVungPhucVu from "@/components/trang/KhoiVungPhucVu";
 import KhoiDoanhNghiep from "@/components/trang/KhoiDoanhNghiep";
 import XemGiaXe from "@/components/trang/XemGiaXe";
+import Icon, { iconDichVu } from "@/components/Icon";
 import s from "./trang-chu.module.css";
 
 export const metadata = { alternates: { canonical: "/" } };
@@ -28,6 +29,10 @@ export default async function TrangChu() {
   const { thuongHieu, lienHe, camKet, google, phapNhan, vungPhucVu } = t;
   const [dau, ...sau] = thuongHieu.slogan.split(",");
   const dichVuXemGia = t.dichVu.filter((d) => d.nhanDatLich && d.baoGiaSoBo).map((d) => ({ slug: d.slug, ten: d.ten }));
+  // Điện thoại: chọn việc ngay ở màn đầu (một chạm sang đặt lịch, việc đã chọn sẵn). Cứu hộ sang gọi gấp.
+  const chonNhanh = t.dichVu.filter((d) => d.nhanDatLich || d.slug === "cuu-ho-keo-xe").slice(0, 6).map((d) => ({
+    slug: d.slug, ten: d.ten.split(",")[0], href: d.slug === "cuu-ho-keo-xe" ? "/goi-gap/" : `/dat-lich/?dv=${d.slug}`,
+  }));
 
   return (
     <>
@@ -58,6 +63,21 @@ export default async function TrangChu() {
           </NutGoi>
           <Link href="/dat-lich/" className={`nut nut-vien-trang ${s.nutDat}`}>Đặt lịch bảo dưỡng</Link>
         </div>
+        {chonNhanh.length ? (
+          <nav className={s.chonNhanh} aria-label="Chọn nhanh việc cần làm">
+            <p>Hoặc chọn việc xe cần:</p>
+            <ul>
+              {chonNhanh.map((d) => (
+                <li key={d.slug}>
+                  <Link href={d.href}>
+                    <span className={s.chonIcon} aria-hidden="true">{iconDichVu[d.slug] ? <Icon name={iconDichVu[d.slug]} size={24} /> : d.ten.slice(0, 2)}</span>
+                    {d.ten}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ) : null}
         <ul className={s.thongSo}>
           {camKet.cuuHoPhut ? <li><b>{camKet.cuuHoPhut} phút</b><span>có mặt cứu hộ</span></li> : null}
           <li><b>Giá công khai</b><span>báo trước khi làm</span></li>
@@ -66,8 +86,10 @@ export default async function TrangChu() {
         <ul className={s.tinCay}>
           {google.diem ? <li>{diem(google.diem)} ★{google.soDanhGia ? ` · ${google.soDanhGia} đánh giá Google` : ""}</li> : null}
           {camKet.baoHanhPhuTungThang ? <li>Bảo hành {camKet.baoHanhPhuTungThang} tháng phụ tùng{camKet.baoHanhCongThang ? `, ${camKet.baoHanhCongThang} tháng công` : ""}</li> : null}
+          {camKet.khongSuaDuocMienPhi ? <li>Không sửa được, không lấy tiền</li> : null}
           <li>Hoá đơn điện tử</li>
         </ul>
+        {camKet.khongSuaDuocMienPhi ? <p className={s.camKetDong}><Icon name="check" size={16} />Không sửa được, không lấy tiền</p> : null}
       </Hero>
 
       <div className="wrap">

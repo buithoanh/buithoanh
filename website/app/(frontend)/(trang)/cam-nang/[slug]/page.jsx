@@ -12,6 +12,7 @@ import TheBai from "@/components/noi-dung/TheBai";
 import MucLuc from "@/components/noi-dung/MucLuc";
 import PhatVideo from "@/components/noi-dung/PhatVideo";
 import HopKeuGoi from "@/components/noi-dung/HopKeuGoi";
+import ChiaSeBai from "@/components/noi-dung/ChiaSeBai";
 import { ganIdTieuDe, nhanBai, phutDoc, tenChuDe } from "@/components/noi-dung/bai";
 import site from "@/site.config.mjs";
 import s from "./bai-viet.module.css";
@@ -112,6 +113,7 @@ export default async function TrangBaiViet({ params }) {
                 {phut ? ` · ${phut} phút đọc` : ""}
               </p>
             </div>
+            <ChiaSeBai tieuDe={e.title} link={`${site.url}/cam-nang/${e.slug}/`} />
           </div>
         </header>
 

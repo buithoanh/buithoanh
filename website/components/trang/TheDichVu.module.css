@@ -19,6 +19,7 @@
   .luoi { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; }
   .the { flex-direction: row; align-items: flex-start; gap: 16px; padding: 22px; border-radius: 14px; min-height: 0; }
   .ma { width: 46px; height: 46px; border-radius: 12px; font-size: 15px; }
+  .ma svg { width: 26px; height: 26px; }
   .chu { gap: 4px; }
   .ten { font-size: 18px; }
   .moTa { font-size: 15px; margin-top: 0; }

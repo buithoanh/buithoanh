@@ -27,6 +27,15 @@ export default async function ChinhSachBaoHanh() {
         <dt>Phụ tùng thay mới</dt><dd>{pt ? `${pt} tháng` : "Theo phiếu bảo hành"} kể từ ngày thay</dd>
         <dt>Tiền công sửa chữa</dt><dd>{cong ? `${cong} tháng` : "Theo phiếu bảo hành"} kể từ ngày làm</dd>
       </dl>
+      {camKet.khongSuaDuocMienPhi ? (
+        <>
+          <h2>Không sửa được, không lấy tiền</h2>
+          <p>
+            Thợ đã tới mà không xử lý được sự cố, bạn không phải trả tiền công, phí kiểm tra hay phí đi lại cho lần tới đó. Nếu cần kéo
+            xe về {lienHe.xuongDoiTac}, phí kéo được báo trước để bạn quyết định.
+          </p>
+        </>
+      ) : null}
       <h2>Được bảo hành khi</h2>
       <ul>
         <li>Phụ tùng do {thuongHieu.ten} cung cấp và lắp bị lỗi trong thời hạn bảo hành.</li>
