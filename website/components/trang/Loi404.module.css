@@ -1,0 +1,52 @@
+.trang { padding-bottom: 8px; }
+.dau { padding-top: 32px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+.hinh { max-width: 100%; height: auto; }
+.net { stroke: var(--toi-2); }
+.banh { stroke: var(--toi-2); fill: var(--nen); }
+.dauX { stroke: var(--nhan); }
+.mat { stroke: var(--net-404); }
+.ma { font-size: 14px; font-weight: 700; letter-spacing: .08em; color: var(--nhan); }
+.tieuDe { font-size: 26px; line-height: 1.25; font-weight: 800; }
+.moTa { font-size: 15.5px; color: var(--chu-404); }
+.lienHe { padding-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+.goi { flex-direction: column; gap: 2px; border-radius: 14px; min-height: 76px; padding: 10px 16px; }
+.goi > span { display: flex; flex-direction: column; align-items: center; }
+.goiDong { font-weight: 800; font-size: 20px; }
+.goiPhu { font-size: 13px; font-weight: 400; color: var(--chu-tren-cam); }
+.haiNut { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.nutPhu { min-height: 50px; border-radius: var(--bo); }
+.datLich { border: 1.5px solid var(--toi); }
+.khoi { padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+.tim label { display: block; font-weight: 600; font-size: 14px; color: var(--toi); margin-bottom: 6px; }
+.hangTim { display: flex; gap: 8px; }
+.hangTim button { flex: none; min-height: 48px; padding: 0 16px; }
+.oTim {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; background: var(--nen-trang); border: 1px solid var(--vien-o);
+  border-radius: 10px; padding: 0 12px; min-height: 48px; color: var(--chu-phu);
+}
+.oTim:focus-within { border-color: var(--toi); outline: 3px solid rgba(19, 40, 63, .15); }
+.oTim input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 10px 0; font-size: 16px; color: var(--chu); outline: none; }
+.h2 { font-size: 20px; }
+.h2Nho { font-size: 16px; }
+.ds { list-style: none; margin: 0; padding: 0; background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); overflow: hidden; }
+.ds li + li { border-top: 1px solid var(--vien-nhat); }
+.ds a { display: flex; align-items: center; gap: 12px; padding: 10px 14px; min-height: 58px; text-decoration: none; color: var(--chu); }
+.ds a:hover { background: var(--nen-nhat); color: var(--chu); }
+.maDv {
+  flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--nhan-nhat); color: var(--nhan);
+  display: grid; place-items: center; font-weight: 800; font-size: 13px;
+}
+.tenDv { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+.tenDv b { color: var(--toi); }
+.tenDv span { font-size: 13px; color: var(--chu-phu); }
+.mui { flex: none; color: var(--chu-phu); }
+.chip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; background: var(--nen-trang); border: 1px solid var(--vien);
+  border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; color: var(--toi);
+}
+.chip a:hover { border-color: var(--toi); }
+@media (min-width: 900px) {
+  .dau { padding-top: 56px; }
+  .tieuDe { font-size: 34px; }
+}

@@ -1,0 +1,8 @@
+.dd { font-size: 13px; color: var(--chu-phu); }
+.dd ol { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; }
+.dd li + li::before { content: "›"; margin-right: 4px; color: #9aa5b1; }
+.dd a { color: var(--chu-phu); text-decoration: none; }
+.dd a:hover { color: var(--toi); text-decoration: underline; }
+.dd span { color: var(--chu); }
+.toi, .toi a, .toi li + li::before { color: var(--chu-tren-toi-2); }
+.toi a:hover, .toi span { color: #fff; }

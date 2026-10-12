@@ -1,0 +1,9 @@
+.thanh {
+  position: sticky; bottom: 0; z-index: 40;
+  display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 8px;
+  padding: 8px 12px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(19, 40, 63, 0.97);
+}
+.nut { min-height: 50px; padding: 0 8px; font-size: 15px; }
+.nut:first-child { font-weight: 800; }
+@media (min-width: 900px) { .thanh { display: none; } }

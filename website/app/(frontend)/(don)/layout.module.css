@@ -1,0 +1,9 @@
+.nen { min-height: 100vh; min-height: 100dvh; background: var(--nen); }
+.khung {
+  max-width: 480px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; background: var(--nen);
+  display: flex; flex-direction: column; position: relative;
+}
+@media (min-width: 600px) {
+  .nen { background: #e9edf2; }
+  .khung { box-shadow: 0 0 0 1px var(--vien), var(--bong); }
+}

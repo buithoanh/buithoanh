@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Quản trị – Bảng giá và dịch vụ</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.55">
+
+  <header style="background: #13283f; color: #ffffff">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 10px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; box-sizing: border-box">
+      <a href="#" style="color: #ffffff; text-decoration: none; display: flex; flex-direction: column; line-height: 1.15; min-height: 44px; justify-content: center">
+        <b style="font-size: 19px; font-weight: 800">ThợTới · Quản trị</b>
+        <span style="font-size: 12px; color: #ffc9a3">by VC Phồn Vinh</span>
+      </a>
+      <div style="flex: 1"></div>
+      <a href="TrangChuMayTinh.dc.html" style="color: #dfe7f1; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        Xem website
+      </a>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <span style="width: 38px; height: 38px; border-radius: 50%; background: #1d3a5a; border: 2px solid #3d5c7e; color: #ffffff; display: grid; place-items: center; font-weight: 700; font-size: 14px">MĐ</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.25">
+          <b style="font-size: 14px">Trần Minh Đức</b>
+          <span style="font-size: 12.5px; color: #c3cfdc">Quản lý dịch vụ · GĐ dự án</span>
+        </span>
+      </div>
+      <button type="button" style="font: inherit; font-size: 14px; color: #ffffff; background: transparent; border: 1.5px solid rgba(255,255,255,0.45); border-radius: 10px; min-height: 44px; padding: 0 14px; cursor: pointer">Đăng xuất</button>
+    </div>
+  </header>
+
+  <div style="max-width: 1440px; margin: 0 auto; padding: 20px 24px 48px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; box-sizing: border-box">
+
+    <aside style="flex: 1 1 220px; min-width: 0; max-width: 100%; display: flex; flex-direction: column; gap: 12px">
+      <nav aria-label="Menu quản trị" style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 8px; display: flex; flex-wrap: wrap; gap: 2px">
+        <a href="#" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          Tổng quan
+        </a>
+        <a href="QtBaiViet.dc.html" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          <span style="flex: 1">Bài viết &amp; trang</span>
+          <span style="font-size: 12px; font-weight: 700; background: #fff1e6; color: #8a2c06; border-radius: 999px; padding: 1px 8px">2 chờ duyệt</span>
+        </a>
+        <a href="#bang-gia" aria-current="page" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #13283f; background: #fff1e6; font-weight: 700; text-decoration: none; box-shadow: inset 3px 0 0 #c2410c">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+          Bảng giá &amp; dịch vụ
+        </a>
+        <a href="#vung" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Vùng phục vụ &amp; giờ
+        </a>
+        <a href="#" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 0 0 2-2V5h14v2a2 2 0 0 0 0 4v2a2 2 0 0 0 0 4v2H5v-2a2 2 0 0 0-2-2"></path><line x1="10" y1="9" x2="14" y2="15"></line></svg>
+          Mã khuyến mãi
+        </a>
+        <a href="#" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          Số liệu
+        </a>
+        <a href="#" style="flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #18212c; text-decoration: none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Lịch hẹn
+        </a>
+      </nav>
+      <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px">
+        <b style="font-size: 13px; color: #5a6575; text-transform: uppercase; letter-spacing: 0.04em">Quyền của bạn</b>
+        <span><b>Quản lý dịch vụ</b>: sửa giá, danh mục dịch vụ, vùng phục vụ, giờ nhận đơn, ngày nghỉ; duyệt bài.</span>
+        <span style="color: #5a6575">Biên tập nội dung (VCmedia) không mở được màn này.</span>
+      </div>
+    </aside>
+
+    <main style="flex: 999 1 760px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; justify-content: space-between">
+        <div>
+          <h1 style="margin: 0; font-size: 26px; color: #13283f; letter-spacing: -0.01em">Bảng giá &amp; dịch vụ</h1>
+          <p style="margin: 2px 0 0; color: #5a6575">Một chỗ sửa giá cho cả website: bảng giá, trang dịch vụ, trang khu vực, trang hãng xe, báo giá sơ bộ và khối giá trong bài viết.</p>
+        </div>
+      </div>
+
+      <nav aria-label="Các phần trong trang" style="display: flex; flex-wrap: wrap; gap: 6px">
+        <a href="#bang-gia" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #13283f; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 600">Bảng giá</a>
+        <a href="#dich-vu" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #ffffff; border: 1.5px solid #c9d0d8; color: #13283f; text-decoration: none; font-size: 14px; font-weight: 600; box-sizing: border-box">Danh mục dịch vụ</a>
+        <a href="#hang-xe" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #ffffff; border: 1.5px solid #c9d0d8; color: #13283f; text-decoration: none; font-size: 14px; font-weight: 600; box-sizing: border-box">Hãng &amp; đời xe</a>
+        <a href="#vung" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #ffffff; border: 1.5px solid #c9d0d8; color: #13283f; text-decoration: none; font-size: 14px; font-weight: 600; box-sizing: border-box">Vùng phục vụ</a>
+        <a href="#gio" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #ffffff; border: 1.5px solid #c9d0d8; color: #13283f; text-decoration: none; font-size: 14px; font-weight: 600; box-sizing: border-box">Giờ nhận đơn &amp; ngày nghỉ</a>
+        <a href="#nhat-ky" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #ffffff; border: 1.5px solid #c9d0d8; color: #13283f; text-decoration: none; font-size: 14px; font-weight: 600; box-sizing: border-box">Nhật ký thay đổi giá</a>
+      </nav>
+
+      <sc-if value="{{msg}}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="display: flex; gap: 10px; align-items: flex-start; border-radius: 12px; padding: 12px 16px; font-size: 14.5px; font-weight: 600; background: #e9f6ec; color: #1f6b2e; border: 1px solid #b7dfc1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 1px"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span style="flex: 1">{{msg}}</span>
+          <button type="button" onClick="{{closeMsg}}" aria-label="Đóng thông báo" style="flex: none; width: 44px; height: 44px; margin: -12px -8px -12px 0; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; font-size: 20px">×</button>
+        </div>
+      </sc-if>
+
+      <section id="bang-gia" aria-labelledby="h-bang-gia" style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+        <div style="padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #e1e5ea">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: baseline">
+            <h2 id="h-bang-gia" style="margin: 0; font-size: 20px; color: #13283f">Bảng giá theo dịch vụ</h2>
+            <span style="font-size: 13.5px; color: #5a6575">Tiền công: giá cụ thể · Phụ tùng: khoảng “từ – đến” theo phân khúc xe</span>
+          </div>
+          <div style="background: #fff1e6; border-radius: 10px; padding: 10px 14px; font-size: 14.5px; display: flex; gap: 10px; align-items: flex-start">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 3px"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span><b style="color: #8a2c06">Đổi giá xong, mọi trang cập nhật trong 5 phút.</b> Mỗi lần lưu đều ghi vào nhật ký: ai sửa, lúc nào, giá cũ và giá mới.</span>
+          </div>
+          <div role="tablist" aria-label="Chọn dịch vụ" style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{svcTabs}}" as="t" hint-placeholder-count="6">
+              <button type="button" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="overflow-x: auto">
+          <div role="table" aria-label="Bảng giá dịch vụ đang chọn" style="min-width: 900px; font-size: 14px">
+            <div role="row" style="display: grid; grid-template-columns: minmax(200px, 1.5fr) 210px repeat(4, minmax(110px, 1fr)) 150px; background: #fafbfc; color: #5a6575; font-weight: 600; border-bottom: 1px solid #e1e5ea">
+              <span role="columnheader" style="padding: 10px 14px">Hạng mục</span>
+              <span role="columnheader" style="padding: 10px 8px">Giá công</span>
+              <span role="columnheader" style="padding: 10px 8px">Phụ tùng A · xe nhỏ</span>
+              <span role="columnheader" style="padding: 10px 8px">B · sedan hạng B</span>
+              <span role="columnheader" style="padding: 10px 8px">C · hạng C, SUV nhỏ</span>
+              <span role="columnheader" style="padding: 10px 8px">D · 7 chỗ, bán tải</span>
+              <span role="columnheader" style="padding: 10px 14px">Sửa lần cuối</span>
+            </div>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+              <div role="row" style="{{r.trStyle}}">
+                <div role="rowheader" style="padding: 10px 14px; font-weight: 600">
+                  <span style="display: block">{{r.ten}}</span>
+                  <span style="display: block; font-size: 12px; font-weight: 600; color: #5a6575">{{r.loaiLabel}}</span>
+                </div>
+                <div role="cell" style="padding: 8px">
+                  <sc-if value="{{r.isCong}}" hint-placeholder-val="{{ true }}">
+                    <div style="display: flex; align-items: center; gap: 4px">
+                      <button type="button" onClick="{{r.dec}}" aria-label="Giảm 10.000đ" style="flex: none; width: 44px; height: 44px; border: 1.5px solid #c9d0d8; background: #ffffff; border-radius: 8px; font: inherit; font-size: 18px; color: #13283f; cursor: pointer">−</button>
+                      <input type="text" aria-label="{{r.aria}}" value="{{r.giaStr}}" style="{{r.inputStyle}}">
+                      <button type="button" onClick="{{r.inc}}" aria-label="Tăng 10.000đ" style="flex: none; width: 44px; height: 44px; border: 1.5px solid #c9d0d8; background: #ffffff; border-radius: 8px; font: inherit; font-size: 18px; color: #13283f; cursor: pointer">+</button>
+                    </div>
+                    <sc-if value="{{r.changed}}" hint-placeholder-val="{{ false }}">
+                      <span style="display: block; font-size: 12.5px; color: #8a2c06; font-weight: 600; margin-top: 4px">Cũ: <s>{{r.oldStr}}</s> · chưa lưu</span>
+                    </sc-if>
+                  </sc-if>
+                  <sc-if value="{{r.isPt}}" hint-placeholder-val="{{ false }}">
+                    <span style="display: block; color: #5a6575; padding: 10px 4px">—</span>
+                  </sc-if>
+                </div>
+                <sc-for list="{{r.segs}}" as="g" hint-placeholder-count="4">
+                  <div role="cell" style="padding: 8px">
+                    <sc-if value="{{g.has}}" hint-placeholder-val="{{ true }}">
+                      <div style="display: flex; flex-direction: column; gap: 4px">
+                        <input type="text" aria-label="{{g.ariaLo}}" value="{{g.lo}}" style="font: inherit; font-size: 13.5px; width: 100%; box-sizing: border-box; padding: 6px 8px; min-height: 44px; border: 1px solid #c9d0d8; border-radius: 8px; color: #8a2c06">
+                        <input type="text" aria-label="{{g.ariaHi}}" value="{{g.hi}}" style="font: inherit; font-size: 13.5px; width: 100%; box-sizing: border-box; padding: 6px 8px; min-height: 44px; border: 1px solid #c9d0d8; border-radius: 8px; color: #8a2c06">
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{g.none}}" hint-placeholder-val="{{ false }}">
+                      <span style="display: block; color: #5a6575; padding: 10px 4px">—</span>
+                    </sc-if>
+                  </div>
+                </sc-for>
+                <div role="cell" style="padding: 10px 14px; font-size: 13px; color: #5a6575">{{r.last}}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="padding: 14px 18px; border-top: 1px solid #e1e5ea; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px">
+          <sc-for list="{{fees}}" as="f" hint-placeholder-count="4">
+            <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">{{f.ten}}
+              <input type="text" value="{{f.gia}}" style="font: inherit; font-weight: 700; color: #13283f; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 46px; box-sizing: border-box">
+              <span style="font-size: 12.5px; font-weight: 400; color: #5a6575">{{f.note}}</span>
+            </label>
+          </sc-for>
+        </div>
+        <div style="position: sticky; bottom: 0; padding: 12px 18px; background: rgba(250,251,252,0.97); border-top: 1px solid #e1e5ea; display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+          <span style="flex: 1 1 260px; font-size: 14px; color: #5a6575">{{pendingText}}</span>
+          <button type="button" onClick="{{discard}}" style="font: inherit; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 48px; padding: 0 18px; cursor: pointer">Bỏ thay đổi</button>
+          <button type="button" onClick="{{save}}" style="{{saveStyle}}">{{saveLabel}}</button>
+        </div>
+      </section>
+
+      <section id="dich-vu" aria-labelledby="h-dich-vu" style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+        <div style="padding: 16px 18px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; border-bottom: 1px solid #e1e5ea">
+          <div>
+            <h2 id="h-dich-vu" style="margin: 0; font-size: 20px; color: #13283f">Danh mục dịch vụ</h2>
+            <span style="font-size: 13.5px; color: #5a6575">Danh mục này hiện ở menu, trang chủ và bước 1 của form đặt lịch.</span>
+          </div>
+          <button type="button" style="font: inherit; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 44px; padding: 0 16px; cursor: pointer">+ Thêm dịch vụ</button>
+        </div>
+        <div style="overflow-x: auto">
+          <div role="table" aria-label="Danh mục dịch vụ" style="min-width: 780px; font-size: 14px">
+            <div role="row" style="display: grid; grid-template-columns: 48px minmax(200px, 1.4fr) minmax(150px, 1fr) 210px 120px 150px; background: #fafbfc; color: #5a6575; font-weight: 600">
+              <span role="columnheader" style="padding: 10px 14px">#</span>
+              <span role="columnheader" style="padding: 10px 8px">Dịch vụ</span>
+              <span role="columnheader" style="padding: 10px 8px">Đường dẫn</span>
+              <span role="columnheader" style="padding: 10px 8px">Báo giá sơ bộ</span>
+              <span role="columnheader" style="padding: 10px 8px">Hạng mục giá</span>
+              <span role="columnheader" style="padding: 10px 14px">Nhận đặt lịch</span>
+            </div>
+            <sc-for list="{{svcList}}" as="d" hint-placeholder-count="6">
+              <div role="row" style="display: grid; grid-template-columns: 48px minmax(200px, 1.4fr) minmax(150px, 1fr) 210px 120px 150px; align-items: center; border-top: 1px solid #eef1f4">
+                <span role="cell" style="padding: 10px 14px; color: #5a6575">{{d.n}}</span>
+                <span role="rowheader" style="padding: 10px 8px; display: flex; align-items: center; gap: 10px">
+                  <span style="flex: none; width: 36px; height: 36px; border-radius: 10px; background: #fff1e6; color: #c2410c; display: grid; place-items: center; font-weight: 800; font-size: 13px">{{d.code}}</span>
+                  <b style="color: #13283f">{{d.name}}</b>
+                </span>
+                <span role="cell" style="padding: 10px 8px; color: #5a6575">{{d.slug}}</span>
+                <span role="cell" style="padding: 10px 8px"><span style="{{d.quoteStyle}}">{{d.quote}}</span></span>
+                <span role="cell" style="padding: 10px 8px">{{d.count}}</span>
+                <span role="cell" style="padding: 6px 14px">
+                  <button type="button" role="switch" aria-checked="{{d.on}}" aria-label="{{d.aria}}" onClick="{{d.toggle}}" style="font: inherit; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; border: 0; background: transparent; cursor: pointer; color: #18212c; padding: 0">
+                    <span style="{{d.track}}"><span style="{{d.knob}}"></span></span>
+                    <span style="font-size: 13.5px">{{d.state}}</span>
+                  </button>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section id="hang-xe" aria-labelledby="h-hang-xe" style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-start">
+          <div style="flex: 1 1 360px; min-width: 0">
+            <h2 id="h-hang-xe" style="margin: 0; font-size: 20px; color: #13283f">Hãng &amp; đời xe</h2>
+            <span style="font-size: 13.5px; color: #5a6575">Danh mục hãng, dòng, đời xe lấy từ VCparts, dùng chung cho form đặt lịch và báo giá sơ bộ. Ở đây chỉ gán phân khúc giá A–D cho từng dòng.</span>
+          </div>
+          <div style="flex: 0 1 auto; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #f6f7f9; border-radius: 10px; padding: 8px 8px 8px 14px">
+            <span style="display: flex; flex-direction: column; line-height: 1.35">
+              <span style="font-size: 12.5px; color: #5a6575">Đồng bộ VCparts lần cuối</span>
+              <b style="font-size: 14px; color: #13283f">{{syncText}}</b>
+            </span>
+            <button type="button" onClick="{{sync}}" style="font: inherit; font-weight: 700; color: #ffffff; background: #13283f; border: 0; border-radius: 10px; min-height: 44px; padding: 0 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              Đồng bộ ngay
+            </button>
+          </div>
+        </div>
+        <span style="font-size: 13.5px; color: #5a6575">Tự đồng bộ 06:00 mỗi ngày · 15 hãng · 142 dòng xe</span>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 8px">
+          <sc-for list="{{brands}}" as="b" hint-placeholder-count="15">
+            <div style="border: 1px solid #e1e5ea; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; line-height: 1.35">
+              <b style="color: #13283f">{{b.ten}}</b>
+              <span style="font-size: 13px; color: #5a6575">{{b.sub}}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background: #fff1e6; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
+          <b style="color: #8a2c06">Dòng xe mới từ VCparts cần gán phân khúc giá</b>
+          <sc-for list="{{newModels}}" as="m" hint-placeholder-count="3">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; background: #ffffff; border-radius: 8px; padding: 8px 12px">
+              <span style="flex: 1 1 220px"><b>{{m.ten}}</b> <span style="color: #5a6575; font-size: 13.5px">· {{m.doi}}</span></span>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600">Phân khúc
+                <select style="font: inherit; font-weight: 400; padding: 8px 10px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 44px">
+                  <option>{{m.pk}}</option><option>A · xe nhỏ</option><option>B · sedan hạng B</option><option>C · hạng C, SUV nhỏ</option><option>D · 7 chỗ, bán tải, xe sang</option>
+                </select>
+              </label>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section id="vung" aria-labelledby="h-vung" style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 14px">
+        <div>
+          <h2 id="h-vung" style="margin: 0; font-size: 20px; color: #13283f">Vùng phục vụ theo quận, phường</h2>
+          <span style="font-size: 13.5px; color: #5a6575">Khách gõ địa chỉ ngoài vùng thì web báo rõ và mời gọi tư vấn hoặc kéo xe. Thời gian đến dự kiến hiện trên trang khu vực và trang theo dõi thợ.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <sc-for list="{{districts}}" as="q" hint-placeholder-count="4">
+            <div style="{{q.boxStyle}}">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 8px 12px">
+                <button type="button" role="switch" aria-checked="{{q.on}}" aria-label="{{q.aria}}" onClick="{{q.toggle}}" style="font: inherit; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; border: 0; background: transparent; cursor: pointer; color: #18212c; padding: 0">
+                  <span style="{{q.track}}"><span style="{{q.knob}}"></span></span>
+                  <b style="font-size: 16px; color: #13283f">{{q.ten}}</b>
+                </button>
+                <span style="{{q.badgeStyle}}">{{q.badge}}</span>
+                <span style="flex: 1"></span>
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600">Đến dự kiến
+                  <input type="text" value="{{q.eta}}" style="font: inherit; font-weight: 700; width: 64px; text-align: center; padding: 8px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 44px; box-sizing: border-box">
+                  <span style="font-weight: 400">phút</span>
+                </label>
+                <button type="button" aria-expanded="{{q.open}}" onClick="{{q.expand}}" style="font: inherit; font-size: 14px; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 44px; padding: 0 12px; cursor: pointer">{{q.expandLabel}}</button>
+              </div>
+              <sc-if value="{{q.open}}" hint-placeholder-val="{{ false }}">
+                <div style="border-top: 1px solid #e1e5ea; padding: 12px; display: flex; flex-wrap: wrap; gap: 6px">
+                  <sc-for list="{{q.wards}}" as="w" hint-placeholder-count="8">
+                    <button type="button" role="switch" aria-checked="{{w.on}}" onClick="{{w.toggle}}" style="{{w.style}}">{{w.label}}</button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{q.hasNote}}" hint-placeholder-val="{{ false }}">
+                  <span style="display: block; padding: 0 12px 12px; font-size: 13px; color: #5a6575">{{q.note}}</span>
+                </sc-if>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <div style="border-top: 1px dashed #c9d0d8; padding-top: 12px; display: flex; flex-direction: column; gap: 8px">
+          <b style="font-size: 14px; color: #13283f">Quận chưa phục vụ (bật khi có tổ thợ trực)</b>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{offDistricts}}" as="o" hint-placeholder-count="4">
+              <button type="button" role="switch" aria-checked="{{o.on}}" onClick="{{o.toggle}}" style="{{o.style}}">{{o.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section id="gio" aria-labelledby="h-gio" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px; align-items: start">
+        <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0">
+          <div>
+            <h2 id="h-gio" style="margin: 0; font-size: 20px; color: #13283f">Khung giờ nhận đơn</h2>
+            <span style="font-size: 13.5px; color: #5a6575">Khung 2 giờ khách chọn ở bước 4 đặt lịch. Bấm từng ô để mở hoặc đóng. Bản đầu dùng khung cố định ở đây, sau lấy khung trống từ phần mềm điều phối.</span>
+          </div>
+          <div style="overflow-x: auto">
+            <div role="table" aria-label="Khung giờ nhận đơn trong tuần" style="min-width: 440px; font-size: 13px; display: flex; flex-direction: column; gap: 4px">
+              <div role="row" style="display: grid; grid-template-columns: 44px repeat(6, minmax(0, 1fr)); gap: 4px; color: #5a6575; font-weight: 600; text-align: center">
+                <span role="columnheader" style="text-align: left">Ngày</span>
+                <sc-for list="{{slotHead}}" as="h" hint-placeholder-count="6">
+                  <span role="columnheader" style="white-space: nowrap">{{h.t}}</span>
+                </sc-for>
+              </div>
+              <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+                <div role="row" style="display: grid; grid-template-columns: 44px repeat(6, minmax(0, 1fr)); gap: 4px; align-items: center">
+                  <span role="rowheader" style="font-weight: 700; color: #13283f">{{d.ten}}</span>
+                  <sc-for list="{{d.slots}}" as="sl" hint-placeholder-count="6">
+                    <button type="button" aria-pressed="{{sl.on}}" aria-label="{{sl.aria}}" onClick="{{sl.toggle}}" style="{{sl.style}}">{{sl.label}}</button>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px">
+            <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Số đơn tối đa mỗi khung
+              <input type="text" value="6 đơn" style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 46px; box-sizing: border-box">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Gọi thợ gấp, cứu hộ
+              <input type="text" value="06:00 – 22:00 hằng ngày" style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; min-height: 46px; box-sizing: border-box">
+            </label>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0">
+          <div>
+            <h2 style="margin: 0; font-size: 20px; color: #13283f">Ngày nghỉ</h2>
+            <span style="font-size: 13.5px; color: #5a6575">Ngày nghỉ không cho đặt lịch. Bấm vào ngày để đánh dấu nghỉ hoặc mở lại.</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <button type="button" aria-label="Tháng trước" style="width: 44px; height: 44px; border: 1.5px solid #c9d0d8; border-radius: 10px; background: #ffffff; color: #13283f; cursor: pointer; display: grid; place-items: center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <b style="flex: 1; text-align: center; color: #13283f; font-size: 16px">Tháng 2 năm 2027</b>
+            <button type="button" aria-label="Tháng sau" style="width: 44px; height: 44px; border: 1.5px solid #c9d0d8; border-radius: 10px; background: #ffffff; color: #13283f; cursor: pointer; display: grid; place-items: center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; text-align: center">
+            <sc-for list="{{dow}}" as="w" hint-placeholder-count="7">
+              <span style="font-size: 12.5px; font-weight: 700; color: #5a6575; padding: 4px 0">{{w.t}}</span>
+            </sc-for>
+            <sc-for list="{{days}}" as="d" hint-placeholder-count="28">
+              <button type="button" aria-pressed="{{d.off}}" aria-label="{{d.aria}}" onClick="{{d.toggle}}" style="{{d.style}}">{{d.n}}</button>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: #5a6575">
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 4px; background: #c2410c"></span>Nghỉ</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 4px; background: #ffffff; border: 1px solid #c9d0d8; box-sizing: border-box"></span>Nhận đơn</span>
+          </div>
+          <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px">
+            <input type="checkbox" checked style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #13283f">
+            <span>Ngày nghỉ vẫn nhận gọi thợ gấp, cứu hộ (tổ trực Tết)</span>
+          </label>
+          <div style="border-top: 1px solid #eef1f4; padding-top: 10px; display: flex; flex-direction: column; gap: 6px">
+            <b style="font-size: 14px; color: #13283f">Sắp tới</b>
+            <sc-for list="{{holidays}}" as="h" hint-placeholder-count="3">
+              <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px"><span>{{h.ten}}</span><b style="color: #13283f; white-space: nowrap">{{h.ngay}}</b></div>
+            </sc-for>
+            <button type="button" style="align-self: flex-start; font: inherit; font-size: 14px; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 44px; padding: 0 14px; cursor: pointer; margin-top: 4px">+ Thêm đợt nghỉ</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="nhat-ky" aria-labelledby="h-nhat-ky" style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+        <div style="padding: 16px 18px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; border-bottom: 1px solid #e1e5ea">
+          <div>
+            <h2 id="h-nhat-ky" style="margin: 0; font-size: 20px; color: #13283f">Nhật ký thay đổi giá</h2>
+            <span style="font-size: 13.5px; color: #5a6575">Ghi tự động mỗi lần lưu giá. Không ai xoá hay sửa được nhật ký.</span>
+          </div>
+          <button type="button" style="font: inherit; font-weight: 700; color: #13283f; background: #ffffff; border: 1.5px solid #c9d0d8; border-radius: 10px; min-height: 44px; padding: 0 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Tải file Excel
+          </button>
+        </div>
+        <div style="overflow-x: auto">
+          <div role="table" aria-label="Nhật ký thay đổi giá" style="min-width: 860px; font-size: 14px">
+            <div role="row" style="display: grid; grid-template-columns: 150px 230px minmax(200px, 1.3fr) 230px minmax(160px, 1fr); background: #fafbfc; color: #5a6575; font-weight: 600">
+              <span role="columnheader" style="padding: 10px 18px">Lúc</span>
+              <span role="columnheader" style="padding: 10px 8px">Người sửa</span>
+              <span role="columnheader" style="padding: 10px 8px">Hạng mục</span>
+              <span role="columnheader" style="padding: 10px 8px">Giá cũ → giá mới</span>
+              <span role="columnheader" style="padding: 10px 18px">Lý do</span>
+            </div>
+            <sc-for list="{{log}}" as="l" hint-placeholder-count="6">
+              <div role="row" style="{{l.trStyle}}">
+                <span role="cell" style="padding: 10px 18px; color: #5a6575">{{l.time}}</span>
+                <span role="cell" style="padding: 10px 8px; display: flex; align-items: center; gap: 8px">
+                  <span style="flex: none; width: 30px; height: 30px; border-radius: 50%; background: #1d3a5a; color: #ffffff; display: grid; place-items: center; font-size: 11.5px; font-weight: 700">{{l.ini}}</span>
+                  <span style="display: flex; flex-direction: column; line-height: 1.3"><b style="font-size: 14px">{{l.who}}</b><span style="font-size: 12.5px; color: #5a6575">{{l.role}}</span></span>
+                </span>
+                <span role="cell" style="padding: 10px 8px">{{l.item}}</span>
+                <span role="cell" style="padding: 10px 8px"><s style="color: #5a6575">{{l.old}}</s> → <b style="color: #c2410c">{{l.neu}}</b></span>
+                <span role="cell" style="padding: 10px 18px; color: #5a6575">{{l.why}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      svc: 'ac-quy',
+      draft: { 'ac-quy|2': 170000 },
+      saved: {},
+      newLog: [],
+      saves: 0,
+      msg: '',
+      svcOff: [],
+      qOff: [],
+      wOff: ['Ba Đình|Phúc Xá'],
+      qOpen: 'Cầu Giấy',
+      extraOn: [],
+      slotOff: ['CN|13–15', 'CN|15–17', 'CN|17–19'],
+      dayOff: [5, 6, 7, 8, 9],
+      synced: false
+    };
+  }
+  renderVals() {
+    const s = this.state;
+    const vnd = (n) => n.toLocaleString('vi-VN') + 'đ';
+    const num = (n) => n.toLocaleString('vi-VN');
+    const data = [
+      { id: 'bao-duong-dinh-ky', code: 'BD', name: 'Bảo dưỡng định kỳ', slug: '/bao-duong-dinh-ky', quick: true, rows: [
+        { ten: 'Bảo dưỡng cấp nhỏ (công, kiểm tra 30 hạng mục)', loai: 'cong', gia: 350000, last: '15/12/2026 · nhập ban đầu' },
+        { ten: 'Bảo dưỡng cấp lớn (công)', loai: 'cong', gia: 650000, last: '15/12/2026 · nhập ban đầu' },
+        { ten: 'Dầu máy và lọc dầu', loai: 'pt', pk: { A: [450000, 650000], B: [550000, 800000], C: [750000, 1100000], D: [950000, 1500000] }, last: '12/01/2027 · VCparts' },
+        { ten: 'Lọc gió động cơ', loai: 'pt', pk: { A: [150000, 250000], B: [180000, 300000], C: [250000, 400000], D: [300000, 550000] }, last: '12/01/2027 · VCparts' }
+      ] },
+      { id: 'ac-quy', code: 'AQ', name: 'Ắc quy', slug: '/thay-ac-quy-o-to', quick: true, rows: [
+        { ten: 'Đo kiểm tra ắc quy và máy phát', loai: 'cong', gia: 0, last: '15/12/2026 · nhập ban đầu' },
+        { ten: 'Kích nổ tại chỗ', loai: 'cong', gia: 150000, last: '15/12/2026 · nhập ban đầu' },
+        { ten: 'Công thay ắc quy', loai: 'cong', gia: 150000, last: '15/12/2026 · nhập ban đầu' },
+        { ten: 'Ắc quy 12V', loai: 'pt', pk: { A: [1200000, 1600000], B: [1350000, 2000000], C: [1600000, 2400000], D: [2000000, 2800000] }, last: '12/01/2027 08:15 · M. Đức' }
+      ] },
+      { id: 'lop', code: 'L', name: 'Lốp', slug: '/va-thay-lop-o-to', quick: true, rows: [
+        { ten: 'Vá lốp không săm', loai: 'cong', gia: 120000, last: '05/01/2027 17:40 · M. Đức' },
+        { ten: 'Thay lốp dự phòng', loai: 'cong', gia: 100000, last: '15/12/2026 · nhập ban đầu' },
+        { ten: 'Công tháo lắp, cân bằng 1 lốp', loai: 'cong', gia: 150000, last: '15/12/2026 · nhập ban đầu' },
+        { ten: 'Lốp mới (1 chiếc)', loai: 'pt', pk: { A: [900000, 1400000], B: [1200000, 1900000], C: [1700000, 2800000], D: [2400000, 4200000] }, last: '12/01/2027 · VCparts' }
+      ] },
+      { id: 'phanh', code: 'P', name: 'Phanh', slug: '/sua-phanh-o-to', quick: true, rows: [
+        { ten: 'Công thay má phanh (1 cầu)', loai: 'cong', gia: 250000, last: '15/12/2026 · nhập ban đầu' },
+        { ten: 'Má phanh (1 cầu)', loai: 'pt', pk: { A: [450000, 700000], B: [550000, 900000], C: [750000, 1300000], D: [1000000, 1900000] }, last: '12/01/2027 · VCparts' },
+        { ten: 'Thay dầu phanh (gồm dầu)', loai: 'cong', gia: 350000, last: '28/12/2026 09:05 · V. Thắng' }
+      ] },
+      { id: 'doc-loi-chan-doan', code: 'ĐL', name: 'Đọc lỗi, chẩn đoán', slug: '/doc-loi-o-to', quick: false, rows: [
+        { ten: 'Đọc lỗi bằng máy chẩn đoán', loai: 'cong', gia: 200000, last: '20/12/2026 14:22 · M. Đức' }
+      ] },
+      { id: 'cuu-ho-keo-xe', code: 'CH', name: 'Cứu hộ, kéo xe', slug: '/cuu-ho-keo-xe', quick: false, rows: [
+        { ten: 'Kéo xe nội thành về xưởng Auto Speedy', loai: 'cong', gia: 400000, last: '15/12/2026 · nhập ban đầu' },
+        { ten: 'Mỗi km ngoài nội thành', loai: 'cong', gia: 15000, donVi: 'km', last: '15/12/2026 · nhập ban đầu' }
+      ] }
+    ];
+    const baseOf = (k, r) => (k in s.saved ? s.saved[k] : r.gia);
+    const newOf = (k, r) => (k in s.draft ? s.draft[k] : baseOf(k, r));
+    const changes = [];
+    data.forEach((sv) => sv.rows.forEach((r, i) => {
+      if (r.loai !== 'cong') return;
+      const k = sv.id + '|' + i;
+      const o = baseOf(k, r), n = newOf(k, r);
+      if (o !== n) changes.push({ k, sv, r, o, n });
+    }));
+    const setPrice = (k, r, delta) => {
+      const n = Math.max(0, newOf(k, r) + delta);
+      const d = Object.assign({}, s.draft);
+      if (n === baseOf(k, r)) delete d[k]; else d[k] = n;
+      this.setState({ draft: d, msg: '' });
+    };
+    const cur = data.find((d) => d.id === s.svc) || data[0];
+    const svcTabs = data.map((d) => {
+      const on = d.id === cur.id;
+      const n = changes.filter((c) => c.sv.id === d.id).length;
+      return { on, label: d.name + (n ? ' · ' + n + ' chưa lưu' : ''), pick: () => this.setState({ svc: d.id }),
+        style: 'font: inherit; font-size: 14px; font-weight: 600; min-height: 44px; padding: 0 14px; border-radius: 999px; cursor: pointer; ' +
+          (on ? 'background: #13283f; color: #ffffff; border: 1.5px solid #13283f;' : 'background: #ffffff; color: #13283f; border: 1.5px solid #c9d0d8;') };
+    });
+    const rows = cur.rows.map((r, i) => {
+      const k = cur.id + '|' + i;
+      const isCong = r.loai === 'cong';
+      const o = isCong ? baseOf(k, r) : 0;
+      const n = isCong ? newOf(k, r) : 0;
+      const changed = isCong && o !== n;
+      const unit = r.donVi ? '/' + r.donVi : '';
+      return {
+        ten: r.ten, isCong, isPt: !isCong, changed,
+        loaiLabel: isCong ? 'Tiền công' : 'Phụ tùng · giá tham khảo VCparts',
+        giaStr: isCong ? (n === 0 ? 'Miễn phí' : vnd(n) + unit) : '',
+        oldStr: isCong ? (o === 0 ? 'Miễn phí' : vnd(o) + unit) : '',
+        aria: 'Giá công ' + r.ten,
+        inputStyle: 'font: inherit; font-weight: 700; width: 100%; min-width: 0; text-align: center; box-sizing: border-box; padding: 6px; min-height: 44px; border-radius: 8px; ' +
+          (changed ? 'border: 2px solid #c2410c; background: #fff1e6; color: #8a2c06;' : 'border: 1px solid #c9d0d8; background: #ffffff; color: #13283f;'),
+        trStyle: 'display: grid; grid-template-columns: minmax(200px, 1.5fr) 210px repeat(4, minmax(110px, 1fr)) 150px; align-items: start; border-top: 1px solid #eef1f4; ' + (changed ? 'background: #fffaf5;' : ''),
+        dec: () => setPrice(k, r, -10000),
+        inc: () => setPrice(k, r, 10000),
+        last: changed ? 'Đang sửa · chưa lưu' : r.last,
+        segs: ['A', 'B', 'C', 'D'].map((g) => isCong
+          ? { has: false, none: true, lo: '', hi: '', ariaLo: '', ariaHi: '' }
+          : { has: true, none: false, lo: 'Từ ' + num(r.pk[g][0]), hi: 'Đến ' + num(r.pk[g][1]), ariaLo: r.ten + ' phân khúc ' + g + ' giá từ', ariaHi: r.ten + ' phân khúc ' + g + ' giá đến' })
+      };
+    });
+    const fees = [
+      { ten: 'Phí đi lại nội thành', gia: vnd(50000), note: 'Trong 4 quận phục vụ, mỗi lần thợ tới.' },
+      { ten: 'Phí kiểm tra khi khách không sửa', gia: vnd(100000), note: 'Thu khi khách từ chối báo giá chính thức.' },
+      { ten: 'Gói hội viên Cơ bản / năm', gia: vnd(490000), note: 'Miễn phí đi lại 4 lần, kích nổ 2 lần, giảm 10% công.' },
+      { ten: 'Gói hội viên An tâm / năm', gia: vnd(1290000), note: 'Miễn phí đi lại, kích nổ, vá lốp; giảm 15% công.' }
+    ];
+    const nc = changes.length;
+    const stamp = (i) => '12/01/2027 09:' + String(44 + s.saves + i).padStart(2, '0');
+    const save = () => {
+      if (!nc) return;
+      const entries = changes.map((c, i) => ({
+        time: stamp(i), ini: 'MĐ', who: 'Trần Minh Đức', role: 'Quản lý dịch vụ',
+        item: c.sv.name + ' › ' + c.r.ten,
+        old: c.o === 0 ? 'Miễn phí' : vnd(c.o), neu: c.n === 0 ? 'Miễn phí' : vnd(c.n),
+        why: 'Sửa trực tiếp trên bảng giá', fresh: true
+      }));
+      this.setState({
+        saved: Object.assign({}, s.saved, s.draft), draft: {}, saves: s.saves + 1,
+        newLog: entries.reverse().concat(s.newLog),
+        msg: 'Đã lưu ' + nc + ' thay đổi giá và ghi vào nhật ký. Mọi trang trên web cập nhật giá mới trong 5 phút.'
+      });
+    };
+    const toggleIn = (arr, v) => (arr.includes(v) ? arr.filter((x) => x !== v) : arr.concat(v));
+    const sw = (on) => ({
+      track: 'flex: none; position: relative; width: 44px; height: 26px; border-radius: 999px; transition: background .15s; background: ' + (on ? '#2b8a3e' : '#b8c0ca'),
+      knob: 'position: absolute; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.25); transition: left .15s; left: ' + (on ? '21px' : '3px')
+    });
+    const svcList = data.map((d, i) => {
+      const on = !s.svcOff.includes(d.id);
+      return Object.assign({ n: i + 1, code: d.code, name: d.name, slug: d.slug, on,
+        quote: d.quick ? 'Tính ngay theo xe' : 'Cố vấn gọi lại trong 15 phút',
+        quoteStyle: 'font-size: 12.5px; font-weight: 700; border-radius: 6px; padding: 2px 8px; ' + (d.quick ? 'background: #e9f6ec; color: #1f6b2e' : 'background: #eef1f4; color: #3c4654'),
+        count: d.rows.length + ' hạng mục',
+        state: on ? 'Đang nhận' : 'Tạm ẩn',
+        aria: 'Nhận đặt lịch ' + d.name,
+        toggle: () => this.setState({ svcOff: toggleIn(s.svcOff, d.id) }) }, sw(on));
+    });
+    const brands = [
+      ['Toyota', 16, 2008], ['Hyundai', 14, 2010], ['Kia', 13, 2010], ['Mazda', 10, 2012], ['VinFast', 9, 2019],
+      ['Honda', 10, 2010], ['Mitsubishi', 9, 2012], ['Ford', 10, 2010], ['Suzuki', 7, 2014], ['Nissan', 6, 2014],
+      ['Peugeot', 6, 2016], ['MG', 7, 2020], ['Chevrolet', 6, 2012], ['Mercedes-Benz', 11, 2012], ['BMW', 8, 2014]
+    ].map(([ten, n, y]) => ({ ten, sub: n + ' dòng · đời ' + y + '–2026' }));
+    const newModels = [
+      { ten: 'Toyota Yaris Cross', doi: 'đời 2024–2026', pk: 'Chưa gán – chọn phân khúc' },
+      { ten: 'Hyundai Creta', doi: 'đời 2022–2026', pk: 'Chưa gán – chọn phân khúc' },
+      { ten: 'VinFast VF 3', doi: 'đời 2024–2026', pk: 'Gợi ý: A · xe nhỏ' }
+    ];
+    const Q = [
+      { ten: 'Cầu Giấy', eta: 30, w: ['Dịch Vọng', 'Dịch Vọng Hậu', 'Mai Dịch', 'Nghĩa Đô', 'Nghĩa Tân', 'Quan Hoa', 'Trung Hòa', 'Yên Hòa'] },
+      { ten: 'Đống Đa', eta: 35, w: ['Cát Linh', 'Hàng Bột', 'Khâm Thiên', 'Khương Thượng', 'Kim Liên', 'Láng Hạ', 'Láng Thượng', 'Nam Đồng', 'Ngã Tư Sở', 'Ô Chợ Dừa', 'Phương Liên – Trung Tự', 'Phương Mai', 'Quang Trung', 'Quốc Tử Giám', 'Thịnh Quang', 'Thổ Quan', 'Trung Liệt', 'Văn Chương', 'Văn Miếu'] },
+      { ten: 'Thanh Xuân', eta: 35, w: ['Hạ Đình', 'Khương Đình', 'Khương Mai', 'Khương Trung', 'Kim Giang', 'Nhân Chính', 'Phương Liệt', 'Thanh Xuân Bắc', 'Thanh Xuân Nam', 'Thanh Xuân Trung', 'Thượng Đình'] },
+      { ten: 'Ba Đình', eta: 40, w: ['Cống Vị', 'Điện Biên', 'Đội Cấn', 'Giảng Võ', 'Kim Mã', 'Liễu Giai', 'Ngọc Hà', 'Ngọc Khánh', 'Nguyễn Trung Trực', 'Phúc Xá', 'Quán Thánh', 'Thành Công', 'Trúc Bạch', 'Vĩnh Phúc'], note: 'Phúc Xá đang tắt: khu ngoài đê, xe van khó vào. Khách ở đây được mời gọi tư vấn hoặc kéo xe.' }
+    ];
+    const districts = Q.map((q) => {
+      const on = !s.qOff.includes(q.ten);
+      const open = s.qOpen === q.ten;
+      const wards = q.w.map((w) => {
+        const key = q.ten + '|' + w;
+        const won = on && !s.wOff.includes(key);
+        return { label: w, on: won, toggle: () => this.setState({ wOff: toggleIn(s.wOff, key) }),
+          style: 'font: inherit; font-size: 13.5px; min-height: 44px; padding: 0 12px; border-radius: 999px; cursor: pointer; ' +
+            (won ? 'background: #e9f6ec; color: #1f6b2e; border: 1.5px solid #9fd1ab; font-weight: 600;' : 'background: #f6f7f9; color: #5a6575; border: 1.5px dashed #b8c0ca; text-decoration: line-through;') };
+      });
+      const nOn = wards.filter((x) => x.on).length;
+      return Object.assign({ ten: q.ten, on, open, eta: String(q.eta), wards, aria: 'Phục vụ quận ' + q.ten,
+        badge: on ? nOn + '/' + q.w.length + ' phường đang phục vụ' : 'Đã tắt cả quận',
+        badgeStyle: 'font-size: 12.5px; font-weight: 700; border-radius: 6px; padding: 2px 8px; ' + (on ? 'background: #e9f6ec; color: #1f6b2e' : 'background: #fdeee8; color: #a8320a'),
+        boxStyle: 'border-radius: 10px; ' + (on ? 'border: 1px solid #e1e5ea; background: #ffffff;' : 'border: 1px solid #e1e5ea; background: #f6f7f9;'),
+        expandLabel: open ? 'Thu gọn phường' : 'Xem phường',
+        hasNote: !!q.note, note: q.note || '',
+        toggle: () => this.setState({ qOff: toggleIn(s.qOff, q.ten) }),
+        expand: () => this.setState({ qOpen: open ? '' : q.ten }) }, sw(on));
+    });
+    const offDistricts = ['Hai Bà Trưng', 'Hoàn Kiếm', 'Tây Hồ', 'Nam Từ Liêm'].map((t) => {
+      const on = s.extraOn.includes(t);
+      return { label: (on ? 'Đã bật · ' : '+ ') + t, on, toggle: () => this.setState({ extraOn: toggleIn(s.extraOn, t) }),
+        style: 'font: inherit; font-size: 14px; min-height: 44px; padding: 0 14px; border-radius: 999px; cursor: pointer; ' +
+          (on ? 'background: #e9f6ec; color: #1f6b2e; border: 1.5px solid #9fd1ab; font-weight: 700;' : 'background: #ffffff; color: #13283f; border: 1.5px solid #c9d0d8;') };
+    });
+    const slots = ['07–09', '09–11', '11–13', '13–15', '15–17', '17–19'];
+    const week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((d) => ({
+      ten: d,
+      slots: slots.map((t) => {
+        const key = d + '|' + t;
+        const on = !s.slotOff.includes(key);
+        return { on, label: on ? 'Nhận' : 'Nghỉ', aria: d + ' ' + t + (on ? ' đang nhận đơn' : ' nghỉ'),
+          toggle: () => this.setState({ slotOff: toggleIn(s.slotOff, key) }),
+          style: 'font: inherit; font-size: 12.5px; font-weight: 700; width: 100%; min-height: 44px; border-radius: 8px; cursor: pointer; ' +
+            (on ? 'background: #13283f; color: #ffffff; border: 0;' : 'background: #f6f7f9; color: #5a6575; border: 1.5px dashed #b8c0ca;') };
+      })
+    }));
+    const days = [];
+    for (let n = 1; n <= 28; n++) {
+      const off = s.dayOff.includes(n);
+      const sun = n % 7 === 0;
+      days.push({ n, off, aria: n + '/02/2027' + (off ? ' nghỉ' : ' nhận đơn'),
+        toggle: () => this.setState({ dayOff: toggleIn(s.dayOff, n) }),
+        style: 'font: inherit; font-size: 14px; font-weight: 700; min-height: 44px; border-radius: 8px; cursor: pointer; ' +
+          (off ? 'background: #c2410c; color: #ffffff; border: 0;' : 'background: #ffffff; border: 1px solid #e1e5ea; color: ' + (sun ? '#a8320a' : '#18212c') + ';') });
+    }
+    const offFeb = s.dayOff.slice().sort((a, b) => a - b);
+    const febText = offFeb.length ? offFeb.map((d) => String(d).padStart(2, '0')).join(', ') + '/02/2027' : 'Chưa có ngày nghỉ';
+    const baseLog = [
+      { time: '12/01/2027 08:15', ini: 'MĐ', who: 'Trần Minh Đức', role: 'Quản lý dịch vụ', item: 'Ắc quy › Ắc quy 12V · phân khúc C', old: '1.500.000 – 2.300.000đ', neu: '1.600.000 – 2.400.000đ', why: 'VCparts báo tăng giá nhập ắc quy GS' },
+      { time: '05/01/2027 17:40', ini: 'MĐ', who: 'Trần Minh Đức', role: 'Quản lý dịch vụ', item: 'Lốp › Vá lốp không săm', old: '100.000đ', neu: '120.000đ', why: 'Đổi sang miếng vá nấm, bền hơn' },
+      { time: '28/12/2026 09:05', ini: 'VT', who: 'Lê Văn Thắng', role: 'Trưởng kỹ thuật · Quản lý dịch vụ', item: 'Phanh › Thay dầu phanh (gồm dầu)', old: '320.000đ', neu: '350.000đ', why: 'Dùng dầu DOT 4 cho mọi xe' },
+      { time: '20/12/2026 14:22', ini: 'MĐ', who: 'Trần Minh Đức', role: 'Quản lý dịch vụ', item: 'Đọc lỗi › Đọc lỗi bằng máy chẩn đoán', old: '250.000đ', neu: '200.000đ', why: 'Giá mở cửa, khớp kế hoạch kinh doanh' },
+      { time: '15/12/2026 10:00', ini: 'VS', who: 'Đỗ Hoàng Nam', role: 'Quản trị hệ thống · VCsoft', item: 'Toàn bộ bảng giá (6 dịch vụ, 18 hạng mục)', old: 'Chưa có', neu: 'Nhập ban đầu', why: 'Nhập từ file giá đã duyệt' }
+    ];
+    const log = s.newLog.concat(baseLog).map((l) => Object.assign({}, l, { trStyle: 'display: grid; grid-template-columns: 150px 230px minmax(200px, 1.3fr) 230px minmax(160px, 1fr); align-items: center; border-top: 1px solid #eef1f4; ' + (l.fresh ? 'background: #e9f6ec;' : '') }));
+    return {
+      msg: s.msg, closeMsg: () => this.setState({ msg: '' }),
+      svcTabs, rows, fees,
+      pendingText: nc ? nc + ' giá đang sửa, chưa lưu. Bấm Lưu để áp dụng; mọi trang cập nhật trong 5 phút.' : 'Không có thay đổi chưa lưu. Dùng nút − / + hoặc gõ thẳng vào ô giá.',
+      saveLabel: nc ? 'Lưu ' + nc + ' thay đổi giá' : 'Đã lưu hết',
+      saveStyle: 'font: inherit; font-weight: 800; border: 0; border-radius: 10px; min-height: 48px; padding: 0 22px; cursor: pointer; ' + (nc ? 'background: #c2410c; color: #ffffff;' : 'background: #e1e5ea; color: #5a6575;'),
+      save, discard: () => this.setState({ draft: {} }),
+      svcList, brands, newModels,
+      syncText: s.synced ? 'Hôm nay 09:44 · không có thay đổi mới' : 'Hôm nay 06:00 · 3 dòng xe mới',
+      sync: () => this.setState({ synced: true, msg: 'Đã đồng bộ danh mục xe từ VCparts lúc 09:44. 15 hãng, 142 dòng xe, không có dòng mới.' }),
+      districts, offDistricts,
+      slotHead: slots.map((t) => ({ t })), week,
+      dow: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((t) => ({ t })), days,
+      holidays: [
+        { ten: 'Tháng 2 (đang chọn trên lịch)', ngay: febText },
+        { ten: 'Giải phóng miền Nam, Quốc tế lao động', ngay: '30/04 – 01/05/2027' },
+        { ten: 'Quốc khánh', ngay: '02/09/2027' }
+      ],
+      log
+    };
+  }
+}
+</script>
+</body>
+</html>

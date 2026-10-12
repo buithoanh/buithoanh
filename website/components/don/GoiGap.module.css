@@ -1,0 +1,63 @@
+.noiDung { flex: 1; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 16px; }
+.camKet { background: var(--nhan-nhat); border-radius: 12px; padding: 12px 14px; display: flex; gap: 10px; align-items: center; font-size: 14px; }
+.camKetIcon { flex: none; color: var(--nhan); }
+.dam { color: var(--nhan-chu-dam); }
+.ngoaiGio {
+  background: var(--do-nhat); border: 1px solid var(--do-vien); border-radius: 12px; padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--do);
+}
+.muc { display: flex; flex-direction: column; gap: 10px; }
+.h2 { font-size: 18px; color: var(--toi); }
+.luoi { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.luoi:focus { outline: none; }
+.luoi :global(b) { font-size: 16px; }
+.loi { font-size: 13px; color: var(--do); font-weight: 600; }
+.sdt input { font-size: 17px; font-weight: 700; letter-spacing: 0.03em; min-height: 50px; }
+
+.chan {
+  position: sticky; bottom: 0; z-index: 20; margin-top: auto;
+  background: #fff; border-top: 1px solid var(--vien); padding: 10px 16px 16px; display: flex; flex-direction: column; gap: 8px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+.ghiChuChan { font-size: 12.5px; color: var(--chu-phu); display: flex; gap: 6px; align-items: center; }
+.chamDo { width: 8px; height: 8px; border-radius: 50%; background: var(--do-khan); flex: none; }
+.nutGui {
+  display: flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 12px; min-height: 56px;
+  font: inherit; font-size: 17px; font-weight: 800; cursor: pointer; color: #fff; background: var(--do-khan);
+}
+.nutGui:hover { background: var(--nhan-dam); }
+.nutTat, .nutTat:hover { background: var(--xam-tat); cursor: not-allowed; }
+.nutGui:disabled { cursor: progress; opacity: .85; }
+
+/* Màn xác nhận */
+.xong { flex: 1; padding: 22px 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+.xongDau { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+.dauTich { width: 72px; height: 72px; border-radius: 50%; background: var(--xanh-nhat); color: var(--xanh); display: grid; place-items: center; }
+.nhanDon { background: var(--do-khan); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 999px; }
+.h1 { font-size: 24px; color: var(--toi); line-height: 1.25; }
+.h1:focus { outline: none; }
+.phu { color: var(--chu-phu); font-size: 14px; }
+.theToi { background: var(--toi); color: var(--chu-tren-toi); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; font-size: 14px; }
+.soPhut { display: flex; flex-direction: column; align-items: center; line-height: 1; flex: none; }
+.soPhut b { font-size: 34px; color: var(--nhan-tren-toi); }
+.soPhut span { font-size: 12px; color: var(--chu-tren-toi-2); }
+.cacBuoc {
+  list-style: none; margin: 0; padding: 14px 16px; background: #fff; border: 1px solid var(--vien); border-radius: 12px;
+  display: flex; flex-direction: column; gap: 12px; font-size: 14px;
+}
+.cacBuoc li { display: flex; gap: 10px; align-items: center; }
+.buocXong { width: 24px; height: 24px; border-radius: 50%; background: var(--xanh); color: #fff; display: grid; place-items: center; flex: none; }
+.buocDang { width: 24px; height: 24px; border-radius: 50%; border: 3px solid var(--nhan); flex: none; }
+.buocChua { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--vien-o); flex: none; }
+.buocCho { color: var(--chu-phu); }
+.chuNhan { color: var(--nhan); }
+.tomTat {
+  margin: 0; background: #fff; border: 1px solid var(--vien); border-radius: 12px; padding: 12px 16px;
+  display: flex; flex-direction: column; gap: 6px; font-size: 14px;
+}
+.tomTat div { display: flex; justify-content: space-between; gap: 10px; }
+.tomTat dt { color: var(--chu-phu); flex: none; }
+.tomTat dd { margin: 0; font-weight: 700; text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.loiKhuyen { background: var(--nhan-nhat); border-radius: 12px; padding: 12px 14px; font-size: 14px; }
+.nutTheoDoi { min-height: 50px; border-radius: 12px; }
+.linkPhu { align-self: center; min-height: 44px; display: inline-flex; align-items: center; color: var(--toi-2); }

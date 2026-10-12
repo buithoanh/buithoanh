@@ -1,0 +1,3 @@
+.luoi3, .luoi2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.luoi3 > :first-child:not(:global(.bao)), .luoi3 > :global(.bao) { grid-column: 1 / -1; }
+.luoi2 > :global(.bao) { grid-column: 1 / -1; }

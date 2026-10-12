@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Hội viên và giới thiệu bạn bè – điện thoại</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 2900px; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.55; display: flex; flex-direction: column; position: relative">
+
+  <header style="background: #13283f; color: #ffffff; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+    <a href="Main.dc.html" style="color: #ffffff; text-decoration: none; display: flex; flex-direction: column; line-height: 1.15">
+      <b style="font-size: 18px; font-weight: 800; letter-spacing: -0.01em">ThợTới</b>
+      <span style="font-size: 11px; color: #ffc9a3">by VC Phồn Vinh</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 4px">
+      <a href="#" aria-label="Gọi hotline" style="display: inline-flex; align-items: center; gap: 6px; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 10px 8px; min-height: 44px; box-sizing: border-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb27a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        1900 1068
+      </a>
+      <button type="button" aria-label="Mở menu" style="width: 44px; height: 44px; border: 0; background: transparent; color: #ffffff; display: grid; place-items: center; cursor: pointer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <section style="background: #13283f; color: #ffffff; padding: 8px 16px 24px; display: flex; flex-direction: column; gap: 10px">
+    <nav aria-label="Vị trí trang" style="font-size: 13px; color: #c3cfdc"><a href="Main.dc.html" style="color: #c3cfdc">Trang chủ</a> / Hội viên</nav>
+    <h1 style="margin: 0; font-size: 28px; line-height: 1.2; font-weight: 800; letter-spacing: -0.02em">Hội viên ThợTới</h1>
+    <p style="margin: 0; color: #d6e0eb; font-size: 15px">Trả một lần mỗi năm, gọi thợ không lo phí đi lại, được giảm tiền công. Giới thiệu bạn bè còn được thêm lượt miễn phí.</p>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 4px">
+      <a href="#goi" style="display: flex; align-items: center; justify-content: center; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 15px; border-radius: 10px; min-height: 48px">Xem 2 gói</a>
+      <a href="#ma" style="display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.7); color: #ffffff; text-decoration: none; font-weight: 700; font-size: 15px; border-radius: 10px; min-height: 48px">Mã giới thiệu</a>
+    </div>
+  </section>
+
+  <section id="goi" style="padding: 22px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <div>
+      <h2 style="margin: 0; font-size: 20px; color: #13283f">Chọn gói hợp với bạn</h2>
+      <p style="margin: 2px 0 0; color: #5a6575; font-size: 14px">Chạm vào gói để chọn, bảng so sánh bên dưới.</p>
+    </div>
+    <div role="radiogroup" aria-label="Gói hội viên" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <sc-for list="{{goi}}" as="g" hint-placeholder-count="2">
+        <button type="button" role="radio" aria-checked="{{g.on}}" onClick="{{g.pick}}" style="{{g.style}}">
+          <span style="{{g.badgeStyle}}">{{g.badge}}</span>
+          <b style="font-size: 16px; color: #13283f">{{g.ten}}</b>
+          <span><b style="font-size: 21px; color: #c2410c">{{g.gia}}</b></span>
+          <span style="font-size: 12.5px; color: #5a6575">mỗi năm · khoảng {{g.thang}}/tháng</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+      <div style="display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 6px; padding: 10px 12px; background: #f0f3f6; font-size: 12.5px; font-weight: 700; color: #13283f">
+        <span>Quyền lợi</span><span style="{{colCB}}">Cơ bản</span><span style="{{colAT}}">An tâm</span>
+      </div>
+      <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+        <div style="display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 6px; padding: 11px 12px; border-top: 1px solid #eef1f4; font-size: 13.5px; align-items: center">
+          <span style="color: #18212c">{{r.ten}}</span>
+          <span style="{{r.cbStyle}}">{{r.cb}}</span>
+          <span style="{{r.atStyle}}">{{r.at}}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background: #e9f6ec; border-radius: 12px; padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e6b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 2px"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span style="font-size: 14px; color: #1e6b2f">{{loiIch}}</span>
+    </div>
+  </section>
+
+  <section style="margin: 16px 16px 8px; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+    <sc-if value="{{chuaDangKy}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <div>
+          <h2 style="margin: 0; font-size: 19px; color: #13283f">Đăng ký {{goiTen}}</h2>
+          <p style="margin: 2px 0 0; color: #5a6575; font-size: 13.5px">Để lại số, cố vấn gửi link thanh toán VietQR qua Zalo. Thanh toán xong gói có hiệu lực ngay.</p>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Họ tên
+          <input type="text" value="Trần Minh Tuấn" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box">
+        </label>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Số điện thoại
+            <input type="tel" value="0912 345 678" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Biển số xe
+            <input type="text" value="30G-482.16" style="font: inherit; font-weight: 700; letter-spacing: 0.03em; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+          </label>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Mã giới thiệu (nếu có)
+          <input type="text" placeholder="VD: HUONG7315" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box">
+        </label>
+        <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px">
+          <input type="checkbox" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #13283f">
+          <span>Tôi đồng ý cho xử lý dữ liệu cá nhân để đăng ký gói (<a href="#">chính sách</a>).</span>
+        </label>
+        <button type="button" onClick="{{dangKy}}" style="border: 0; border-radius: 12px; min-height: 52px; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; color: #ffffff; background: #c2410c">Đăng ký mua gói · {{goiGia}}</button>
+        <span style="font-size: 12.5px; color: #5a6575; text-align: center">Chưa trừ tiền khi bấm. Gói dùng 12 tháng kể từ ngày thanh toán.</span>
+      </div>
+    </sc-if>
+    <sc-if value="{{daDangKy}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #e9f6ec; color: #2b8a3e; display: grid; place-items: center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </span>
+          <b style="font-size: 17px; color: #13283f">Đã nhận đăng ký {{goiTen}}</b>
+        </div>
+        <span style="font-size: 14px">Mã đơn <b>TT-000418</b>. Link thanh toán VietQR {{goiGia}} vừa gửi tới Zalo số 0912 345 678. Có gì thắc mắc, gọi 1900 1068.</span>
+        <button type="button" onClick="{{lamLai}}" style="align-self: flex-start; border: 0; background: transparent; padding: 0; font: inherit; font-size: 13px; color: #1d3a5a; text-decoration: underline; cursor: pointer; min-height: 44px">Bản mẫu: quay lại form đăng ký</button>
+      </div>
+    </sc-if>
+  </section>
+
+  <section id="ma" style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <div>
+      <h2 style="margin: 0; font-size: 20px; color: #13283f">Giới thiệu bạn bè</h2>
+      <p style="margin: 2px 0 0; color: #5a6575; font-size: 14px">Mỗi khách có một mã riêng. Bạn bè đặt qua link của bạn, mã tự gắn vào đơn.</p>
+    </div>
+
+    <sc-if value="{{dangNhap}}" hint-placeholder-val="{{ true }}">
+      <div style="background: #fff1e6; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 10px">
+          <span style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #1d3a5a; color: #ffffff; display: grid; place-items: center; font-weight: 700; font-size: 14px">MT</span>
+          <span style="line-height: 1.3"><b style="display: block; color: #13283f">Mã giới thiệu của bạn</b><span style="font-size: 13px; color: #5a6575">Anh Trần Minh Tuấn · 0912 ••• 678</span></span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: stretch">
+          <span aria-label="Mã giới thiệu" style="flex: 1; background: #ffffff; border: 2px dashed #c2410c; border-radius: 10px; display: grid; place-items: center; font-size: 24px; font-weight: 800; letter-spacing: 0.12em; color: #13283f; min-height: 54px">TUAN2481</span>
+          <button type="button" onClick="{{saoChepMa}}" style="{{btnMaStyle}}">{{btnMaLabel}}</button>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 13.5px">Link giới thiệu
+          <span style="display: flex; gap: 8px">
+            <input type="text" readonly="readonly" value="thotoi.vn/?ma=TUAN2481" style="flex: 1; min-width: 0; font: inherit; font-weight: 400; font-size: 14px; padding: 10px 12px; border: 1px solid #e3c7b0; border-radius: 10px; background: #ffffff; color: #18212c; min-height: 46px; box-sizing: border-box">
+            <button type="button" onClick="{{saoChepLink}}" style="{{btnLinkStyle}}">{{btnLinkLabel}}</button>
+          </span>
+        </label>
+        <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #0068ff; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 16px; border-radius: 10px; min-height: 52px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Chia sẻ qua Zalo
+        </a>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+          <div style="background: #ffffff; border-radius: 10px; padding: 10px 6px; text-align: center"><b style="display: block; font-size: 19px; color: #13283f">5</b><span style="font-size: 12px; color: #5a6575">bạn đã mở link</span></div>
+          <div style="background: #ffffff; border-radius: 10px; padding: 10px 6px; text-align: center"><b style="display: block; font-size: 19px; color: #13283f">3</b><span style="font-size: 12px; color: #5a6575">đơn đã hoàn thành</span></div>
+          <div style="background: #ffffff; border-radius: 10px; padding: 10px 6px; text-align: center"><b style="display: block; font-size: 19px; color: #c2410c">3</b><span style="font-size: 12px; color: #5a6575">lượt miễn phí đi lại</span></div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{chuaDangNhap}}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff1e6; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <b style="color: #13283f; font-size: 16px">Lấy mã giới thiệu của bạn</b>
+        <span style="font-size: 14px">Nhập số điện thoại đã đặt thợ, mã riêng gửi về Zalo trong vài giây.</span>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Số điện thoại
+          <input type="tel" placeholder="09xx xxx xxx" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #e3c7b0; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box">
+        </label>
+        <button type="button" onClick="{{dangNhapMau}}" style="border: 0; border-radius: 10px; min-height: 50px; font: inherit; font-weight: 800; font-size: 15px; cursor: pointer; color: #ffffff; background: #13283f">Nhận mã qua Zalo</button>
+      </div>
+    </sc-if>
+    <button type="button" onClick="{{doiDangNhap}}" style="align-self: flex-start; border: 0; background: transparent; padding: 0; font: inherit; font-size: 13px; color: #1d3a5a; text-decoration: underline; cursor: pointer; min-height: 44px">{{doiDangNhapLabel}}</button>
+  </section>
+
+  <section style="padding: 16px 16px 8px; display: flex; flex-direction: column; gap: 10px">
+    <h2 style="margin: 0; font-size: 20px; color: #13283f">Nhận thưởng thế nào</h2>
+    <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+      <sc-for list="{{buoc}}" as="b" hint-placeholder-count="4">
+        <li style="display: flex; gap: 12px; padding: 10px 0">
+          <span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #13283f; color: #ffffff; display: grid; place-items: center; font-weight: 800; font-size: 14px">{{b.n}}</span>
+          <div><b style="display: block; color: #13283f">{{b.t}}</b><span style="color: #5a6575; font-size: 14px">{{b.d}}</span></div>
+        </li>
+      </sc-for>
+    </ol>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px"><span style="font-size: 12.5px; color: #5a6575">Bạn bè được</span><b style="display: block; color: #13283f; font-size: 15px; line-height: 1.35">Miễn phí đi lại đơn đầu tiên</b><span style="font-size: 13px; color: #c2410c; font-weight: 700">tiết kiệm 50.000đ</span></div>
+      <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px"><span style="font-size: 12.5px; color: #5a6575">Bạn được</span><b style="display: block; color: #13283f; font-size: 15px; line-height: 1.35">1 lượt miễn phí đi lại mỗi bạn</b><span style="font-size: 13px; color: #c2410c; font-weight: 700">tiết kiệm 50.000đ/lượt</span></div>
+    </div>
+  </section>
+
+  <section style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 10px">
+    <h2 style="margin: 0; font-size: 20px; color: #13283f">Câu hỏi thường gặp</h2>
+    <sc-for list="{{faq}}" as="q" hint-placeholder-count="5">
+      <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; overflow: hidden">
+        <button type="button" aria-expanded="{{q.open}}" onClick="{{q.toggle}}" style="width: 100%; border: 0; background: transparent; font: inherit; font-weight: 700; color: #13283f; text-align: left; padding: 12px 14px; min-height: 52px; display: flex; align-items: center; gap: 10px; cursor: pointer">
+          <span style="flex: 1">{{q.hoi}}</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6575" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="{{q.chevron}}"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <sc-if value="{{q.open}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; padding: 0 14px 14px; font-size: 14px; color: #18212c">{{q.dap}}</p>
+        </sc-if>
+      </div>
+    </sc-for>
+    <a href="BangGia.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: #c2410c; font-size: 14.5px">Xem bảng giá đầy đủ →</a>
+  </section>
+
+  <footer style="background: #13283f; color: #c3cfdc; padding: 24px 16px 96px; margin-top: 28px; font-size: 13px; display: flex; flex-direction: column; gap: 10px">
+    <b style="color: #ffffff; font-size: 15px">Công ty TNHH ThợTới · MST 0109876543</b>
+    <span>18 Trần Thái Tông, Cầu Giấy, Hà Nội · Phục vụ: Cầu Giấy, Đống Đa, Thanh Xuân, Ba Đình</span>
+    <span style="display: flex; flex-wrap: wrap; gap: 6px 14px"><a href="#" style="color: #ffffff">Chính sách bảo hành</a><a href="#" style="color: #ffffff">Bảo vệ dữ liệu cá nhân</a><a href="#" style="color: #ffffff">Tuyển thợ cộng tác</a></span>
+  </footer>
+
+  <div style="flex: 1"></div>
+  <nav aria-label="Liên hệ nhanh" style="position: sticky; bottom: 0; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 8px; padding: 8px 12px 12px; background: rgba(19,40,63,0.97); margin-top: -76px">
+    <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 10px; min-height: 50px; font-size: 15px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      Gọi thợ
+    </a>
+    <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #0068ff; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 10px; min-height: 50px; font-size: 15px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      Zalo
+    </a>
+    <a href="DatLich.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #ffffff; color: #13283f; text-decoration: none; font-weight: 700; border-radius: 10px; min-height: 50px; font-size: 15px">Đặt lịch</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { goi: 'an-tam', daDangKy: false, dangNhap: true, copiedMa: false, copiedLink: false, faqOpen: 0 };
+  }
+  renderVals() {
+    const st = this.state;
+    const vnd = (n) => n.toLocaleString('vi-VN') + 'đ';
+    const goiData = [
+      { id: 'co-ban', ten: 'Gói Cơ bản', giaNam: 490000, badge: 'Đi lại ít' },
+      { id: 'an-tam', ten: 'Gói An tâm', giaNam: 1290000, badge: 'Nhiều người chọn' }
+    ];
+    const goi = goiData.map((g) => {
+      const on = st.goi === g.id;
+      return {
+        ...g, on,
+        gia: vnd(g.giaNam),
+        thang: vnd(Math.round(g.giaNam / 12 / 1000) * 1000),
+        pick: () => this.setState({ goi: g.id }),
+        style: 'font: inherit; text-align: left; border-radius: 12px; padding: 12px; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 150px; box-sizing: border-box; ' +
+          (on ? 'background: #fff1e6; border: 2px solid #c2410c;' : 'background: #ffffff; border: 2px solid #e1e5ea;'),
+        badgeStyle: 'font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 2px 8px; margin-bottom: 2px; ' +
+          (on ? 'background: #c2410c; color: #ffffff;' : 'background: #eef1f4; color: #5a6575;')
+      };
+    });
+    const sel = goiData.find((g) => g.id === st.goi);
+    const cell = (hl, good) => 'font-weight: ' + (hl ? '700' : '500') + '; color: ' + (good ? '#1e6b2f' : '#5a6575') + '; ' + (hl ? 'background: #fff1e6; border-radius: 6px; padding: 2px 6px; margin: -2px -6px;' : '');
+    const cbOn = st.goi === 'co-ban', atOn = st.goi === 'an-tam';
+    const rowData = [
+      { ten: 'Phí đi lại (50.000đ/lần)', cb: 'Miễn 4 lần/năm', at: 'Miễn không giới hạn', cbG: true, atG: true },
+      { ten: 'Kích nổ ắc quy (150.000đ)', cb: 'Miễn 2 lần/năm', at: 'Miễn phí', cbG: true, atG: true },
+      { ten: 'Vá lốp không săm (120.000đ)', cb: 'Giá thường', at: 'Miễn phí', cbG: false, atG: true },
+      { ten: 'Giảm tiền công', cb: 'Giảm 10%', at: 'Giảm 15%', cbG: true, atG: true },
+      { ten: 'Ưu tiên xếp thợ khi gọi gấp', cb: 'Không', at: 'Có', cbG: false, atG: true }
+    ];
+    const rows = rowData.map((r) => ({ ...r, cbStyle: cell(cbOn, r.cbG), atStyle: cell(atOn, r.atG) }));
+    const colHl = (on) => on ? 'color: #c2410c;' : '';
+    const faqData = [
+      { hoi: 'Gói hội viên dùng cho mấy xe?', dap: 'Mỗi gói gắn với 1 biển số. Nhà có 2 xe thì đăng ký 2 gói. Doanh nghiệp có đội xe xem gói hợp đồng riêng.' },
+      { hoi: 'Giảm tiền công có tính cả phụ tùng không?', dap: 'Chỉ giảm tiền công. Phụ tùng tính theo giá trong báo giá chính thức, thợ kiểm tra xe xong mới chốt.' },
+      { hoi: 'Bạn bè dùng mã của tôi thế nào?', dap: 'Bạn bè mở link có ?ma=TUAN2481, mã tự điền vào ô "Mã giới thiệu" khi đặt lịch. Gõ tay mã vào ô đó cũng được.' },
+      { hoi: 'Khi nào tôi nhận được lượt miễn phí?', dap: 'Khi đơn của bạn bè sửa xong và đã thanh toán. ThợTới nhắn Zalo báo bạn, lượt miễn phí tự trừ vào đơn kế tiếp.' },
+      { hoi: 'Muốn huỷ gói thì sao?', dap: 'Gọi 1900 1068, cố vấn kiểm tra quyền lợi đã dùng và hướng dẫn huỷ theo chính sách hội viên.' }
+    ];
+    const faq = faqData.map((q, i) => {
+      const open = st.faqOpen === i;
+      return { ...q, open, chevron: 'flex: none; transform: rotate(' + (open ? '180deg' : '0deg') + ')', toggle: () => this.setState({ faqOpen: open ? -1 : i }) };
+    });
+    const copyBtn = (done) => 'flex: none; border: 0; border-radius: 10px; min-height: 46px; min-width: 92px; padding: 0 12px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; ' +
+      (done ? 'background: #2b8a3e; color: #ffffff;' : 'background: #13283f; color: #ffffff;');
+    return {
+      goi, rows,
+      colCB: colHl(cbOn), colAT: colHl(atOn),
+      loiIch: st.goi === 'co-ban'
+        ? 'Ví dụ: 4 lần đi lại (200.000đ) và 2 lần kích nổ (300.000đ) đã bằng 500.000đ, hơn tiền gói 490.000đ.'
+        : 'Ví dụ: 1 năm gọi thợ 10 lần đã tiết kiệm 500.000đ phí đi lại, chưa kể kích nổ, vá lốp miễn phí và giảm 15% tiền công.',
+      goiTen: sel.ten, goiGia: vnd(sel.giaNam),
+      chuaDangKy: !st.daDangKy, daDangKy: st.daDangKy,
+      dangKy: () => this.setState({ daDangKy: true }),
+      lamLai: () => this.setState({ daDangKy: false }),
+      dangNhap: st.dangNhap, chuaDangNhap: !st.dangNhap,
+      dangNhapMau: () => this.setState({ dangNhap: true }),
+      doiDangNhap: () => this.setState({ dangNhap: !st.dangNhap, copiedMa: false, copiedLink: false }),
+      doiDangNhapLabel: st.dangNhap ? 'Bản mẫu: xem khi chưa nhận mã' : 'Bản mẫu: xem khi đã có mã',
+      btnMaLabel: st.copiedMa ? 'Đã chép' : 'Sao chép',
+      btnMaStyle: copyBtn(st.copiedMa),
+      saoChepMa: () => this.setState({ copiedMa: true, copiedLink: false }),
+      btnLinkLabel: st.copiedLink ? 'Đã chép' : 'Chép link',
+      btnLinkStyle: copyBtn(st.copiedLink),
+      saoChepLink: () => this.setState({ copiedLink: true, copiedMa: false }),
+      buoc: [
+        { n: 1, t: 'Gửi mã hoặc link cho bạn bè', d: 'Bấm Chia sẻ qua Zalo, hoặc chép link thotoi.vn/?ma=TUAN2481.' },
+        { n: 2, t: 'Bạn bè đặt lịch qua link', d: 'Mã tự gắn vào đơn, bạn bè không cần nhớ hay gõ lại.' },
+        { n: 3, t: 'Đơn sửa xong, thanh toán', d: 'Bạn bè được miễn phí đi lại ngay trong đơn đầu.' },
+        { n: 4, t: 'Bạn nhận lượt miễn phí', d: 'ThợTới nhắn Zalo báo, lượt tự trừ vào lần gọi thợ sau.' }
+      ],
+      faq
+    };
+  }
+}
+</script>
+</body>
+</html>

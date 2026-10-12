@@ -1,8 +1,0 @@
-[
-  { "ten": "Xe không nổ máy", "moTa": "Đề không quay, đèn taplo mờ", "icon": "battery", "href": "/cam-nang/kich-binh-ac-quy-o-to/" },
-  { "ten": "Đèn check engine sáng", "moTa": "Sáng đứng hay nhấp nháy?", "icon": "engine", "href": "/cam-nang/den-check-engine-sang/" },
-  { "ten": "Lốp xịt, thủng", "moTa": "Vá hoặc thay lốp dự phòng", "icon": "tire", "href": "/dich-vu/lop/" },
-  { "ten": "Phanh kêu, đạp sâu", "moTa": "Má phanh mòn, dầu phanh", "icon": "brake", "href": "/dich-vu/phanh/" },
-  { "ten": "Đến hạn thay dầu", "moTa": "Bảo dưỡng ngay nơi xe đỗ", "icon": "oil", "href": "/dich-vu/bao-duong-dinh-ky/" },
-  { "ten": "Hỏng giữa đường", "moTa": "Không sửa tại chỗ được", "icon": "alert", "href": "/dich-vu/cuu-ho-keo-xe/" }
-]

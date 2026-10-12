@@ -1,0 +1,15 @@
+.khung { display: flex; flex-direction: column; gap: 8px; }
+.nut {
+  display: flex; align-items: center; justify-content: center; gap: 8px; border: 1.5px dashed var(--vien-net-dut); background: #fff;
+  border-radius: 10px; min-height: 48px; font: inherit; font-weight: 600; color: var(--toi-2); cursor: pointer; padding: 8px 12px; text-align: center;
+}
+.nut:hover { border-color: var(--toi); }
+.ds { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.tep { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--vien); border-radius: 10px; padding: 4px 4px 4px 8px; }
+.anh { width: 44px; height: 44px; object-fit: cover; border-radius: 6px; flex: none; }
+.video { width: 44px; height: 44px; border-radius: 6px; background: var(--toi); color: #fff; display: grid; place-items: center; flex: none; font-size: 14px; }
+.ten { flex: 1; min-width: 0; font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ten small { color: var(--chu-phu); font-size: 12px; }
+.bo { width: 44px; height: 44px; border: 0; background: transparent; color: var(--chu-phu); display: grid; place-items: center; cursor: pointer; border-radius: 8px; flex: none; }
+.bo:hover { color: var(--do); background: var(--do-nhat); }
+.loi { font-size: 13px; color: var(--do); font-weight: 600; }

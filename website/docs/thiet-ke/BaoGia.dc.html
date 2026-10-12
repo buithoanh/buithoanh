@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Duyệt báo giá chính thức</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 1180px; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.5; display: flex; flex-direction: column">
+
+  <header style="background: #13283f; color: #ffffff; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between">
+    <div style="display: flex; flex-direction: column; line-height: 1.2">
+      <b style="font-size: 16px">Báo giá đơn TT-000123</b>
+      <span style="font-size: 12px; color: #c3cfdc">Toyota Vios 2019 · 30A-123.45</span>
+    </div>
+    <b style="font-size: 13px; color: #ffc9a3">ThợTới</b>
+  </header>
+
+  <section style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; gap: 12px; align-items: center; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: #1d3a5a; color: #ffffff; flex: none; display: grid; place-items: center; font-weight: 800; font-size: 15px">MĐ</div>
+      <div style="display: flex; flex-direction: column; line-height: 1.35; font-size: 14px">
+        <b style="color: #13283f">Thợ Trần Minh Đức đã kiểm tra xe</b>
+        <span style="color: #5a6575">Chọn hạng mục bạn muốn làm rồi bấm Đồng ý.</span>
+      </div>
+    </div>
+    <span style="align-self: flex-start; background: #eef3f9; color: #1d3a5a; border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 600">Số liệu mẫu để duyệt bố cục</span>
+  </section>
+
+  <sc-if value="{{editing}}" hint-placeholder-val="{{ true }}">
+    <section style="padding: 0 16px; display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{items}}" as="it" hint-placeholder-count="5">
+        <div style="{{it.card}}">
+          <div style="display: flex; gap: 12px; align-items: flex-start">
+            <sc-if value="{{it.hasPhoto}}" hint-placeholder-val="{{ true }}">
+              <div style="width: 64px; height: 64px; border-radius: 8px; background: #e6ebf0; flex: none"></div>
+            </sc-if>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+              <b style="color: #13283f; font-size: 15px">{{it.name}}</b>
+              <span style="font-size: 13px; color: #5a6575">{{it.why}}</span>
+              <span style="{{it.tagStyle}}">{{it.tag}}</span>
+            </div>
+            <b style="{{it.priceStyle}}">{{it.priceText}}</b>
+          </div>
+          <sc-if value="{{it.optional}}" hint-placeholder-val="{{ true }}">
+            <button type="button" aria-pressed="{{it.on}}" onClick="{{it.toggle}}" style="{{it.btn}}">{{it.btnLabel}}</button>
+          </sc-if>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="margin: 16px; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+      <div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #5a6575">Tiền công</span><span>{{labor}}</span></div>
+      <div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #5a6575">Phụ tùng</span><span>{{parts}}</span></div>
+      <div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #5a6575">Phí đi lại</span><span>{{travel}}</span></div>
+      <div style="height: 1px; background: #e1e5ea; margin: 4px 0"></div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><b style="color: #13283f">Tổng cộng</b><b style="font-size: 24px; color: #c2410c">{{total}}</b></div>
+      <span style="font-size: 12.5px; color: #5a6575">Phụ tùng chính hãng từ VCparts. Phát sinh hạng mục mới, thợ sẽ gửi báo giá để bạn duyệt lại.</span>
+    </section>
+
+    <section style="padding: 0 16px 24px; display: flex; flex-direction: column; gap: 10px">
+      <button type="button" onClick="{{approve}}" style="border: 0; border-radius: 12px; min-height: 54px; background: #c2410c; color: #ffffff; font: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Đồng ý {{total}}</button>
+      <button type="button" style="border: 1.5px solid #c9d0d8; border-radius: 12px; min-height: 48px; background: #ffffff; color: #13283f; font: inherit; font-weight: 700; cursor: pointer">Không sửa, chỉ trả phí kiểm tra</button>
+      <span style="font-size: 12px; color: #5a6575; text-align: center">Khi bấm Đồng ý, hệ thống lưu thời điểm, số điện thoại và nội dung bạn đã duyệt.</span>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{approved}}" hint-placeholder-val="{{ false }}">
+    <section style="padding: 24px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px">
+      <span style="width: 68px; height: 68px; border-radius: 50%; background: #e9f6ec; color: #2b8a3e; display: grid; place-items: center">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </span>
+      <h1 style="margin: 0; font-size: 23px; color: #13283f">Đã duyệt báo giá</h1>
+      <p style="margin: 0; color: #5a6575">Thợ bắt đầu sửa. Bạn sẽ nhận ảnh trước khi sửa và link thanh toán VietQR khi xong.</p>
+      <div style="width: 100%; box-sizing: border-box; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px; text-align: left; display: flex; flex-direction: column; gap: 4px; font-size: 14px">
+        <div style="display: flex; justify-content: space-between"><span style="color: #5a6575">Tổng đã duyệt</span><b>{{total}}</b></div>
+        <div style="display: flex; justify-content: space-between"><span style="color: #5a6575">Số hạng mục</span><b>{{count}}</b></div>
+        <div style="display: flex; justify-content: space-between"><span style="color: #5a6575">Thời điểm</span><b>08/10/2026 10:58</b></div>
+        <div style="display: flex; justify-content: space-between"><span style="color: #5a6575">Số điện thoại</span><b>0912 xxx 345</b></div>
+      </div>
+      <a href="TheoDoi.dc.html" style="display: flex; align-items: center; justify-content: center; width: 100%; background: #13283f; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 12px; min-height: 50px">Xem trạng thái đơn</a>
+      <button type="button" onClick="{{reset}}" style="border: 0; background: transparent; font: inherit; color: #1d3a5a; text-decoration: underline; cursor: pointer; min-height: 44px">Xem lại báo giá (bản mẫu)</button>
+    </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1180}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { off: [], approved: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const vnd = (n) => n.toLocaleString('vi-VN') + 'đ';
+    const raw = [
+      { id: 'aq', name: 'Ắc quy 12V 45Ah', why: 'Điện áp khởi động 8,9V, dưới mức an toàn', kind: 'parts', price: 1650000, optional: false, tag: 'Cần làm ngay', photo: true },
+      { id: 'cong', name: 'Công thay ắc quy', why: 'Gồm lưu bộ nhớ xe', kind: 'labor', price: 150000, optional: false, tag: 'Cần làm ngay', photo: false },
+      { id: 'coc', name: 'Vệ sinh cọc, thay đầu cos', why: 'Cọc âm bị rỉ trắng', kind: 'labor', price: 120000, optional: true, tag: 'Nên làm', photo: true },
+      { id: 'gat', name: 'Thay lưỡi gạt mưa', why: 'Lưỡi gạt chai, để vệt khi gạt', kind: 'parts', price: 280000, optional: true, tag: 'Có thể để sau', photo: true }
+    ];
+    const items = raw.map((r) => {
+      const on = !st.off.includes(r.id);
+      return {
+        ...r, on, hasPhoto: r.photo,
+        priceText: vnd(r.price),
+        card: 'background: #ffffff; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; ' + (on ? 'border: 1.5px solid #e1e5ea;' : 'border: 1.5px dashed #c9d0d8; opacity: 0.6;'),
+        priceStyle: 'flex: none; color: #13283f; white-space: nowrap; ' + (on ? '' : 'text-decoration: line-through;'),
+        tagStyle: 'align-self: flex-start; margin-top: 4px; font-size: 12px; font-weight: 700; border-radius: 6px; padding: 1px 8px; ' +
+          (r.tag === 'Cần làm ngay' ? 'background: #fde8e0; color: #8a2c06;' : r.tag === 'Nên làm' ? 'background: #fff4d6; color: #6b4e00;' : 'background: #eef1f4; color: #4a5768;'),
+        btnLabel: on ? 'Bỏ hạng mục này' : 'Thêm lại',
+        btn: 'align-self: stretch; font: inherit; font-size: 14px; font-weight: 600; border-radius: 10px; min-height: 44px; cursor: pointer; ' + (on ? 'background: #ffffff; color: #13283f; border: 1.5px solid #c9d0d8;' : 'background: #13283f; color: #ffffff; border: 1.5px solid #13283f;'),
+        toggle: () => this.setState({ off: on ? st.off.concat(r.id) : st.off.filter((x) => x !== r.id) })
+      };
+    });
+    const sum = (k) => items.filter((i) => i.on && i.kind === k).reduce((a, i) => a + i.price, 0);
+    const travel = 50000;
+    const labor = sum('labor'), parts = sum('parts');
+    return {
+      items, editing: !st.approved, approved: st.approved,
+      labor: vnd(labor), parts: vnd(parts), travel: vnd(travel), total: vnd(labor + parts + travel),
+      count: items.filter((i) => i.on).length,
+      approve: () => this.setState({ approved: true }),
+      reset: () => this.setState({ approved: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.ds { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.buoc { display: flex; gap: 12px; padding: 10px 0; }
+.so {
+  flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--toi); color: var(--nen-trang);
+  display: grid; place-items: center; font-weight: 800; font-size: 14px;
+}
+.chu { display: flex; flex-direction: column; }
+.chu b { color: var(--toi); }
+.chu span { color: var(--chu-phu); font-size: 14px; }
+@media (min-width: 900px) {
+  .ds { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 16px; }
+  .buoc { flex-direction: column; gap: 6px; background: var(--nen-trang); border: 1px solid var(--vien); border-radius: 14px; padding: 20px; }
+  .so { width: 34px; height: 34px; }
+  .chu { gap: 6px; }
+  .chu b { font-size: 17px; }
+  .chu span { font-size: 15px; }
+}

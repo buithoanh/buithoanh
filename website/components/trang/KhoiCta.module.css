@@ -1,0 +1,15 @@
+.khoi {
+  margin-top: 24px; background: var(--toi); color: var(--nen-trang); border-radius: var(--bo); padding: 18px 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.nhan { font-size: 13px; color: var(--nhan-tren-toi-2); font-weight: 600; }
+.tieuDe { font-size: 19px; line-height: 1.25; }
+.moTa { font-size: 14px; color: var(--chu-tren-toi); }
+.nut { margin-top: 4px; min-height: 52px; font-size: 16px; }
+@media (min-width: 900px) {
+  .khoi { padding: 24px 28px; display: grid; grid-template-columns: 1fr auto; column-gap: 24px; align-items: center; border-radius: var(--bo-lon); margin-top: 40px; }
+  .khoi > * { grid-column: 1; }
+  .nut { grid-column: 2; grid-row: 1 / span 3; margin: 0; padding: 0 28px; }
+  .tieuDe { font-size: 22px; }
+  .moTa { font-size: 15px; }
+}

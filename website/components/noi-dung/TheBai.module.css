@@ -1,0 +1,36 @@
+.the {
+  background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo);
+  text-decoration: none; color: var(--chu); display: flex; overflow: hidden;
+  transition: border-color .15s, box-shadow .15s;
+}
+.the:hover { border-color: var(--vien-o); box-shadow: var(--bong); color: var(--chu); }
+.than { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+
+/* nổi bật */
+.noiBat { flex-direction: column; }
+.noiBat .than { padding: 14px; gap: 8px; }
+.anhTo { border-radius: 0; border: 0; }
+.nhanCam {
+  align-self: flex-start; background: var(--nhan-nhat); color: var(--nhan-chu-dam);
+  font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+}
+.tieuDeTo { font-size: 19px; line-height: 1.3; color: var(--toi); font-weight: 700; }
+.tomTat { font-size: 14px; color: var(--chu-phu); }
+.meta { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--chu-phu); flex-wrap: wrap; }
+
+/* dòng */
+.dong { padding: 12px; gap: 12px; }
+.anhNho { flex: none; width: 92px; height: 76px; border-radius: var(--bo-nho); background: var(--nen-khung-anh); }
+.nhanChu { font-size: 12px; font-weight: 700; color: var(--nhan); }
+.tieuDe { font-size: 15px; line-height: 1.35; color: var(--toi); font-weight: 700; }
+.metaNho { font-size: 12.5px; color: var(--chu-phu); }
+
+/* ngang (bài liên quan) */
+.ngang { flex: none; width: 240px; flex-direction: column; }
+.ngang .anhNho { width: 100%; height: 120px; border-radius: 0; }
+.ngang .than { padding: 12px; }
+
+@media (min-width: 900px) {
+  .ngang { width: auto; }
+  .tieuDeTo { font-size: 22px; }
+}

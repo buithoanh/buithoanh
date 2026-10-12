@@ -1,0 +1,11 @@
+.trang { padding-top: 12px; padding-bottom: 32px; display: flex; flex-direction: column; gap: 10px; }
+.tieuDe { font-size: 27px; line-height: 1.2; margin-top: 4px; }
+.nd { margin-top: 8px; font-size: 15.5px; }
+.nd h2 { font-size: 20px; }
+.nd dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; }
+.nd dt { font-weight: 700; color: var(--toi); }
+.nd dd { margin: 0; }
+@media (min-width: 900px) {
+  .trang { padding-top: 24px; }
+  .tieuDe { font-size: 36px; }
+}

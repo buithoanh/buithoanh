@@ -1,0 +1,39 @@
+.chanDoan { font-size: 14px; color: var(--chu-phu-2); background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); padding: 10px 12px; }
+.chanDoan b { color: var(--toi); }
+
+.muc {
+  background: var(--nen-trang); border: 1.5px solid var(--vien); border-radius: var(--bo); padding: 12px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.mucBo { border-style: dashed; border-color: var(--vien-o); }
+.mucBo .mucTren { opacity: .6; }
+.mucBo .gia { text-decoration: line-through; }
+.mucTren { display: flex; gap: 12px; align-items: flex-start; }
+.anh { position: relative; width: 64px; height: 64px; border-radius: var(--bo-nho); background: var(--nen-ban-do); flex: none; overflow: hidden; display: block; }
+.anh img { width: 64px; height: 64px; object-fit: cover; display: block; }
+.themAnh { position: absolute; right: 4px; bottom: 4px; background: var(--toi); color: #fff; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 0 5px; }
+.mucChu { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.mucChu b { color: var(--toi); font-size: 15px; }
+.mucChu > span { font-size: 13px; color: var(--chu-phu); }
+.mucChu > .mucDo { align-self: flex-start; margin-top: 4px; font-size: 12px; font-weight: 700; border-radius: 6px; padding: 1px 8px; }
+.mucGap { background: var(--muc-gap-nen); color: var(--nhan-chu) !important; }
+.mucNen { background: var(--muc-nen-nen); color: var(--muc-nen-chu) !important; }
+.mucSau { background: var(--vien-nhat); color: var(--chu-xam) !important; }
+.gia { flex: none; color: var(--toi); white-space: nowrap; }
+.nutBo, .nutThem {
+  align-self: stretch; font-size: 14px; font-weight: 600; border-radius: 10px; min-height: 44px; cursor: pointer;
+  background: var(--nen-trang); color: var(--toi); border: 1.5px solid var(--vien-o);
+}
+.nutBo:hover { border-color: var(--toi); }
+.nutThem { background: var(--toi); color: #fff; border-color: var(--toi); }
+
+.tongKet { margin: 16px; }
+.giam { color: var(--xanh); font-weight: 600; }
+.hanhDong { padding: 0 16px 24px; display: flex; flex-direction: column; gap: 10px; }
+.batBuoc { color: var(--nhan-chu); }
+.tuChoi {
+  background: var(--nen-trang); border: 1.5px solid var(--vien-o); border-radius: var(--bo); padding: 14px;
+  display: flex; flex-direction: column; gap: 8px; font-size: 14px;
+}
+.tuChoi > b { color: var(--toi); font-size: 16px; }
+.tuChoi > span { color: var(--chu-phu); }

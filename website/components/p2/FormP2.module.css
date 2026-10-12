@@ -1,0 +1,23 @@
+/* Khung form của trang doanh nghiệp, tuyển thợ (thẻ trắng, tiêu đề, lưới hai cột, nút chọn dạng viên). */
+.form { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.form h2 { font-size: 22px; }
+.hai { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.haiLech { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; }
+.nhom { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.nhom legend { font-weight: 600; font-size: 14px; padding: 0; margin-bottom: 8px; }
+.goiYNhom { font-size: 12.5px; color: var(--chu-phu); margin-top: -4px; }
+.ba { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.dsHai { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.vien {
+  font-size: 13.5px; font-weight: 600; border-radius: 10px; min-height: 46px; cursor: pointer; padding: 6px; line-height: 1.2;
+  background: var(--nen-trang); color: var(--toi); border: 1.5px solid var(--vien-o);
+}
+.vien[aria-pressed="true"], .vien[aria-checked="true"] { background: var(--toi); color: #fff; border-color: var(--toi); }
+.vienLoi { border-color: var(--do); }
+.loi { font-size: 13px; color: var(--do); font-weight: 600; }
+.daChon { font-size: 13px; color: var(--toi-2); font-weight: 600; }
+.nutGui { min-height: 52px; font-size: 16px; font-weight: 800; border-radius: 12px; }
+@media (max-width: 359px) { .hai, .haiLech { grid-template-columns: 1fr; } .ba { grid-template-columns: 1fr 1fr; } }
+.phuTrach { text-align: left; width: 100%; }
+.mstOk { color: var(--xanh); }
+.mstOk svg { vertical-align: -2px; }

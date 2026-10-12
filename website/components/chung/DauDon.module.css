@@ -1,0 +1,5 @@
+.dau { background: var(--toi); color: #fff; padding: 10px 16px; min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.trai { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.trai b { font-size: 16px; }
+.trai span { font-size: 12px; color: var(--chu-tren-toi-2); }
+.thuongHieu { font-size: 13px; color: var(--nhan-tren-toi-2); flex: none; }

@@ -1,0 +1,12 @@
+.nhom { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.nut {
+  border-radius: var(--bo); min-height: 60px; cursor: pointer; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; line-height: 1.2; padding: 6px 4px; background: var(--nen-trang); color: var(--toi); border: 2px solid var(--vien);
+}
+.nut b { font-size: 18px; }
+.nut span { font-size: 11.5px; }
+.nut:hover { border-color: var(--toi); }
+.chon { background: var(--toi); color: var(--nen-trang); border-color: var(--toi); }
+@media (min-width: 900px) {
+  .nut span { font-size: 13px; }
+}

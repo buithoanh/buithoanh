@@ -1,0 +1,50 @@
+.chamDiem { margin: 0 16px; padding: 20px 14px; align-items: center; gap: 10px; text-align: center; }
+.cauHoi { font-size: 21px; line-height: 1.3; }
+.goiY { font-size: 14px; color: var(--chu-phu); }
+.hangSao { border: 0; margin: 4px 0 0; padding: 0; display: flex; gap: 4px; justify-content: center; }
+.sao {
+  width: 58px; height: 58px; display: grid; place-items: center; border-radius: 10px; cursor: pointer;
+  color: var(--sao-tat); transition: color .12s, transform .12s;
+}
+.sao:hover { transform: scale(1.06); }
+.saoSang { color: var(--sao); }
+.sao:has(input:focus-visible) { outline: 3px solid var(--nhan); outline-offset: 2px; }
+.hangSao:disabled .sao { cursor: default; transform: none; }
+@media (max-width: 359px) { .sao { width: 50px; height: 50px; } .sao svg { width: 38px; height: 38px; } }
+.chuaChon, .chuTot, .chuKem { font-size: 16px; min-height: 24px; }
+.chuaChon { font-size: 15px; color: var(--chu-phu); font-weight: 600; }
+.chuTot { color: var(--xanh-dam); }
+.chuKem { color: var(--nhan-chu); }
+
+.hopTot {
+  margin: 16px; background: var(--xanh-nhat); border: 1px solid var(--xanh-vien); border-radius: var(--bo);
+  padding: 18px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+}
+.trai { align-self: stretch; text-align: left; }
+.tieuDeTot { font-size: 17px; color: var(--xanh-dam); }
+.vongTrang { width: 60px; height: 60px; border-radius: 50%; background: var(--nen-trang); color: var(--xanh); display: grid; place-items: center; }
+.camOn { font-size: 19px; color: var(--xanh-dam); }
+.camOn:focus, .camOnToi:focus { outline: none; }
+.chuXanh { font-size: 14px; color: var(--xanh-dam); }
+.chuXanhNho { font-size: 12.5px; color: var(--xanh-dam); }
+.nutGoogle { min-height: 52px; border-radius: var(--bo); font-weight: 800; }
+
+.hopKem { margin: 16px; padding: 16px 14px; gap: 12px; }
+.dauKem { display: flex; flex-direction: column; gap: 2px; }
+.dauKem b { font-size: 17px; color: var(--toi); }
+.dauKem span { font-size: 14px; color: var(--chu-phu); }
+.vanDe { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.vanDe legend, .nhan { font-size: 14px; font-weight: 700; color: var(--toi); padding: 0; margin-bottom: 8px; }
+.nhan { margin-bottom: 0; }
+.dsChip { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  min-height: 44px; padding: 0 14px; border-radius: 22px; font-size: 14px; font-weight: 600; cursor: pointer;
+  background: var(--nen-trang); color: var(--toi); border: 1.5px solid var(--vien-o);
+}
+.chip:hover { border-color: var(--toi); }
+.chipBat, .chipBat:hover { background: var(--toi); color: #fff; border-color: var(--toi); }
+
+.hopGui { margin: 16px; padding: 20px 14px; align-items: center; gap: 10px; text-align: center; }
+.camOnToi { font-size: 19px; color: var(--toi); }
+.tomTat { width: 100%; background: var(--nen); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; text-align: left; }
+.maPhieu { color: var(--toi); letter-spacing: .5px; }

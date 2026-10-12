@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Đặt lịch 4 bước</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.5; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="background: #13283f; color: #ffffff; padding: 6px 8px 12px; display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; align-items: center; gap: 4px">
+      <sc-if value="{{canBack}}" hint-placeholder-val="{{ true }}">
+        <button type="button" aria-label="Quay lại" onClick="{{back}}" style="width: 44px; height: 44px; border: 0; background: transparent; color: #ffffff; display: grid; place-items: center; cursor: pointer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+      </sc-if>
+      <sc-if value="{{noBack}}" hint-placeholder-val="{{ false }}">
+        <a href="Main.dc.html" aria-label="Đóng" style="width: 44px; height: 44px; color: #ffffff; display: grid; place-items: center">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+        </a>
+      </sc-if>
+      <b style="font-size: 17px; flex: 1">{{headTitle}}</b>
+      <span style="font-size: 13px; color: #c3cfdc; padding-right: 8px">{{stepLabel}}</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 0 8px">
+      <sc-for list="{{segs}}" as="sg" hint-placeholder-count="4">
+        <span style="{{sg.style}}"></span>
+      </sc-for>
+    </div>
+  </header>
+
+  <main style="flex: 1; overflow-y: auto; padding: 18px 16px 20px; display: flex; flex-direction: column; gap: 14px">
+
+    <sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <h1 style="margin: 0; font-size: 22px; color: #13283f">Xe cần làm gì?</h1>
+        <p style="margin: -8px 0 0; color: #5a6575; font-size: 14px">Chọn một hoặc nhiều việc.</p>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <sc-for list="{{services}}" as="s" hint-placeholder-count="6">
+            <button type="button" aria-pressed="{{s.on}}" onClick="{{s.pick}}" style="{{s.style}}">
+              <b style="font-size: 15px; color: #13283f">{{s.name}}</b>
+              <span style="font-size: 12.5px; color: #5a6575">{{s.note}}</span>
+            </button>
+          </sc-for>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Mô tả triệu chứng (không bắt buộc)
+          <textarea rows="3" placeholder="VD: sáng nay đề không nổ, đèn taplo mờ" style="font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; resize: none"></textarea>
+        </label>
+        <button type="button" style="display: flex; align-items: center; justify-content: center; gap: 8px; border: 1.5px dashed #a9b6c4; background: #ffffff; border-radius: 10px; min-height: 48px; font: inherit; font-weight: 600; color: #1d3a5a; cursor: pointer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+          Thêm ảnh hoặc video (tối đa 3 ảnh / 30 giây)
+        </button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <h1 style="margin: 0; font-size: 22px; color: #13283f">Xe của bạn</h1>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Hãng xe
+          <select style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px"><option>Toyota</option><option>Hyundai</option><option>Kia</option><option>Mazda</option><option>VinFast</option></select>
+        </label>
+        <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Dòng xe
+            <select style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px"><option>Vios</option><option>Corolla Cross</option><option>Innova</option></select>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Đời xe
+            <select style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px"><option>2019</option><option>2020</option><option>2021</option></select>
+          </label>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Biển số
+          <input type="text" placeholder="30A-123.45" style="font: inherit; font-weight: 700; letter-spacing: 0.04em; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box">
+          <span style="font-weight: 400; font-size: 12.5px; color: #5a6575">Gõ liền cũng được, hệ thống tự thêm dấu.</span>
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Số km hiện tại (không bắt buộc)
+          <input type="number" placeholder="VD: 45000" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box">
+        </label>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <h1 style="margin: 0; font-size: 22px; color: #13283f">Xe đang ở đâu?</h1>
+        <button type="button" onClick="{{locate}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; border: 0; background: #13283f; color: #ffffff; border-radius: 10px; min-height: 50px; font: inherit; font-weight: 700; cursor: pointer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+          Lấy vị trí hiện tại
+        </button>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Hoặc gõ địa chỉ
+          <input type="text" placeholder="Số nhà, đường, phường" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box">
+        </label>
+        <sc-if value="{{inArea}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 10px; background: #e9f6ec; border-radius: 10px; padding: 12px; color: #1e6b2f; font-size: 14px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><b>Trong vùng phục vụ.</b> 18 Trần Thái Tông, Dịch Vọng Hậu, Cầu Giấy. Thợ tới dự kiến 25–40 phút.</span>
+          </div>
+        </sc-if>
+        <sc-if value="{{outArea}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 8px; background: #fff1e6; border-radius: 10px; padding: 12px; font-size: 14px">
+            <b style="color: #8a2c06">Địa chỉ này ngoài vùng phục vụ</b>
+            <span>Gọi cố vấn để được hướng dẫn, hoặc đặt kéo xe về xưởng Auto Speedy.</span>
+            <a href="#" style="font-weight: 700; color: #c2410c">Gọi tư vấn →</a>
+          </div>
+        </sc-if>
+        <button type="button" onClick="{{toggleOut}}" style="align-self: flex-start; border: 0; background: transparent; padding: 0; font: inherit; font-size: 13px; color: #1d3a5a; text-decoration: underline; cursor: pointer; min-height: 32px">{{outToggleLabel}}</button>
+        <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+          <legend style="font-weight: 600; font-size: 14px; padding: 0; margin-bottom: 8px">Xe đỗ ở đâu?</legend>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+            <sc-for list="{{parks}}" as="p" hint-placeholder-count="4">
+              <button type="button" aria-pressed="{{p.on}}" onClick="{{p.pick}}" style="{{p.style}}">{{p.name}}</button>
+            </sc-for>
+          </div>
+        </fieldset>
+        <sc-if value="{{basement}}" hint-placeholder-val="{{ false }}">
+          <div style="background: #eef3f9; border-radius: 10px; padding: 12px; font-size: 14px">Xe trong hầm chung cư: bạn báo trước với ban quản lý để thợ được vào. Ghi rõ tầng hầm, ô đỗ ở ô dưới.</div>
+        </sc-if>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Ghi chú cho thợ
+          <input type="text" placeholder="VD: hầm B2, ô số 115" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box">
+        </label>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <h1 style="margin: 0; font-size: 22px; color: #13283f">Chọn giờ và để lại số</h1>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+          <sc-for list="{{days}}" as="d" hint-placeholder-count="4">
+            <button type="button" aria-pressed="{{d.on}}" onClick="{{d.pick}}" style="{{d.style}}"><span style="font-size: 12px">{{d.w}}</span><b style="font-size: 15px">{{d.dd}}</b></button>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+          <sc-for list="{{slots}}" as="t" hint-placeholder-count="6">
+            <button type="button" aria-pressed="{{t.on}}" disabled="{{t.full}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Họ tên
+            <input type="text" placeholder="Nguyễn Văn A" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Số điện thoại
+            <input type="tel" placeholder="09xx xxx xxx" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box; width: 100%">
+          </label>
+        </div>
+        <details style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 10px; padding: 10px 12px; font-size: 14px">
+          <summary style="font-weight: 600; cursor: pointer; color: #1d3a5a">Xuất hoá đơn công ty, mã giới thiệu</summary>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px">
+            <input type="text" aria-label="Mã số thuế" placeholder="Mã số thuế (tự điền tên công ty)" style="font: inherit; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 8px">
+            <input type="text" aria-label="Mã giới thiệu hoặc khuyến mãi" placeholder="Mã giới thiệu / khuyến mãi" style="font: inherit; padding: 10px 12px; border: 1px solid #c9d0d8; border-radius: 8px">
+          </div>
+        </details>
+        <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px">
+          <input type="checkbox" checked="{{agree}}" onChange="{{toggleAgree}}" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #13283f">
+          <span>Tôi đồng ý cho xử lý dữ liệu cá nhân để phục vụ đơn này (<a href="#">chính sách</a>). <b style="color: #8a2c06">Bắt buộc</b></span>
+        </label>
+        <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px">
+          <input type="checkbox" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #13283f">
+          <span>Nhắc tôi lịch bảo dưỡng tiếp theo qua Zalo.</span>
+        </label>
+        <sc-if value="{{agreeErr}}" hint-placeholder-val="{{ false }}">
+          <span style="color: #a8320a; font-size: 13.5px; font-weight: 600">Bạn cần tích ô đồng ý xử lý dữ liệu để gửi đơn.</span>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{s5}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; padding-top: 40px">
+        <span style="width: 72px; height: 72px; border-radius: 50%; background: #e9f6ec; color: #2b8a3e; display: grid; place-items: center">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </span>
+        <h1 style="margin: 0; font-size: 24px; color: #13283f">Đã nhận yêu cầu</h1>
+        <p style="margin: 0; color: #5a6575">Chúng tôi sẽ gọi lại trong 5 phút để xác nhận.</p>
+        <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 14px 18px; display: flex; flex-direction: column; gap: 2px; width: 100%; box-sizing: border-box">
+          <span style="font-size: 13px; color: #5a6575">Mã đơn</span>
+          <b style="font-size: 22px; letter-spacing: 0.06em; color: #13283f">TT-000123</b>
+        </div>
+        <p style="margin: 0; font-size: 14px; color: #5a6575">Tin xác nhận và link theo dõi thợ đã gửi vào Zalo của bạn.</p>
+        <a href="TheoDoi.dc.html" style="display: flex; align-items: center; justify-content: center; background: #13283f; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 12px; min-height: 50px; width: 100%">Xem trạng thái đơn</a>
+        <button type="button" onClick="{{restart}}" style="border: 0; background: transparent; font: inherit; color: #1d3a5a; text-decoration: underline; cursor: pointer; min-height: 44px">Đặt lại từ đầu (bản mẫu)</button>
+      </div>
+    </sc-if>
+  </main>
+
+  <sc-if value="{{showFoot}}" hint-placeholder-val="{{ true }}">
+    <footer style="background: #ffffff; border-top: 1px solid #e1e5ea; padding: 10px 16px 16px; display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+        <span style="font-size: 13px; color: #5a6575">Giá sơ bộ</span>
+        <b style="font-size: 16px; color: #c2410c; text-align: right">{{estimate}}</b>
+      </div>
+      <span style="font-size: 12px; color: #5a6575; margin-top: -6px">{{estimateNote}}</span>
+      <button type="button" onClick="{{next}}" style="{{nextStyle}}">{{nextLabel}}</button>
+    </footer>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 1, picked: ['aq'], park: 'ham', day: 0, slot: '08-10', located: false, out: false, agree: false, agreeErr: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const chip = (on) => 'display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; padding: 12px; border-radius: 12px; cursor: pointer; font: inherit; min-height: 84px; ' +
+      (on ? 'background: #fff1e6; border: 2px solid #c2410c;' : 'background: #ffffff; border: 2px solid #e1e5ea;');
+    const pill = (on, full) => 'font: inherit; font-size: 14px; font-weight: 600; border-radius: 10px; min-height: 46px; cursor: pointer; padding: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2; ' +
+      (full ? 'background: #eef1f4; color: #6b7684; border: 1.5px solid #e1e5ea; text-decoration: line-through; cursor: not-allowed;' :
+       on ? 'background: #13283f; color: #ffffff; border: 1.5px solid #13283f;' : 'background: #ffffff; color: #13283f; border: 1.5px solid #c9d0d8;');
+    const svc = [
+      { id: 'bd', name: 'Bảo dưỡng định kỳ', note: 'Dầu, lọc, kiểm tra', simple: true, lo: 650000, hi: 1100000 },
+      { id: 'aq', name: 'Ắc quy', note: 'Kích nổ, thay mới', simple: true, lo: 1350000, hi: 2000000 },
+      { id: 'lop', name: 'Lốp', note: 'Vá, thay lốp', simple: true, lo: 120000, hi: 1600000 },
+      { id: 'phanh', name: 'Phanh', note: 'Má phanh, dầu phanh', simple: true, lo: 450000, hi: 1200000 },
+      { id: 'loi', name: 'Đọc lỗi, chẩn đoán', note: 'Đèn báo, máy yếu', simple: false },
+      { id: 'cuuho', name: 'Cứu hộ, kéo xe', note: 'Kéo về xưởng', simple: false }
+    ];
+    const services = svc.map((s) => {
+      const on = st.picked.includes(s.id);
+      return { ...s, on, style: chip(on), pick: () => this.setState({ picked: on ? st.picked.filter((x) => x !== s.id) : st.picked.concat(s.id) }) };
+    });
+    const parks = [
+      { id: 'nha', name: 'Nhà riêng' }, { id: 'ham', name: 'Hầm chung cư' }, { id: 'bai', name: 'Bãi công ty' }, { id: 'duong', name: 'Đường phố' }
+    ].map((p) => ({ ...p, on: st.park === p.id, style: pill(st.park === p.id, false), pick: () => this.setState({ park: p.id }) }));
+    const days = [
+      { w: 'Hôm nay', dd: '08/10' }, { w: 'T6', dd: '09/10' }, { w: 'T7', dd: '10/10' }, { w: 'CN', dd: '11/10' }
+    ].map((d, i) => ({ ...d, on: st.day === i, style: pill(st.day === i, false), pick: () => this.setState({ day: i }) }));
+    const slots = [
+      { id: '08-10', full: false }, { id: '10-12', full: true }, { id: '12-14', full: false },
+      { id: '14-16', full: false }, { id: '16-18', full: true }, { id: '18-20', full: false }
+    ].map((t) => ({ ...t, label: t.id.replace('-', 'h – ') + 'h', on: st.slot === t.id, style: pill(st.slot === t.id, t.full), pick: () => this.setState({ slot: t.id }) }));
+    const complex = services.some((s) => s.on && !s.simple);
+    const none = st.picked.length === 0;
+    const segs = [1, 2, 3, 4].map((n) => ({ style: 'height: 4px; border-radius: 2px; background: ' + (n <= st.step ? '#ff8a4c' : 'rgba(255,255,255,0.22)') }));
+    const titles = { 1: 'Đặt lịch', 2: 'Đặt lịch', 3: 'Đặt lịch', 4: 'Đặt lịch', 5: 'Hoàn tất' };
+    const canNext = st.step === 1 ? !none : st.step === 3 ? !st.out : true;
+    return {
+      s1: st.step === 1, s2: st.step === 2, s3: st.step === 3, s4: st.step === 4, s5: st.step === 5,
+      canBack: st.step > 1 && st.step < 5, noBack: st.step === 1 || st.step === 5,
+      headTitle: titles[st.step], stepLabel: st.step < 5 ? 'Bước ' + st.step + '/4' : '',
+      segs, services, parks, days, slots,
+      inArea: st.located && !st.out, outArea: st.out,
+      outToggleLabel: st.out ? 'Bản mẫu: quay lại địa chỉ trong vùng' : 'Bản mẫu: xem khi địa chỉ ngoài vùng',
+      basement: st.park === 'ham',
+      agree: st.agree, agreeErr: st.agreeErr,
+      showFoot: st.step < 5,
+      estimate: none ? 'Chọn dịch vụ' : complex ? 'Cố vấn gọi lại' : (() => {
+        const on = services.filter((s) => s.on);
+        const m = (n) => (n / 1000000).toLocaleString('vi-VN', { maximumFractionDigits: 2 });
+        const lo = on.reduce((a, s) => a + s.lo, 50000), hi = on.reduce((a, s) => a + s.hi, 50000);
+        return m(lo) + ' – ' + m(hi) + ' triệu';
+      })(),
+      estimateNote: complex ? 'Việc phức tạp: cố vấn sẽ gọi lại trong 15 phút để báo giá.' : 'Đã gồm phí đi lại 50.000đ. Giá chính thức chốt sau khi thợ kiểm tra.',
+      nextLabel: st.step === 4 ? 'Gửi yêu cầu' : 'Tiếp tục',
+      nextStyle: 'border: 0; border-radius: 12px; min-height: 52px; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; color: #ffffff; background: ' + (canNext ? '#c2410c' : '#9aa5b1'),
+      back: () => this.setState({ step: st.step - 1 }),
+      next: () => {
+        if (!canNext) return;
+        if (st.step === 4 && !st.agree) { this.setState({ agreeErr: true }); return; }
+        this.setState({ step: st.step + 1 });
+      },
+      locate: () => this.setState({ located: true, out: false }),
+      toggleOut: () => this.setState({ out: !st.out, located: true }),
+      toggleAgree: () => this.setState({ agree: !st.agree, agreeErr: false }),
+      restart: () => this.setState({ step: 1, located: false, out: false, agree: false, agreeErr: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

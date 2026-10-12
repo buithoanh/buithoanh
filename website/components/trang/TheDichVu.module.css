@@ -1,0 +1,26 @@
+.luoi { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.luoi > li { display: flex; }
+.the {
+  flex: 1; background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); padding: 14px 12px;
+  text-decoration: none; color: var(--chu); display: flex; flex-direction: column; gap: 6px; min-height: 118px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.the:hover { border-color: var(--nhan); color: var(--chu); box-shadow: var(--bong); }
+.ma {
+  flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--nhan-nhat); color: var(--nhan);
+  display: grid; place-items: center; font-weight: 800; font-size: 13px;
+}
+.chu { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.ten { font-size: 15px; color: var(--toi); line-height: 1.25; }
+.moTa { font-size: 13px; color: var(--chu-phu); margin-top: auto; }
+.gia { display: none; }
+
+@media (min-width: 900px) {
+  .luoi { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+  .the { flex-direction: row; align-items: flex-start; gap: 16px; padding: 22px; border-radius: 14px; min-height: 0; }
+  .ma { width: 46px; height: 46px; border-radius: 12px; font-size: 15px; }
+  .chu { gap: 4px; }
+  .ten { font-size: 18px; }
+  .moTa { font-size: 15px; margin-top: 0; }
+  .gia { display: block; font-size: 14px; color: var(--nhan); font-weight: 700; margin-top: 6px; }
+}

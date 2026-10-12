@@ -1,0 +1,13 @@
+.dai { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; scroll-snap-type: x mandatory; }
+.the {
+  flex: none; width: 270px; margin: 0; background: #fff; border: 1px solid var(--vien); border-radius: var(--bo);
+  padding: 14px; display: flex; flex-direction: column; gap: 8px; scroll-snap-align: start;
+}
+.the blockquote { margin: 0; font-size: 14px; }
+.the figcaption { font-size: 13px; color: var(--chu-phu); margin-top: auto; }
+.sao { color: var(--nhan); letter-spacing: 2px; }
+.diem { color: var(--toi); }
+@media (min-width: 900px) {
+  .dai { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; }
+  .the { width: auto; }
+}

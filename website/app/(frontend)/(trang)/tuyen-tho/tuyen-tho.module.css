@@ -1,0 +1,52 @@
+.hero { background: var(--toi); color: #fff; padding: 8px 0 26px; }
+.heroTrong { display: flex; flex-direction: column; gap: 14px; }
+.nhanHero {
+  align-self: flex-start; background: rgba(255, 255, 255, .1); color: var(--nhan-tren-toi-3); font-size: 13px; font-weight: 600;
+  padding: 4px 10px; border-radius: 999px;
+}
+.hero h1 { color: #fff; font-size: 29px; line-height: 1.18; font-weight: 800; letter-spacing: -0.02em; }
+.dan { color: var(--chu-tren-toi); font-size: 15px; max-width: 640px; }
+.tyLe { background: rgba(255, 255, 255, .07); border-radius: var(--bo); padding: 14px; display: flex; align-items: center; gap: 14px; max-width: 560px; }
+.tyLe b { font-size: 40px; line-height: 1; color: var(--nhan-tren-toi); font-weight: 800; }
+.tyLe span { font-size: 14px; color: var(--chu-tren-toi); }
+.hero :global(.nut-lon) { max-width: 560px; }
+
+.luoi { display: flex; flex-direction: column; }
+.cotTrai { display: flex; flex-direction: column; }
+.khoi { padding-top: 24px; display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 16px; }
+.khoi h2 { font-size: 22px; }
+
+.bang { overflow: hidden; }
+.bang table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.bang thead th { background: var(--toi); color: #fff; font-size: 13px; font-weight: 600; padding: 10px 14px; text-align: left; }
+.bang thead th + th, .bang td { text-align: right; white-space: nowrap; }
+.bang tbody th { font-weight: 400; text-align: left; padding: 12px 14px; }
+.bang td { padding: 12px 14px; color: var(--chu-phu); }
+.bang td b { color: var(--nhan); }
+.bang tbody tr { border-bottom: 1px solid var(--vien-nhat); }
+.viDu { padding: 12px 14px; background: var(--nhan-nhat); font-size: 14px; color: var(--toi); }
+
+.dieuKien { list-style: none; margin: 0; padding: 0; }
+.dieuKien li { display: flex; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--vien-nhat); font-size: 14.5px; }
+.dieuKien li:last-child { border-bottom: 0; }
+.dieuKien svg { flex: none; color: var(--xanh); margin-top: 2px; }
+
+.quyenLoi { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.quyenLoi li { padding: 14px 12px; display: flex; flex-direction: column; gap: 6px; }
+.quyenLoi b { font-size: 15px; color: var(--toi); line-height: 1.25; }
+.quyenLoi li > span:last-child { font-size: 13px; color: var(--chu-phu); }
+.ma {
+  width: 36px; height: 36px; border-radius: 10px; background: var(--nhan-nhat); color: var(--nhan);
+  display: grid; place-items: center; font-weight: 800; font-size: 13px;
+}
+.cotForm { padding-top: 24px; }
+
+@media (min-width: 900px) {
+  .hero { padding: 16px 0 40px; }
+  .hero h1 { font-size: 44px; }
+  .dan { font-size: 17px; }
+  .luoi { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px; align-items: start; }
+  .khoi { padding-top: 40px; }
+  .khoi h2 { font-size: 26px; }
+  .cotForm { position: sticky; top: 16px; padding-top: 40px; }
+}

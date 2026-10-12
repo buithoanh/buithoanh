@@ -1,0 +1,20 @@
+{
+  "_ghiChu": "DỮ LIỆU MẪU để chạy thử, thay bằng danh mục thật từ VCparts. Mỗi dòng: [tên dòng, phân khúc gợi ý (null = chưa gán), đời từ, đời đến, 1 nếu xe điện]. Phân khúc theo bảng giá: A xe nhỏ, B sedan/hatchback hạng B, C hạng C/SUV cỡ nhỏ, D SUV 7 chỗ/bán tải/xe sang.",
+  "hang": [
+    { "ten": "Toyota", "dong": [["Vios", "B", 2014, 2026], ["Corolla Cross", "C", 2020, 2026], ["Innova", "D", 2012, 2026], ["Fortuner", "D", 2012, 2026], ["Camry", "D", 2012, 2026], ["Veloz Cross", "B", 2022, 2026], ["Wigo", "A", 2018, 2026], ["Yaris", "B", 2014, 2023], ["Raize", "B", 2021, 2026], ["Corolla Altis", "C", 2012, 2026], ["Hilux", "D", 2012, 2026], ["Avanza", "B", 2018, 2026], ["Yaris Cross", null, 2024, 2026]] },
+    { "ten": "Hyundai", "dong": [["Grand i10", "A", 2014, 2026], ["Accent", "B", 2018, 2026], ["Venue", "B", 2023, 2026], ["Stargazer", "B", 2022, 2026], ["Elantra", "C", 2016, 2026], ["Kona", "C", 2018, 2023], ["Tucson", "C", 2016, 2026], ["Santa Fe", "D", 2012, 2026], ["Custin", "D", 2023, 2026], ["Creta", null, 2022, 2026]] },
+    { "ten": "Kia", "dong": [["Morning", "A", 2012, 2026], ["Soluto", "A", 2019, 2026], ["Sonet", "B", 2021, 2026], ["Carens", "B", 2022, 2026], ["K3", "C", 2016, 2026], ["Seltos", "C", 2020, 2026], ["Sportage", "C", 2022, 2026], ["Sorento", "D", 2014, 2026], ["Carnival", "D", 2021, 2026]] },
+    { "ten": "Mazda", "dong": [["Mazda2", "B", 2015, 2026], ["CX-3", "B", 2021, 2026], ["Mazda3", "C", 2015, 2026], ["CX-30", "C", 2020, 2026], ["CX-5", "C", 2013, 2026], ["CX-8", "D", 2019, 2026], ["Mazda6", "D", 2014, 2024], ["BT-50", "D", 2012, 2026]] },
+    { "ten": "VinFast", "dong": [["Fadil", "A", 2019, 2022], ["VF 3", "A", 2024, 2026, 1], ["VF 5", "A", 2023, 2026, 1], ["VF e34", "B", 2021, 2024, 1], ["VF 6", "C", 2024, 2026, 1], ["VF 7", "C", 2024, 2026, 1], ["VF 8", "D", 2022, 2026, 1], ["VF 9", "D", 2023, 2026, 1], ["Lux A2.0", "D", 2019, 2022]] },
+    { "ten": "Honda", "dong": [["Brio", "A", 2019, 2022], ["City", "B", 2014, 2026], ["BR-V", "B", 2023, 2026], ["HR-V", "C", 2018, 2026], ["Civic", "C", 2012, 2026], ["CR-V", "C", 2013, 2026], ["Accord", "D", 2012, 2026]] },
+    { "ten": "Mitsubishi", "dong": [["Mirage", "A", 2014, 2020], ["Attrage", "B", 2014, 2026], ["Xpander", "B", 2018, 2026], ["Xforce", "B", 2024, 2026], ["Outlander", "C", 2016, 2026], ["Pajero Sport", "D", 2016, 2026], ["Triton", "D", 2012, 2026]] },
+    { "ten": "Ford", "dong": [["Fiesta", "B", 2012, 2018], ["EcoSport", "B", 2014, 2021], ["Focus", "C", 2012, 2019], ["Territory", "C", 2022, 2026], ["Everest", "D", 2012, 2026], ["Ranger", "D", 2012, 2026], ["Transit", "D", 2012, 2026], ["Explorer", "D", 2017, 2026]] },
+    { "ten": "Suzuki", "dong": [["Celerio", "A", 2018, 2021], ["Swift", "A", 2014, 2026], ["Ciaz", "B", 2016, 2023], ["Ertiga", "B", 2019, 2026], ["XL7", "B", 2020, 2026], ["Jimny", "B", 2024, 2026]] },
+    { "ten": "Nissan", "dong": [["Sunny", "B", 2014, 2022], ["Almera", "B", 2021, 2026], ["Kicks", "B", 2022, 2026], ["X-Trail", "C", 2014, 2026], ["Navara", "D", 2015, 2026], ["Terra", "D", 2019, 2026]] },
+    { "ten": "Peugeot", "dong": [["2008", "B", 2021, 2026], ["3008", "C", 2017, 2026], ["408", "C", 2024, 2026], ["5008", "D", 2018, 2026], ["Traveller", "D", 2017, 2026]] },
+    { "ten": "MG", "dong": [["MG5", "B", 2021, 2026], ["ZS", "B", 2020, 2026], ["HS", "C", 2020, 2026], ["RX5", "C", 2023, 2026], ["MG7", "D", 2024, 2026]] },
+    { "ten": "Chevrolet", "dong": [["Spark", "A", 2012, 2018], ["Aveo", "B", 2012, 2018], ["Cruze", "C", 2012, 2018], ["Captiva", "C", 2012, 2018], ["Colorado", "D", 2017, 2019], ["Trailblazer", "D", 2018, 2019]] },
+    { "ten": "Mercedes-Benz", "dong": [["A-Class", "C", 2015, 2023], ["C-Class", "D", 2012, 2026], ["E-Class", "D", 2012, 2026], ["S-Class", "D", 2012, 2026], ["GLC", "D", 2016, 2026], ["GLE", "D", 2016, 2026]] },
+    { "ten": "BMW", "dong": [["3 Series", "D", 2012, 2026], ["5 Series", "D", 2012, 2026], ["X3", "D", 2014, 2026], ["X5", "D", 2014, 2026]] }
+  ]
+}

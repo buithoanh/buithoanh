@@ -1,0 +1,36 @@
+.banDo { position: relative; border-radius: var(--bo); overflow: hidden; background: var(--nen-ban-do); border: 1px solid var(--vien-ban-do); }
+.thuong { min-height: 190px; }
+.thap { min-height: 150px; }
+.iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.giuCho { display: flex; align-items: flex-end; }
+.nen { position: absolute; inset: 0; width: 100%; height: 100%; }
+.duong { stroke: var(--nen-trang); stroke-width: 6; fill: none; }
+.vung { fill: var(--nhan); fill-opacity: .14; stroke: var(--nhan); stroke-width: 2; stroke-dasharray: 6 4; }
+.giuChoChu {
+  position: relative; margin: 10px 12px; background: var(--nen-trang); border-radius: 8px; padding: 8px 10px; font-size: 12.5px;
+  color: var(--chu-phu); display: flex; flex-direction: column; gap: 2px; max-width: calc(100% - 24px); box-shadow: var(--bong);
+}
+.giuChoChu b { color: var(--toi); font-size: 13px; }
+.giuChoChu ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 10px; color: var(--chu); }
+.giuChoChu ul span { color: var(--chu-phu); }
+.ghiChu { font-size: 12px; }
+.chip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+
+.form { display: flex; flex-direction: column; gap: 6px; }
+.nhanO { font-weight: 600; font-size: 14px; }
+.hang { display: flex; gap: 8px; }
+.o {
+  flex: 1; min-width: 0; min-height: 46px; padding: 11px 12px; border: 1px solid var(--vien-o); border-radius: 10px;
+  background: var(--nen-trang); font-size: 16px;
+}
+.o:focus { border-color: var(--toi); outline: 3px solid rgba(19, 40, 63, .15); outline-offset: 0; }
+.oLoi { border-color: var(--do); background: var(--do-nhat); }
+.nutKiemTra { flex: none; min-height: 46px; padding: 0 14px; }
+.loi { font-size: 13px; color: var(--do); font-weight: 600; }
+.kq { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+
+@media (min-width: 900px) {
+  .thuong { min-height: 280px; }
+  .giuChoChu { margin: 12px 14px; font-size: 13px; }
+  .chip :global(.chip) { padding: 6px 14px; }
+}

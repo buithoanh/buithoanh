@@ -1,0 +1,16 @@
+.bang { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); overflow: hidden; }
+.ds { margin: 0; }
+.dong { display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; border-bottom: 1px solid var(--vien-nhat); }
+.dong dt { min-width: 0; }
+.dong dd { margin: 0; font-weight: 700; color: var(--toi); white-space: nowrap; }
+.ghiChu { padding: 10px 14px; font-size: 12.5px; color: var(--chu-phu); background: var(--nen-nhat); }
+.cuoi { display: none; }
+.xemDu { font-size: 14px; }
+@media (min-width: 900px) {
+  .bang { border-radius: 14px; }
+  .dong { padding: 13px 18px; }
+  .ghiChu { display: none; }
+  .xemDu { display: none; }
+  .cuoi { display: block; padding: 13px 18px; font-weight: 700; color: var(--nhan); text-decoration: none; background: var(--nen-nhat); }
+  .cuoi:hover { color: var(--nhan-dam); text-decoration: underline; }
+}

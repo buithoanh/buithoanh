@@ -1,0 +1,59 @@
+{
+  "_ghiChu": "DỮ LIỆU MẪU lấy từ thiết kế (BangGia, QtBangGia, XeDien). Mọi mức giá phải được Quản lý dịch vụ duyệt lại trước khi lên web thật. baoGiaSoBo: luonCo = luôn tính, coThe = có thể phát sinh (chỉ cộng vào giá cao), khong = không tính.",
+  "phi": { "phiDiLai": 50000, "phiKiemTra": 100000, "baoHanhPhuTungThang": 6, "baoHanhCongThang": 3, "camKetCuuHoPhut": 60, "coVanGoiLaiPhut": 15 },
+  "phanKhuc": [
+    { "ma": "A", "tenNgan": "Xe nhỏ", "moTa": "Xe cỡ nhỏ (i10, Morning, Fadil, VF 3)" },
+    { "ma": "B", "tenNgan": "Sedan B", "moTa": "Sedan, hatchback hạng B (Vios, Accent, City, Mazda2)" },
+    { "ma": "C", "tenNgan": "Hạng C", "moTa": "Hạng C, SUV cỡ nhỏ (Corolla Cross, CX-5, Seltos, Tucson)" },
+    { "ma": "D", "tenNgan": "7 chỗ", "moTa": "SUV 7 chỗ, bán tải, xe sang (Fortuner, Santa Fe, Ranger, Camry)" }
+  ],
+  "dichVu": [
+    { "ma": "BD", "ten": "Bảo dưỡng định kỳ", "slug": "bao-duong-dinh-ky", "moTaNgan": "Thay dầu, lọc, kiểm tra 30 hạng mục", "nutKeuGoi": "Đặt lịch bảo dưỡng", "thoiGianLam": "60–90 phút", "baoGiaSoBo": true,
+      "ghiChuBangGia": "Dầu theo đúng tiêu chuẩn hãng. Thợ ghi số km và nhắc lần bảo dưỡng sau qua Zalo.",
+      "hangMuc": [
+        { "ten": "Bảo dưỡng cấp nhỏ (công, kiểm tra 30 hạng mục)", "loai": "cong", "gia": 350000, "baoGiaSoBo": "luonCo", "noiBat": true, "tenNgan": "Bảo dưỡng cấp nhỏ (công)" },
+        { "ten": "Bảo dưỡng cấp lớn (công)", "loai": "cong", "gia": 650000 },
+        { "ten": "Dầu máy và lọc dầu", "loai": "phuTung", "nguonGia": "vcparts", "baoGiaSoBo": "luonCo", "pk": { "A": [450000, 650000], "B": [550000, 800000], "C": [750000, 1100000], "D": [950000, 1500000] } },
+        { "ten": "Lọc gió động cơ", "loai": "phuTung", "nguonGia": "vcparts", "baoGiaSoBo": "coThe", "pk": { "A": [150000, 250000], "B": [180000, 300000], "C": [250000, 400000], "D": [300000, 550000] } }
+      ] },
+    { "ma": "AQ", "ten": "Ắc quy", "slug": "ac-quy", "moTaNgan": "Kích nổ, đo, thay mới tại chỗ", "nutKeuGoi": "Gọi thợ thay ắc quy", "thoiGianLam": "20–30 phút", "baoGiaSoBo": true,
+      "ghiChuBangGia": "Đo miễn phí trước, ắc quy còn tốt thì thợ nói thật, không ép thay.",
+      "hangMuc": [
+        { "ten": "Đo kiểm tra ắc quy và máy phát", "loai": "cong", "gia": 0 },
+        { "ten": "Kích nổ tại chỗ", "loai": "cong", "gia": 150000, "noiBat": true, "tenNgan": "Kích nổ ắc quy" },
+        { "ten": "Công thay ắc quy", "loai": "cong", "gia": 150000, "baoGiaSoBo": "luonCo", "noiBat": true },
+        { "ten": "Ắc quy 12V", "loai": "phuTung", "nguonGia": "vcparts", "baoGiaSoBo": "luonCo", "pk": { "A": [1200000, 1600000], "B": [1350000, 2000000], "C": [1600000, 2400000], "D": [2000000, 2800000] } }
+      ] },
+    { "ma": "L", "ten": "Lốp", "slug": "lop", "moTaNgan": "Vá, thay, đổi lốp dự phòng", "nutKeuGoi": "Gọi thợ vá, thay lốp", "thoiGianLam": "20–40 phút", "baoGiaSoBo": true,
+      "ghiChuBangGia": "Lốp mới tính theo cỡ lốp ghi trên thành lốp. Gửi ảnh thành lốp qua Zalo để báo sát hơn.",
+      "hangMuc": [
+        { "ten": "Vá lốp không săm", "loai": "cong", "gia": 120000, "baoGiaSoBo": "luonCo", "noiBat": true },
+        { "ten": "Thay lốp dự phòng", "loai": "cong", "gia": 100000 },
+        { "ten": "Công tháo lắp, cân bằng 1 lốp", "loai": "cong", "gia": 150000, "baoGiaSoBo": "coThe" },
+        { "ten": "Lốp mới (1 chiếc)", "loai": "phuTung", "nguonGia": "vcparts", "baoGiaSoBo": "coThe", "pk": { "A": [900000, 1400000], "B": [1200000, 1900000], "C": [1700000, 2800000], "D": [2400000, 4200000] } }
+      ] },
+    { "ma": "ĐL", "ten": "Đọc lỗi, chẩn đoán", "slug": "doc-loi-chan-doan", "moTaNgan": "Máy đọc lỗi, đèn báo", "nutKeuGoi": "Đặt lịch đọc lỗi", "thoiGianLam": "20–30 phút", "baoGiaSoBo": false,
+      "ghiChuBangGia": "Sửa lỗi tìm ra sẽ có báo giá riêng. Cố vấn gọi lại trong 15 phút để tư vấn.",
+      "hangMuc": [
+        { "ten": "Đọc lỗi bằng máy chẩn đoán", "loai": "cong", "gia": 200000, "baoGiaSoBo": "luonCo", "noiBat": true, "tenNgan": "Đọc lỗi bằng máy" }
+      ] },
+    { "ma": "P", "ten": "Phanh", "slug": "phanh", "moTaNgan": "Má phanh, dầu phanh", "nutKeuGoi": "Đặt lịch kiểm tra phanh", "thoiGianLam": "40–60 phút", "baoGiaSoBo": true,
+      "ghiChuBangGia": "Má phanh tính theo 1 cầu (trước hoặc sau). Thợ đo độ mòn và chụp ảnh gửi bạn trước khi thay.",
+      "hangMuc": [
+        { "ten": "Công thay má phanh (1 cầu)", "loai": "cong", "gia": 250000, "baoGiaSoBo": "luonCo" },
+        { "ten": "Má phanh (1 cầu)", "loai": "phuTung", "nguonGia": "vcparts", "baoGiaSoBo": "luonCo", "pk": { "A": [450000, 700000], "B": [550000, 900000], "C": [750000, 1300000], "D": [1000000, 1900000] } },
+        { "ten": "Thay dầu phanh (gồm dầu)", "loai": "cong", "gia": 350000, "baoGiaSoBo": "coThe" }
+      ] },
+    { "ma": "CH", "ten": "Cứu hộ, kéo xe", "slug": "cuu-ho-keo-xe", "moTaNgan": "Kéo về xưởng Auto Speedy", "nutKeuGoi": "Gọi cứu hộ ngay", "thoiGianLam": "", "baoGiaSoBo": false,
+      "ghiChuBangGia": "Trong vùng phục vụ có mặt trong 60 phút. Xe kéo về xưởng Auto Speedy để sửa tiếp.",
+      "hangMuc": [
+        { "ten": "Kéo xe nội thành về xưởng Auto Speedy", "loai": "cong", "gia": 400000, "baoGiaSoBo": "luonCo" },
+        { "ten": "Mỗi km ngoài nội thành", "loai": "cong", "gia": 15000, "donVi": "km" }
+      ] },
+    { "ma": "ĐH", "ten": "Điều hòa", "slug": "dieu-hoa", "moTaNgan": "Kém lạnh, có mùi, quạt yếu", "nhanDatLich": false, "hienTrenBangGia": false, "baoGiaSoBo": false,
+      "ghiChuBangGia": "Vệ sinh, nạp gas, thay lọc gió điều hòa: báo giá sau kiểm tra.",
+      "hangMuc": [
+        { "ten": "Phí kiểm tra điều hòa", "loai": "cong", "gia": 100000 }
+      ] }
+  ]
+}

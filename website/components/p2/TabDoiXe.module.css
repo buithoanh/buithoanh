@@ -1,0 +1,16 @@
+.tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; background: var(--vien); padding: 4px; border-radius: var(--bo); }
+.tab {
+  font-size: 14px; font-weight: 700; border: 0; border-radius: 9px; min-height: 44px; cursor: pointer; padding: 4px 6px; line-height: 1.2;
+  background: transparent; color: var(--chu-2);
+}
+.tab[aria-selected="true"] { background: var(--nen-trang); color: var(--toi); box-shadow: 0 1px 3px rgba(19, 40, 63, .18); }
+.bang { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.dau { display: flex; align-items: center; gap: 12px; }
+.dau div { display: flex; flex-direction: column; }
+.dau b { font-size: 17px; color: var(--toi); }
+.dau span { font-size: 13.5px; color: var(--chu-phu); }
+.icon { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--nhan-nhat); color: var(--nhan); display: grid; place-items: center; }
+.bang ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.bang li { display: flex; gap: 10px; font-size: 14.5px; }
+.bang li svg { flex: none; color: var(--xanh); margin-top: 2px; }
+.ghiChu { background: var(--nhan-nhat); border-radius: 10px; padding: 10px 12px; font-size: 14px; color: var(--toi); }

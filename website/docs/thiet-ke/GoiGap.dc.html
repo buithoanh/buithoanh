@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Gọi thợ gấp</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d3a5a}a:hover{color:#13283f}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; background: #f6f7f9; color: #18212c; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 15px; line-height: 1.5; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="background: #13283f; color: #ffffff; padding: 6px 8px 6px 4px; display: flex; align-items: center; gap: 4px">
+    <a href="Main.dc.html" aria-label="Đóng" style="width: 44px; height: 44px; color: #ffffff; display: grid; place-items: center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+    </a>
+    <div style="flex: 1; display: flex; flex-direction: column; line-height: 1.15">
+      <b style="font-size: 17px">Gọi thợ gấp</b>
+      <span style="font-size: 11px; color: #ffc9a3">ThợTới · by VC Phồn Vinh</span>
+    </div>
+    <span style="background: #b42318; color: #ffffff; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; padding: 5px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px">
+      <span style="width: 7px; height: 7px; border-radius: 50%; background: #ffffff"></span>KHẨN CẤP
+    </span>
+    <a href="#" aria-label="Gọi hotline 1900 1068" style="width: 44px; height: 44px; color: #ffb27a; display: grid; place-items: center">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+    </a>
+  </header>
+
+  <sc-if value="{{form}}" hint-placeholder-val="{{ true }}">
+    <main style="flex: 1; overflow-y: auto; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 16px">
+
+      <div style="background: #fff1e6; border-radius: 12px; padding: 12px 14px; display: flex; gap: 10px; align-items: center">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span style="font-size: 14px"><b style="color: #8a2c06">Thợ có mặt trong 60 phút</b> ở Cầu Giấy, Đống Đa, Thanh Xuân, Ba Đình. Chỉ cần 3 thông tin bên dưới.</span>
+      </div>
+
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 18px; color: #13283f">1. Xe đang bị gì?</h2>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <button type="button" aria-pressed="{{pAq.on}}" onClick="{{pAq.pick}}" style="{{pAq.style}}">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="13" rx="2"></rect><line x1="6" y1="4" x2="6" y2="7"></line><line x1="18" y1="4" x2="18" y2="7"></line><line x1="6" y1="13.5" x2="9" y2="13.5"></line><line x1="15" y1="13.5" x2="18" y2="13.5"></line><line x1="16.5" y1="12" x2="16.5" y2="15"></line></svg>
+            <b style="font-size: 16px">Hết ắc quy</b>
+            <span style="font-size: 12.5px; color: #5a6575">Đề không quay, đèn mờ</span>
+          </button>
+          <button type="button" aria-pressed="{{pLop.on}}" onClick="{{pLop.pick}}" style="{{pLop.style}}">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3.5"></circle><line x1="12" y1="3" x2="12" y2="8.5"></line><line x1="4.2" y1="16.5" x2="9" y2="13.8"></line><line x1="19.8" y1="16.5" x2="15" y2="13.8"></line></svg>
+            <b style="font-size: 16px">Thủng, xẹp lốp</b>
+            <span style="font-size: 12.5px; color: #5a6575">Vá hoặc thay tại chỗ</span>
+          </button>
+          <button type="button" aria-pressed="{{pMay.on}}" onClick="{{pMay.pick}}" style="{{pMay.style}}">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"></path><path d="M6.3 6.3a8 8 0 1 0 11.4 0"></path></svg>
+            <b style="font-size: 16px">Không nổ máy</b>
+            <span style="font-size: 12.5px; color: #5a6575">Đề quay nhưng không nổ</span>
+          </button>
+          <button type="button" aria-pressed="{{pKhac.on}}" onClick="{{pKhac.pick}}" style="{{pKhac.style}}">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <b style="font-size: 16px">Vấn đề khác</b>
+            <span style="font-size: 12.5px; color: #5a6575">Đèn báo lỗi, kẹt khóa…</span>
+          </button>
+        </div>
+        <sc-if value="{{showOther}}" hint-placeholder-val="{{ false }}">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Tả ngắn giúp thợ mang đúng đồ
+            <input type="text" placeholder="VD: đèn check engine sáng, xe giật" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box">
+          </label>
+        </sc-if>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 18px; color: #13283f">2. Xe đang ở đâu?</h2>
+        <button type="button" onClick="{{locate}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; border: 0; background: #13283f; color: #ffffff; border-radius: 12px; min-height: 54px; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+          {{locateLabel}}
+        </button>
+        <sc-if value="{{inArea}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 10px; background: #e9f6ec; border-radius: 10px; padding: 12px; color: #1e6b2f; font-size: 14px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 1px"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><b>Trong vùng phục vụ.</b> Gần 72 Nguyễn Chí Thanh, Láng Thượng, Đống Đa. Thợ gần nhất cách khoảng 3,2 km.</span>
+          </div>
+        </sc-if>
+        <sc-if value="{{outArea}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 8px; background: #fdecea; border: 1px solid #f3b8b1; border-radius: 10px; padding: 12px; font-size: 14px">
+            <b style="color: #8f1d12">Vị trí này ngoài vùng phục vụ</b>
+            <span>Gần Đại lộ Thăng Long, Hoài Đức. Thợ lưu động chưa tới được đây trong 60 phút. Bạn gọi cố vấn để được chỉ cách xử lý tạm, hoặc đặt kéo xe về xưởng Auto Speedy.</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+              <a href="#" style="display: flex; align-items: center; justify-content: center; min-height: 46px; border-radius: 10px; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 14px">Gọi tư vấn</a>
+              <a href="DichVu.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 46px; border-radius: 10px; background: #ffffff; border: 1.5px solid #c9d0d8; color: #13283f; text-decoration: none; font-weight: 700; font-size: 14px">Đặt kéo xe</a>
+            </div>
+          </div>
+        </sc-if>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Hoặc gõ địa chỉ, mốc gần nhất
+          <input type="text" placeholder="VD: trước số 72 Nguyễn Chí Thanh" style="font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 48px; box-sizing: border-box">
+        </label>
+        <button type="button" onClick="{{toggleOut}}" style="align-self: flex-start; border: 0; background: transparent; padding: 0; font: inherit; font-size: 13px; color: #1d3a5a; text-decoration: underline; cursor: pointer; min-height: 32px">{{outToggleLabel}}</button>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 18px; color: #13283f">3. Số điện thoại của bạn</h2>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Số điện thoại
+          <input type="tel" value="0912 345 678" placeholder="09xx xxx xxx" style="font: inherit; font-size: 17px; font-weight: 700; letter-spacing: 0.03em; padding: 11px 12px; border: 1px solid #c9d0d8; border-radius: 10px; background: #ffffff; min-height: 50px; box-sizing: border-box">
+          <span style="font-weight: 400; font-size: 12.5px; color: #5a6575">Điều phối và thợ sẽ gọi số này. Tin xác nhận gửi vào Zalo của số này.</span>
+        </label>
+        <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px">
+          <input type="checkbox" checked="{{agree}}" onChange="{{toggleAgree}}" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #13283f">
+          <span>Tôi đồng ý cho xử lý số điện thoại và vị trí để phục vụ yêu cầu này (<a href="#">chính sách</a>). <b style="color: #8a2c06">Bắt buộc</b></span>
+        </label>
+        <sc-if value="{{agreeErr}}" hint-placeholder-val="{{ false }}">
+          <span style="color: #a8320a; font-size: 13.5px; font-weight: 600">Bạn tích ô đồng ý giúp mình để gửi yêu cầu nhé.</span>
+        </sc-if>
+      </section>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{form}}" hint-placeholder-val="{{ true }}">
+    <footer style="background: #ffffff; border-top: 1px solid #e1e5ea; padding: 10px 16px 16px; display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 12.5px; color: #5a6575; display: flex; gap: 6px; align-items: center">
+        <span style="width: 8px; height: 8px; border-radius: 50%; background: #b42318; flex: none"></span>
+        {{footNote}}
+      </span>
+      <button type="button" onClick="{{send}}" style="{{sendStyle}}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        Gửi yêu cầu khẩn cấp
+      </button>
+    </footer>
+  </sc-if>
+
+  <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+    <main style="flex: 1; overflow-y: auto; padding: 22px 16px 20px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+        <span style="width: 72px; height: 72px; border-radius: 50%; background: #e9f6ec; color: #2b8a3e; display: grid; place-items: center">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </span>
+        <span style="background: #b42318; color: #ffffff; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 999px">ĐƠN KHẨN CẤP · TT-000123</span>
+        <h1 style="margin: 0; font-size: 24px; color: #13283f; line-height: 1.25">Đã nhận. Điều phối đang xếp thợ gần nhất</h1>
+        <p style="margin: 0; color: #5a6575; font-size: 14px">Đơn của bạn được đưa lên đầu hàng chờ. Điều phối sẽ gọi lại số 0912 345 678 trong 5 phút.</p>
+      </div>
+
+      <div style="background: #13283f; color: #ffffff; border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 14px">
+        <div style="display: flex; flex-direction: column; align-items: center; line-height: 1">
+          <b style="font-size: 34px; color: #ffb27a">60</b>
+          <span style="font-size: 12px; color: #c3cfdc">phút</span>
+        </div>
+        <span style="font-size: 14px; color: #d6e0eb">Cam kết thợ có mặt trong 60 phút kể từ 09:14. Muộn hơn, chúng tôi gọi báo bạn trước.</span>
+      </div>
+
+      <ol style="list-style: none; margin: 0; padding: 14px 16px; background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; display: flex; flex-direction: column; gap: 12px; font-size: 14px">
+        <li style="display: flex; gap: 10px; align-items: center"><span style="width: 24px; height: 24px; border-radius: 50%; background: #2b8a3e; color: #ffffff; display: grid; place-items: center; flex: none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span><b>Đã nhận yêu cầu</b> · 09:14</span></li>
+        <li style="display: flex; gap: 10px; align-items: center"><span style="width: 24px; height: 24px; border-radius: 50%; border: 3px solid #c2410c; box-sizing: border-box; flex: none"></span><span><b style="color: #c2410c">Đang xếp thợ gần nhất</b></span></li>
+        <li style="display: flex; gap: 10px; align-items: center; color: #5a6575"><span style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #c9d0d8; box-sizing: border-box; flex: none"></span><span>Thợ đang đến · link theo dõi gửi qua Zalo</span></li>
+      </ol>
+
+      <div style="background: #ffffff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; font-size: 14px">
+        <div style="display: flex; justify-content: space-between; gap: 10px"><span style="color: #5a6575">Vấn đề</span><b style="text-align: right">{{problemName}}</b></div>
+        <div style="display: flex; justify-content: space-between; gap: 10px"><span style="color: #5a6575">Vị trí</span><b style="text-align: right">72 Nguyễn Chí Thanh, Đống Đa</b></div>
+        <div style="display: flex; justify-content: space-between; gap: 10px"><span style="color: #5a6575">Điện thoại</span><b>0912 345 678</b></div>
+      </div>
+
+      <div style="background: #fff1e6; border-radius: 12px; padding: 12px 14px; font-size: 14px">
+        <b style="color: #8a2c06">Trong lúc chờ:</b> bật đèn khẩn cấp, đặt xe ở chỗ an toàn và đứng lên vỉa hè. Đừng cố đề máy liên tục.
+      </div>
+
+      <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #c2410c; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 17px; border-radius: 12px; min-height: 54px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        Gọi ngay 1900 1068
+      </a>
+      <a href="TinZalo.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #0068ff; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 15px; border-radius: 12px; min-height: 50px">Xem tin xác nhận trên Zalo</a>
+      <button type="button" onClick="{{restart}}" style="border: 0; background: transparent; font: inherit; color: #1d3a5a; text-decoration: underline; cursor: pointer; min-height: 44px">Làm lại từ đầu (bản mẫu)</button>
+    </main>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { problem: 'aq', located: false, out: false, agree: false, agreeErr: false, sent: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const big = (on) => 'display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; padding: 12px; border-radius: 12px; cursor: pointer; font: inherit; min-height: 112px; color: #13283f; ' +
+      (on ? 'background: #fff1e6; border: 2px solid #c2410c;' : 'background: #ffffff; border: 2px solid #e1e5ea;');
+    const names = { aq: 'Hết ắc quy', lop: 'Thủng, xẹp lốp', may: 'Không nổ máy', khac: 'Vấn đề khác' };
+    const mk = (id) => ({ on: st.problem === id, style: big(st.problem === id), pick: () => this.setState({ problem: id }) });
+    const ready = !!st.problem && st.located && !st.out;
+    let footNote = 'Đơn gửi đi gắn nhãn KHẨN CẤP, điều phối nhận chuông báo ngay.';
+    if (!st.located) footNote = 'Bấm "Lấy vị trí của xe" để gửi được yêu cầu.';
+    if (st.out) footNote = 'Vị trí ngoài vùng phục vụ: gọi tư vấn hoặc đặt kéo xe.';
+    return {
+      form: !st.sent, sent: st.sent,
+      pAq: mk('aq'), pLop: mk('lop'), pMay: mk('may'), pKhac: mk('khac'),
+      showOther: st.problem === 'khac',
+      locateLabel: st.located ? 'Lấy lại vị trí' : 'Lấy vị trí của xe',
+      inArea: st.located && !st.out, outArea: st.located && st.out,
+      outToggleLabel: st.out ? 'Bản mẫu: quay lại vị trí trong vùng' : 'Bản mẫu: xem khi vị trí ngoài vùng',
+      agree: st.agree, agreeErr: st.agreeErr,
+      footNote,
+      sendStyle: 'display: flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 12px; min-height: 56px; font: inherit; font-size: 17px; font-weight: 800; cursor: pointer; color: #ffffff; background: ' + (ready ? '#b42318' : '#9aa5b1'),
+      problemName: names[st.problem],
+      locate: () => this.setState({ located: true, out: false }),
+      toggleOut: () => this.setState({ out: !st.out, located: true }),
+      toggleAgree: () => this.setState({ agree: !st.agree, agreeErr: false }),
+      send: () => {
+        if (!ready) return;
+        if (!st.agree) { this.setState({ agreeErr: true }); return; }
+        this.setState({ sent: true });
+      },
+      restart: () => this.setState({ problem: 'aq', located: false, out: false, agree: false, agreeErr: false, sent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

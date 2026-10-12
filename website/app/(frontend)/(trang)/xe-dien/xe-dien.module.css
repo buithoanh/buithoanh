@@ -1,0 +1,49 @@
+.camKet { background: var(--xanh-nen); color: var(--chu); border-radius: var(--bo); padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start; }
+.camKet svg { flex: none; color: var(--xanh-vua); margin-top: 1px; }
+.camKet b { font-size: 15px; color: var(--toi); line-height: 1.35; }
+.h2 { font-size: 20px !important; }
+.dong { display: flex; flex-wrap: wrap; gap: 8px; }
+.oDong {
+  font-size: 14.5px; font-weight: 700; border-radius: 10px; min-height: 46px; min-width: 64px; padding: 6px 14px; cursor: pointer;
+  background: var(--nen-trang); color: var(--toi); border: 1.5px solid var(--vien-o);
+}
+.chon { background: var(--toi); color: var(--nen-trang); border-color: var(--toi); }
+.dauMuc { display: flex; align-items: center; gap: 8px; }
+.icon { width: 28px; height: 28px; border-radius: 50%; color: var(--nen-trang); display: grid; place-items: center; flex: none; }
+.iconCo { background: var(--xanh-vua); }
+.iconKhong { background: var(--do); }
+.luoiViec { display: flex; flex-direction: column; gap: 12px; }
+.viec { background: var(--nen-trang); border: 1px solid var(--vien); border-radius: var(--bo); overflow: hidden; }
+.viecDau { padding: 12px 14px 8px; display: flex; flex-direction: column; gap: 2px; }
+.viecDau b { color: var(--toi); font-size: 16px; }
+.viecDau span { font-size: 14px; color: var(--chu-phu); }
+.bangViec { border: 0; border-top: 1px solid var(--vien-nhat); border-radius: 0; }
+.khongLam { background: var(--do-nen); border: 1px solid var(--do-vien); border-radius: var(--bo); padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.khongLam ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.khongLam li { display: flex; gap: 10px; }
+.khongLam li svg { flex: none; color: var(--do); margin-top: 3px; }
+.khongLam li div { display: flex; flex-direction: column; }
+.khongLam li b { color: var(--toi); }
+.khongLam li span { font-size: 14px; color: var(--chu-tren-do); }
+.khongLam p { border-top: 1px solid var(--do-vien); padding-top: 10px; font-size: 14px; }
+.taxi { margin-top: 24px; background: var(--nhan-nhat); border-radius: var(--bo); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.iconTaxi { width: 40px; height: 40px; border-radius: 10px; background: var(--toi); color: var(--nen-trang); display: grid; place-items: center; flex: none; }
+.h2Taxi { font-size: 19px; line-height: 1.25; }
+.dsTaxi { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; }
+.dsTaxi li { display: flex; gap: 10px; }
+.dsTaxi svg { flex: none; color: var(--nhan); margin-top: 3px; }
+.dsTaxi b { color: var(--toi); }
+.goi {
+  background: var(--nen-trang); border-radius: 10px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--chu);
+}
+.goi > span { display: flex; flex-direction: column; }
+.goi > span b { color: var(--toi); }
+.goi > span span { font-size: 13px; color: var(--chu-phu); }
+.giaGoi { color: var(--nhan); white-space: nowrap; }
+.nutTaxi { min-height: 50px; border-radius: var(--bo); }
+@media (min-width: 900px) {
+  .luoiViec { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .taxi { padding: 24px 28px; margin-top: 40px; }
+  .nutTaxi { align-self: flex-start; padding: 0 28px; }
+}

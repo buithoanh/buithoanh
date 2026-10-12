@@ -1,0 +1,39 @@
+/* Màn quản trị (/quan-tri/*): biến màu riêng bổ sung cho globals.css (biến chung --toi, --nhan, --vien… dùng lại).
+   Layout app/(quan-tri)/layout.jsx nạp file này sau globals.css. Style từng khối nằm trong *.module.css cùng thư mục. */
+:root {
+  --qt-xanh: #1f6b2e;          /* chữ trạng thái tốt: Đã đăng, Đang chạy */
+  --qt-xanh-nhat: #e9f6ec;
+  --qt-xanh-vien: #9fd1ab;
+  --qt-xanh-bat: #2b8a3e;      /* công tắc bật, nút duyệt */
+  --qt-xanh-bat-dam: #237032;
+  --qt-lam: #0050c8;           /* Đã hẹn giờ */
+  --qt-lam-nhat: #e7f0ff;
+  --qt-do: #a8320a;            /* thiếu, sai */
+  --qt-do-nhat: #fdeee8;
+  --qt-do-vien: #f3c3ae;
+  --qt-xam-chu: #3c4654;       /* chữ trên nền xám nhạt */
+  --qt-xam-tat: #b8c0ca;       /* công tắc tắt, viền nét đứt */
+  --qt-xam-vach: #8a94a3;
+  --qt-thong-tin: #f0f4f8;     /* hộp thông tin xanh xám */
+  --qt-thong-tin-vien: #c9d6e3;
+  --qt-tam-dung: #7a5300;
+  --qt-tam-dung-nhat: #fdf3d8;
+  --qt-cam-hang: #fffaf5;      /* dòng đang sửa chưa lưu */
+  --qt-vien-toi: #3d5c7e;      /* viền ảnh đại diện trên nền tối */
+  --qt-chu-toi: #dfe7f1;       /* chữ phụ trên header tối */
+  --qt-bong-day: 0 -6px 18px rgba(19, 40, 63, 0.08);
+  /* Màu biểu đồ theo nguồn khách (QtSoLieu) */
+  --qt-bd-1: #13283f;
+  --qt-bd-2: #2a5482;
+  --qt-bd-3: #c2410c;
+  --qt-bd-4: #d9692a;
+  --qt-bd-5: #93b2d4;
+  --qt-bd-6: #c9daee;
+  --qt-bd-7: #5a6575;
+  --qt-bd-8: #8a2c06;
+  --qt-bd-9: #6f9bc7;
+  --qt-bd-10: #f0a072;
+  --qt-bd-11: #b8c0ca;
+}
+
+body.qt { background: var(--nen); overflow-x: auto; }

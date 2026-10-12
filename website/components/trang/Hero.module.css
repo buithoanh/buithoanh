@@ -1,0 +1,25 @@
+.hero { background: var(--toi); color: var(--nen-trang); }
+.trong { padding-top: 16px; padding-bottom: 26px; display: flex; flex-direction: column; gap: 24px; }
+.chu { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.nhan {
+  align-self: flex-start; background: rgba(255, 255, 255, .1); color: var(--nhan-tren-toi-3);
+  font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+}
+.tieuDe { color: var(--nen-trang); font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.18; }
+.lon .tieuDe { font-size: 31px; line-height: 1.15; }
+.moTa { color: var(--chu-tren-toi); font-size: 15px; }
+.lon .trong { padding-top: 20px; padding-bottom: 28px; }
+
+@media (min-width: 900px) {
+  .trong { padding-top: 32px; padding-bottom: 48px; }
+  .haiCot { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 40px; }
+  .haiCot .chu { flex: 999 1 520px; }
+  .phai { flex: 1 1 340px; min-width: 0; }
+  .tieuDe { font-size: clamp(30px, 3.6vw, 42px); }
+  .moTa { font-size: 17px; max-width: 680px; }
+  .lon .trong { padding-top: 48px; padding-bottom: 64px; }
+  .lon .chu { gap: 18px; }
+  .lon .tieuDe { font-size: clamp(36px, 5vw, 58px); line-height: 1.08; letter-spacing: -0.025em; }
+  .lon .moTa { font-size: 19px; max-width: 560px; }
+  .lon .nhan { font-size: 14px; padding: 5px 12px; }
+}

@@ -1,0 +1,21 @@
+.khoi { background: var(--nhan-nhat); border-radius: var(--bo); padding: 16px; display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+.chu { display: flex; flex-direction: column; gap: 4px; }
+.khoi h2.tieuDe, .tieuDe { font-size: 16px; color: var(--toi); }
+.moTa { font-size: 14px; color: var(--chu-phu); }
+.themMayTinh { display: none; }
+.nut { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.link { font-weight: 700; color: var(--nhan); font-size: 15px; min-height: 44px; display: inline-flex; align-items: center; }
+.link:hover { color: var(--nhan-dam); }
+.taiPdf { display: none; }
+
+@media (min-width: 900px) {
+  .khoi { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding: 28px; border-radius: var(--bo-lon); margin-top: 48px; }
+  .chu { flex: 1 1 420px; min-width: 0; }
+  .khoi h2.tieuDe, .tieuDe { font-size: 22px; }
+  .moTa { font-size: 16px; }
+  .themMayTinh { display: inline; }
+  .link { background: var(--toi); color: var(--nen-trang); text-decoration: none; border-radius: 10px; padding: 0 20px; }
+  .link:hover { background: var(--toi-2); color: var(--nen-trang); }
+  .muiTen { display: none; }
+  .taiPdf { display: inline-flex; border-width: 1.5px; border-color: var(--vien-o); }
+}
