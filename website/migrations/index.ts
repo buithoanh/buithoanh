@@ -4,7 +4,7 @@ import * as migration_20261008_100259_tu_lieu from './20261008_100259_tu_lieu';
 import * as migration_20261008_102632_p0_danh_muc_gia_vung_don_hang from './20261008_102632_p0_danh_muc_gia_vung_don_hang';
 import * as migration_20261008_111844_p1_phuc_vu_quan_tri from './20261008_111844_p1_phuc_vu_quan_tri';
 import * as migration_20261008_114750_p2_hoi_vien_gioi_thieu_doanh_nghiep_tho from './20261008_114750_p2_hoi_vien_gioi_thieu_doanh_nghiep_tho';
-import * as migration_20261012_073059_cam_ket_khong_sua_duoc from './20261012_073059_cam_ket_khong_sua_duoc';
+import * as migration_20261012_080101_cam_ket_khong_sua_duoc from './20261012_080101_cam_ket_khong_sua_duoc';
 
 export const migrations = [
   {
@@ -38,8 +38,8 @@ export const migrations = [
     name: '20261008_114750_p2_hoi_vien_gioi_thieu_doanh_nghiep_tho',
   },
   {
-    up: migration_20261012_073059_cam_ket_khong_sua_duoc.up,
-    down: migration_20261012_073059_cam_ket_khong_sua_duoc.down,
-    name: '20261012_073059_cam_ket_khong_sua_duoc'
+    up: migration_20261012_080101_cam_ket_khong_sua_duoc.up,
+    down: migration_20261012_080101_cam_ket_khong_sua_duoc.down,
+    name: '20261012_080101_cam_ket_khong_sua_duoc'
   },
 ];

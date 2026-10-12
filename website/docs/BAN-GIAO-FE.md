@@ -89,8 +89,8 @@ giao diện đổi theo. Đường dẫn trang khu vực vẫn là `/dich-vu/<d�
   (cứu hộ sang `/goi-gap/`). Máy tính đã có ô "Xem giá cho xe của bạn" nên ẩn hàng này.
 - Thẻ dịch vụ (trang chủ, 404) và thẻ chọn dịch vụ ở bước 1 đặt lịch dùng biểu tượng `iconDichVu` (`components/Icon.jsx`) thay mã
   viết tắt; dịch vụ chưa có biểu tượng vẫn hiện mã viết tắt.
-- Cam kết "Không sửa được, không lấy tiền": chỉ hiện khi bật ô cùng tên trong **Phí chung, bảo hành, phân khúc** (mặc định tắt, bật/tắt
-  ghi nhật ký giá). Hiện ở trang chủ, khối Bảo hành trang dịch vụ, gọi gấp, chính sách bảo hành.
+- Cam kết "Không sửa được, không lấy tiền": bật mặc định (đã duyệt 12/10/2026), tắt bằng ô cùng tên trong **Phí chung, bảo hành, phân khúc**
+  (bật/tắt ghi nhật ký giá). Hiện ở trang chủ, khối Bảo hành trang dịch vụ, gọi gấp, chính sách bảo hành.
 - Bài cẩm nang: nút "Chia sẻ bài" (bảng chia sẻ của điện thoại, máy không có thì chép link) và nút Facebook dưới dòng ngày đăng.
 - Ảnh chia sẻ `public/og.png`, icon màn hình chính (`apple-icon.png`, `icon-192.png`, `icon-512.png`) và `manifest.webmanifest`.
   Tạo lại ảnh: `node scripts/tao-anh-chia-se.mjs`. Font Be Vietnam Pro đóng gói bằng `@fontsource/be-vietnam-pro` (không gọi Google

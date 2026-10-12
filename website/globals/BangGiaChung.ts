@@ -53,8 +53,8 @@ export const BangGiaChung: GlobalConfig = {
     { type: "row", fields: [soNguyen("phiDiLai", "Phí đi lại nội thành (đ)", "Mỗi lần thợ tới, trong vùng phục vụ."), soNguyen("phiKiemTra", "Phí kiểm tra khi khách không sửa (đ)", "Thu khi khách từ chối báo giá chính thức.")] },
     { type: "row", fields: [soNguyen("baoHanhPhuTungThang", "Bảo hành phụ tùng (tháng)"), soNguyen("baoHanhCongThang", "Bảo hành tiền công (tháng)")] },
     {
-      name: "camKetKhongSuaDuocMienPhi", label: "Cam kết “Không sửa được, không lấy tiền”", type: "checkbox", defaultValue: false,
-      admin: { description: "Bật: thợ không xử lý được thì không thu gì cả (không tiền công, không phí kiểm tra, không phí đi lại). Web hiện cam kết này ở trang chủ, trang dịch vụ, gọi gấp và chính sách bảo hành. Chỉ bật khi điều phối và thu tiền đã làm đúng như vậy." },
+      name: "camKetKhongSuaDuocMienPhi", label: "Cam kết “Không sửa được, không lấy tiền”", type: "checkbox", defaultValue: true,
+      admin: { description: "Bật (mặc định, đã duyệt 12/10/2026): thợ không xử lý được thì không thu gì cả (không tiền công, không phí kiểm tra, không phí đi lại). Web hiện cam kết này ở trang chủ, trang dịch vụ, gọi gấp và chính sách bảo hành; điều phối và thu tiền phải làm đúng như vậy. Tắt thì cam kết biến mất khỏi web." },
     },
     { type: "row", fields: [soNguyen("camKetCuuHoPhut", "Cam kết cứu hộ trong vùng (phút)"), soNguyen("coVanGoiLaiPhut", "Cố vấn gọi lại việc phức tạp (phút)")] },
     { type: "row", fields: [

@@ -14033,7 +14033,7 @@
           "type": "boolean",
           "primaryKey": false,
           "notNull": false,
-          "default": false
+          "default": true
         },
         "cam_ket_cuu_ho_phut": {
           "name": "cam_ket_cuu_ho_phut",
@@ -15701,6 +15701,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "471a850a-5e02-4358-8a8e-d9f4a908b45b",
+  "id": "71e7f800-63f6-40d4-83ed-67f43b2338e4",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }
