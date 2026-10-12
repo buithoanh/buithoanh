@@ -19,11 +19,11 @@ export default function Footer() {
               <div className="footer-ctas"><CallButton /><ZaloButton /></div>
             </div>
             <div>
-              <h4>Dịch vụ</h4>
+              <h2 className="footer-h">Dịch vụ</h2>
               <ul>{services.map((s) => <li key={s.slug}><Link href={`/dich-vu/${s.slug}/`}>{s.data.ten}</Link></li>)}</ul>
             </div>
             <div>
-              <h4>Khách hàng</h4>
+              <h2 className="footer-h">Khách hàng</h2>
               <ul>
                 <li><Link href="/dat-lich/">Đặt lịch thợ</Link></li>
                 <li><Link href="/tra-cuu/">Tra cứu lệnh sửa chữa</Link></li>
@@ -31,7 +31,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h4>Liên hệ</h4>
+              <h2 className="footer-h">Liên hệ</h2>
               <ul className="footer-contact">
                 <li><Icon name="phone" size={18} />Hotline: {site.hotline || "sắp có"}</li>
                 <li><Icon name="chat" size={18} />Email: {site.email || "sắp có"}</li>
@@ -42,7 +42,7 @@ export default function Footer() {
           <p className="footer-bottom">© {new Date().getFullYear()} {site.name} · {site.parent}</p>
         </div>
       </footer>
-      <div className="callbar" role="navigation" aria-label="Liên hệ nhanh">
+      <div className={`callbar${site.hotline || site.zalo ? "" : " callbar-empty"}`} role="navigation" aria-label="Liên hệ nhanh">
         <CallButton className="btn btn-primary" label="Gọi thợ" short />
         <ZaloButton className="btn btn-zalo" label="Zalo" short />
         <Link className="btn btn-light" href="/dat-lich/"><Icon name="calendar" size={20} /><span>Đặt lịch</span></Link>

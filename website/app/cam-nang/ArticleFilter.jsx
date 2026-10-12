@@ -18,7 +18,7 @@ export default function ArticleFilter({ articles }) {
         {list.map((a) => (
           <Link key={a.slug} className="art" href={`/cam-nang/${a.slug}/`}>
             <span className="chip">{a.nhom}</span>
-            <h3>{a.title}</h3>
+            <h2>{a.title}</h2>
             <p>{a.description}</p>
             <span className="art-foot"><span className="meta">{a.ngay}</span><span className="more">Đọc bài <Icon name="arrow" size={16} /></span></span>
           </Link>

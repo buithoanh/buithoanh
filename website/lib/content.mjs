@@ -5,6 +5,22 @@ import matter from "gray-matter";
 import { marked } from "marked";
 
 const ROOT = path.join(process.cwd(), "content");
+
+/** "Dấu hiệu ắc quy sắp hết" → "dau-hieu-ac-quy-sap-het" (dùng cho đường dẫn neo #...). */
+export function slugify(s) {
+  return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/gi, "d")
+    .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+// Tiêu đề cấp 2–3 có id để làm mục lục và gửi link tới đúng đoạn.
+marked.use({
+  renderer: {
+    heading({ tokens, depth, text }) {
+      const id = slugify(text);
+      return `<h${depth} id="${id}">${this.parser.parseInline(tokens)}</h${depth}>\n`;
+    },
+  },
+});
 export const SECTIONS = { dichVu: "dich-vu", camNang: "cam-nang" };
 
 export function slugsOf(section) {
@@ -18,7 +34,8 @@ export function readEntry(section, slug) {
   const raw = fs.readFileSync(file, "utf8");
   const { data, content } = matter(raw);
   const words = content.split(/\s+/).filter(Boolean).length;
-  return { slug, section, file, data, body: content, words, html: marked.parse(content) };
+  const toc = marked.lexer(content).filter((t) => t.type === "heading" && t.depth === 2).map((t) => ({ id: slugify(t.text), text: t.text.replace(/\*\*|__|`/g, "") }));
+  return { slug, section, file, data, body: content, words, toc, html: marked.parse(content) };
 }
 
 export function allEntries(section) {

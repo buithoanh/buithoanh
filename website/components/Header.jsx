@@ -27,7 +27,7 @@ export default function Header() {
   return (
     <>
       {!site.allowIndex && (
-        <div className="staging">Bản chạy thử, Google chưa lập chỉ mục trang này.</div>
+        <aside className="staging" aria-label="Thông báo">Bản chạy thử, Google chưa lập chỉ mục trang này.</aside>
       )}
       <header className="header">
         <div className="wrap header-row">

@@ -31,6 +31,10 @@ Website dịch vụ sửa ô tô tận nơi, slogan "Xe dừng đâu, thợ tớ
 | Ahamove / GHN: tra cứu theo mã, dòng thời gian | Trang `/tra-cuu/`: tiếp nhận → đang tới → đang sửa → hoàn tất → đã thanh toán |
 | Cake / Timo: sáng, nhiều khoảng trắng, chữ to | Toàn bộ phong cách: nền trắng, chữ xanh than, một màu cam thương hiệu |
 
+Bài cẩm nang tự có mục lục (từ các tiêu đề `##`) và nút chia sẻ. Font Be Vietnam Pro được đóng gói sẵn (gói `@fontsource/be-vietnam-pro`), không gọi Google Fonts khi khách mở trang.
+
+Icon trang và ảnh chia sẻ (`public/og.png`, hiện khi gửi link qua Zalo/Facebook) tạo bằng `scripts/tao-anh.mjs`. Đổi tên, slogan hoặc thành phố thì chạy lại: `npx -y -p playwright@1.56.1 node scripts/tao-anh.mjs`.
+
 Mỗi trang dịch vụ có thêm các trường: `tenNgan` (tên trên ô icon), `icon` (oil, battery, tire, scan, brake, tow…, xem `components/Icon.jsx`), và tuỳ chọn `giaTu` (ví dụ `"350.000đ"`, chỉ hiện khi có `giaDaDuyet: true`).
 
 ## Quy trình đăng bài SEO (có duyệt)

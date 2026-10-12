@@ -5,6 +5,9 @@ import { slugsOf, readEntry, formatDate, isoDate } from "../../../lib/content.mj
 import { CallButton } from "../../../components/Contact";
 import Icon from "../../../components/Icon";
 import JsonLd from "../../../components/JsonLd";
+import Breadcrumbs from "../../../components/Breadcrumbs";
+import Share from "../../../components/Share";
+import Toc from "../../../components/Toc";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -27,6 +30,7 @@ export default async function ArticlePage({ params }) {
   const services = (e.data.dichVuLienQuan || []).filter((s) => slugsOf("dich-vu").includes(s)).map((s) => readEntry("dich-vu", s));
   const faq = e.data.faq || [];
   const main = services[0];
+  const toc = [...e.toc, ...(faq.length ? [{ id: "cau-hoi-thuong-gap", text: "Câu hỏi thường gặp" }] : [])];
   return (
     <>
       <JsonLd data={{
@@ -41,18 +45,20 @@ export default async function ArticlePage({ params }) {
       }} />}
       <section className="page-hero page-hero-article">
         <div className="wrap">
-          <nav className="crumbs" aria-label="Đường dẫn"><Link href="/">Trang chủ</Link><span>/</span><Link href="/cam-nang/">Cẩm nang xe</Link></nav>
+          <Breadcrumbs items={[{ href: "/cam-nang/", label: "Cẩm nang xe" }, { label: e.data.title }]} />
           {e.data.nhom && <span className="chip">{e.data.nhom}</span>}
           <h1>{e.data.title}</h1>
           <p className="meta"><Icon name="calendar" size={16} />{formatDate(e.data.ngay)}<span>·</span><Icon name="clock" size={16} />khoảng {Math.max(1, Math.round(e.words / 220))} phút đọc</p>
+          <Share title={e.data.title} url={`${site.url}/cam-nang/${slug}/`} />
         </div>
       </section>
       <div className="wrap with-aside">
         <article className="prose">
+          <Toc items={toc} />
           <div dangerouslySetInnerHTML={{ __html: e.html }} />
           {faq.length > 0 && (
             <section className="faq">
-              <h2>Câu hỏi thường gặp</h2>
+              <h2 id="cau-hoi-thuong-gap">Câu hỏi thường gặp</h2>
               {faq.map((f) => <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>)}
             </section>
           )}
@@ -62,7 +68,7 @@ export default async function ArticlePage({ params }) {
           </div>
         </article>
         <aside className="aside">
-          <div className="aside-card">
+          <div className="aside-card aside-card-static">
             <b className="aside-title">Cần thợ tới tận nơi?</b>
             <p className="aside-sub">Đặt lịch hoặc gọi, thợ mang đồ nghề và phụ tùng tới.</p>
             <Link className="btn btn-primary btn-block" href={main ? `/dat-lich/?dv=${main.slug}` : "/dat-lich/"}><Icon name="calendar" size={20} />Đặt lịch</Link>
@@ -76,6 +82,7 @@ export default async function ArticlePage({ params }) {
               </>
             )}
           </div>
+          <Toc items={toc} variant="side" />
         </aside>
       </div>
     </>

@@ -5,6 +5,7 @@ import { slugsOf, readEntry, allEntries, sortedServices, approvedPrice } from ".
 import { CallButton, Commitments } from "../../../components/Contact";
 import Icon from "../../../components/Icon";
 import JsonLd from "../../../components/JsonLd";
+import Breadcrumbs from "../../../components/Breadcrumbs";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -39,7 +40,7 @@ export default async function ServicePage({ params }) {
       }} />}
       <section className="page-hero">
         <div className="wrap">
-          <nav className="crumbs" aria-label="Đường dẫn"><Link href="/">Trang chủ</Link><span>/</span><Link href="/#dich-vu">Dịch vụ</Link><span>/</span>{e.data.ten}</nav>
+          <Breadcrumbs items={[{ href: "/#dich-vu", label: "Dịch vụ" }, { label: e.data.ten }]} />
           <div className="svc-hero">
             <span className="svc-hero-ic"><Icon name={e.data.icon} size={40} /></span>
             <div>
@@ -58,7 +59,7 @@ export default async function ServicePage({ params }) {
           <div dangerouslySetInnerHTML={{ __html: e.html }} />
           {faq.length > 0 && (
             <section className="faq">
-              <h2>Câu hỏi thường gặp</h2>
+              <h2 id="cau-hoi-thuong-gap">Câu hỏi thường gặp</h2>
               {faq.map((f) => <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>)}
             </section>
           )}
