@@ -1,9 +1,9 @@
 import site from "../../site.config.mjs";
-import { allEntries } from "../../lib/content.mjs";
+import { team as teamEntries } from "../../lib/content.mjs";
 import TeamGrid from "../../components/TeamGrid";
 import { Commitments } from "../../components/Contact";
 
-const team = () => allEntries("ky-thuat-vien").sort((a, b) => (a.data.thuTu ?? 99) - (b.data.thuTu ?? 99));
+const team = teamEntries;
 
 export function generateMetadata() {
   const has = team().length > 0;
@@ -29,7 +29,7 @@ export default function TeamPage() {
       </section>
       <section className="block">
         <div className="wrap">
-          {list.length ? <TeamGrid team={list} /> : <p className="notice">Hồ sơ kỹ thuật viên đang được cập nhật.</p>}
+          {list.length ? <TeamGrid team={list} heading="h2" /> : <p className="notice">Hồ sơ kỹ thuật viên đang được cập nhật.</p>}
           <div className="mt"><Commitments /></div>
         </div>
       </section>

@@ -13,7 +13,7 @@ export default function BookingPage() {
       <div className="wrap bk-grid">
         <div className="bk-h1"><h1>Đặt lịch thợ tới tận nơi</h1><p>3 bước ngắn. Nhân viên gọi lại báo giá trước khi làm.</p></div>
         <div className="card-lg">
-          <BookingForm services={services} endpoint={site.bookingEndpoint} hotline={site.hotline} telHref={telHref()} zalo={site.zalo} />
+          <BookingForm services={services} endpoint={site.bookingEndpoint} mock={site.mock} hotline={site.hotline} telHref={telHref()} zalo={site.zalo} />
         </div>
         <div className="bk-aside">
           <div className="urgent">

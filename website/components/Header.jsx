@@ -1,6 +1,6 @@
 import Link from "next/link";
 import site from "../site.config.mjs";
-import { slugsOf } from "../lib/content.mjs";
+import { team } from "../lib/content.mjs";
 import { telHref } from "./Contact";
 import Icon from "./Icon";
 import MobileMenu from "./MobileMenu";
@@ -21,13 +21,13 @@ export default function Header() {
     { href: "/dat-lich/", label: "Đặt lịch" },
     { href: "/tra-cuu/", label: "Tra cứu lệnh sửa" },
     { href: "/cam-nang/", label: "Cẩm nang xe" },
-    ...(slugsOf("ky-thuat-vien").length ? [{ href: "/doi-ngu/", label: "Đội ngũ" }] : []),
+    ...(team().length ? [{ href: "/doi-ngu/", label: "Đội ngũ" }] : []),
   ];
   const tel = telHref();
   return (
     <>
       {!site.allowIndex && (
-        <aside className="staging" aria-label="Thông báo">Bản chạy thử, Google chưa lập chỉ mục trang này.</aside>
+        <aside className="staging" aria-label="Thông báo">{site.mock ? "Bản chạy thử · Hotline, giá, đánh giá, KTV là dữ liệu mẫu" : "Bản chạy thử, Google chưa lập chỉ mục trang này."}</aside>
       )}
       <header className="header">
         <div className="wrap header-row">
@@ -39,7 +39,7 @@ export default function Header() {
             {links.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
           </nav>
           <div className="header-actions">
-            <a className="hotline" href={tel} aria-disabled={tel ? undefined : "true"}>
+            <a className="hotline" href={tel} aria-disabled={tel ? undefined : "true"} aria-label={tel ? `Gọi thợ tới: ${site.hotline}` : "Hotline sắp có"}>
               <span className="hotline-ic"><Icon name="phone" size={18} /></span>
               <span className="hotline-txt"><small>Gọi thợ tới</small><b>{site.hotline || "Hotline sắp có"}</b></span>
             </a>

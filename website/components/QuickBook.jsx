@@ -38,7 +38,7 @@ export default function QuickBook({ services, telHref, hotline }) {
       <label className="qb-loc">
         <Icon name="pin" size={20} className="qb-loc-pin" />
         <span className="sr-only">Vị trí xe</span>
-        <input value={viTri} onChange={(e) => setViTri(e.target.value)} placeholder="Xe đang đỗ ở đâu? (đường, quận)" autoComplete="street-address" />
+        <input value={viTri} onChange={(e) => setViTri(e.target.value)} placeholder="Xe đang đỗ ở đâu?" autoComplete="street-address" />
         <button type="button" className="qb-locate" onClick={locate} disabled={locating} aria-label="Dùng vị trí hiện tại">
           <Icon name="locate" size={20} /><span>{locating ? "Đang lấy…" : "Vị trí của tôi"}</span>
         </button>

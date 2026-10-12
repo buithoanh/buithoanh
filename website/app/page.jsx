@@ -1,6 +1,7 @@
 import Link from "next/link";
 import site from "../site.config.mjs";
-import { sortedServices, sortedArticles, symptoms, approvedPrice, allEntries } from "../lib/content.mjs";
+import { sortedServices, sortedArticles, symptoms, approvedPrice, team as teamEntries, reviews, stats } from "../lib/content.mjs";
+import Reviews, { Stars } from "../components/Reviews";
 import { CallButton, Commitments, telHref } from "../components/Contact";
 import QuickBook from "../components/QuickBook";
 import OrderStatus from "../components/OrderStatus";
@@ -18,7 +19,10 @@ const DEMO_ORDER = {
 export default function Home() {
   const services = sortedServices();
   const articles = sortedArticles().slice(0, 3);
-  const team = allEntries("ky-thuat-vien");
+  const team = teamEntries();
+  const rv = reviews();
+  const st = stats();
+  const names = Object.fromEntries(services.map((s) => [s.slug, s.data.ten]));
   const areas = site.serviceAreas.length ? site.serviceAreas.join(", ") : site.city;
   return (
     <>
@@ -32,7 +36,7 @@ export default function Home() {
       <section className="hero">
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow"><Icon name="pin" size={16} />Sửa ô tô tận nơi · {areas}</p>
+            <p className="eyebrow"><Icon name="pin" size={16} />Sửa ô tô tận nơi · {site.serviceAreas.length > 2 ? `${site.serviceAreas.length} quận ${site.city}` : areas}</p>
             <h1>Xe dừng đâu,<br /><em>thợ tới đó.</em></h1>
             <p className="lead">Thợ mang đồ nghề và phụ tùng tới tận chỗ xe bạn đang đỗ. Báo giá trước, đồng ý mới làm.</p>
           </div>
@@ -42,6 +46,13 @@ export default function Home() {
           <li><Icon name="check" size={18} />Phụ tùng VCparts rõ nguồn gốc</li>
           <li><Icon name="check" size={18} />Thanh toán VietQR, có hoá đơn điện tử</li>
           </ul>
+          {st && (
+            <div className="hero-stats">
+              <span><b>{st.diem}</b><Stars n={5} /><small>{st.soDanhGia} đánh giá</small></span>
+              <span><b>{st.phutToi}′</b><small>thời gian tới trung bình</small></span>
+              <span><b>{st.luotSua}</b><small>lượt sửa tận nơi</small></span>
+            </div>
+          )}
           <div className="hero-card">
             <QuickBook
               services={services.map((s) => ({ slug: s.slug, ngan: s.data.tenNgan || s.data.ten, icon: s.data.icon }))}
@@ -66,7 +77,7 @@ export default function Home() {
           </div>
           <div className="svc-grid">
             {services.map((s) => {
-              const price = approvedPrice(s.data);
+              const price = approvedPrice(s.data, s.slug);
               return (
                 <Link key={s.slug} className="svc" href={`/dich-vu/${s.slug}/`}>
                   <span className="svc-ic"><Icon name={s.data.icon} size={30} /></span>
@@ -123,7 +134,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block block-soft">
+      {rv.length > 0 && (
+        <section className="block block-soft">
+          <div className="wrap">
+            <div className="sec-head">
+              <div><p className="kicker">Khách nói gì</p><h2>Gọi một lần, quay lại nhiều lần</h2></div>
+              {st && <p className="rv-sum"><b>{st.diem}</b>/5 <Stars n={5} /> <span>{st.soDanhGia} đánh giá</span></p>}
+            </div>
+            <Reviews items={rv.slice(0, 6)} serviceNames={names} />
+          </div>
+        </section>
+      )}
+
+      <section className="block">
         <div className="wrap">
           <div className="sec-head"><div><p className="kicker">Quy trình</p><h2>4 bước, không phải ra garage</h2></div></div>
           <ol className="steps">
@@ -136,7 +159,7 @@ export default function Home() {
       </section>
 
       {team.length > 0 && (
-        <section className="block">
+        <section className="block block-soft">
           <div className="wrap">
             <div className="sec-head">
               <div><p className="kicker">Đội ngũ</p><h2>Kỹ thuật viên của {site.name}</h2></div>

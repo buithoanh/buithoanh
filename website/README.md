@@ -37,6 +37,21 @@ Icon trang và ảnh chia sẻ (`public/og.png`, hiện khi gửi link qua Zalo/
 
 Mỗi trang dịch vụ có thêm các trường: `tenNgan` (tên trên ô icon), `icon` (oil, battery, tire, scan, brake, tow…, xem `components/Icon.jsx`), và tuỳ chọn `giaTu` (ví dụ `"350.000đ"`, chỉ hiện khi có `giaDaDuyet: true`).
 
+## Dữ liệu mẫu (giai đoạn phát triển)
+
+Để web trông và chạy như thật trước khi có số liệu, file `mock/du-lieu-mau.mjs` chứa **dữ liệu giả**: hotline, Zalo, email, 6 quận, giá "từ …", 4 kỹ thuật viên (ảnh minh hoạ), 6 đánh giá, số liệu (4,9★, 326 đánh giá…) và 3 lệnh sửa chữa mẫu.
+
+- **Bật** khi chạy thử (mặc định), thanh vàng đầu trang ghi rõ "dữ liệu mẫu".
+- **Tự tắt** khi gắn tên miền thật (`ALLOW_INDEX=1`). Bước sau build còn quét lại: trang nào còn sót số/tên mẫu thì build dừng.
+- Tắt tay để xem bản "sạch": `DU_LIEU_MAU=0 npm run dev`.
+- Dữ liệu thật luôn được ưu tiên: điền hotline trong `site.config.mjs`, hồ sơ trong `content/ky-thuat-vien/`, đánh giá thật trong `content/danh-gia.json` (cùng định dạng mảng `danhGia` trong file mẫu), số liệu thật trong `site.soLieu`.
+
+**API giả:** chưa có `NEXT_PUBLIC_BOOKING_ENDPOINT` / `NEXT_PUBLIC_TRACKING_ENDPOINT` thì `lib/api.js` giả lập ngay trong trình duyệt:
+
+- Đặt lịch → nhận mã `VC-xxxx`, lệnh lưu trong trình duyệt.
+- Tra cứu lệnh vừa đặt → trạng thái tự chạy: tiếp nhận (0′) → KTV đang tới (1′) → đang sửa (4′) → hoàn tất (8′) → đã thanh toán (10′). Trang tra cứu tự cập nhật 20 giây/lần.
+- Lệnh mẫu có sẵn: `0912345678` / `VC-2401` (đang tới), `0987654321` / `VC-2398` (đang sửa), `0901234567` / `VC-2385` (đã thanh toán).
+
 ## Quy trình đăng bài SEO (có duyệt)
 
 ```
@@ -91,11 +106,12 @@ npm run build        # kiểm tra + xuất trang tĩnh ra out/
 
 ## Việc còn thiếu trước khi chạy thật
 
-- Hotline, Zalo OA, email trong `site.config.mjs` (đang hiện "sắp có").
+- Hotline, Zalo OA, email trong `site.config.mjs` (đang dùng số mẫu khi chạy thử, bản thật hiện "sắp có").
 - Danh sách quận đợt 1 trong `serviceAreas`.
-- Tra cứu lệnh sửa chữa chưa có nguồn dữ liệu. Khi VCgarage có API, đặt biến `NEXT_PUBLIC_TRACKING_ENDPOINT`. Trang gọi `GET <endpoint>?sdt=<số điện thoại>&ma=<mã lệnh>` và cần nhận JSON dạng `{ ma, dichVu, xe, trangThai, duKienPhut, ktv: { ten, anh, chuyenMon, bienSo, sdt }, lichSu: [{ trangThai, luc }] }`, với `trangThai` là một trong `tiep-nhan`, `dang-toi`, `dang-sua`, `hoan-tat`, `da-thanh-toan`. API **phải kiểm tra khớp cả số điện thoại và mã lệnh**, trả 404 nếu không khớp, để người lạ không xem được lệnh (và vị trí xe) của khách khác. API cũng cần cho phép CORS từ tên miền website.
+- API thật thay cho API giả (`lib/api.js` giữ nguyên định dạng, chỉ cần đặt biến môi trường):
+  - Đặt lịch (VCsoft): `POST <NEXT_PUBLIC_BOOKING_ENDPOINT>` nhận JSON `{ dichVu, xe, bienSo, viTri, banDo?, gio, sdt, ghiChu, nguon }`, trả `{ ma: "VC-1234" }`.
+  - Tra cứu (VCgarage): `NEXT_PUBLIC_TRACKING_ENDPOINT`. Trang gọi `GET <endpoint>?sdt=<số điện thoại>&ma=<mã lệnh>` và cần nhận JSON dạng `{ ma, dichVu, xe, trangThai, duKienPhut, tongTien, ktv: { ten, anh, chuyenMon, bienSo, sdt }, lichSu: [{ trangThai, luc }] }`, với `trangThai` là một trong `tiep-nhan`, `dang-toi`, `dang-sua`, `hoan-tat`, `da-thanh-toan`. API **phải kiểm tra khớp cả số điện thoại và mã lệnh**, trả 404 nếu không khớp, để người lạ không xem được lệnh (và vị trí xe) của khách khác. API cũng cần cho phép CORS từ tên miền website.
 - Hồ sơ kỹ thuật viên: thêm file vào `content/ky-thuat-vien/` (ảnh thật, được KTV đồng ý). Có ít nhất một hồ sơ thì menu "Đội ngũ" và mục đội ngũ ở trang chủ tự hiện.
-- Chính sách bảo hành: khi chốt, thêm một dòng vào `camKet` trong `site.config.mjs`.
-- Form đặt lịch chưa có nơi nhận. Khi VCsoft có API nhận lịch, đặt biến `NEXT_PUBLIC_BOOKING_ENDPOINT`. Trước đó form hiện nội dung để khách gửi qua Zalo hoặc đọc khi gọi.
+- Bản thật chưa có API đặt lịch thì form hiện nội dung để khách gửi qua Zalo hoặc đọc khi gọi.
 - Bảng giá: kế hoạch muốn lấy giá phụ tùng từ dữ liệu VCparts, nên cần người phụ trách duyệt giá trước khi đưa lên.
 - Ảnh việc thật (kế hoạch yêu cầu mỗi trang khu vực có ảnh tại khu đó). Đặt trong `public/anh/` và chèn vào bài bằng `![mô tả](/anh/ten-anh.jpg)`.

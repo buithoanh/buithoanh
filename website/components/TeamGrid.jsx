@@ -1,13 +1,13 @@
 import Icon from "./Icon";
 
 /** Hồ sơ kỹ thuật viên, học từ trang chuyên gia của Long Châu/Tâm Anh: ảnh thật, số năm, chứng chỉ. */
-export default function TeamGrid({ team }) {
+export default function TeamGrid({ team, heading: H = "h3" }) {
   return (
     <div className="team-grid">
       {team.map(({ slug, data: d, html }) => (
         <article key={slug} className="ktv">
           {d.anh ? <img src={d.anh} alt={`Ảnh ${d.ten}`} width="96" height="96" loading="lazy" /> : <span className="avatar avatar-lg"><Icon name="user" size={36} /></span>}
-          <h3>{d.ten}</h3>
+          <H>{d.ten}</H>
           {d.chucDanh && <p className="ktv-role">{d.chucDanh}</p>}
           {d.namKinhNghiem && <p className="ktv-exp"><b>{d.namKinhNghiem}</b> năm kinh nghiệm</p>}
           {d.chuyenMon?.length > 0 && <ul className="chips">{d.chuyenMon.map((c) => <li key={c} className="chip">{c}</li>)}</ul>}

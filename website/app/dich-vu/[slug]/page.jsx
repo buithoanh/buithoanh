@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import site from "../../../site.config.mjs";
-import { slugsOf, readEntry, allEntries, sortedServices, approvedPrice } from "../../../lib/content.mjs";
+import { slugsOf, readEntry, allEntries, sortedServices, approvedPrice, reviews } from "../../../lib/content.mjs";
+import Reviews from "../../../components/Reviews";
 import { CallButton, Commitments } from "../../../components/Contact";
 import Icon from "../../../components/Icon";
 import JsonLd from "../../../components/JsonLd";
@@ -25,8 +26,9 @@ export default async function ServicePage({ params }) {
   const related = allEntries("cam-nang").filter((a) => (a.data.dichVuLienQuan || []).includes(slug));
   const others = sortedServices().filter((s) => s.slug !== slug);
   const faq = e.data.faq || [];
-  const price = approvedPrice(e.data);
+  const price = approvedPrice(e.data, slug);
   const book = `/dat-lich/?dv=${slug}`;
+  const rv = reviews().filter((r) => r.dichVu === slug);
   return (
     <>
       <JsonLd data={{
@@ -61,6 +63,12 @@ export default async function ServicePage({ params }) {
             <section className="faq">
               <h2 id="cau-hoi-thuong-gap">Câu hỏi thường gặp</h2>
               {faq.map((f) => <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>)}
+            </section>
+          )}
+          {rv.length > 0 && (
+            <section>
+              <h2 id="khach-noi-gi">Khách đã dùng dịch vụ nói gì</h2>
+              <Reviews items={rv} />
             </section>
           )}
           {related.length > 0 && (

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Icon from "../../components/Icon";
 import { useLocate } from "../../components/useLocate";
+import { datLich } from "../../lib/api";
 
 // Đặt lịch 3 bước, học từ bTaskee: chọn dịch vụ → vị trí và giờ → liên hệ và xác nhận.
 const OTHER = { slug: "khac", ten: "Khác / chưa rõ lỗi", icon: "help" };
@@ -10,12 +11,13 @@ const TIMES = ["Càng sớm càng tốt", "Trong hôm nay", "Ngày mai"];
 const STEP_TITLES = ["Xe cần làm gì?", "Thợ tới đâu, lúc nào?", "Liên hệ và xác nhận"];
 const empty = { dichVu: "", xe: "", bienSo: "", viTri: "", gio: TIMES[0], gioCuThe: "", sdt: "", ghiChu: "" };
 
-export default function BookingForm({ services, endpoint, hotline, telHref, zalo }) {
+export default function BookingForm({ services, endpoint, mock, hotline, telHref, zalo }) {
   const all = [...services, OTHER];
   const [step, setStep] = useState(0);
   const [f, setF] = useState(empty);
   const [state, setState] = useState("idle"); // idle | sending | sent | error | offline
   const [copied, setCopied] = useState(false);
+  const [ma, setMa] = useState("");
   const top = useRef(null);
   const set = (k) => (e) => setF((x) => ({ ...x, [k]: e.target.value }));
   const { locate, locating, locError } = useLocate((v) => setF((x) => ({ ...x, viTri: v })));
@@ -45,12 +47,12 @@ export default function BookingForm({ services, endpoint, hotline, telHref, zalo
   async function submit(e) {
     e.preventDefault();
     if (step < 2) { go(step + 1); return; }
-    if (!endpoint) { setState("offline"); return; }
     setState("sending");
     try {
       const { gioCuThe, ...rest } = f;
-      const r = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...rest, gio, ...(banDo && { banDo }), nguon: "website" }) });
-      setState(r.ok ? "sent" : "error");
+      const r = await datLich({ endpoint, mock }, { ...rest, gio, ...(banDo && { banDo }), nguon: "website" });
+      if (r.ok) setMa(r.ma);
+      setState(r.ok ? "sent" : r.offline ? "offline" : "error");
     } catch { setState("error"); }
   }
 
@@ -63,8 +65,9 @@ export default function BookingForm({ services, endpoint, hotline, telHref, zalo
       <div className="bk-done">
         <span className="bk-done-ic"><Icon name="check" size={36} /></span>
         <h2>Đã nhận lịch hẹn</h2>
-        <p>Nhân viên sẽ gọi lại số <b>{f.sdt}</b> để báo giá và xác nhận giờ. Khi có kỹ thuật viên nhận lệnh, bạn tra cứu được ai đang tới.</p>
-        <Link className="btn btn-dark" href="/tra-cuu/"><Icon name="search" size={20} />Tra cứu lệnh sửa chữa</Link>
+        {ma && <p className="bk-ma">Mã lệnh <b>{ma}</b></p>}
+        <p>Nhân viên sẽ gọi lại số <b>{f.sdt}</b> để báo giá và xác nhận giờ. Khi có kỹ thuật viên nhận lệnh, bạn xem được ai đang tới.</p>
+        <Link className="btn btn-dark" href={ma ? `/tra-cuu/?${new URLSearchParams({ sdt: f.sdt, ma })}` : "/tra-cuu/"}><Icon name="search" size={20} />Theo dõi lệnh sửa chữa</Link>
       </div>
     );
   }

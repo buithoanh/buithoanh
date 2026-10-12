@@ -20,7 +20,7 @@ export default function TrackPage() {
       </section>
       <section className="block">
         <div className="wrap">
-          <TrackForm endpoint={site.trackingEndpoint} hotline={site.hotline} telHref={telHref()} />
+          <TrackForm endpoint={site.trackingEndpoint} mock={site.mock} hotline={site.hotline} telHref={telHref()} />
         </div>
       </section>
     </>

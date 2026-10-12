@@ -17,6 +17,7 @@ export default function OrderStatus({ order, demo = false }) {
   const idx = Math.max(0, ORDER_STEPS.findIndex((s) => s.key === order.trangThai));
   const times = Object.fromEntries((order.lichSu || []).map((h) => [h.trangThai, h.luc]));
   const ktv = order.ktv;
+  const xong = idx === ORDER_STEPS.length - 1;
   return (
     <div className="order">
       <div className="order-head">
@@ -40,10 +41,13 @@ export default function OrderStatus({ order, demo = false }) {
           {ktv.sdt && <a className="icon-btn icon-btn-brand" href={`tel:${ktv.sdt.replace(/[^\d+]/g, "")}`} aria-label={`Gọi ${ktv.ten}`}><Icon name="phone" size={20} /></a>}
         </div>
       )}
+      {order.tongTien && (
+        <div className="order-total"><span>Tổng thanh toán</span><b>{order.tongTien}</b></div>
+      )}
       <ol className="timeline">
         {ORDER_STEPS.map((s, i) => (
-          <li key={s.key} className={i < idx ? "done" : i === idx ? "now" : ""}>
-            <span className="dot">{i < idx && <Icon name="check" size={14} />}</span>
+          <li key={s.key} className={i < idx || xong ? "done" : i === idx ? "now" : ""}>
+            <span className="dot">{(i < idx || xong) && <Icon name="check" size={14} />}</span>
             <div><b>{s.label}</b><small>{times[s.key] || s.note}</small></div>
           </li>
         ))}

@@ -1,5 +1,5 @@
 import site from "../site.config.mjs";
-import { slugsOf, readEntry, isoDate } from "../lib/content.mjs";
+import { slugsOf, readEntry, isoDate, team } from "../lib/content.mjs";
 
 export const dynamic = "force-static";
 
@@ -10,7 +10,7 @@ export default function sitemap() {
     { url: u("/dat-lich/"), priority: 0.8 },
     { url: u("/cam-nang/"), changeFrequency: "weekly", priority: 0.7 },
     { url: u("/tra-cuu/"), priority: 0.3 },
-    ...(slugsOf("ky-thuat-vien").length ? [{ url: u("/doi-ngu/"), priority: 0.5 }] : []),
+    ...(team().length ? [{ url: u("/doi-ngu/"), priority: 0.5 }] : []),
     ...slugsOf("dich-vu").map((s) => ({ url: u(`/dich-vu/${s}/`), priority: 0.9 })),
     ...slugsOf("cam-nang").map((s) => {
       const d = readEntry("cam-nang", s).data;
